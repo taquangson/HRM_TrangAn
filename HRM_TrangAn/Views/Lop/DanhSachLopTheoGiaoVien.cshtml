@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Quản lý lớp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Assets/stringeeConfig.js"></script>
+<link href="~/Content/danhsachloptheogiaovien.css" rel="stylesheet" />
+<div id="dialogRoot"></div>
+<div class="row">
+    <h2><b>Danh sách lớp</b></h2>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm lớp bồi dưỡng</i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div id="windowChitiet">
+    <div id="gridHocSinhTrongLop"></div>
+</div>
+<div id="windowBaiKiemTra">
+    <input type="hidden" id="ID_HocSinh" />
+    <div id="lstBaiKiemTra" class="lstBKT">
+        <div class="itemBKT">
+            <div class="addnewfoler" onclick="ThemBaiKiemTra()"></div>
+            <label class="BKTname">Tạo bài kiểm tra mới</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <input id="fileBKT" type="file" />
+    </div>
+    <div style="margin:auto; width:100%">
+        <div id="scrollView" style="width: 100%; height:calc(100vh - 50px)">
+        </div>
+    </div>
+</div>
+<div id="windowThemBKT">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuBKT()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyBKT()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <div class="form-group">
+        <input id="ID_BaiKiemTra" type="hidden" />
+    </div>
+    <div class="form-group valid" toggle-valid="TenHocSinh">
+        <label style="width:100%">Tên bài kiểm tra: <span style="color:red">*</span></label>
+        <input id="TenBKT" placeholder="Tên bài kiểm tra" type="text" class="k-textbox input" />
+        <span class="fa fa-exclamation-triangle icon"></span>
+    </div>
+</div>
+<div style="visibility:hidden" id="windowLopHocBu">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="TenLop">
+            <label style="width:100%">Tên lớp: <span style="color:red">*</span></label>
+            <input id="TenLop" placeholder="Tên lớp" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Lịch học: </label>
+            <div id="gridLichHoc"></div>
+        </div>
+    </form>
+</div>
+
+<div id="windowChitietLopHocBu">
+    <input type="hidden" id="IDLop" />
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuChiTietLop()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyChiTietLop()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <div style="width:50%;float:left;text-align:center">
+        <h5><b>Học sinh trong lớp</b></h5>
+    </div>
+    <div style="width:50%;float:left;text-align:center">
+        <h5><b>Học sinh ngoài lớp</b></h5>
+    </div>
+    <div style="width:49.5%;float:left" id="gridHocSinhTrongLopHocBu"></div>
+    <div style="width:50%;float:left" id="gridHocSinhNgoaiLopHocBu"></div>
+</div>
+
+<script src="~/Scripts/js/danhsachhocsinhtheogiaovien.js"></script>

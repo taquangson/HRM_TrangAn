@@ -1,0 +1,682 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tra cứu thông tin</title>
+    <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Assets/kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    @*<link href="~/Assets/custom.min.css" rel="stylesheet" />*@
+    <link href="~/Assets/Common.css" rel="stylesheet" />
+
+    <link href="~/Assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Assets/kendo/kendo.all.min.js"></script>
+    <style>
+        body {
+            padding: 0px;
+            height: 100vh;
+            background: linear-gradient( 0deg, #191919,#6b1a8f);
+        }
+
+        .btn-grey {
+            background-color: #D8D8D8;
+            color: #FFF;
+        }
+
+        .rating-block {
+            background-color: #FAFAFA;
+            border: 1px solid #EFEFEF;
+            padding: 5px 5px 10px 15px;
+            border-radius: 3px;
+            height: 290px;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .padding-bottom-7 {
+            padding-bottom: 7px;
+        }
+
+        .review-block {
+            background-color: #FAFAFA;
+            border: 1px solid #EFEFEF;
+            padding: 15px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        .review-block-name {
+            font-size: 12px;
+            margin: 10px 0;
+        }
+
+        .review-block-date {
+            font-size: 12px;
+        }
+
+        .review-block-rate {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .review-block-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .review-block-description {
+            font-size: 13px;
+        }
+
+        .animated {
+            -webkit-transition: height 0.2s;
+            -moz-transition: height 0.2s;
+            transition: height 0.2s;
+        }
+
+        .stars {
+            margin: 20px 2px;
+            font-size: 28px;
+            color: #fffe00;
+        }
+
+            .stars .glyphicon {
+                margin-left: 10px;
+            }
+
+        .avatar {
+            vertical-align: middle;
+            width: 100px;
+            height: 100px;
+            border-radius: 20%;
+        }
+    </style>
+    <script>
+        var MaNhanVien = @Model;
+        var isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function () {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+        $(document).ready(function () {
+
+            $("#TuNgay").kendoDatePicker({
+                format: "dd/MM/yyyy",
+                value: new Date(),
+                change: function (e) {
+                    loadData();
+                }
+            })
+            $("#DenNgay").kendoDatePicker({
+                format: "dd/MM/yyyy",
+                value: new Date(),
+                change: function (e) {
+                    loadData();
+                }
+            })
+
+
+
+            $("#gridchamcong").kendoGrid({
+                height: function () {
+                    var height = $(window).height() - 450;
+                    if (isMobile.any()) {
+                        height = 300;
+                    }
+                    return height;
+                },
+                scrollable: true,
+                persistSelection: true,
+                autoFitColumn: true,
+                resizable: true,
+                sortable: true,
+                //filterable: {
+                //    mode: "row",
+                //},
+                /*                pageable: pageableShort,*/
+                dataBinding: function () {
+                    record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+                },
+                columns: [
+                    //{
+                    //    width: "26px",
+                    //    selectable: true,
+                    //    headerAttributes: {
+                    //        style: "text-align:left",
+                    //        class: "table-header-cell "
+                    //    },
+                    //},
+                    {
+                        title: "STT",
+                        template: "#= ++record #",
+                        filterable: false,
+                        width: "50px",
+                        attributes: {
+                            class: "text-center"
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        }
+                    },
+                    {
+                        field: "WorkDate",
+                        format: "{0:dd/MM/yyyy HH:mm:ss}",
+                        title: "Thời gian chấm công",
+                        width: "130px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            style: "text-align: center;",
+                        }
+                    },
+                    {
+                        field: "TenDiem",
+                        title: "Tên điểm",
+                        width: "130px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        //attributes: { style: "color: green;" },
+                        template: function (e) {
+                            if (e.ID_ChuyenDo > 0) {
+                                return "<span style='color:green'>" + e.TenDiem + "</span>";
+                            } else {
+                                return e.TenDiem;
+                            }
+                        }
+                    },
+                    //{
+                    //    field: "DiaDiem",
+                    //    title: "Vị trí",
+                    //    width: "100px",
+                    //    filterable: {
+                    //        cell: {
+                    //            operator: "contains",
+                    //            showOperators: false,
+                    //            template: function (e) {
+                    //                e.element.addClass("k-textbox").css("width", "100%")
+                    //            }
+                    //        }
+                    //    },
+                    //    headerAttributes: {
+                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
+                    //        class: "table-header-cell"
+                    //    }
+                    //},
+                    //{
+                    //    field: "DiaChiIP",
+                    //    title: "IP",
+                    //    width: "100px",
+                    //    filterable: {
+                    //        cell: {
+                    //            operator: "contains",
+                    //            showOperators: false,
+                    //            template: function (e) {
+                    //                e.element.addClass("k-textbox").css("width", "100%")
+                    //            }
+                    //        }
+                    //    },
+                    //    headerAttributes: {
+                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
+                    //        class: "table-header-cell"
+                    //    }
+                    //}
+
+                ]
+
+            });
+
+
+            if (MaNhanVien != null) {
+                $("#MaNhanVien").val(MaNhanVien);
+                loadData();
+
+            }
+            $("#MaNhanVien").on('keyup', function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    loadData();
+                }
+            });
+            $("#MaNhanVien").focus();
+        })
+        var timer = 0;
+        function reload() {
+            timer++;
+            if (timer < 20)
+                $("#timer").text((20 - timer) + 's');
+            if (timer == 21) {
+                location.reload();
+            }
+        }
+        function loadData() {
+            kendo.ui.progress($("#gridchamcong"), true);
+            //$("#timer").text('20s');
+            $.ajax({
+                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&From=' + kendo.toString(new Date(), 'yyyy-MM-ddT00:00:00') + '&to=' + kendo.toString(new Date(), 'yyyy-MM-ddT23:59:59'),
+                url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + MaNhanVien
+                    + "&from=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
+                    + "&to=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
+                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&from=2022-09-03T00:00:00&to=2022-09-03T23:59:59',
+                type: 'GET',
+            }).done(function successCallback(response) {
+                console.log(response);
+                if (response.nv.AnhDaiDien) {
+                    $("img.k-avatar-image").attr("src", response.nv.AnhDaiDien.FilePath);
+                }
+                $("#TenLaiDo").text(response.nv.TenDayDu);
+                $("#MaLaiDo").text("Mã lái đò: " + response.nv.MaNhanVien);
+                $("#MaSoDo").text("Số đò: " + response.nv.MaThuyen);
+                $("#TenTo").text(response.nv.TenToNhom);
+                $("#chuyendotrongngay").text(response.data1.length);
+
+                $("#conglaodongtrongthang").text(response.data2.TongCongLDTrongThang);
+                $("#chuyendotrongthang").text(response.data2.Ticket);
+                $("#nocong").text(response.data2.NoCongTonDau);
+                $("#luongtamtinh").text(kendo.toString(response.data2.Ticket * 200000,'N0'));
+                $("#luotdanhgia").text(response.data2.LuotDanhGia);
+
+                var dataSource = new kendo.data.DataSource({
+                    data: response.data3,
+                    schema: {
+                        model: {
+                            fields: {
+                                WorkDate: {
+                                    type: 'date'
+                                },
+                            }
+                        }
+                    },
+                    pageSize: 100
+                });
+                $("#gridchamcong").data('kendoGrid').setDataSource(dataSource);
+                kendo.ui.progress($("#gridchamcong"), false);
+                $("#MaNhanVien").blur();
+
+                var star1 = 0;
+                var star2 = 0;
+                var star3 = 0;
+                var star4 = 0;
+                var star5 = 0;
+                var star1t = 0;
+                var star2t = 0;
+                var star3t = 0;
+                var star4t = 0;
+                var star5t = 0;
+
+                var sum = 0;
+                var avg = 0;
+                var sumt = 0;
+                var avgt = 0;
+                $.each(response.data4, function (index, r) {
+
+                    sum += r.DiemDanhGia;
+                    if (r.DiemDanhGia == 1) {
+                        star1++;
+                    }
+                    else if (r.RaDiemDanhGiate == 2) {
+                        star2++;
+                    }
+                    else if (r.DiemDanhGia == 3) {
+                        star3++;
+                    }
+                    else if (r.DiemDanhGia == 4) {
+                        star4++;
+                    }
+                    else if (r.DiemDanhGia == 5) {
+                        star5++;
+                    }
+                });
+                if (response.data4.length == 0) {
+                    avg = 0;
+                }
+                else {
+                    avg = sum / response.data4.length;
+                }
+                var pstar1 = star1 * 100 / response.data4.length;
+                var pstar2 = star2 * 100 / response.data4.length;
+                var pstar3 = star3 * 100 / response.data4.length;
+                var pstar4 = star4 * 100 / response.data4.length;
+                var pstar5 = star5 * 100 / response.data4.length;
+                console.log(avg);
+                $("#avg").html(kendo.toString(avg,'N2'));
+                $("#star1").html(star1);
+                $("#star2").html(star2);
+                $("#star3").html(star3);
+                $("#star4").html(star4);
+                $("#star5").html(star5);
+                $("#pstar5").css("width", pstar5 + "%");
+                $("#pstar4").css("width", pstar4 + "%");
+                $("#pstar3").css("width", pstar3 + "%");
+                $("#pstar2").css("width", pstar2 + "%");
+                $("#pstar1").css("width", pstar1 + "%");
+                //setInterval(reload, 1000);
+
+
+            $.each(response.data5, function (index, r) {
+
+                sumt += r.DiemDanhGia;
+                if (r.DiemDanhGia == 1) {
+                    star1t++;
+                }
+                else if (r.RaDiemDanhGiate == 2) {
+                    star2t++;
+                }
+                else if (r.DiemDanhGia == 3) {
+                    star3t++;
+                }
+                else if (r.DiemDanhGia == 4) {
+                    star4t++;
+                }
+                else if (r.DiemDanhGia == 5) {
+                    star5t++;
+                }
+            });
+            if (response.data5.length == 0) {
+                avgt = 0;
+            }
+            else {
+                avgt = sumt / response.data5.length;
+            }
+
+            $("#avgt").html(kendo.toString(avgt, 'N2'));
+                $("#star1t").html(star1t);
+                $("#star2t").html(star2t);
+                $("#star3t").html(star3t);
+                $("#star4t").html(star4t);
+                $("#star5t").html(star5t);
+                var pstar1t = star1t * 100 / response.data5.length;
+                var pstar2t = star2t * 100 / response.data5.length;
+                var pstar3t = star3t * 100 / response.data5.length;
+                var pstar4t = star4t * 100 / response.data5.length;
+                var pstar5t = star5t * 100 / response.data5.length;
+                $("#pstar5t").css("width", pstar5t + "%");
+                $("#pstar4t").css("width", pstar4t + "%");
+                $("#pstar3t").css("width", pstar3t + "%");
+                $("#pstar2t").css("width", pstar2t + "%");
+                $("#pstar1t").css("width", pstar1t + "%");
+
+        });
+        }
+    </script>
+    <style>
+        body {
+            height: 100vh;
+            background-image: url(../../Images/bbg.jpg);
+            background-position: center center;
+            background-size: cover;
+        }
+
+        label {
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container body" style=" background: rgb(255 255 255 / 60%); height: 100vh;overflow-y:scroll">
+        <div class="row container">
+            <div class="col-sm-3 text-center">
+                <img style="max-width: 200px;" src="~/Images/user_image.png" class="k-avatar-image" />
+                <span style=" width: 100%; display: block; font-size: 30px; margin-top: 10px;" id="TenLaiDo">----</span>
+                <span style=" width: 100%; display: block; font-size: 30px; margin-top: 10px;" id="TenTo">----</span>
+                <span style=" width: 100%; display: block; font-size: 30px; margin-top: 10px;" id="MaLaiDo">----</span>
+                <span style=" width: 100%; display: block; font-size: 30px; margin-top: 10px;" id="MaSoDo">----</span>
+                @*<input class="k-input" style="width: 100%; font-size: 25px; margin-top: 10px; border-radius: 10px; padding-left: 10px; " type="text" id="MaNhanVien" />*@
+            </div>
+            <div class="col-sm-9">
+                <span style="position: absolute; top: 0; right: 0; font-size: 20px;" id="timer"></span>
+                <div id="rating-result" class="row">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="rating-block">
+                                <h4>Điểm đánh giá trung bình năm</h4>
+                                <h2 class="bold padding-bottom-7"><span id="avg"></span><small>/ 5 <span class="glyphicon glyphicon-star"></span></small></h2>
+                                <h4>Lượt đánh giá</h4>
+
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" id="pstar5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star5"></span> </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" id="pstar4">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star4"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" id="pstar3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star3"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" id="pstar2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star2"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" id="pstar1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star1"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="rating-block">
+                                <h4>Điểm đánh giá trung bình tháng</h4>
+                                <h2 class="bold padding-bottom-7"><span id="avgt"></span><small>/ 5 <span class="glyphicon glyphicon-star"></span></small></h2>
+                                <h4>Lượt đánh giá</h4>
+
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" id="pstar5t">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star5t"></span> </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" id="pstar4t">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star4t"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" id="pstar3t">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star3t"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" id="pstar2t">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star2t"></span></div>
+                                </div>
+                                <div class="container">
+                                    <div class="pull-left" style="width:35px; line-height:1;">
+                                        <div style="height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+                                    </div>
+                                    <div class="pull-left" style="width:180px;">
+                                        <div class="progress" style="height:9px; margin:8px 0;">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" id="pstar1t">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pull-left" style="margin-left:10px;"><span id="star1t"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:50px;">
+            <div class="col-sm-3">
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        1 - Số chuyến đò tạm tính (chưa tính công LĐ):
+                        <span style="font-size: 20px; font-weight: bold" id="chuyendotrongngay"></span>
+                    </label>
+                </div>
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        2 - Số công lao động đã được duyệt:
+                        <span style="font-size: 20px; font-weight: bold" id="conglaodongtrongthang"></span>
+                    </label>
+                </div>
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        3 - Số chuyến đò trong tháng đã được duyệt:
+                        <span style="font-size: 20px; font-weight: bold" id="chuyendotrongthang"></span>
+                    </label>
+                </div>
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        4 - Nợ công lao động trong tháng:
+                        <span style="font-size:20px;font-weight:bold" id="nocong"></span>
+                    </label>
+                </div>
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        5 - Lương chuyến đò (chưa gồm công LĐ):
+                        <span style="font-size:20px;font-weight:bold" id="luongtamtinh"></span>
+                    </label>
+                </div>
+                <div class="form-group" style=" background-color: #fff; border-radius: 5px; padding-left: 5px;">
+                    <label>
+                        6 - Số đánh giá trong tháng đã được duyệt:
+                        <span style="font-size:20px;font-weight:bold" id="luotdanhgia"></span>
+                    </label>
+                </div>
+                <!-- /container -->
+            </div>
+            <div class="col-sm-9" style=" min-height: 500px;">
+                <label>Dữ liệu chấm công:</label>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="width:100%">Từ ngày</label>
+                        <input style="width:100%" id="TuNgay" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label style="width:100%">Đến ngày</label>
+                        <input style="width:100%" id="DenNgay" />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div id="gridchamcong"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

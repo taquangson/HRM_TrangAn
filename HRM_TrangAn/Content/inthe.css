@@ -1,0 +1,175 @@
+﻿
+@media print {
+
+    .background {
+        position: absolute;
+        z-index: 1;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        width: 829px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .bg-inthe {
+        width: 829px;
+        margin-top: -0.8px;
+    }
+
+    .anhthe-panel {
+        width: 829px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin: auto;
+    }
+
+
+    .hocsinh {
+        width: 50%;
+        height: 223px;
+        font-weight: 700;
+        font-size: 13px;
+        z-index: 1000;
+    }
+
+        .hocsinh:nth-child(2n+1) .ten {
+            margin-top: 125px;
+            display: block;
+            margin-left: 200px;
+        }
+
+        .hocsinh:nth-child(2n) .ten {
+            margin-top: 125px;
+            display: block;
+            margin-left: 235px;
+        }
+
+        .hocsinh:nth-child(2n+1) .ma {
+            display: block;
+            margin-left: 200px;
+        }
+
+        .hocsinh:nth-child(2n) .ma {
+            display: block;
+            margin-left: 235px;
+        }
+
+        .hocsinh:nth-child(2n+1) .namsinh {
+            display: block;
+            margin-left: 200px;
+        }
+
+        .hocsinh:nth-child(2n) .namsinh {
+            display: block;
+            margin-left: 235px;
+        }
+}
+
+
+.background {
+    position: absolute;
+    z-index: 1;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    width: 829px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.bg-inthe {
+    width: 829px;
+    margin-top: -0.8px;
+}
+
+.anhthe-panel {
+    width: 829px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: auto;
+}
+
+.space {
+    width: 100%;
+    height: 50.3px;
+}
+
+.hocsinh {
+    width: 50%;
+    height: 255.83px;
+    font-weight: 700;
+    z-index: 1000;
+    font-size: 13px;
+}
+
+    .hocsinh:nth-child(2n+1) .ten {
+        margin-top: 110px;
+        font-size: 1.3em;
+        display: block;
+        margin-left: 173px;
+        text-align: center;
+    }
+
+    .hocsinh:nth-child(2n+1) .ten1 {
+        display: block;
+        text-align: center;
+        margin-left: 173px;
+    }
+
+    .hocsinh:nth-child(2n) .ten {
+        margin-top: 110px;
+        font-size: 1.3em;
+        display: block;
+        margin-left: 173px;
+        text-align: center;
+    }
+
+    .hocsinh:nth-child(2n) .ten1 {
+        display: block;
+        text-align: center;
+        margin-left: 173px;
+    }
+
+
+    .hocsinh:nth-child(2n+1) .ma {
+        display: block;
+        margin-left: 238px;
+        margin-top: 41px;
+    }
+
+    .hocsinh:nth-child(2n) .ma {
+        display: block;
+        margin-left: 238px;
+        margin-top: 41px;
+    }
+
+    .hocsinh:nth-child(2n+1) .namsinh {
+        display: block;
+        margin-left: 72px;
+        margin-top: 5px;
+        color: #fff;
+    }
+
+    .hocsinh:nth-child(2n) .namsinh {
+        display: block;
+        margin-left: 72px;
+        margin-top: 5px;
+        color: #fff;
+    }
+
+    .hocsinh:nth-child(2n) .qrcode {
+        display: block;
+        margin-left: 175px;
+        position: relative;
+        top: -48px;
+    }
+
+    .hocsinh:nth-child(2n+1) .qrcode {
+        display: block;
+        margin-left: 175px;
+        position: relative;
+        top: -48px;
+    }

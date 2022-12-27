@@ -1,0 +1,165 @@
+﻿@using HRM_TrangAn.DataAccess.Models;
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>In thẻ</title>
+    <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/qrcode.js"></script>
+    <script>
+        $(document).ready(function () {
+            var host = window.location.host;
+            @for (int i = 0; i < Model.Count; i++){
+                <text>
+                var QR_CODE@(i) = new QRCode("qrcode@(i)", {
+                width: 60,
+                height: 60,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+            ////QR_CODE@(i).makeCode("@Model[i].MaNhanVien");
+            QR_CODE@(i).makeCode("http://dstabt.ddns.net:198/B/B?I=" +@Model[i].MaNhanVien);
+
+            var QR_CODEX@(i) = new QRCode("qrcodex@(i)", {
+                width: 90,
+                height: 90,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+            ////QR_CODEX@(i).makeCode(host+"/HoTro/RatingLaiDo?MaNhanVien=@Model[i].MaNhanVien");
+            QR_CODEX@(i).makeCode("http://dstabt.ddns.net:198/B/DG?I=" +@Model[i].MaNhanVien);
+            //QR_CODEX@(i).makeCode("https://docs.google.com/forms/d/e/1FAIpQLSfAja_rqx6ayhCgue0TM5CtPohGh_9N9G3l8F61GRK6AJBBzQ/viewform?usp=pp_url&entry.1488161317=@Model[i].MaNhanVien");
+                </text>
+
+            }
+        })
+
+    </script>
+    <link href="~/Content/intheA3.css" rel="stylesheet" />
+
+</head>
+<body class="anhthe-panel">
+    <div class="background">
+        @*<div class="space"></div>*@
+        @for (int j = 0; j < Model.Count; j = j + 2)
+        {
+            if (j % 10 == 0)
+            {
+                <div class="space"></div>
+                <div class="space"></div>
+            }
+            <img style="width: 335px; height: 213px; border-radius: 14px;" src="~/Images/mattruoc.png" />
+            <img style="width: 335px; height: 213px; border-radius: 14px;" src="~/Images/matsau.png" />
+            <img style="width: 335px; height: 213px; border-radius: 14px;" src="~/Images/mattruoc.png" />
+            <img style="width: 335px; height: 213px; border-radius: 14px;" src="~/Images/matsau.png" />
+        }
+    </div>
+    <div class="hocsinh-wrap">
+        @*<div class="space"></div>*@
+        @for (int i = 0; i < Model.Count; i = i + 2)
+        {
+            if (i % 10 == 0)
+            {
+                <div class="space"></div>
+                <div class="space"></div>
+            }
+            <div class="hocsinh">
+                <div style="width:356px;position:absolute;">
+                    <div class="talogo"><img style="width: 60px" src="~/Images/logodh2.png" /></div>
+                    <div class="tagname">KHU DU LỊCH SINH THÁI TRÀNG AN</div>
+                    <div class="qrcode" id="qrcode@(i)"></div>
+                    <span class="qrname">QR BÁO CÁO</span>
+                </div>
+                @if (Model[i].AnhDaiDien != null)
+                {
+                    <img class="anhdaidien" src="@Model[i].AnhDaiDien.FilePath" />
+                }
+                <span class="ten">@Model[i].TenDayDu.ToUpper()</span>
+                <span class="ten1">NHÂN VIÊN CHỞ ĐÒ</span>
+                <span class="namsinh">TỔ ĐÒ: <b>@Model[i].MaToNhom.ToUpper()</b></span>
+                <span class="ma">Mã LĐ: <span>@Model[i].MaNhanVien.ToUpper()</span></span>
+
+                <div class="noiquy">
+                    <p>QUY ĐỊNH</p>
+                    <p style="width:310px;">
+                        1. Thẻ này là tài sản của Khu du lịch Sinh thái Tràng An.
+                    </p>
+                    <p style="width:310px;">
+                        2. CBCNV phải đeo thẻ trước ngực, không che thẻ trong suốt quá trình làm việc tại các vị trí thuộc Khu du lịch.
+                    </p>
+                    <p style="width:310px;">
+                        3. Không cho người khác mượn thẻ, không gạch xóa, thay đổi thông tin, ảnh trên thẻ.
+                    </p>
+                    <p style="width:210px;">
+                        4. Nếu mất thẻ, CBCNV báo lại cho phòng Nhân sự xin cấp lại thẻ mới và nộp phạt theo quy định của Khu du lịch.
+                    </p>
+                    <p style="width:210px;">
+                        5. CBCNV phải hoàn trả lại thẻ cho phòng Nhân sự sau khi chuyển công tác, nghỉ việc.
+                    </p>
+                    <p style="width:240px;">
+                        6. Số điện thoại liên hệ phòng Nhân sự: 098.153.0008
+                    </p>
+                </div>
+                <div style="width:100%">
+                    <div class="qrcode2" id="qrcodex@(i)"></div>
+                    <span class="qrname2">QR ĐÁNH GIÁ</span>
+                </div>
+            </div>
+
+            if (i < Model.Count - 1)
+            {
+                <div class="hocsinh">
+                    <div style="width:356px;position:absolute;">
+                        <div class="talogo"><img style="width: 60px" src="~/Images/logodh2.png" /></div>
+                        <div class="tagname">KHU DU LỊCH SINH THÁI TRÀNG AN</div>
+                        <div class="qrcode" id="qrcode@(i + 1)"></div>
+                        <span class="qrname">QR BÁO CÁO </span>
+                    </div>
+                    @if (Model[i + 1].AnhDaiDien != null)
+                    {
+                        <img class="anhdaidien" src="@Model[i + 1].AnhDaiDien.FilePath" />
+                    }
+                    <span class="ten">@Model[i + 1].TenDayDu.ToUpper()</span>
+                    <span class="ten1">NHÂN VIÊN CHỞ ĐÒ</span>
+                    <span class="namsinh">TỔ ĐÒ: <b>@Model[i + 1].MaToNhom.ToUpper()</b></span>
+                    <span class="ma">MÃ LĐ: <span>@Model[i + 1].MaNhanVien.ToUpper()</span></span>
+
+                    <div class="noiquy">
+                        <p>QUY ĐỊNH</p>
+                        <p style="width:310px;">
+                            1. Thẻ này là tài sản của Khu du lịch Sinh thái Tràng An.
+                        </p>
+                        <p style="width:310px;">
+                            2. CBCNV phải đeo thẻ trước ngực, không che thẻ trong suốt quá trình làm việc tại các vị trí thuộc Khu du lịch.
+                        </p>
+                        <p style="width:310px;">
+                            3. Không cho người khác mượn thẻ, không gạch xóa, thay đổi thông tin, ảnh trên thẻ.
+                        </p>
+                        <p style="width:210px;">
+                            4. Nếu mất thẻ, CBCNV báo lại cho phòng Nhân sự xin cấp lại thẻ mới và nộp phạt theo quy định của Khu du lịch.
+                        </p>
+                        <p style="width:210px;">
+                            5. CBCNV phải hoàn trả lại thẻ cho phòng Nhân sự sau khi chuyển công tác, nghỉ việc.
+                        </p>
+                        <p style="width:240px;">
+                            6. Số điện thoại liên hệ phòng Nhân sự: 098.153.0008
+                        </p>
+                    </div>
+                    <div style="width:100%">
+                        <div class="qrcode2" id="qrcodex@(i + 1)"></div>
+                        <span class="qrname2">QR ĐÁNH GIÁ</span>
+                    </div>
+                </div>
+            }
+
+
+        }
+    </div>
+</body>
+</html>

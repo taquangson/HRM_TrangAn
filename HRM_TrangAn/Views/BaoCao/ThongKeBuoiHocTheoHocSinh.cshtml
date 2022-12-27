@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Thống kê buổi học theo học sinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/baocao_js/thongkebuoihocthohocsinh.js"></script>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <h2><b>Thống kê buổi học theo học sinh</b></h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label style="width:100%">Khối</label>
+            <div style="width:100%" id="comboKhoi"></div>
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Lớp</label>
+            <div style="width:100%" id="comboLop"></div>
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Tên học sinh</label>
+            <div style="width:100%" id="comboHocSinh"></div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-3">
+            <label style="width:100%">Từ ngày</label>
+            <input style="width:100%" id="TuNgay" />
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Đến ngày</label>
+            <input style="width:100%" id="DenNgay" />
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%"> </label>
+            <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Xem báo cáo </i></button>
+            <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel </i></button>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div id="gridData"></div>
+    </div>
+</div>

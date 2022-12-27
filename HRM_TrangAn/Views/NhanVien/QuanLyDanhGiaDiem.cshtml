@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý đánh giá điểm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/quanlydanhgiadiem.js"></script>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <h2><b>Dữ liệu đánh giá điểm</b></h2>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-2">
+            <label style="width:100%">Từ ngày</label>
+            <input style="width:100%" id="TuNgay" />
+        </div>
+        <div class="col-sm-2">
+            <label style="width:100%">Đến ngày</label>
+            <input style="width:100%" id="DenNgay" />
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%"> </label>
+            <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Tra cứu dữ liệu </i></button>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div id="gridData"></div>
+    </div>
+</div>
+<script type="text/x-kendo-template" id="template">
+    <div class="orders"></div>
+</script>

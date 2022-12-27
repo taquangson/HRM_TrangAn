@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Sơ đồ tổ chức nhân sự";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #treeview {
+        height: calc( 100vh - 170px) !important;
+        width: 100%;
+        /*overflow-y: scroll;*/
+        /*overflow-x: scroll;*/
+        float: left;
+        border-color: grey;
+        border: 1px solid #d9d9d9 !important;
+        line-height: 30px !important;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .k-treeview .k-group {
+        padding: 5px;
+    }
+</style>
+<script src="~/Scripts/js/phongban.js"></script>
+<div id="rootContainer" style="display:none">
+    <span class="sitemap">
+        <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+        <i class="fa fa-chevron-right"></i>
+        <b><i class="fa fa-cogs"></i> Quản trị hệ thống</b>
+        <i class="fa fa-chevron-right"></i>
+        <b><i class="fa fa-users"></i> Quản lý nhóm quyền</b>
+    </span>
+    <div id="windowChonNhanVien">
+        <div id="gridNhanVienNgoaiPhongBan"></div>
+    </div>
+
+    <div id="windowChonChucNang">
+        <div id="gridChucNangNgoaiPhongBan"></div>
+    </div>
+
+    <div id="dialogRoot"></div>
+    @*<div class="row">
+        <h2><b>Tổ chức nhân sự</b></h2>
+    </div>*@
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="toolBarMenu">
+                <button class="k-button bg-blue" onclick="ThemPhongBan()"> <i class="fa fa-plus-square"> Thêm </i></button>
+                <button class="k-button bg-orange" onclick="SuaPhongBan()"> <i class="fa fa-wrench"> Sửa</i> </button>
+                <button class="k-button bg-red" onclick="XoaPhongBan()"> <i class="fa fa-close"> Xóa</i> </button>
+            </div>
+            <div id="treeview"></div>
+        </div>
+        <div class="col-sm-9">
+            <div id="tabstrip">
+                <ul>
+                    <li class="k-state-active">
+                        Danh sách nhân sự
+                    </li>
+                    <li>
+                        Quyền truy cập
+                    </li>
+                </ul>
+                <div style="border:none;padding:0px;margin:0px;">
+                    <div id="gridNhanVienTrongPhongBan"></div>
+                </div>
+                <div style="border:none;padding:0px;margin:0px;">
+                    <div id="gridChucNangTrongPhongBan"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="windowPhongBan">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuPhongBan()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyPhongBan()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formPhongBan">
+        <input type="hidden" id="ID_PhongBan" />
+        <div style="margin-top:10px;" class="form-group valid" toggle-valid="TenPhongBan">
+            <label style="width:100%">Tên phòng ban: <span style="color:red">*</span></label>
+            <input id="TenPhongBan" placeholder="Tên phòng ban" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="PhongBanCha">
+            <label style="width:100%">Cấp cha: <span style="color:red">*</span></label>
+            <input id="PhongBanCha" class="input" />
+            <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+        </div>
+    </form>
+</div>

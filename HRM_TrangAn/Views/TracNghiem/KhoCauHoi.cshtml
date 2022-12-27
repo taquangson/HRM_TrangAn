@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Kho dữ liệu câu hỏi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<style>
+    #treeview {
+        height: calc( 100vh - 180px) !important;
+        width: 100%;
+        /*overflow-y: scroll;*/
+        /*overflow-x: scroll;*/
+        float: left;
+        border-color: grey;
+        border: 1px solid #d9d9d9 !important;
+        line-height: 30px !important;
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .k-treeview .k-group {
+        padding: 5px;
+    }
+
+    .photo {
+        height: 100px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .k-upload-sync .k-upload-button {
+        margin: 1px;
+    }
+
+        .k-upload-sync .k-upload-button span {
+            line-height: 13px;
+        }
+
+    #gridDapAn > div.k-grid-content.k-auto-scrollable > table > tbody > tr > td:nth-child(4) > div {
+        border: none;
+        background-color: transparent;
+    }
+
+    .k-widget.k-tooltip {
+        background-color: #8c9ebf;
+        border-color: #111;
+        width: 700px;
+    }
+</style>
+<script src="~/Scripts/js/khocauhoi.js"></script>
+<div id="dialogRoot"></div>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <h2><b>Kho câu hỏi</b></h2>
+        <p>
+
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="toolBarMenu">
+                <button class="k-button bg-blue" onclick="ThemDanhMuc()"> <i class="fa fa-plus-square"> Thêm </i></button>
+                <button class="k-button bg-orange" onclick="SuaDanhMuc()"> <i class="fa fa-wrench"> Sửa</i> </button>
+                <button class="k-button bg-red" onclick="XoaDanhMuc()"> <i class="fa fa-close"> Xóa</i> </button>
+            </div>
+            <div id="treeview"></div>
+        </div>
+        <div class="col-sm-9">
+            <div id="gridCauHoi"></div>
+        </div>
+    </div>
+</div>
+
+<div id="windowDanhMuc">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuDanhMuc()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyDanhMuc()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formDanhMuc">
+        <input type="hidden" id="ID" />
+        <div style="margin-top:10px;" class="form-group valid" toggle-valid="TenDanhMucCauHoi">
+            <label style="width:100%">Tên danh mục câu hỏi: <span style="color:red">*</span></label>
+            <input id="TenDanhMucCauHoi" placeholder="Tên danh mục" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="DanhMucCha">
+            <label style="width:100%">Danh mục cấp trên: <span style="color:red">*</span></label>
+            <input id="DanhMucCha" class="input" />
+            <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+        </div>
+
+    </form>
+</div>
+
+
+<div id="windowCauHoi">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuCauHoi()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyCauHoi()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+
+    <form id="formCauHoi">
+        <div style="width:100%">
+            <input type="hidden" id="ID_CauHoi" />
+            <div style="width:48%;float:left;margin-left:2%">
+                <div class="valid" toggle-valid="DanhMuc">
+                    <label style="width:100%;margin-top:7px;">Danh mục câu hỏi: <span style="color:red">*</span></label>
+                    <input id="DanhMuc" class="input" />
+                    <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+                </div>
+                <div class="valid" toggle-valid="NoiDung">
+                    <label style="width:100%;margin-top:7px;">Nội dung câu hỏi: <span style="color:red">*</span></label>
+                    <textarea id="NoiDung" style="width:100%;height:700px;" rows="2" class="k-textbox"></textarea>
+                    <span class="fa fa-exclamation-triangle icon" title="Không được bỏ trống"></span>
+                </div>
+                <div class="valid">
+                    <label style="width:100%;;margin-top:7px;">Cú pháp LaTeX: </label>
+                    <textarea id="latex_syntax" style="width:100%;" rows="2" class="k-textbox"></textarea>
+                    <br />
+                    <button type="button" class="k-textbox" onclick="insertLatex()">Kiểm tra cú pháp</button>
+                    <span id="test"></span>
+                </div>
+                <div class="valid">
+                    <label style="width:100%;;margin-top:7px;">Ảnh câu hỏi: </label>
+                    <input id="AnhCauHoi" type="file" />
+                </div>
+
+            </div>
+            <div style="width:48%;float:left;margin-left:2%">
+                <label style="width:100%;margin-top:7px;">Đáp án: <span style="color:red">*</span></label>
+                <div id="gridDapAn"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div id="templateCauHoiTooltip" style="display:none">
+    <div id="" style="width:100%;padding-top:10px;">
+        <b>#= htmlDecode(NoiDungCauHoi)#</b>
+        # $.each(lstDapAn, function(index, item){#
+        <div id="content-answer" style="width:46%;float:left;padding:1%; # if(item.IsDapAnDung){ # color:green #}# ">
+            #: Ans[index] #. #: item.DapAn == null ? "" : item.DapAn #
+            #if(item.AnhDapAn != null){#
+            <img src="../Images/AnhDapAn/#:item.AnhDapAn #" style="max-width:150px;" />
+            #}#
+        </div>
+        #})#
+    </div>
+</div>

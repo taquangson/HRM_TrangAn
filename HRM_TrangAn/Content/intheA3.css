@@ -1,0 +1,413 @@
+﻿
+@media print {
+
+    html {
+        font-family: Arial;
+    }
+
+    .background {
+        position: absolute;
+        z-index: 1;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        width: 1340px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: 236.47px;
+        /*justify-content: end;*/
+    }
+
+    .anhthe-panel {
+        width: 1658px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin: auto;
+        /*justify-content: end;*/
+    }
+
+    .space {
+        width: 100%;
+        height: 53.2px;
+    }
+
+        .space:first-child {
+            width: 100%;
+            height: 0px;
+        }
+
+    .hocsinh-wrap {
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: 236.47px;
+    }
+
+    .hocsinh {
+        width: 670px;
+        height: 213px;
+        z-index: 1000;
+        font-size: 13px;
+    }
+
+        .hocsinh .ten {
+            margin-top: 94px;
+            font-size: 17px;
+            display: block;
+            margin-left: 137px;
+            width: 198px;
+            text-align: center;
+            color: #4e3573;
+            font-weight: 700;
+        }
+
+        .hocsinh .ten1 {
+            font-size: 12px;
+            color: #4e3573;
+            display: block;
+            margin-left: 137px;
+            width: 198px;
+            text-align: center;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+
+        .hocsinh .ma {
+            font-size: 13px;
+            color: #4e3573;
+            display: block;
+            margin-left: 35px;
+            width: 130px;
+            margin-left: 171px;
+            text-align: center;
+            margin-right: 10px;
+            background: linear-gradient(90deg, rgba(226,226,236,1) 0%, rgba(228,228,235,1) 30%, rgba(201,221,224,1) 65%, rgba(219,232,235,1) 98%);
+            border-radius: 5px;
+        }
+
+            .hocsinh .ma span {
+                font-weight: 700;
+                font-size: 22px;
+                color: #4e3573;
+            }
+
+
+        .hocsinh .namsinh {
+            font-size: 16px;
+            color: #fff;
+            display: block;
+            margin-left: 35px;
+            width: 100%;
+            /*color: #fff;*/
+            width: 198px;
+            margin-left: 137px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .hocsinh .qrcode {
+            display: block;
+            float: left;
+            /*margin-left: 160px;*/
+            margin-top: 9px;
+            /*position: absolute;*/
+        }
+
+        .hocsinh .qrname {
+            font-size: 8px;
+            color: #fff;
+            margin-left: 272px;
+        }
+
+        .hocsinh .qrcode2 {
+            display: block;
+            margin-left: 580px;
+            margin-top: -85px;
+            position: absolute;
+        }
+
+        .hocsinh .qrname2 {
+            margin-left: 581px;
+            width: 75px;
+            font-size: 11px;
+            color: #fff;
+            position: absolute;
+            margin-top: -8px;
+        }
+
+        .hocsinh .anhdaidien {
+            height: 135px;
+            width: 100px;
+            position: absolute;
+            margin-top: 54px;
+            margin-left: 25px;
+            border: 10px solid;
+            border-image-slice: 1;
+            border-width: 5px;
+            border-image-source: linear-gradient(to bottom, #ab944e, #deadc3);
+        }
+
+    .noiquy {
+        position: absolute;
+        width: 311px;
+        height: 190px;
+        z-index: 99;
+        color: #fff;
+        font-size: 9px;
+        margin-left: 345px;
+        margin-top: -186px;
+        border: solid 1px #fff;
+        padding-left: 3px;
+        border-radius: 10px;
+    }
+
+        .noiquy p {
+            margin: 0 0 5px;
+            font-size: 10px;
+            color: #fff;
+            print-color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
+        }
+
+            .noiquy p:first-child {
+                font-size: 11px;
+                text-align: center;
+                margin-top: -6px;
+                background-color: #6b6590;
+                margin-bottom: 10px;
+                width: 70px;
+                margin-left: 126px;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+    .talogo {
+        margin-top: 2px;
+        margin-left: 10px;
+        float: left;
+    }
+
+    .tagname {
+        float: left;
+        width: 195px;
+        font-size: 11px;
+        margin-top: 24px;
+        color: #fff;
+        text-align: center;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+html {
+    font-family: Arial;
+}
+
+.background {
+    position: absolute;
+    z-index: 1;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    width: 1340px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 236.47px;
+    /*justify-content: end;*/
+}
+
+.anhthe-panel {
+    width: 1658px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: auto;
+    /*justify-content: end;*/
+}
+
+.space {
+    width: 100%;
+    height: 53.2px;
+}
+
+    .space:first-child {
+        width: 100%;
+        height: 0px;
+    }
+
+.hocsinh-wrap {
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 236.47px;
+}
+
+.hocsinh {
+    width: 670px;
+    height: 213px;
+    z-index: 1000;
+    font-size: 13px;
+}
+
+    .hocsinh .ten {
+        margin-top: 94px;
+        font-size: 17px;
+        display: block;
+        margin-left: 137px;
+        width: 198px;
+        text-align: center;
+        color: #4e3573;
+        font-weight: 700;
+    }
+
+    .hocsinh .ten1 {
+        font-size: 12px;
+        color: #4e3573;
+        display: block;
+        margin-left: 137px;
+        width: 198px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 5px;
+    }
+
+
+    .hocsinh .ma {
+        font-size: 13px;
+        color: #4e3573;
+        display: block;
+        margin-left: 35px;
+        width: 130px;
+        margin-left: 171px;
+        text-align: center;
+        margin-right: 10px;
+        background: linear-gradient(90deg, rgba(226,226,236,1) 0%, rgba(228,228,235,1) 30%, rgba(201,221,224,1) 65%, rgba(219,232,235,1) 98%);
+        border-radius: 5px;
+    }
+
+        .hocsinh .ma span {
+            font-weight: 700;
+            font-size: 22px;
+            color: #4e3573;
+        }
+
+
+    .hocsinh .namsinh {
+        font-size: 16px;
+        color: #fff;
+        display: block;
+        margin-left: 35px;
+        width: 100%;
+        /*color: #fff;*/
+        width: 198px;
+        margin-left: 137px;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    .hocsinh .qrcode {
+        display: block;
+        float: left;
+        /*margin-left: 160px;*/
+        margin-top: 9px;
+        /*position: absolute;*/
+    }
+
+    .hocsinh .qrname {
+        font-size: 8px;
+        color: #fff;
+        margin-left: 272px;
+    }
+
+    .hocsinh .qrcode2 {
+        display: block;
+        margin-left: 560px;
+        margin-top: -100px;
+        position: absolute;
+    }
+
+    .hocsinh .qrname2 {
+        margin-left: 570px;
+        width: 75px;
+        font-size: 11px;
+        color: #fff;
+        position: absolute;
+        margin-top: -8px;
+    }
+
+    .hocsinh .anhdaidien {
+        height: 135px;
+        width: 100px;
+        position: absolute;
+        margin-top: 54px;
+        margin-left: 25px;
+        border: 10px solid;
+        border-image-slice: 1;
+        border-width: 5px;
+        border-image-source: linear-gradient(to bottom, #ab944e, #deadc3);
+    }
+
+.noiquy {
+    position: absolute;
+    width: 311px;
+    height: 190px;
+    z-index: 99;
+    color: #fff;
+    font-size: 9px;
+    margin-left: 345px;
+    margin-top: -186px;
+    border: solid 1px #fff;
+    padding-left: 3px;
+    border-radius: 10px;
+}
+
+    .noiquy p {
+        margin: 0 0 5px;
+        font-size: 10px;
+        color: #fff;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+        .noiquy p:first-child {
+            font-size: 11px;
+            text-align: center;
+            margin-top: -6px;
+            background-color: #6b6590;
+            margin-bottom: 10px;
+            width: 70px;
+            margin-left: 126px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+.talogo {
+    margin-top: 2px;
+    margin-left: 10px;
+    float: left;
+}
+
+.tagname {
+    float: left;
+    width: 195px;
+    font-size: 11px;
+    margin-top: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+* {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}

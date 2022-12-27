@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Công ty giáo dục Dương Hòa - Thông báo học phí</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0 20px;
+        }
+
+        tbody td {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style="background-color: #355593;color: #fff;padding: 0px 5px;">
+        <h4 class="text-center"><b style="text-transform:uppercase;font-size:13px;">Cty TNHH Giáo Dục CLC Dương Hoà</b></h4>
+        <h5 class="text-center">@Model.TaiKhoan.DiaChiChiNhanh</h5>
+        <h5 class="text-center">@Model.TaiKhoan.DienThoaiChiNhanh</h5>
+        <p class="text-center" style="border-bottom:dashed 1px"></p>
+        <h4 class="text-center" style="margin-top:20px;margin-bottom:20px;"><b>PHIẾU ĐỀ NGHỊ THANH TOÁN HỌC PHÍ</b></h4>
+        <p style="font-size:12px;width:50%;float:left">Ngày lập: @Model.PhieuThu.NgayTao.ToString("dd/MM/yyyy HH:mm")</p>
+        <p style="font-size:12px;width:50%;float:left;text-align:right">Người lập: @Model.PhieuThu.NguoiLap</p>
+        <p style="font-size:12px;width:100%;float:left;text-align:left">Học sinh: <b>@Model.PhieuThu.TenHocSinh</b></p>
+
+        <b style="margin-top:20px;display:block">Đơn chính</b>
+        <table style="margin:2px;width:100%">
+            <thead>
+                <tr style="border-bottom:solid 1px;">
+                    @*<td style="width:10%;text-align:center">STT</td>*@
+                    <td style="width:60%;text-align:center">Nội dung</td>
+                    <td style="width:30%;text-align:center">Thành tiền</td>
+                </tr>
+            </thead>
+            <tbody style="border-bottom: solid 1px;">
+                @{int i = 0; }
+                @foreach (HRM_TrangAn.DataAccess.Models.PhieuHocModel ph in Model.PhieuThu.lstPhieuHoc)
+                {
+                    i++;
+                    <tr>
+                        @*<td style="text-align:center">@i</td>*@
+                        <td>@ph.TenLop - Tháng @ph.Thang - @ph.SoBuoi buổi</td>
+                        <td style="text-align:right;">@ph.SoTien.ToString("N0")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+        <b style="margin-top:20px;display:block">Phụ thu</b>
+        <table style="margin:2px;width:100%">
+            <thead>
+                <tr style="border-bottom:solid 1px;">
+                    @*<td style="width:10%;text-align:center">STT</td>*@
+                    <td style="width:60%;text-align:center">Nội dung</td>
+                    <td style="width:30%;text-align:center">Thành tiền</td>
+                </tr>
+            </thead>
+            <tbody style="border-bottom: solid 1px;">
+                @{int j = 0; }
+                @foreach (HRM_TrangAn.DataAccess.Models.PhuThuGiamTruModel pt in Model.PhieuThu.lstPhuThu)
+                {
+                    j++;
+                    <tr>
+                        @*<td style="text-align:center">@j</td>*@
+                        <td>@pt.LyDo</td>
+                        <td style="text-align:right;">@pt.DonGia.ToString("N0")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+        <b style="margin-top:20px;display:block">Giảm trừ</b>
+        <table style="margin:2px;width:100%">
+            <thead>
+                <tr style="border-bottom:solid 1px;">
+                    @*<td style="width:10%;text-align:center">STT</td>*@
+                    <td style="width:60%;text-align:center">Nội dung</td>
+                    <td style="width:30%;text-align:center">Thành tiền</td>
+                </tr>
+            </thead>
+            <tbody style="border-bottom: solid 1px;">
+                @{int k = 0; }
+                @foreach (HRM_TrangAn.DataAccess.Models.PhuThuGiamTruModel pt in Model.PhieuThu.lstGiamTru)
+                {
+                    k++;
+                    <tr>
+                        @*<td style="text-align:center">@k</td>*@
+                        <td>@pt.LyDo</td>
+                        <td style="text-align:right;">@pt.DonGia.ToString("N0")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="text-right"><b>Tổng:  @Model.PhieuThu.TongThu.ToString("N0") VNĐ</b></p>
+        @if (Model.TaiKhoan.ID_ChiNhanh == 1)
+        {
+            <p class="text-center" style="border-top:dashed 1px; font-size:12px;vertical-align:middle;padding-top:10px;">
+                Chuyển khoản: 48310000576200 - Tạ Thị Thanh Nga - BIDV TP Ninh Bình
+            </p>
+
+        }
+    </div>
+
+</body>
+</html>

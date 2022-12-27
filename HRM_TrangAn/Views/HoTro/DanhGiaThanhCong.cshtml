@@ -1,0 +1,89 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+	<title>THÔNG TIN KHẢO SÁT</title>
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="~/Assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="~/Assets/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			font-size: 62.5%;
+		}
+
+		body {
+			background-color: #f0ebf8;
+			font-size: 1.6rem;
+		}
+
+		.container {
+			max-width: 690px;
+			padding: 12px 24px;
+		}
+
+		.header-bg {
+			width: 100%;
+			margin-bottom: 12px;
+			padding-top: 25%;
+			background-image: url('../../images/khaosatimage.jpg');
+			background-size: cover;
+			background-position: center;
+			border-radius: 5px;
+		}
+
+		.row {
+			margin: 0 0 12px;
+			transition: background-color 200ms cubic-bezier(0,0,0.2,1);
+			background-color: #fff;
+			border: 1px solid #dadce0;
+			border-radius: 8px;
+			padding: 24px;
+			page-break-inside: avoid;
+			word-wrap: break-word;
+		}
+
+		.highlight {
+			color: transparent;
+			background-color: #FF3CAC;
+			background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			white-space: nowrap;
+		}
+
+		h1 {
+			margin: 0 0 12px;
+			line-height: 1.4;
+		}
+
+	</style>
+
+</head>
+<body>
+	<div class="container pt-5">
+		<div class="header-bg">
+		</div>
+		@* Thank You for the Survey *@
+		<div class="row">
+			<h1>ĐÁNH GIÁ ĐÃ ĐƯỢC GỬI <strong class="highlight">THÀNH CÔNG</strong></h1>
+			<p>Cảm ơn bạn đã dành thời gian đánh giá !</p>
+		</div>
+	</div>
+</body>
+</html>

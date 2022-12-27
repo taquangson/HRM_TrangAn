@@ -1,0 +1,38 @@
+﻿
+<script>
+    $(document).ready(function () {
+        $("#TenDanhMucTruongHoc").val('');
+    });
+    function LuuDanhMucTruongHoc() {
+        $.ajax({
+            url: '/DanhMuc/InsertOrUpdate_DanhMuc',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({
+                item: {
+                    text: $("#TenDanhMucTruongHoc").val(),
+                    value: 0
+                },
+                TenBang: "DanhMucTruong"
+            })
+        }).done(function successCallback(response) {
+            if (response.success) {
+                notification.show({ kValue: response.msg }, "success");
+                LoadDanhMucTruongHoc();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        });
+        CloseLayoutWindow();
+    }
+
+</script>
+<div class="toolBarMenu">
+    <button class="k-button bg-blue" onclick="LuuDanhMucTruongHoc()"> <i class="fa fa-plus-square"> Lưu </i></button>
+</div>
+<div class="form-group valid" toggle-valid="TenDanhMucTruongHoc">
+    <label style="width:100%">Tên danh mục trường học: <span style="color:red">*</span></label>
+    <input id="TenDanhMucTruongHoc" placeholder="Tên danh mục trường học" type="text" class="k-textbox input" />
+    <span class="fa fa-exclamation-triangle icon"></span>
+</div>

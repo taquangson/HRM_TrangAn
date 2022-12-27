@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/quanlytuyendo.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-database"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-users"></i> Quản lý tuyến đò</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="MaTuyen">
+            <label style="width:100%">Mã tuyến: <span style="color:red">*</span></label>
+            <input id="MaTuyen" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="TenTuyen">
+            <label style="width:100%">Tên tuyến: <span style="color:red">*</span></label>
+            <input id="TenTuyen" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Thời gian tối thiểu(phút): </label>
+            <input id="ThoiGianToiThieu" type="text" style="width:100%" class="k-textbox" />
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Thời gian tối đa(phút):</label>
+            <input id="ThoiGianToiDa" type="text" style="width:100%" class="k-textbox" />
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Danh sách điểm quẹt thẻ</label>
+            <div id="gridDiem"></div>
+        </div>
+    </form>
+</div>
+<div id="windowDiem">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddDiem()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách điểm:</label>
+        <div id="gridAddDiem"></div>
+    </div>
+</div>
+

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/js/home.js"></script>
+<style>
+    td {
+        vertical-align: top;
+        padding-left: 10px;
+    }
+
+    #ttketnoi li {
+        list-style: none;
+        margin-top: 3px;
+    }
+
+        #ttketnoi li span {
+            font-weight: bold;
+            width: 150px;
+        }
+
+    #ttketnoi2 li {
+        list-style: none;
+        margin-top: 3px;
+    }
+
+        #ttketnoi2 li span {
+            font-weight: bold;
+            width: 150px;
+        }
+
+    #ttnhansu span {
+        font-weight: bold;
+    }
+</style>
+<div class="row" style="height:calc(100vh - 80px);overflow:scroll">
+    <div class="row">
+        <a href="/User/Index" class="col-sm-2 dashboard-box blue">
+            <i class="fa fa-user"></i>
+            <label>Quản lý nhân viên</label>
+        </a>
+        <a href="/DanhMuc/DanhMucToNhom" class="col-sm-2 dashboard-box blue">
+            <i class="fa fa-book"></i>
+            <label>Quản lý tổ/nhóm</label>
+        </a>
+        <a href="/TuyenDo/Index" class="col-sm-2 dashboard-box blue">
+            <i class="fa fa-bookmark"></i>
+            <label>Quản lý tuyến đò</label>
+        </a>
+        <a href="/CongViec/PhanCongCongViec" class="col-sm-2 dashboard-box blue">
+            <i class="fa fa-dollar"></i>
+            <label>Quản lý phân công</label>
+        </a>
+    </div>
+    <br />
+    <div style="width:100%;float:left;">
+        <div style="width:50%;float:left;margin-top:20px;">
+            <b style="text-align:center;width:100%;display:block;font-size:16px;">Tình trạng kết nối các điểm</b>
+            <ul id="ttketnoi">
+            </ul>
+            <ul id="ttketnoi2">
+            </ul>
+        </div>
+        <div id="ttnhansu" style="width:50%;float:left;margin-top:20px;">
+            <b style="text-align:center;width:100%;display:block;font-size:16px;">Tổng hợp thông tin nhân sự</b>
+            <label>
+                1. Tổng số chứng nhận theo trạng thái Chưa có
+                theo mỗi loại:
+            </label>
+            <ul>
+
+                <li>
+                    1.1 Nghiệp vụ du lịch: Đã có <span style="color:green" id="ccnvdaco"></span>; Chưa có:<span style="color:orange" id="ccnvchuaco"></span>
+                </li>
+                <li>
+                    1.2 PCCC: Đã có <span style="color:green" id="ccpcccdaco"></span>; Chưa có:<span style="color:orange" id="ccpcccchuaco"></span>
+                <li>
+                    1.3 Đường thủy nội địa: Đã có <span style="color:green" id="cctnddaco"></span>; Chưa có:<span style="color:orange" id="cctndchuaco"></span>
+                </li>
+                <li>
+                    1.4 Tiếng Anh: Đã có <span style="color:green" id="cctadaco"></span>; Chưa có:<span style="color:orange" id="cctachuaco"></span>
+                </li>
+            </ul>
+            <label>
+                2. Hợp đồng lao động hết hạn trong tháng
+            </label>
+            <ul>
+                <li>
+                    2.1 Học việc: <span id="hdhocviec"></span>
+                </li>
+                <li>
+                    2.2 Thử việc: <span id="hdthuviec"></span>
+                </li>
+                <li>
+                    2.3 Chính thức: <span id="hdchinhthuc"></span>
+                </li>
+
+            </ul>
+            <label>3. Số đò có tích kê trong tháng: <span id="soluongdocoticke"></span></label>
+            <label style="width:100%">4. Số lái đò đang làm việc: <span id="soluongdodanglam"></span></label>
+            <label style="width:100%">5. Số lái đò đã nghỉ việc: <span id="soluongdodanghi"></span></label>
+        </div>
+    </div>
+    <div style="width:50%;float:left;margin-top:20px;">
+        <b style="text-align:center;width:100%;display:block;font-size:16px;">Dữ liệu chấm công realtime</b>
+        <div id="gridChamCong"></div>
+    </div>
+    <div style="width: 50%; float: left; margin-top: 20px;">
+        <b style="text-align:center;width:100%;display:block;font-size:16px;">Thuyền đang ở bến</b>
+        <div id="gridThuyen"></div>
+    </div>
+</div>

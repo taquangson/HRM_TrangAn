@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    @*<link href="~/Assets/kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />*@
+    @*<link href="~/Assets/kendo/styles/kendo.common.min.css" rel="stylesheet" />*@
+    @*<link href="~/Assets/kendo/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />*@
+    @*<link href="~/Assets/kendo/styles/kendo.rtl.min.css" rel="stylesheet" />*@
+
+    <link href="~/Assets/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.common-bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.bootstrap.mobile.min.css" />
+
+    @*<link href="~/Assets/kendo/kendo.ext.css" rel="stylesheet" />*@
+    @*<link href="~/Assets/kendo/styles/kendo2021.default-main.min.css" rel="stylesheet" />*@
+    <link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/custom.min.css" rel="stylesheet" />
+    <link href="~/Assets/Common.css" rel="stylesheet" />
+
+    <link href="~/Assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/jszip.js"></script>
+    <script src="~/Assets/xlsx.js"></script>
+
+</head>
+@using HRM_TrangAn.DataAccess.Models
+@{
+    TaiKhoanModel userinfor = (TaiKhoanModel)Session["UserInfor"];
+}
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title">
+                        <a href="/Home/Index" class="site_title">
+                            @*<img src="~/Images/logo_trangan_white2.png" alt="..." style="width:50px;border-radius: 10px;">*@
+                            <span>HRM System</span>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/Images/img.png" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Xin chào,</span>
+                            <h2>@userinfor.TenDayDu</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Danh sách chức năng</h3>
+                            <ul id="main-menu" class="nav side-menu"></ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    @*<div class="sidebar-footer hidden-small">
+                            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            </a>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                            @Html.AntiForgeryToken()
+                            <a data-toggle="tooltip" data-placement="top" title="Đăng xuất" href="javascript:document.getElementById('logoutForm').submit()">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
+                            }
+
+                        </div>*@
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle" style="color:#5f2d75"><i class="fa fa-bars"></i></a>
+                        </div>
+                        @using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/Images/img.png" alt="">@userinfor.TenDayDu
+                                        <span class="fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="/User/ChangePass"> Đổi mật khẩu</a></li>
+                                        <li><a href="javascript:;">Hỗ trợ</a></li>
+                                        <li>
+                                            @Html.AntiForgeryToken()
+                                            <a title="Đăng xuất" href="javascript:document.getElementById('logoutForm').submit()">
+                                                <i class="fa fa-sign-out pull-right"></i>Đăng xuất
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                @*<li role="presentation" class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-envelope-o"></i>
+                                            <span class="badge bg-green">6</span>
+                                        </a>
+                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="~/Images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="~/Images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="~/Images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="~/Images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="text-center">
+                                                    <a>
+                                                        <strong>See All Alerts</strong>
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>*@
+                            </ul>
+                        }
+
+
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main" style="overflow:hidden;">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-left">
+                    <p>Website developed by QS - quangson0409@gmail.com</p>
+                </div>
+                <div class="pull-right">
+                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="wrong-pass">
+            <i class="fa fa-close" style="color:red;font-size:40px;"></i>
+            <p>#= kValue # </p>
+        </div>
+    </script>
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="upload-success">
+            <i class="fa fa-check" style="color:green;font-size:40px;"></i>
+            <p>#= kValue # </p>
+        </div>
+    </script>
+    <div id="dialogRoot"></div>
+    <div style="visibility:hidden" id="LayoutWindow">
+        <div id="LayoutWindowContent"></div>
+    </div>
+    @Scripts.Render("~/bundles/vendor")
+    @RenderSection("scripts", required: false)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!Notification) {
+                alert('Desktop notifications not available in your browser. Try Chromium.');
+                return;
+            }
+
+            if (Notification.permission !== 'granted')
+                Notification.requestPermission();
+        });
+        var signalR = $.connection.diemDanhHub;
+        //var signalR_tinnhan = $.connection.tinNhanHub;
+
+
+        //signalR_tinnhan.client.pushTinNhan = function (DienThoai) {
+        //    notifyTinNhan(DienThoai);
+        //}
+
+        //signalR.client.pushDesktopDiemDanh = function (ID_Lop, TenLop, TenGiaoVien, Ca) {
+        //    var lastnoti_arr = [];
+        //    if (window.sessionStorage.LastNoti == undefined) {
+        //        let lastnoti = {
+        //            ID_Lop: ID_Lop,
+        //            TenGiaoVien: TenGiaoVien,
+        //            Time: new Date()
+        //        }
+        //        lastnoti_arr.push(lastnoti);
+        //        window.sessionStorage.setItem("LastNoti", JSON.stringify(lastnoti_arr));
+        //        notifyMe(TenLop, TenGiaoVien, ID_Lop, Ca);
+        //    } else {
+        //        lastnoti_arr = JSON.parse(window.sessionStorage.LastNoti);
+        //        var index_last_noti = -1;
+        //        $.each(lastnoti_arr, function (index, item) {
+        //            if ((parseInt(item.ID_Lop)) == parseInt(ID_Lop)) {
+        //                index_last_noti = index;
+        //                let last_time_noti = new Date(item.Time);
+        //                let seconds = Math.abs(new Date() - last_time_noti) / 60000;
+        //                if (seconds > 2) {
+        //                    item.Time = new Date();
+        //                    window.sessionStorage.setItem("LastNoti", JSON.stringify(lastnoti_arr));
+        //                    notifyMe(TenLop, TenGiaoVien, ID_Lop, Ca);
+        //                }
+        //            }
+        //        })
+        //        if (index_last_noti >= 0) {
+
+        //        } else {
+        //            let lastnoti = {
+        //                ID_Lop: ID_Lop,
+        //                TenGiaoVien: TenGiaoVien,
+        //                Time: new Date()
+        //            }
+        //            lastnoti_arr.push(lastnoti);
+        //            window.sessionStorage.setItem("LastNoti", JSON.stringify(lastnoti_arr));
+        //            notifyMe(TenLop, TenGiaoVien, ID_Lop, Ca);
+        //        }
+        //    }
+        //};
+
+        signalR.client.pushChamCong = function (ID_Lop) {
+            LoadDataChamCong();
+            LoadDataThuyen();
+            LoadData_GetDataMatKetNoi();
+        };
+
+        $.connection.hub.start().done(function () {
+            console.log("Connect signalR OK!");
+        });
+
+
+        //function notifyMe(TenLop, TenGiaoVien, ID_Lop, Ca) {
+        //    if (Notification.permission !== 'granted')
+        //        Notification.requestPermission();
+        //    else {
+        //        var notification = new Notification('Thông báo!', {
+        //            icon: '/Images/img.jpg',
+        //            body: TenGiaoVien + ' đã cập nhật dữ liệu điểm danh lớp ' + TenLop
+        //        });
+        //        notification.onclick = function () {
+        //            window.open('/DiemDanh/DiemDanhFromNoti?ID_Lop=' + ID_Lop + '&Ca=' + Ca);
+        //        };
+        //    }
+        //}
+
+        //function notifyTinNhan(DienThoai) {
+        //    if (Notification.permission !== 'granted')
+        //        Notification.requestPermission();
+        //    else {
+        //        var notification = new Notification('Thông báo tin nhắn mới!', {
+        //            icon: '/Images/sms.png',
+        //            body: "Có tin nhắn mới được gửi từ số: " + DienThoai
+        //        });
+        //        notification.onclick = function () {
+        //            window.open('/ChatMessage/Index');
+        //        };
+        //    }
+        //}
+
+    </script>
+</body>
+</html>

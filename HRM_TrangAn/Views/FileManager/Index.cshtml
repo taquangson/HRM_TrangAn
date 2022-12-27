@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Quản lý thông tài liệu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.914/styles/kendo.default-main.min.css" />
+<script src="~/Scripts/js/quanlytailieu.js"></script>
+<style>
+    .k-window-titlebar .k-window-actions {
+        position: inherit !important;
+    }
+</style>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-briefcase"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-male"></i> Quản lý Tài liệu</b>
+</span>
+<div id="filemanager"></div>
+
+<script id="preview-template" type="text/kendo-ui-template">
+    <div class="#=styles.fileInfo#">
+    #if(kendo.getFileGroup(selection[0].extension, true) == 'file-image'){#
+        <div class="#=styles.filePreviewWrapper#">
+    <img src="../Content/UserFiles/FileServer/Files/#=selection[0].path#" style="width:140px" />
+        </div>
+    #}else{#
+     <div class="#=styles.filePreviewWrapper#">
+            <span class="k-icon k-i-#=kendo.getFileGroup(selection[0].extension, true)#"></span>
+        </div>
+    #}#
+
+        <div class="#=styles.fileTitleWrapper#">
+            <a href="../Content/UserFiles/FileServer/Files/#=selection[0].path#" target="_blank"><b>Tải về</b></a>
+        </div>
+        <div class="#=styles.fileTitleWrapper#">
+            <span class="#=styles.fileTitle#"><b>Tên tài liệu: </b>#=selection[0].tentailieu#</span>
+        </div>
+        <div class="#=styles.fileTitleWrapper#">
+            <span class="#=styles.fileTitle#"><b>Ngày cấp: </b>#=kendo.toString(selection[0].ngaycap, "dd/MM/yyyy")#</span>
+        </div>
+        <div class="#=styles.fileTitleWrapper#">
+            <span class="#=styles.fileTitle#">#=selection[0].name#</span>
+        </div>
+        #if(metaFields){#
+        <dl class="#=styles.fileMetaWrapper#">
+            #for(var i = 0; i < metaFields.length; i+=1){#
+            #var field = metaFields[i]#
+            <dt class="#=styles.metaLabel#">#=messages[field]#: </dt>
+            <dd class="#=styles.metaValue# #=styles[field]#">
+                #if(field == "size"){#
+                #=kendo.getFileSizeMessage(selection[0][field])#
+                #} else if(selection[0][field] instanceof Date) {#
+                #=kendo.toString(selection[0][field], "G")#
+                #} else if(field == "extension") {#
+                #=kendo.getFileGroup(selection[0].extension)#
+                #} else {#
+                #=selection[0][field]#
+                #}#
+            </dd>
+            <dd class="line-break"></dd>
+            # } #
+        </dl>
+        #}#
+    </div>
+</script>

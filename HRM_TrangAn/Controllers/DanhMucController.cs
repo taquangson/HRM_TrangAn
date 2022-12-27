@@ -1,0 +1,181 @@
+﻿using HRM_TrangAn.App_Start;
+using HRM_TrangAn.DataAccess.DAO;
+using HRM_TrangAn.DataAccess.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using static HRM_TrangAn.DataAccess.DAO.DanhMucDAO;
+
+namespace HRM_TrangAn.Controllers
+{
+    public class DanhMucController : Controller
+    {
+        // GET: DanhMuc
+        [SessionExpire]
+        public ActionResult GetAll_DanhMucQuyen()
+        {
+            DanhMucDAO dm_dao = new DanhMucDAO();
+            List<DanhMuc> dt = dm_dao.GetAll_DMQuyen();
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [SessionAdminRole]
+        public ActionResult DanhMucLoi()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        [SessionAdminRole]
+        public ActionResult NguoiLaoDong()
+        {
+            return View();
+        }
+
+        [SessionAdminRole]
+        public ActionResult DanhMucTruongHoc()
+        {
+            return PartialView("DanhMucTruongHoc");
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult GetAll_DanhMuc(string TenBang)
+        {
+            DanhMucDAO dm_dao = new DanhMucDAO();
+            List<DanhMuc> dt = dm_dao.GetAll_DM(TenBang);
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [HttpGet]
+        public ActionResult GetAll_CaHoc()
+        {
+            CaHocDAO dm_dao = new CaHocDAO();
+            List<CaHocModel> dt = dm_dao.GetAll();
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult InsertOrUpdate_DanhMuc(DanhMuc item, string TenBang)
+        {
+            DanhMucDAO dm_dao = new DanhMucDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.InsertOrUpdate_DM(item, TenBang, userinfor.ID_ChiNhanh))
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
+        public ActionResult DanhMucToNhom()
+        {
+            return View();
+        }
+
+
+        //[SessionExpire]
+        //[HttpPost]
+        //public ActionResult InsertOrUpdate_ToNhom(ToNhomModel item)
+        //{
+        //    TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+        //    ToNhomDAO dao = new ToNhomDAO();
+        //    NhanVien_ToNhomDAO nvdao = new NhanVien_ToNhomDAO();
+        //    int IDnew = 0;
+        //    int countXoaErr = 0;
+        //    int countThemErr = 0;
+        //    if (item.ID == 0)
+        //    {
+        //        IDnew = dao.InsertOrUpdate(item);
+        //        foreach(NhanVien_ToNhomModel x in item.lstNhanVienToNhom)
+        //        {
+        //            nvdao.Insert(x);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        IDnew = dao.InsertOrUpdate(item);
+        //        List<NhanVien_ToNhomModel> cur_lst = nvdao.GetAllByToNhom(item.ID);
+        //        List<NhanVien_ToNhomModel> delete_lst = cur_lst.Except<NhanVien_ToNhomModel>(item.lstNhanVienToNhom).ToList(); // Danh sách nhân viên bị xóa
+        //        List<NhanVien_ToNhomModel> insert_lst = item.lstNhanVienToNhom.Except<NhanVien_ToNhomModel>(cur_lst).ToList(); // Danh sách nhân viên được thêm
+        //        foreach(NhanVien_ToNhomModel del in delete_lst) // Xóa các item cũ
+        //        {
+        //            if (nvdao.Delete(del.ID))
+        //            {
+
+        //            }
+        //            else
+        //            {
+        //                countXoaErr++;
+        //            }
+        //        }
+        //        foreach (NhanVien_ToNhomModel ins in insert_lst) // Thêm các item mới
+        //        {
+        //            if(nvdao.Insert(ins)> 0)
+        //            {
+
+        //            }
+        //            else
+        //            {
+        //                countThemErr++;
+        //            }
+        //        }
+        //    }
+
+        //    if (IDnew > 0)
+        //    {
+        //        return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+
+        [SessionExpire]
+        public ActionResult CongViec()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult QuanLyNguoiLaoDong()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult QuanLyCongVIec()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult NguoiGiamSat()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult DiemQuetThe()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult ThuyenDo()
+        {
+            return View();
+        }
+    }
+}

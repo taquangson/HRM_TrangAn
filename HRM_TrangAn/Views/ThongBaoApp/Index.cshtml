@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = "Quản lý thông báo điện tử";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* The device with borders */
+    .smartphone {
+        position: relative;
+        width: 200px;
+        height: 320px;
+        margin: auto;
+        border: 12px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+        float: left;
+        margin-left: 70px;
+    }
+
+        /* The horizontal line on the top of the device */
+        .smartphone:before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 5px;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            border-radius: 10px;
+        }
+
+        /* The circle on the bottom of the device */
+        .smartphone:after {
+            content: '';
+            display: block;
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            left: 50%;
+            bottom: -57px;
+            transform: translate(-50%, -50%);
+            background: #333;
+            border-radius: 50%;
+        }
+
+        /* The screen (or content) of the device */
+        .smartphone .content {
+            width: 200px;
+            height: 320px;
+            background: white;
+        }
+
+    .photo {
+        height: 100px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .k-upload {
+        border: none;
+    }
+
+    .k-upload-button {
+        margin: 0 !important;
+        width: 100%;
+    }
+
+    .k-dialog-buttongroup .k-button {
+        width: 50%;
+    }
+</style>
+<script src="~/Scripts/js/quanlythongbaoapp.js"></script>
+<div id="dialogRoot"></div>
+<div class="row">
+    <h2><b>Lịch sử thông báo gần đây</b></h2>
+</div>
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Lớp</label>
+        <div style="width:100%" id="comboLop"></div>
+    </div>
+    <div class="col-sm-4">
+        <label style="width:100%">Số điện thoại - Tên học sinh</label>
+        <div style="width:100%" id="comboHocSinh"></div>
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Từ ngày</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày</label>
+        <input style="width:100%" id="DenNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%;height:15px;"> </label>
+        <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Xem báo cáo </i></button>
+    </div>
+</div>
+<div class="row toolBarMenu">
+    @*<button class="k-button bg-blue" onclick="openThongBaoWindow()"> <i class="fa fa-plus-square"> Tạo thông báo mới</i></button>*@
+    <button class="k-button bg-green" onclick="openThongBaoWindow()"> <i class="fa fa-paper-plane"> Gửi thông báo </i></button>
+    @*<button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>*@
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+
+<div id="windowThongBao">
+    <div class="toolBarMenu">
+        @*<button class="k-button bg-blue" onclick="luuThongBao()"> <i class="fa fa-plus-square"> Lưu thông báo</i></button>*@
+        <button class="k-button bg-red" onclick="huyGuiThongBao()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <div style="width:100%;float:left">
+        <div style="width:45%;float:left;margin-left:2%">
+            <div>
+                <input id="ID_ThongBao" type="hidden" />
+            </div>
+            <div style="margin-top:10px">
+                <div style="width:100%;float:left;margin-bottom:10px;">
+                    <label style="width:100%">Tiêu đề:</label>
+                    <input onkeyup="updateTitle()" id="TieuDe" style="width:100%;" type="text" class="k-textbox">
+                </div>
+            </div>
+            <div style="margin-top:10px">
+                <div style="width:100%;float:left;margin-bottom:10px;">
+                    <label style="width:100%">Nội dung:</label>
+                    <textarea onkeyup="updateContent()" id="NoiDung" rows="2" style="width:100%;height:80px;padding:5px;" class="k-textbox"></textarea>
+                </div>
+            </div>
+            <div style="margin-top:10px">
+                <div style="width:100%;float:left;margin-bottom:10px;">
+                    <label style="width:100%">Nội dung HTML:</label>
+                    <textarea id="NoiDungHTML" style="width:100%;height:200px;" rows="2" class="k-textbox"></textarea>
+                </div>
+            </div>
+            <div style="margin-top:10px">
+                <div style="width:100%;float:left;margin-bottom:10px;">
+                    <label style="width:100%">Nội dung riêng:</label>
+                    <textarea id="NoiDungRieng" style="width:100%;height:80px;padding:5px;" rows="2" class="k-textbox"></textarea>
+                </div>
+            </div>
+            <div style="margin-top:10px">
+                <div style="width:50%;float:left;">
+                    <label style="width:100%">Icon thông báo:</label>
+                    <input style="width:100%" type="file" id="file" />
+                </div>
+                <div style="width:50%;float:left;padding:0 10px;" id="iconThongBao">
+                    <div class="photo" style="background-image: url('../../Images/logodh.png')">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width:50%;float:left;padding:30px 10px">
+
+            <div class="smartphone" style="background-image: url(../../Images/app1.jpg);background-size: cover;">
+                <b id="titleapp1" style="margin-top: 120px; font-size: 7px; margin-left: 10px; color: white; display: block;"></b>
+                <p style="font-size: 7px; margin-left: 10px; color: white;" id="contentapp1"></p>
+            </div>
+            <div class="smartphone" style="background-image: url(../../Images/app2.jpg);background-size: cover;">
+                <p id="titleapp2" style="margin-top: 50px; font-size: 9px; margin-left: 10px;"></p>
+                <p id="thoigian" style="font-size: 7px; margin-left: 10px;"></p>
+                <p style="font-size: 9px;margin-left: 10px;width: 180px;" id="contentapp2"></p>
+            </div>
+
+        </div>
+    </div>
+    <div style="width:100%;float:left;text-align:center">
+        <button class="k-button bg-green" style="width: 20%;height: 30px;font-size: 1.3em;" onclick="sendThongBao()"> <i class="fa fa-paper-plane"> Gửi thông báo</i></button>
+    </div>
+    <div style="width:100%;float:left;">
+        <div style="width:45%;float:left;margin-left:2%">
+            <label style="width:100%">Lớp nhận thông báo</label>
+            <div style="width:50%" id="comboLop2"></div>
+        </div>
+        <div style="width:95%;float:left;margin:2%">
+            <div id="gridHocSinhTrongLop"></div>
+        </div>
+    </div>
+</div>

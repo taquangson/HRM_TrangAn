@@ -1,0 +1,237 @@
+﻿
+.title-container {
+    border-bottom-left-radius: 10px;
+    width: 84%;
+    margin-left: 1%;
+    text-align: center;
+    line-height: 25px;
+    float: left;
+    background-color: #fff;
+}
+
+.bottom-button-container {
+    width: 84%;
+    border-top-left-radius: 10px;
+    margin-left: 1%;
+    float: left;
+    margin-top: 20px;
+    background-color: #fff
+}
+
+.timer-container {
+    border-bottom-right-radius: 10px;
+    width: 15%;
+    float: left;
+    background-color: #fff;
+    height: 125px;
+}
+
+.question-list {
+    border-top-right-radius: 10px;
+    width: 15%;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    height: calc(100vh - 192px);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.question-info {
+    width: 100%;
+    float: left;
+    height: calc(100vh - 245px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.start-time {
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+    .start-time span {
+        font-weight: 600;
+        font-size: 1em;
+    }
+
+.curnent-time {
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+    .curnent-time span {
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+
+
+@media (max-width: 768px) {
+    .title-container {
+        width: 82%;
+        margin-left: 1%;
+        text-align: center;
+        line-height: 25px;
+        float: left;
+        background-color: #fff;
+        display: none;
+    }
+
+    .bottom-button-container {
+        width: 82%;
+        border-top-left-radius: 10px;
+        margin-left: 1%;
+        float: left;
+        margin-top: 20px;
+        background-color: #fff
+    }
+
+    .timer-container {
+        width: 100%;
+        float: left;
+        background-color: #fff;
+        height: 125px;
+    }
+
+
+
+    .question-list {
+        border-top-right-radius: 10px;
+        width: 17%;
+        float: left;
+        background-color: #fff;
+        margin-top: 20px;
+        height: calc(100vh - 242px);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .question-info {
+        width: 100%;
+        float: left;
+        height: calc(100vh - 295px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .start-time {
+        line-height: 25px;
+        padding-left: 10px;
+    }
+
+        .start-time span {
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+    .curnent-time {
+        line-height: 25px;
+        padding-left: 10px;
+    }
+
+        .curnent-time span {
+            font-weight: 600;
+            font-size: 1em;
+        }
+}
+
+
+.question-item {
+    cursor: pointer;
+    margin: 5px;
+}
+
+    .question-item.answered {
+        color: green;
+    }
+
+    .question-item.selected {
+        font-weight: 700;
+        background-color: #e2e2e2;
+    }
+
+.bottom-button-question {
+    width: 49%;
+    float: left;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    cursor: pointer;
+    border: solid 1px #f2f2f2;
+}
+
+    .bottom-button-question:hover {
+        font-weight: 700;
+    }
+
+
+
+
+
+.question-count {
+    border-top-left-radius: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    color: #fff;
+    display: block;
+    float: left;
+    background: linear-gradient(#92aee4, #456cb6,#92aee4);
+    margin: 0;
+}
+
+.question-content {
+    width: 90%;
+    float: left;
+    padding: 20px;
+}
+
+.list-answer {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+}
+
+    .list-answer img {
+        max-width: 150px;
+    }
+
+.answer-content {
+    width: calc(100% - 20px);
+    margin-left: 18px;
+}
+
+.answer-title {
+    width: 15px;
+    float: left;
+}
+
+.orient-alert {
+    padding-top: calc(100vh / 2);
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    height: 100vh;
+    position: absolute;
+    z-index: 1000000;
+    background: #fff;
+}
+.photo {
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.green {
+    color: green;
+}
+
+.selected {
+    font-weight: 700;
+    font-style: italic;
+    text-decoration-line: underline;
+}

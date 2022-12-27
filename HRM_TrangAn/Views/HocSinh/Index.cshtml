@@ -1,0 +1,728 @@
+﻿@{
+    ViewBag.Title = "Quản lý học sinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/danhsachloptheogiaovien.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        $("#window").kendoWindow({
+            width: "400px",
+            height: "480px",
+            title: "Chi tiết",
+            visible: false,
+            modal: true,
+            resizable: false,
+            actions: [
+                "Close"
+            ]
+        });
+
+        $("#windowBaiKiemTra").kendoWindow({
+            title: "Các bài kiểm tra của học sinh",
+            visible: false,
+            modal: true,
+            resizable: false,
+            actions: [
+                "Close"
+            ]
+        });
+
+        $("#windowThemBKT").kendoWindow({
+            title: "Thông tin bài kiểm tra",
+            visible: false,
+
+            width: 400,
+            height: 120,
+            modal: true,
+            resizable: false,
+            actions: [
+                "Close"
+            ]
+        });
+
+        $("#fileBKT").kendoUpload({
+            multiple: false,
+            localization: {
+                select: 'Tải file ảnh bài kiểm tra',
+                remove: '',
+                cancel: ''
+            },
+            allowedExtensions: [".jpg", ".png", ".jpeg"],
+            select: function (e) {
+                PushFormDataFile(e.files[0], $("#ID_BaiKiemTra").val());
+            }
+        });
+
+        $("#grid").kendoGrid({
+            height: function () {
+                var height = $(window).height() - 160;
+                return height;
+            },
+            scrollable: true,
+            persistSelection: true,
+            autoFitColumn: true,
+            resizable: true,
+            sortable: true,
+            excel: {
+                filterable: true
+            },
+            excelExport: function (e) {
+                var columns = e.workbook.sheets[0].columns;
+                var sheet = e.workbook.sheets[0];
+                sheet.title = "Danh sách học sinh";
+                //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
+                for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
+                    var row = sheet.rows[rowIndex];
+                    var flag = false;
+                    if (rowIndex == 0) {
+                        flag = true;
+                    }
+                    for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                        if (flag) {
+                            row.cells[cellIndex].textAlign = 'center';
+                            row.cells[cellIndex].bold = true;
+                        }
+                        row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
+                        row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
+                        row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
+                        row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                    }
+                }
+            },
+            filterable: {
+                mode: "row",
+            },
+            pageable: pageableShort,
+            dataBinding: function () {
+                record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+            },
+            columns: [
+                {
+                    width: "26px",
+                    selectable: true,
+                    headerAttributes: {
+                        style: "text-align:left",
+                        class: "table-header-cell "
+                    },
+                },
+                {
+                    title: "STT",
+                    template: "#= ++record #",
+                    width: "50px",
+                    attributes: {
+                        class: "text-center"
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "TenHocSinh",
+                    title: "Tên học sinh",
+                    width: "200px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "NgaySinh",
+                    title: "Ngày sinh",
+                    template: function (e) {
+                        var dateString = e.NgaySinh.substr(6);
+                        var currentTime = new Date(parseInt(dateString));
+                        if (currentTime.getFullYear() != 1) {
+                            return kendo.toString(currentTime, "dd/MM/yyyy");
+                        } else {
+                            return "";
+                        }
+                    },
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                 {
+                     field: "DiaChi",
+                     title: "Địa chỉ",
+                     width: "150px",
+                     filterable: {
+                         cell: {
+                             operator: "contains",
+                             showOperators: false,
+                             template: function (e) {
+                                 e.element.addClass("k-textbox").css("width", "100%")
+                             }
+                         }
+                     },
+                     headerAttributes: {
+                         style: "text-align: center; font-size: 12px; font-weight:bold",
+                         class: "table-header-cell"
+                     }
+                 },
+                {
+                    field: "PhuHuynh",
+                    title: "Tên phụ huynh",
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "DienThoaiMacDinh",
+                    title: "Điện thoại liên hệ",
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                {
+                    field: "TenTruong",
+                    title: "Tên trường học",
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                {
+                    title: "Bài kiểm tra",
+                    width: "100px",
+                    template: function (e) {
+                        return "<button class='k-button k-success text-center' onclick='openBaiKiemTra(" + e.ID + ")'><i class='fa fa-pencil'/> Bài kiểm tra</button>";
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                }
+            ]
+
+        });
+
+        $("#grid").on("dblclick", "tr[role='row']", function () {
+            $("#grid").data("kendoGrid").clearSelection();
+            var row = $("#grid").data("kendoGrid").table.find("[data-uid=" + $(this).attr("data-uid") + "]");
+            $("#grid").data("kendoGrid").select(row);
+            openEditWindow();
+        })
+        LoadGridData();
+        $("#dialogRoot").kendoDialog().data("kendoDialog").close();
+
+        $("#GioiTinh").kendoComboBox({
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            suggest: true,
+            delay: 500,
+            dataSource: new kendo.data.DataSource({
+                data: [{ text: "Nam", value: 1 }, { text: 'Nữ', value: 0 }],
+            })
+        });
+
+        $("#NgaySinh").kendoDatePicker({
+            value: new Date(),
+            format: "dd/MM/yyyy"
+        });
+
+        LoadDanhMucTruongHoc();
+
+
+    })
+
+    function LoadDanhMucTruongHoc() {
+        $.ajax({
+            url: '/DanhMuc/GetAll_DanhMuc',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify({
+                TenBang: "DanhMucTruong"
+            })
+        }).done(function successCallback(response) {
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+            });
+            if ($("#TruongHoc").data("kendoComboBox") == undefined) {
+                $("#TruongHoc").kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    filter: "contains",
+                    suggest: true,
+                    delay: 1000,
+                    dataSource: dataSource
+                })
+            } else {
+                $("#TruongHoc").data("kendoComboBox").setDataSource(dataSource);
+            }
+        });
+    }
+
+
+    function openEditWindow() {
+        var arr = $("#grid").data("kendoGrid").selectedKeyNames();
+        if (arr.length != 1) {
+            openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sửa");
+        } else {
+            if ($(window).width() > 800) {
+                $("#window").data("kendoWindow").center().open();
+            } else {
+                $("#window").data("kendoWindow").center().maximize().open();
+            }
+            var selectedItem = $("#grid").data("kendoGrid").dataItem($("#grid").data("kendoGrid").select());
+            $("#ID").val(selectedItem.ID);
+            $("#TenHocSinh").val(selectedItem.TenHocSinh);
+            $("#DiaChi").val(selectedItem.DiaChi);
+            $("#DienThoai1").val(selectedItem.DienThoai1);
+            $("#DienThoai2").val(selectedItem.DienThoai2);
+            $("#DienThoai3").val(selectedItem.DienThoai3);
+            $("#PhuHuynh").val(selectedItem.PhuHuynh);
+            $("#TruongHoc").data("kendoComboBox").value(selectedItem.ID_Truong);
+            $("#GioiTinh").data("kendoComboBox").value(selectedItem.GioiTinh);
+            $("#NgaySinh").data("kendoDatePicker").value(toDate(selectedItem.NgaySinh));
+        }
+
+    }
+
+    function toDate(value) {
+        var dateRegExp = /^\/Date\((.*?)\)\/$/;
+        var date = dateRegExp.exec(value);
+        return new Date(parseInt(date[1]));
+    }
+
+
+    function LoadGridData() {
+        $.ajax({
+            url: '/HocSinh/GetAll',
+            type: 'GET',
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#grid"), true);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID",
+                        field: {
+                            NgaySinh: {
+                                type: 'date'
+                            }
+                        }
+                    }
+                },
+                pageSize: 20,
+            });
+            $("#grid").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#grid"), false);
+        });
+    }
+
+    function ThemMoi() {
+        document.getElementById("formChiTiet").reset();
+        $("#ID").val('');
+        if ($(window).width() > 800) {
+            $("#window").data("kendoWindow").center().open();
+        } else {
+            $("#window").data("kendoWindow").center().maximize().open();
+        }
+    }
+
+    function Luu() {
+        var validten = SetValidate("TenHocSinh");
+        var validdienthoai = SetValidate("DienThoai1");
+        var valid = validten && validdienthoai;
+        if (valid) {
+            $.ajax({
+                url: '/HocSinh/CreateOrUpdate',
+                type: 'POST',
+                data: {
+                    ID: $("#ID").val(),
+                    TenHocSinh: $("#TenHocSinh").val(),
+                    DiaChi: $("#DiaChi").val(),
+                    PhuHuynh: $("#PhuHuynh").val(),
+                    DienThoai1: $("#DienThoai1").val(),
+                    DienThoai2: $("#DienThoai2").val(),
+                    DienThoai3: $("#DienThoai3").val(),
+                    DienThoaiMacDinh: $("#DienThoai1").val(),
+                    ID_Truong: $("#TruongHoc").data("kendoComboBox").value(),
+                    GioiTinh: $("#GioiTinh").data("kendoComboBox").value(),
+                    NgaySinh: kendo.toString($("#NgaySinh").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss')
+                }
+            }).done(function successCallback(response) {
+
+                if (response.status) {
+                    notification.show({ kValue: response.msg }, "success");
+                    Huy();
+                    $("#grid").data("kendoGrid").clearSelection();
+                    LoadGridData();
+                } else {
+                    notification.show({ kValue: response.msg }, "error");
+                }
+            });
+        }
+    }
+
+    function OpenDanhMucTruongHoc() {
+        var windowOption = {
+            width: "30%",
+            height: "20%",
+            title: "Thêm danh mục trường học"
+        }
+        OpenLayoutWindow('/DanhMuc/DanhMucTruongHoc', windowOption);
+    }
+
+    function Huy() {
+        document.getElementById("formChiTiet").reset();
+        $("#ID").val('');
+        $("#window").data("kendoWindow").close();
+    }
+
+    function Xoa() {
+        var bangDuLieu = $("#grid").data("kendoGrid");
+        if (bangDuLieu.select().length > 0) {
+            openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa " + bangDuLieu.select().length + " học sinh?</b>", function () { XoaDuLieu(bangDuLieu); }, function () { });
+        } else {
+            openDialog(dialogRoot, "<b style='line-height:40px;'>Bạn phải chọn dữ liệu cần xóa</b>");
+            //notification.show({ kValue: "Bạn phải chọn dữ liệu cần xóa" }, "error");
+        }
+    }
+
+    function XoaDuLieu(bangDuLieu) {
+        var ids = [];
+        bangDuLieu.select().each(function () {
+            var dataItem = bangDuLieu.dataItem(this);
+            var id = dataItem.id;
+            ids.push(id);
+        });
+        $.ajax({
+            url: '/HocSinh/Delete?ID=' + ids.join(','),
+            type: 'POST'
+        }).done(function (response) {
+            if (response.status) {
+                LoadGridData();
+                notification.show({ kValue: response.msg }, "success");
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        })
+    }
+
+    function openBaiKiemTra(id) {
+        $("#ID_HocSinh").val(id);
+        LoadDSBKT();
+        $("#windowBaiKiemTra").data("kendoWindow").maximize().open();
+    }
+
+    function ThemBaiKiemTra() {
+        HuyBKT();
+        $("#windowThemBKT").data("kendoWindow").center().open();
+    }
+
+    function LoadDSBKT() {
+        var html = '<div class="itemBKT">'
+                + '<div class="addnewfoler" onclick="ThemBaiKiemTra()"></div>'
+                + '<label class="BKTname">Tạo bài kiểm tra mới</label>'
+                + '</div>'
+        $.ajax({
+            url: '/BaiKiemTra/GetBaiKiemTraByHocSinh?ID_HocSinh=' + $("#ID_HocSinh").val(),
+            type: 'GET',
+        }).done(function successCallback(response) {
+            $.each(response, function (index, item) {
+                html += '<div class="itemBKT">'
+                        + '<div class="folericon">'
+                        + '<button onclick="SuaBKT(' + item.ID + ',\'' + item.TenBaiKiemTra + '\')" class="k-button   BKTbtnedit" title="Sửa tên bài kiểm tra"><i class="fa fa-pencil"></i></button>'
+                        + '<button onclick="XemBKT(' + item.ID + ')" class="k-button BKTbtnedit" title="Xem ảnh bài kiểm tra"><i class="fa fa-eye"></i></button>'
+                        + '<button onclick="DeleteBKT(' + item.ID + ')" class="k-button BKTbtnedit" title="Xóa bài kiểm tra"><i class="fa fa-trash"></i></button>'
+                        + '</div>'
+                        + '<label class="BKTname">' + item.TenBaiKiemTra + '</label>'
+                        + '</div>'
+            })
+            $("#lstBaiKiemTra").html(html);
+        });
+    }
+
+    function LuuBKT() {
+        var validten = SetValidate("TenBKT");
+        if (validten) {
+            $.ajax({
+                url: '/BaiKiemTra/ThemBaiKiemTra',
+                type: 'POST',
+                data: {
+                    ID: $("#ID_BaiKiemTra").val(),
+                    ID_HocSinh: $("#ID_HocSinh").val(),
+                    TenBaiKiemTra: $("#TenBKT").val()
+                }
+            }).done(function successCallback(response) {
+
+                if (response.status) {
+                    notification.show({ kValue: response.msg }, "success");
+                    HuyBKT();
+                    LoadDSBKT();
+                } else {
+                    notification.show({ kValue: response.msg }, "error");
+                }
+            });
+        }
+    }
+
+    function SuaBKT(id, ten) {
+        $("#ID_BaiKiemTra").val(id);
+        $("#TenBKT").val(ten);
+        $("#windowThemBKT").data("kendoWindow").center().open();
+    }
+
+    function HuyBKT() {
+        $("#ID_BaiKiemTra").val("");
+        $("#TenBKT").val("");
+        $("#windowThemBKT").data("kendoWindow").close();
+    }
+
+    function XemBKT(ID) {
+        $("#ID_BaiKiemTra").val(ID);
+        var html = "";
+        $.ajax({
+            url: '/BaiKiemTra/GetBaiKiemTraByID?ID=' + ID,
+            type: 'GET',
+        }).done(function successCallback(response) {
+            if (response.lstAnh) {
+                $.each(response.lstAnh, function (index, item) {
+                    html += '<div class="photo" style="background-image: url(../Images/BaiKiemTra/' + item.DuongDan + ')" data-role="page">'
+                            + '<button type="button" onclick="DeleteImage(' + item.ID + ')" class="k-button k-upload-action BKTremovebtn" aria-label="">'
+                            + '<span class="k-icon k-i-close k-i-x" title=""></span>'
+                            + '</button>'
+                            + '</div>'
+                })
+
+                $("#scrollView").html(html);
+                if ($("#scrollView").data("kendoMobileScrollView")) {
+                    $("#scrollView").data("kendoMobileScrollView").destroy();
+                }
+                $("#scrollView").kendoMobileScrollView({
+                    enablePager: true,
+                    contentHeight: "100%"
+                });
+            }
+
+        });
+    }
+
+    function DeleteBKT(ID) {
+        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa bài kiểm tra?</b>", function () { XoaBKT(ID); }, function () { });
+    }
+
+    function XoaBKT(ID) {
+        $.ajax({
+            url: '/BaiKiemTra/XoaBaiKiemTra?ID=' + ID,
+            type: 'POST'
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                LoadDSBKT();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        });
+    }
+
+    function DeleteImage(ID) {
+        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa ảnh?</b>", function () { XoaImage(ID); }, function () { });
+    }
+
+    function XoaImage(ID) {
+        $.ajax({
+            url: '/BaiKiemTra/XoaAnh?ID=' + ID,
+            type: 'POST'
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                XemBKT($("#ID_BaiKiemTra").val());
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        });
+    }
+
+    function PushFormDataFile(file, id_baikiemtra) {
+        var data = new FormData();
+        data.append("ID_BaiKiemTra", id_baikiemtra);
+        data.append('file', file.rawFile, file.name);
+        var t = $.ajax({
+            url: '/BaiKiemTra/UploadAnh',
+            processData: false,
+            contentType: false,
+            data: data,
+            type: 'POST'
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                XemBKT(id_baikiemtra);
+                $("#fileBKT").data("kendoUpload").clearAllFiles();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+
+        });
+    }
+
+    function XuatExcel() {
+        var grid = $('#grid').data('kendoGrid');
+
+        grid.options.excel = {
+            fileName: "Danh_Sach_Hoc_Sinh.xlsx",
+            filterable: true,
+            allPages: true
+        }
+        grid.saveHRM_TrangAnxcel();
+    }
+
+
+
+</script>
+<div id="dialogRoot"></div>
+<div class="row">
+    <h2><b>Danh sách học sinh</b></h2>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="TenHocSinh">
+            <label style="width:100%">Tên đầy đủ: <span style="color:red">*</span></label>
+            <input id="TenHocSinh" placeholder="Họ tên học sinh" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="TruongHoc">
+            <label style="width:100%">Trường học:</label>
+            <a class="k-button btn-category" onclick="OpenDanhMucTruongHoc()"><i class="fa fa-plus"></i></a>
+            <input id="TruongHoc" type="text" class="inputcatgory" />
+        </div>
+        <div class="form-group valid" toggle-valid="NgaySinh">
+            <label style="width:100%">Ngày sinh: </label>
+            <input id="NgaySinh" class="input" />
+        </div>
+        <div class="form-group valid" toggle-valid="GioiTinh">
+            <label style="width:100%">Giới tính: </label>
+            <input id="GioiTinh" class="input" />
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Địa chỉ:</label>
+            <textarea id="DiaChi" type="text" placeholder="Địa chỉ" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Phụ huynh:</label>
+            <input id="PhuHuynh" placeholder="Tên phụ huynh học sinh" type="text" style="width:100%" class="k-textbox" />
+        </div>
+        <div class="form-group valid" toggle-valid="DienThoai1">
+            <label style="width:100%">Điện thoại liên hệ: <span style="color:red">*</span></label>
+            <input id="DienThoai1" type="text" placeholder="Số điện thoại 1" style="width:32.3%" class="k-textbox input" />
+            <input id="DienThoai2" type="text" placeholder="Số điện thoại 2" style="width:32.3%" class="k-textbox" />
+            <input id="DienThoai3" type="text" placeholder="Số điện thoại 3" style="width:32.3%" class="k-textbox" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+    </form>
+</div>
+<div id="windowBaiKiemTra">
+    <input type="hidden" id="ID_HocSinh" />
+    <div id="lstBaiKiemTra" class="lstBKT">
+        <div class="itemBKT">
+            <div class="addnewfoler" onclick="ThemBaiKiemTra()"></div>
+            <label class="BKTname">Tạo bài kiểm tra mới</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <input id="fileBKT" type="file" />
+    </div>
+    <div style="margin:auto; width:100%">
+        <div id="scrollView" style="width: 100%; height:calc(100vh - 50px)">
+        </div>
+    </div>
+</div>
+<div id="windowThemBKT">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuBKT()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyBKT()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <div class="form-group">
+        <input id="ID_BaiKiemTra" type="hidden" />
+    </div>
+    <div class="form-group valid" toggle-valid="TenHocSinh">
+        <label style="width:100%">Tên bài kiểm tra: <span style="color:red">*</span></label>
+        <input id="TenBKT" placeholder="Tên bài kiểm tra" type="text" class="k-textbox input" />
+        <span class="fa fa-exclamation-triangle icon"></span>
+    </div>
+</div>

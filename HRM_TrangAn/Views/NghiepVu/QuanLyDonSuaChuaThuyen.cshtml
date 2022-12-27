@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = " Quản lý thông tin sửa chữa thuyền";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/quanlydonsuachuathuyen.js"></script>
+<link href="~/Content/danhsachloptheogiaovien.css" rel="stylesheet" />
+
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-briefcase"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-ship"></i> Quản lý thông tin sửa chữa thuyền</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> 1.Thêm </i></button>
+    <button class="k-button bg-blue" onclick="openUpdate2Window()"> <i class="fa fa-star-o"> 2.Kiểm tra</i> </button>
+    <button class="k-button bg-blue" onclick="openUpdate3Window()"> <i class="fa fa-star-half-o"> 3.Sửa chữa</i> </button>
+    <button class="k-button bg-blue" onclick="openUpdate4Window()"> <i class="fa fa-star"> 4.Xác nhận thu phí</i> </button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="ComboThuyen">
+            <label style="width:100%">Mã số đò: <span style="color:red">*</span></label>
+            <input id="ComboThuyen" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Lý do sửa:</label>
+            <textarea id="LyDo" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group valid" toggle-valid="NgayLapPhieu">
+            <label style="width:100%">Ngày lập đơn: <span style="color:red">*</span></label>
+            <input id="NgayLapPhieu" style="width:100%" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        @*<div class="form-group valid" toggle-valid="SoTienSua">
+            <label style="width:100%">Số tiền sửa: <span style="color:red">*</span></label>
+            <input id="SoTienSua" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>*@
+        @*<div class="form-group valid" toggle-valid="ComboTinhTrang">
+            <label style="width:100%">Tình trạng:<span style="color:red">*</span></label>
+            <input id="ComboTinhTrang" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>*@
+        @*<div class="form-group">
+            <label style="width:100%">Ngày hoàn thành:</label>
+            <input id="NgayHoanThanh" style="width:100%" class="input" />
+        </div>*@
+        <div class="form-group">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu1" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+
+    </form>
+</div>
+<div style="visibility:hidden" id="windowUpdate2">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Update1()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formUpdate2">
+
+        <div class="form-group">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu2" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+
+    </form>
+</div>
+
+<div style="visibility:hidden" id="windowUpdate3">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Update2()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formUpdate3">
+
+        <div class="form-group valid" toggle-valid="SoTienSua">
+            <label style="width:100%">Số tiền sửa: <span style="color:red">*</span></label>
+            <input id="SoTienSua" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu3" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+
+    </form>
+</div>
+
+<div style="visibility:hidden" id="windowUpdate4">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Update3()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formUpdate4">
+
+        <div class="form-group valid" toggle-valid="NgayHoanThanh">
+            <label style="width:100%">Ngày hoàn thành: <span style="color:red">*</span></label>
+            <input id="NgayHoanThanh" style="width:100%" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu4" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+
+    </form>
+</div>

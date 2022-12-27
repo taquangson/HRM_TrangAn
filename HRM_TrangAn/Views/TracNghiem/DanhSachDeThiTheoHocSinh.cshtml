@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Trang chủ trắc nghiệm online";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+@*<link href="~/Content/thitracnghiem.css" rel="stylesheet" />
+    <script src="~/Scripts/js/danhsachdethitheohocsinh.js"></script>*@
+<script>document.write('<script src="../Scripts/js/danhsachdethitheohocsinh.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+<script>document.write('<link href="../Content/thitracnghiem.css?dev=' + Math.floor(Math.random() * 100) + '" rel="stylesheet" />');</script>
+<div id="dialogRoot"></div>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="gridDeThi"></div>
+        </div>
+    </div>
+</div>
+<div id="windowXemDeThi" style="background-color:rgb(79 96 158 / 30%);display:none">
+    <div id="alertOrientation" class="orient-alert" style="display:none">
+        Thiết bị của bạn không thể hiển thị đầy đủ câu hỏi ở chế độ xoay ngang màn hình. Vui lòng giữ thiết bị ở chế độ màn hình dọc!
+    </div>
+    <div id="alertChangetab" class="orient-alert" style="display:none">
+        <p>Cảnh báo! Hệ thống phát hiện Bạn đã: <span id="typeAlert"></span>, vui lòng xác nhận để quay trở lại làm bài. Hệ thống sẽ tự động nộp bài sau:</p>
+        <p id="countAlertChangeTab"></p>
+        <button class="k-button" onclick="tiepTucLamBai()">Tiếp tục làm bài</button>
+    </div>
+    <input type="hidden" id="ID_BaiLamTracNghiem" />
+    <div class="timer-container">
+        <p class="start-time">Bắt đầu lúc: <span id="batdau"></span></p>
+        <p class="curnent-time">Th.gian làm bài: <span id="thoigian"></span></p>
+        <button class="k-button k-success-colored" style="width:90%;margin-left:5%" id="btnketthuc" onclick="ketthucbaithi()">Nộp bài</button>
+        <button class="k-button k-success-colored" style="width:90%;margin-left:5%" id="btnbatdau" onclick="batdaulambai()">Bắt đầu</button>
+    </div>
+    <div class="title-container">
+        <div style="width:50%;float:left;padding-top:10px;">
+            <div class="photo" style="background-image: url('../../Images/logodh.png')">
+            </div>
+            <b>Công ty TNHH Giáo Dục CLC Dương Hòa</b>
+        </div>
+        <div style="width:50%;float:left;padding-top:30px;">
+            <b id="TenDe"></b>
+            <p>Môn Thi: <span id="TenMon"></span> </p>
+            <p>Thời gian làm bài: <span id="ThoiGianLamBai"></span> phút</p>
+        </div>
+    </div>
+    <div class="question-list">
+    </div>
+    <div class="bottom-button-container">
+        <div id="listviewcauhoi"></div>
+    </div>
+</div>
+<script type="text/x-kendo-tmpl" id="templatecauhoi">
+    <div class="question-info">
+        <h4 class="question-count"><b>Câu #: (count + 1)#</b></h4>
+        <div class="question-content">
+            <b>#= htmlDecode(NoiDungCauHoi)#</b>
+            # $.each(lstDapAn, function(index, item){#
+            <div class="list-answer">
+                <input class="answer-title" onchange="updateDapAn(#:ID_BaiLamTracNghiem#,#:ID#,#:item.ID#,#:item.IsDapAnDung#,#:Diem#)" type="radio" id="ch-#:ID#-da-#:item.ID#" name="ch-#:ID#" />
+                <label class="answer-content" for="ch-#:ID#-da-#:item.ID#">
+                    #: Ans[index] #. #: item.DapAn == null ? "" : item.DapAn #
+                    #if(item.AnhDapAn != null){#
+                    <img src="../Images/AnhDapAn/#:item.AnhDapAn #" />
+                    #}#
+                </label>
+            </div>
+            #})#
+            # if(lstDapAn.length == 0){#
+            <div class="valid">
+                <textarea id="DapAn" style="width:100%;height:300px;" rows="2" class="k-textbox"></textarea>
+            </div>
+            <div class="valid">
+                <label style="width:100%;;margin-top:7px;">Ảnh đáp án: </label>
+                <input id="AnhDapAn" type="file" />
+            </div>
+            #}#
+        </div>
+
+    </div>
+    <div style="width:100%">
+        <span class="bottom-button-question" onclick="loadCauHoi(#: (count - 1)#)">Câu trước</span>
+        <span class="bottom-button-question" onclick="loadCauHoi(#: (count + 1)#)">Câu tiếp theo</span>
+    </div>
+</script>
+
+<div id="windowChiTietBaiThi">
+    <div style="width:20%;float:left">
+        <p style="margin-left:10px;margin-top:10px">Tên đề thi: <span id="TenDe" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Môn học: <span id="TenMon" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Tên học sinh: <span id="TenHocSinh" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Ngày làm bài: <span id="NgayLam" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Thời gian bắt đầu :<span id="BatDau" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Thời gian kết thúc: <span id="KetThuc" style="font-weight:700"></span></p>
+        <p style="margin-left:10px;margin-top:10px">Điểm: <span id="DiemBaiLam" style="font-weight:700"></span></p>
+    </div>
+    <div style="width:60%;float:left">
+        <div id="listviewbailam"></div>
+    </div>
+    <div style="width:10%;float:left">
+        <div id="lichsulambai"></div>
+    </div>
+</div>
+
+
+<script type="text/x-kendo-tmpl" id="templatebailam">
+    <div>
+        <h4 class="question-count">
+            <b>Câu #: (count++)#</b>
+        </h4>
+        <div class="question-content">
+            <b>#= htmlDecode(cauhoi.NoiDungCauHoi)#</b>
+            # $.each(cauhoi.lstDapAn, function(index, item){#
+            <div class="list-answer">
+                <label class="answer-content  #if(item.IsDapAnDung){ # green # }# #if(item.ID.toString() === TraLoi){# selected #}# ">
+                    #: Ans[index] #. #: item.DapAn == null ? "" : item.DapAn #
+                    #if(item.AnhDapAn != null){#
+                    <img src="../Images/AnhDapAn/#:item.AnhDapAn #" />
+                    #}#
+                </label>
+            </div>
+            #})#
+            # if(cauhoi.lstDapAn.length == 0){#
+            #= htmlDecode(TraLoi)#
+            #}#
+        </div>
+    </div>
+</script>

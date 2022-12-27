@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Báo cáo công lao động theo tháng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/baocao_js/baocaochitietchamcong.js"></script>
+<style>
+    .nghiphep {
+        background-color: #feef3c;
+        width: 70px;
+        height: 27px;
+        display: block;
+    }
+
+    .nghipheptruam {
+        background-color: #ff6a00;
+        width: 70px;
+        height: 27px;
+        display: block;
+    }
+</style>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <h2><b>Báo cáo công lao động theo tháng</b></h2>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-2">
+            <label style="width:100%">Tổ</label>
+            <div style="width:100%" id="comboToNhom"></div>
+        </div>
+        <div class="col-sm-2">
+            <label style="width:100%">Từ ngày</label>
+            <input style="width:100%" id="TuNgay" />
+        </div>
+        <div class="col-sm-2">
+            <label style="width:100%">Đến ngày</label>
+            <input style="width:100%" id="DenNgay" />
+        </div>
+        <div class="col-sm-6">
+            <label style="width:100%"> </label>
+            <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Xem báo cáo </i></button>
+            <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel </i></button>
+            <button id="btnChotCong" class="k-button bg-red" onclick="ChotCong()"> <i class="fa fa-lock"> Chốt công </i></button>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div id="gridData"></div>
+    </div>
+</div>
+
+<script id="templateTooltip" type="text/x-kendo-template">
+    #var idnv = target.attr("data-idnhanvien"); #
+    #var ngay = target.attr("data-ngay"); #
+    #loadChiTietChuyenDo(idnv,ngay)#
+    <div id="contentgrid">
+        <div id="gridChiTietChuyenDo">
+        </div>
+    </div>
+</script>
+
+<script id="templateTooltipPS" type="text/x-kendo-template">
+    #var idnv = target.attr("data-idnhanvien"); #
+    #var ngay = target.attr("data-ngay"); #
+    #loadChiTietPhatSinh(idnv,ngay)#
+    <div id="contentgridPS">
+        <div id="gridChiTietPhatSinh">
+        </div>
+    </div>
+</script>

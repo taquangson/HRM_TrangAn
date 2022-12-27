@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Thưởng đánh giá nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/thuongdanhgia.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-database"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-users"></i> Thưởng đánh giá nhân viên</b>
+</span>
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Tổ nhóm</label>
+        <input style="width:100%" id="comboToNhom" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Loại</label>
+        <input style="width:100%" id="comboLoai" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Năm</label>
+        <input style="width:100%" id="comboNam" />
+    </div>
+    <div class="col-sm-2" id="showQuyThang">
+        <label style="width:100%" id="textthoigian"></label>
+        <div id="showQuy">
+            <input style="width:100%" id="comboQuy" />
+        </div>
+        <div id="showThang">
+            <input style="width:100%" id="comboThang" />
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <label style="width:100%"> </label>
+        <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Xem dữ liệu </i></button>
+        <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel </i></button>
+    </div>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>

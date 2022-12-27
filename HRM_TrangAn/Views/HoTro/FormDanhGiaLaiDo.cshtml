@@ -1,0 +1,464 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+	<title>THÔNG TIN KHẢO SÁT</title>
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="~/Assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="~/Assets/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			font-size: 62.5%;
+		}
+
+		body {
+			background-color: #f0ebf8;
+			font-size: 1.6rem;
+		}
+
+		.container {
+			max-width: 690px;
+			padding: 12px 24px;
+		}
+
+		.row {
+			margin: 0 0 12px;
+			transition: background-color 200ms cubic-bezier(0,0,0.2,1);
+			background-color: #fff;
+			border: 1px solid #dadce0;
+			border-radius: 8px;
+			padding: 24px;
+			page-break-inside: avoid;
+			word-wrap: break-word;
+		}
+
+			.row:nth-child(2) h1 {
+				border-bottom: 1px solid #ccc;
+				padding: 16px 24px 22px;
+				margin: 0 -16px;
+				font-size: 3.2rem;
+			}
+
+			.row:nth-child(2) {
+				border-top: 10px solid #523b71;
+				padding-top: 0;
+			}
+
+				.row:nth-child(2) label {
+					padding-top: 24px;
+				}
+
+		.header-bg {
+			width: 100%;
+			margin-bottom: 12px;
+			padding-top: 25%;
+			background-image: url('../../images/khaosatimage.jpg');
+			background-size: cover;
+			background-position: center;
+			border-radius: 5px;
+		}
+
+		.start-danh-gia::before {
+			content: "ĐÁNH GIÁ CỦA QUÝ KHÁCH";
+			display: block;
+			margin: -24px -24px 24px;
+			padding: 12px 24px;
+			font-size: 1.6rem;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			height: 48px;
+			background-color: rgb(82, 59, 113);
+			color: rgba(255, 255, 255, 1);
+		}
+
+		input[type='radio'] {
+			width: 20px;
+			height: 20px;
+		}
+
+			input[type="radio"]:checked {
+				color: #523b71;
+			}
+
+		input[type="text"]:not(.input-inline),
+		input[type="email"],
+		select {
+			margin-top: 12px;
+		}
+
+		.radio {
+			margin-left: 20px;
+			line-height: 30px;
+		}
+
+		.inputInRadio {
+			display: flex;
+			white-space: nowrap;
+		}
+	</style>
+	<script>
+        var malaido = @Model.MaLaiDo
+        $(document).ready(function () {
+			$("#maLaiDo").val(malaido);
+			//Add event onChange for disable/enable text input by radio checked for
+			//Thông tin hành trình
+			var radioName = 'Lái Đò Có Cung Cấp Thông Tin Hành Trình';
+			$("input:radio[name='" + radioName + "']").change(function () {
+				$("#ccttkhac").prop('disabled', !$("#cungCapTTKhac").is(':checked'));
+			});
+
+			//Add event onChange for disable/enable text input by radio checked for
+			//Phương tiện vận chuyển và áo phao:
+			var radioName2 = 'Phương Tiện Vận Chuyển Và Áo Phao';
+			$("input:radio[name='" + radioName2 + "']").change(function () {
+				$("#ptchkhac").prop('disabled', !$("#vanChuyenAoPhaoKhac").is(':checked'));
+			});
+		})
+
+
+		function submitForm(event) {
+			event.preventDefault();
+			var data = [];
+			$.each($('form').serializeArray(), function (index, item) {
+				var itemData = { Title: item.name, Value: item.value }
+				if (itemData.Title == 'Lái Đò Có Cung Cấp Thông Tin Hành Trình' && itemData.Value == 'Mục Khác') {
+					itemData.Value = $('#ccttkhac').val();
+				} else if (itemData.Title == 'Phương Tiện Vận Chuyển Và Áo Phao' && itemData.Value == 'Mục Khác') {
+					itemData.Value = $('#ptchkhac').val();
+				}
+				data.push(itemData);
+			});
+
+			$.ajax({
+				url: '/HoTro/SyncResponseGoogleForm/',
+				data: {
+					model: { items : data }
+				},
+				type: 'POST'
+			}).done(function(response) {
+				if (response.success) {
+					console.log(response)
+					window.location.replace('/HoTro/DanhGiaThanhCong');
+				} else {
+					alert("Send the survey failed!")
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="container pt-5">
+		<form onsubmit="submitForm(event)">
+			<div class="header-bg">
+			</div>
+
+			@* Email *@
+			<div class="row">
+				<h1>THÔNG TIN KHẢO SÁT</h1>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" name="Email Của Khách:" required />
+				</div>
+			</div>
+			@* Mã Lái Đò *@
+			<div class="row">
+				<div class="form-group">
+					<label for="maLaiDo">Mã Lái Đò</label>
+					<input type="text" class="form-control" id="maLaiDo" name="Mã Lái Đò:" readonly required />
+				</div>
+			</div>
+			@* Họ và Tên Khách *@
+			<div class="row">
+				<div class="form-group">
+					<label for="hoVaTenKhachHang">HỌ VÀ TÊN QUÝ KHÁCH</label>
+					<input type="text" class="form-control" id="hoVaTenKhachHang" name="Họ Và Tên Khách Hàng" required />
+				</div>
+			</div>
+			@* Giới Tính *@
+			<div class="row">
+				<div class="form-group">
+					<label>GIỚI TÍNH</label>
+					<div class="radio">
+						<input type="radio" id="gtNam" name="Giới Tính Khách:" value="Nam" checked><label for="gtNam">Nam</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="gtNu" name="Giới Tính Khách:" value="Nữ"><label for="gtNu">Nữ</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="gtKhac" name="Giới Tính Khách:" value="Khác"><label for="gtKhac">Khác</label>
+					</div>
+				</div>
+			</div>
+			@* Đến từ đâu *@
+			<div class="row">
+				<div class="form-group">
+					<label>Quý Khách Đến Từ Đâu</label>
+					<div class="radio">
+						<input type="radio" id="mienBac" name="Đến Từ:" value="KV Phía Bắc" checked><label for="mienBac">KV Phía Bắc</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="mienNam" name="Đến Từ:" value="KV Phía Nam"><label for="mienNam">KV Phía Nam</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="mienTrung" name="Đến Từ:" value="KV Miền Trung"><label for="mienTrung">KV Miền Trung</label>
+					</div>
+				</div>
+			</div>
+			@*  Địa chỉ *@
+			<div class="row">
+				<div class="form-group">
+					<label for="diaChi">Quý Khách Đến Từ Đâu</label>
+					<select class="form-control" id="diaChi" name="Tỉnh Thành:" required >
+						<option value="" selected disabled hidden>Mời chọn:</option>
+						<option value="Hà Nội">Hà Nội</option>
+						<option value="Hồ Chí Minh">Hồ Chí Minh</option>
+						<option value="Đà Nẵng">Đà Nẵng</option>
+						<option value="Cần Thơ">Cần Thơ</option>
+						<option value="Hải Phòng">Hải Phòng</option>
+						<option value="Thanh Hóa">Thanh Hóa</option>
+						<option value="Nghệ An">Nghệ An</option>
+						<option value="Tỉnh Khác">Tỉnh Khác</option>
+					</select>
+				</div>
+			</div>
+			@* SỐ ĐIỆN THOẠI *@
+			<div class="row">
+				<div class="form-group">
+					<label for="soDT">SỐ ĐIỆN THOẠI CỦA QUÝ KHÁCH ĐỂ NHẬN PHẢN HỒI CỦA BQL</label>
+					<input type="text" class="form-control" id="soDT" name="Số Điện Thoại Của Khách:" required />
+				</div>
+			</div>
+			@* Phần đánh giá của quý khách *@
+			<div class="row start-danh-gia">
+				<div class="form-group">
+					<label>
+						Người lái đò giới thiệu về các điểm đến trên tuyến tham quan:
+					</label>
+					<div class="radio">
+						<input type="radio" id="gtTot" name="Lái Đò Có Giới Thiệu Các Điểm ?:" value="Thuyết minh tốt, giới thiệu các địa điểm và thông tin về Khu du lịch" checked>
+						<label for="gtTot">
+							Thuyết minh tốt, giới thiệu các địa điểm và thông tin về Khu du lịch
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="gtVua" name="Lái Đò Có Giới Thiệu Các Điểm ?:" value="Cung cấp thông tin một số điểm  trên hành trình">
+						<label for="gtVua">
+							Cung cấp thông tin một số điểm  trên hành trình
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="gtTB" name="Lái Đò Có Giới Thiệu Các Điểm ?:" value="Không giới thiệu về các điểm tham quan">
+						<label for="gtTB">
+							Không giới thiệu về các điểm tham quan
+						</label>
+					</div>
+				</div>
+			</div>
+			@* Người lái đò đi các điểm *@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Người lái đò đi các điểm:
+					</label>
+					<div class="radio">
+						<input type="radio" id="duDiem" name="Lái Đò Có Đi Đủ Các Điểm? :" value="Đi đủ các điểm trong tuyến thăm quan" checked>
+						<label for="duDiem">
+							Đi đủ các điểm trong tuyến thăm quan
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="boDiem" name="Lái Đò Có Đi Đủ Các Điểm? :" value="Bỏ điểm trong tuyến thăm quan">
+						<label for="boDiem">
+							Bỏ điểm trong tuyến thăm quan
+						</label>
+					</div>
+				</div>
+			</div>
+			@* Thái độ phục vụ của người lái đò: *@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Thái độ phục vụ của người lái đò:
+					</label>
+					<div class="radio">
+						<input type="radio" id="thaiDoTot" name="Thái Độ Phục Vụ" value="Thân thiện, nhiệt tình" checked>
+						<label for="thaiDoTot">
+							Thân thiện, nhiệt tình
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="thaiDoTB" name="Thái Độ Phục Vụ" value="Trung bình">
+						<label for="thaiDoTB">
+							Trung bình
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="thaiDoXau" name="Thái Độ Phục Vụ" value="Không tốt">
+						<label for="thaiDoXau">
+							Không tốt
+						</label>
+					</div>
+				</div>
+			</div>
+			@* Lái đò cung cấp thông tin hành trình *@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Người lái đò cung cấp thông tin hành trình:
+					</label>
+					<div class="radio">
+						<input type="radio" id="cungCapTTTot" name="Lái Đò Có Cung Cấp Thông Tin Hành Trình" value="Lái đò cung cấp các thông tin hữu ích cho chuyến đi" checked>
+						<label for="cungCapTTTot">
+							Lái đò cung cấp các thông tin hữu ích cho chuyến đi
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="cungCapTTChuaTot" name="Lái Đò Có Cung Cấp Thông Tin Hành Trình" value="Chưa tốt">
+						<label for="cungCapTTChuaTot">
+							Chưa tốt
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="cungCapTTKhong" name="Lái Đò Có Cung Cấp Thông Tin Hành Trình" value="Không cung cấp thông tin trên tuyến đi">
+						<label for="cungCapTTKhong">
+							Không cung cấp thông tin trên tuyến đi
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="cungCapTTKhac" name="Lái Đò Có Cung Cấp Thông Tin Hành Trình" value="Mục Khác">
+						<label for="cungCapTTKhac" class="inputInRadio">
+							Mục khác : <input type="text" id="ccttkhac" class="form-control input-inline" disabled>
+						</label>
+					</div>
+				</div>
+			</div>
+			@* Phương tiện vận chuyển và áo phao:*@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Phương tiện vận chuyển và áo phao:
+					</label>
+					<div class="radio">
+						<input type="radio" id="vanChuyenAoPhaoTot" name="Phương Tiện Vận Chuyển Và Áo Phao" value="Đảm bảo An toàn sạch sẽ." checked>
+						<label for="vanChuyenAoPhaoTot">
+							Đảm bảo An toàn sạch sẽ.
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="vanChuyenAoPhaoTB" name="Phương Tiện Vận Chuyển Và Áo Phao" value="Chất lượng trung bình">
+						<label for="vanChuyenAoPhaoTB">
+							Chất lượng trung bình
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="vanChuyenAoPhaoChuaTot" name="Phương Tiện Vận Chuyển Và Áo Phao" value="Chưa tốt">
+						<label for="vanChuyenAoPhaoChuaTot">
+							Chưa tốt
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="vanChuyenAoPhaoKhac" name="Phương Tiện Vận Chuyển Và Áo Phao" value="Mục Khác">
+						<label for="vanChuyenAoPhaoKhac" class="inputInRadio">
+							Mục khác : <input type="text" id="ptchkhac" class="form-control input-inline" disabled>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			@* Lái đò không gợi ý xin tiền Bo (Tip)*@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Lái đò không gợi ý xin tiền Bo (Tip)
+					</label>
+					<div class="radio">
+						<input type="radio" id="xinTienBoDung" name="Lái Đò Không Gợi Ý Tiền Bo" value="Đúng" checked>
+						<label for="xinTienBoDung">
+							Đúng
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="xinTienBoSai" name="Lái Đò Không Gợi Ý Tiền Bo" value="Sai">
+						<label for="xinTienBoSai">
+							Sai
+						</label>
+					</div>
+				</div>
+			</div>
+
+			@*  Số lần Quý khách đã đến thăm quan Tràng An *@
+
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Số lần Quý khách đã đến thăm quan Tràng An:
+					</label>
+					<div class="radio">
+						<input type="radio" id="soLanThamTA1" name="Số Lần Khách Thăm Quan Tràng An:" value="1" checked>
+						<label for="soLanThamTA1">
+							1
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="soLanThamTA2" name="Số Lần Khách Thăm Quan Tràng An:" value="2">
+						<label for="soLanThamTA2">
+							2
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="soLanThamTA3" name="Số Lần Khách Thăm Quan Tràng An:" value="3">
+						<label for="soLanThamTA3">
+							3
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="soLanThamTA4" name="Số Lần Khách Thăm Quan Tràng An:" value="Nhiều hơn 3 lần">
+						<label for="soLanThamTA4" class="inputInRadio">
+							Nhiều hơn 3 lần
+						</label>
+					</div>
+				</div>
+			</div>
+
+			@* Quý khách sẽ quay lại hoặc giới thiệu cho bạn bè, người thân về Tràng An? *@
+			<div class="row">
+				<div class="form-group">
+					<label>
+						Quý khách sẽ quay lại hoặc giới thiệu cho bạn bè, người thân về Tràng An?
+					</label>
+					<div class="radio">
+						<input type="radio" id="gioiThieuBBCo" name="Quý Khách Sẽ" value="Giới thiệu và quay lại Tràng An" checked>
+						<label for="gioiThieuBBCo">
+							Sẽ giới thiệu và quay lại Tràng An
+						</label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="gioiThieuBBKo" name="Quý Khách Sẽ" value="Không giới thiệu">
+						<label for="gioiThieuBBKo">
+							Không giới thiệu
+						</label>
+					</div>
+				</div>
+			</div>
+			@* Submit button *@
+			<button class="btn btn-default" type="submit">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

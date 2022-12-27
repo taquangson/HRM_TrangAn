@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý lịch xin nghỉ phép của học sinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/xinnghiphep.js"></script>
+<div id="dialogRoot"></div>
+<div class="row">
+    <h2><b>Lịch xin nghỉ phép của học sinh</b></h2>
+</div>
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Lớp</label>
+        <div style="width:100%" id="comboLop"></div>
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Từ ngày</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày</label>
+        <input style="width:100%" id="DenNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%;height:15px;"> </label>
+        <button class="k-button bg-blue" onclick="LoadLichXinPhep()"> <i class="fa fa-search"> Xem báo cáo </i></button>
+    </div>
+</div>
+<div class="row">
+    <div id="gridHocSinhTrongLop"></div>
+</div>

@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Đổi mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using HRM_TrangAn.DataAccess.Models
+@{
+    TaiKhoanModel userinfor = (TaiKhoanModel)Session["UserInfor"];
+}
+<script>
+    $(document).ready(function () {
+
+    })
+    function Huy() {
+        $("#TenDayDu").val("@userinfor.TenDayDu");
+        $("#MatKhauCu").val("");
+        $("#MatKhauMoi").val("");
+        $("#ReMatKhauMoi").val("");
+    }
+    function Luu() {
+        var validten = SetValidate("TenDayDu");
+        var validmkcu = SetValidate("MatKhauCu");
+        var validmkmoi = SetValidate("MatKhauMoi");
+        var validremkmoi = SetValidate("ReMatKhauMoi");
+        var valid = validten && validmkcu && validmkmoi && validremkmoi
+        if (valid) {
+            var mkmoi = $("#MatKhauMoi").val();
+            var remkmoi = $("#ReMatKhauMoi").val();
+            if (mkmoi == remkmoi) {
+                $.ajax({
+                    url: '/User/ThayDoiMatKhau',
+                    type: 'POST',
+                    data: {
+                        TenDayDu: $("#TenDayDu").val(),
+                        OldPass: $("#MatKhauCu").val(),
+                        NewPass: $("#MatKhauMoi").val(),
+                    }
+                }).done(function successCallback(response) {
+                    if (response.status) {
+                        notification.show({ kValue: response.msg }, "success");
+                        kendo.ui.progress($("body"), true);
+                        setTimeout(function () {
+                            document.getElementById('logoutForm').submit()
+                        }, 2000)
+                    } else {
+                        notification.show({ kValue: response.msg }, "error");
+                    }
+                });
+            } else {
+                notification.show({ kValue: "Nhập lại mật khẩu chưa chính xác, vui lòng kiểm tra lại!" }, "error");
+                $("#ReMatKhauMoi").focus();
+            }
+        }
+    }
+</script>
+
+<div class="row">
+    <h2><b>Thay đổi thông tin tài khoản</b></h2>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="form-group valid" toggle-valid="TenTaiKhoan">
+            <label style="width:100%"><i class="fa fa-user"></i> Tên tài khoản:<span style="color:red">*</span></label>
+            @*<a class="k-button btn-category" onclick="OpenDanhMucLoi()"><i class="fa fa-plus"></i></a>*@
+            <input id="TenTaiKhoan" type="text" class="k-textbox input" value="@userinfor.TaiKhoan" readonly />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="TenDayDu">
+            <label style="width:100%"><i class="fa fa-users"></i> Tên đầy đủ: <span style="color:red">*</span></label>
+            <input id="TenDayDu" type="text" class="k-textbox input" value="@userinfor.TenDayDu" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="MatKhauCu">
+            <label style="width:100%"> <i class="fa fa-user-secret"></i> Mật khẩu cũ: <span style="color:red">*</span></label>
+            <input id="MatKhauCu" type="password" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="MatKhauMoi">
+            <label style="width:100%"> <i class="fa fa-user-secret"></i> Mật khẩu mới: <span style="color:red">*</span></label>
+            <input id="MatKhauMoi" type="password" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="ReMatKhauMoi">
+            <label style="width:100%"> <i class="fa fa-user-secret"></i> Nhập lại mật khẩu mới: <span style="color:red">*</span></label>
+            <input id="ReMatKhauMoi" type="password" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+
+</div>

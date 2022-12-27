@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Phiếu học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/phieuhoc.js"></script>
+<div id="rootContainer" style="display:none">
+    <div id="dialogRoot"></div>
+    <div class="row">
+        <h2><b>Phiếu vào lớp học</b></h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div id="gridTimKiemHocSinh"></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row" style="padding-left:30px;padding-right:30px;height:calc((100vh - 160px)/2)">
+                <div class="form-group">
+                    <input id="IDPhieuHoc" type="hidden" />
+                </div>
+                <div class="form-group valid" toggle-valid="TenHocSinh">
+                    <label style="width:50%;float:left">Phiếu vào lớp của học sinh: </label>
+                    <button class="k-button bg-red" onclick="HuyPhieu()" style="float:right"> <i class="fa fa-close"> Hủy</i> </button>
+                    <button class="k-button bg-blue" onclick="LuuPhieu()" style="float:right"> <i class="fa fa-plus-square"> Lưu </i></button>
+                    <input readonly id="TenHocSinh" placeholder="Họ tên học sinh" type="text" class="k-textbox input" />
+                    <span class="fa fa-exclamation-triangle icon"></span>
+                </div>
+                <div style="width:50%;float:left;padding-right:5px;">
+                    <div class="form-group valid" toggle-valid="LopHoc">
+                        <label style="width:100%">Lớp: <span style="color:red">*</span></label>
+                        <input id="LopHoc" type="text" class="input" />
+                        <span class="fa fa-exclamation-triangle icon"></span>
+                    </div>
+                </div>
+                <div style="width:50%;float:left;padding-left:5px;">
+                    <div class="form-group valid" toggle-valid="Thang">
+                        <label style="width:100%">Tháng: <span style="color:red">*</span></label>
+                        <input id="Thang" type="text" class="input" />
+                        <span class="fa fa-exclamation-triangle icon"></span>
+                    </div>
+                </div>
+                <div style="width:50%;float:left;padding-right:5px;">
+                    <div class="form-group valid" toggle-valid="SoBuoiHoc">
+                        <label style="width:100%">Số buổi học: <span style="color:red">*</span></label>
+                        <input id="SoBuoiHoc" placeholder="Số buổi học" type="number" min="1" class="k-textbox input" />
+                        <span class="fa fa-exclamation-triangle icon"></span>
+                    </div>
+                </div>
+                <div style="width:50%;float:left;padding-left:5px;">
+                    <div class="form-group valid" toggle-valid="LoaiPhieu">
+                        <label style="width:100%">Loại phiếu: <span style="color:red">*</span></label>
+                        <input id="LoaiPhieu" class="input" />
+                        <span class="fa fa-exclamation-triangle icon"></span>
+                    </div>
+                </div>
+                <div class="form-group valid" toggle-valid="GhiChu">
+                    <label style="width:100%">Ghi chú: </label>
+                    <input id="GhiChu" placeholder="" type="text" min="1" class="k-textbox input" />
+                    <span class="fa fa-exclamation-triangle icon"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div id="gridLichSuMuaPhieu"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

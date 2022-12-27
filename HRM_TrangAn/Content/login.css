@@ -1,0 +1,232 @@
+﻿body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.main-head {
+    height: 150px;
+    background: #FFF;
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #8894a5;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 15px 10px;
+}
+
+.logo-login {
+    background-image: url(../../Images/logodh.png);
+    width: 30%;
+    margin-left: 33%;
+    height: 100%;
+    z-index: 999;
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    padding: 0;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.login-main-text {
+    margin-top: 20%;
+    padding: 8%;
+    color: #fff;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .login-main-text {
+        margin-top: 20%;
+        padding: 5%;
+        color: #fff;
+    }
+
+    .logo-login {
+        background-image: url(../../Images/logodh.png);
+        width: 30%;
+        height: 100%;
+        background-size: contain;
+        position: absolute;
+        top: 0;
+        margin-left: 33%;
+        z-index: 999;
+        padding: 0;
+        display: block;
+        background-repeat: no-repeat;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .login-form {
+        margin-top: 10%;
+    }
+
+    .register-form {
+        margin-top: 10%;
+    }
+
+    .logo-login {
+        background-image: url(../../Images/logodh.png);
+        width: 30%;
+        height: 100%;
+        background-size: contain;
+        margin-left: 33%;
+        position: absolute;
+        z-index: 999;
+        padding: 0;
+        display: block;
+        background-repeat: no-repeat;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .main {
+        margin-left: 40%;
+    }
+
+    .sidenav {
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form {
+        margin-top: 30%;
+    }
+
+    .register-form {
+        margin-top: 20%;
+    }
+
+    .logo-login {
+        background-image: url(../../Images/logodh.png);
+        width: 30%;
+        background-size: contain;
+        height: 100%;
+        margin-left: 33%;
+        position: absolute;
+        z-index: 999;
+        padding: 0;
+        display: block;
+        background-repeat: no-repeat;
+    }
+}
+
+.background-login {
+    background-image: url(../../Images/bbg.jpg);
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    background-size: cover;
+    padding: 0;
+    display: block;
+}
+
+
+
+.login-main-text h2 {
+    font-weight: 300;
+}
+
+.btn-black {
+    background-color: #355593;
+    color: #fff;
+}
+
+/*Css tết 2020*/
+
+/*.logo-login {
+    display: none;
+}
+
+.main {
+    height: 100vh;
+    background-color: #fbf9b2;
+}
+
+.login-form {
+    color: #960001;
+}
+
+.btn-black {
+    background-color: #9c0202;
+    color: #f0ed9e;
+}
+
+@media screen and (max-height: 450px){
+    .background-login {
+        background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20190916/pngtree-merry-christmas-happy-chinese-new-year-2020-image_314717.jpg);
+        background-position: top;
+        opacity: 1;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .sidenav {
+        height: 100%;
+        background-color: #950101;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+    .login-main-text {
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .background-login {
+        background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20190916/pngtree-merry-christmas-happy-chinese-new-year-2020-image_314717.jpg);
+        background-position: top;
+        opacity: 1;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .sidenav {
+        height: 100%;
+        background-color: #950101;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+    .login-main-text {
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .background-login {
+        background-image: url(https://png.pngtree.com/thumb_back/fw800/background/20190916/pngtree-merry-christmas-happy-chinese-new-year-2020-image_314717.jpg);
+        background-position: top;
+        opacity: 1;
+        background-size: unset;
+    }
+
+}*/
+
+/*CSS Xa Lánh*/
+/*.btn-black {
+    background-color: #6dad87;
+    color: #fff;
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #62af7a;
+    overflow-x: hidden;
+    padding-top: 20px;
+}*/

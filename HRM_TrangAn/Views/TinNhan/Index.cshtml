@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Thông báo tin nhắn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/tinnhan.js"></script>
+<div id="dialogRoot"></div>
+<div class="row">
+    <h2><b>Gửi tin nhắn thông báo</b></h2>
+</div>
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Năm sinh</label>
+        <div style="width:100%" id="comboNamSinh"></div>
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đang học tại TT</label>
+        <div style="width:100%" id="comboDangHoc"></div>
+    </div>
+    <div class="col-sm-3">
+        <label style="width:100%">Lớp</label>
+        <div style="width:100%" id="comboLop"></div>
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Số điện thoại</label>
+        <input style="width:100%" class="k-textbox" id="soDienThoai" />
+    </div>
+
+    <div class="col-sm-2">
+        <label style="width:100%;height:15px;"> </label>
+        <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Tìm kiếm </i></button>
+    </div>
+</div>
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-sm-4">
+        <label style="width:100%">Mẫu tin nhắn</label>
+        <div style="width:100%" id="comboMauTinNhan"></div>
+        <input type="text" id="param1" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 1" />
+        <input type="text" id="param2" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 2" />
+        <input type="text" id="param3" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 3" />
+        <input type="text" id="param4" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 4" />
+        <input type="text" id="param5" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 5" />
+        <input type="text" id="param6" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 6" />
+        <input type="text" id="param7" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 7" />
+        <input type="text" id="param8" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 8" />
+        <input type="text" id="param9" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 9" />
+        <input type="text" id="param10" onkeyup="updateParam()" style="width:30%;float:left;margin-right:3%;margin-top:3px" class="k-textbox" placeholder="Tham số 10" />
+        <button style="width:100%" class="k-button bg-blue" onclick="ApDungTinNhan()"> <i class="fa fa-plus-square"> Áp dụng tin nhắn </i></button>
+    </div>
+
+    <div class="col-sm-8">
+        <label style="width:100%">Nội dung tin nhắn</label>
+        <textarea rows="3" style="width:100%;border:none;" class="k-textbox" id="noiDungTinNhan"></textarea>
+    </div>
+    <div class="col-sm-12">
+        <p id="guithanhcong" style="color:#14760d"></p>
+        <p id="guithatbai" style="color:#ff6a00"></p>
+    </div>
+</div>
+
+<div class="row toolBarMenu">
+    <button class="k-button bg-green" onclick="GuiTinNhanTheoMau()"> <i class="fa fa-envelope-o"> Gửi tin nhắn </i></button>
+    <button class="k-button bg-blue" onclick="InThe()"> <i class="fa fa-envelope-o"> In thẻ </i></button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>

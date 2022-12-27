@@ -1,0 +1,621 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hỗ trợ kỹ thuật - Trung tâm luyện thi Dương Hòa</title>
+    <link href="~/Assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="~/Assets/kendo/kendo.ext.css" rel="stylesheet" />
+    <link href="~/Assets/tracuulichhoc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Assets/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/jszip.js"></script>
+    <script src="~/Assets/xlsx.js"></script>
+    <link href="~/Assets/Common.css" rel="stylesheet" />
+    <style>
+        body {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #treeview {
+            background-color: #e2e2e0 !important;
+            height: calc( 100vh - 120px) !important;
+            width: 100%;
+            /*overflow-y: scroll;*/
+            /*overflow-x: scroll;*/
+            float: left;
+            border-color: grey;
+            border: 1px solid #d9d9d9 !important;
+            line-height: 30px !important;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .k-treeview .k-group {
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        var notification;
+        var selectedPhongBan = { value: 0, text: "Total" };
+        var lenght;
+        var jsondata;
+        $(document).ready(function () {
+            notification = $("<div />").kendoNotification({
+                position: {
+                    //pinned: true,
+                    top: 50,
+                    right: Math.floor($(window).width() / 2 - 400 / 2)
+                },
+                templates: [{
+                    type: "error",
+                    template: $("#errorTemplate").html()
+                }, {
+                    type: "success",
+                    template: $("#successTemplate").html()
+                }]
+            }).data("kendoNotification");
+
+
+            $("#file").kendoUpload({
+                multiple: false,
+                localization: {
+                    select: 'Tải file dữ liệu đầu vào',
+                    remove: '',
+                    cancel: ''
+                },
+                allowedExtensions: [".xls", ".xlsx"],
+                select: function (e) {
+                    PushFormDataFile(e.files[0]);
+                }
+            });
+
+            $("#treeview").kendoTreeView({
+                dataTextField: "text",
+                dataValueField: "value",
+                select: function (e) {
+                    if ($("#file").data("kendoUpload").getFiles().length > 0) {
+                        kendo.ui.progress($("body"), true);
+                        selectedPhongBan = $("#treeview").getKendoTreeView().dataItem(e.node);
+                        if (selectedPhongBan.value.toString().length == 2) {
+                            var digits = ("" + selectedPhongBan.value).split("");
+                            let T = lenght;
+                            let A = digits[0];
+                            let B = digits[1];
+                            let P1 = Math.round(T * A / 5);
+                            let P2 = Math.round(T * (A - 1) / 5);
+                            let L1 = P1 - P2;
+                            let C1 = Math.round(L1 * B / 3);
+                            let C2 = Math.round(L1 * (B - 1) / 3);
+                            let X1 = P2 + C2;
+                            let X2 = P2 + C1;
+                            let L3 = C1 - C2;
+                            let Y1 = Math.round(L3 * 1 / 3);
+                            let Y2 = Math.round(L3 * 2 / 3);
+                            let Y3 = Math.round(L3 * 3 / 3);
+                            let sortData = jsondata.slice(X1, X2).sort(compareValues('Debt_to_assets'));
+                            $.each(sortData, function (index, item) {
+                                if (index < Y1) {
+                                    item.Rank = "LOW";
+                                }
+                                if (Y1 <= index && index < Y2) {
+                                    item.Rank = "MID";
+                                }
+                                if (Y2 <= index && index < Y3) {
+                                    item.Rank = "HIGH";
+                                }
+                            })
+                            var dsgrid = new kendo.data.DataSource({
+                                data: sortData,
+                                //pageSize: 50
+                            });
+                            $("#grid").data("kendoGrid").setDataSource(dsgrid);
+                            kendo.ui.progress($("body"), false);
+                        }
+                        else if (selectedPhongBan.value.toString().length == 1) {
+                            if (selectedPhongBan.value == 0) {
+                                var dsgrid = new kendo.data.DataSource({
+                                    data: jsondata,
+                                    //pageSize: 50
+                                });
+                                $("#grid").data("kendoGrid").setDataSource(dsgrid);
+                            } else {
+                                let T = lenght;
+                                let A = selectedPhongBan.value;
+                                let P1 = Math.round(T * A / 5);
+                                let P2 = Math.round(T * (A - 1) / 5);
+                                let sortData = jsondata.slice(P2, P1);
+                                var dsgrid = new kendo.data.DataSource({
+                                    data: sortData,
+                                    //pageSize: 50
+                                });
+                                $("#grid").data("kendoGrid").setDataSource(dsgrid);
+                            }
+                            kendo.ui.progress($("body"), false);
+
+                        }
+                    }
+                    else {
+                        notification.show({ kValue: "Chưa tải dữ liệu lên" }, "error");
+                    }
+                },
+            });
+
+            var dataSource = new kendo.data.HierarchicalDataSource({
+                data: [
+                    {
+                        text: "Total",
+                        value: 0,
+                        lstChild: [
+                            {
+                                text: "Small",
+                                value: 1,
+                                lstChild: [
+                                    {
+                                        text: "Small.1",
+                                        value: 11,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "Small.2",
+                                        value: 12,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "Small.3",
+                                        value: 13,
+                                        lstChild: null
+                                    }
+                                ]
+                            },
+                            {
+                                text: "2",
+                                value: 2,
+                                lstChild: [
+                                    {
+                                        text: "2.1",
+                                        value: 21,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "2.2",
+                                        value: 22,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "2.3",
+                                        value: 23,
+                                        lstChild: null
+                                    }
+                                ]
+                            },
+                            {
+                                text: "3",
+                                value: 3,
+                                lstChild: [
+                                    {
+                                        text: "3.1",
+                                        value: 31,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "3.2",
+                                        value: 32,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "3.3",
+                                        value: 33,
+                                        lstChild: null
+                                    }
+                                ]
+                            },
+                            {
+                                text: "4",
+                                value: 4,
+                                lstChild: [
+                                    {
+                                        text: "4.1",
+                                        value: 41,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "4.2",
+                                        value: 42,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "4.3",
+                                        value: 43,
+                                        lstChild: null
+                                    }
+                                ]
+                            },
+                            {
+                                text: "Big",
+                                value: 5,
+                                lstChild: [
+                                    {
+                                        text: "Big.1",
+                                        value: 51,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "Big.2",
+                                        value: 52,
+                                        lstChild: null
+                                    },
+                                    {
+                                        text: "Big.3",
+                                        value: 53,
+                                        lstChild: null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                schema: {
+                    model: {
+                        children: "lstChild"
+                    }
+                }
+            });
+            $("#treeview").data("kendoTreeView").setDataSource(dataSource);
+            $("#treeview").data("kendoTreeView").expand(".k-item");
+            $("#treeview").data("kendoTreeView").expand(".k-item");
+
+            var filterable = {
+                mode: "row",
+                messages: {
+                    and: "và",
+                    or: "hoặc",
+                    filter: "Lọc",
+                    clear: "Xóa lọc"
+                }
+            }
+
+            $("#grid").kendoGrid({
+                height: function () {
+                    var height = $(window).height() - 120;
+                    return height;
+                },
+                scrollable: true,
+                persistSelection: true,
+                autoFitColumn: true,
+                resizable: true,
+                sortable: true,
+                filterable: {
+                    mode: "row",
+                },
+                pageable: {
+                    input: true,
+                    numeric: false,
+                    messages: {
+                        itemsPerPage: "Bản ghi trên trang",
+                        display: "Hiển thị {0}-{1} trong số {2} bản ghi",
+                        page: "Trang",
+                        of: "/ {0}",
+                        next: "Trang sau",
+                        previous: "Trang trước",
+                        first: "Trang đầu",
+                        last: "Trang cuối"
+                    }
+                },
+                dataBinding: function () {
+                    //record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+                    record = 0;
+                },
+                excelexcel: {
+                    filterable: true
+                },
+                excelExport: function (e) {
+                    var columns = e.workbook.sheets[0].columns;
+                    var sheet = e.workbook.sheets[0];
+                    sheet.title = selectedPhongBan.text;
+                    //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
+                    for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
+                        var row = sheet.rows[rowIndex];
+                        var flag = false;
+                        if (rowIndex == 0) {
+                            flag = true;
+                        }
+                        for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+
+                            if (flag) {
+                                row.cells[cellIndex].textAlign = 'center';
+                                row.cells[cellIndex].bold = true;
+                            }
+                            row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
+                            row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
+                            row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
+                            row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                        }
+                    }
+                },
+                columns: [
+                    {
+                        title: "STT",
+                        template: "#= ++record #",
+                        width: "60px",
+                        attributes: {
+                            class: "text-center"
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        }
+                    },
+                    {
+                        field: "Ticket",
+                        title: "Ticket",
+                        width: "130px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        }
+                    },
+                    {
+                        field: "Market_cap",
+                        title: "MarketCap",
+                        width: "150px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        }
+                    },
+                    {
+                        field: "Total_assets",
+                        title: "Total assets",
+                        width: "100px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            class: "text-center"
+                        }
+                    },
+                    {
+                        field: "Total_liabilities",
+                        title: "Total Liabilities",
+                        width: "100px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            class: "text-center"
+                        }
+                    },
+                    {
+
+                        field: "Debt_to_assets",
+                        title: "Debt to assets",
+                        width: "100px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            class: "text-center"
+                        }
+                    },
+                    {
+                        field: "Rank",
+                        title: "Rank",
+                        width: "100px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            class: "text-center"
+                        }
+                    }
+                ]
+
+            });
+
+        })
+
+        function compareValues(key, order = 'asc') {
+            return function innerSort(a, b) {
+                if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                    // property doesn't exist on either object
+                    return 0;
+                }
+
+                const varA = (typeof a[key] === 'string')
+                    ? a[key].toUppercase() : a[key];
+                const varB = (typeof b[key] === 'string')
+                    ? b[key].toUppercase() : b[key];
+
+                let comparison = 0;
+                if (varA > varB) {
+                    comparison = 1;
+                } else if (varA < varB) {
+                    comparison = -1;
+                }
+                return (
+                    (order === 'desc') ? (comparison * -1) : comparison
+                );
+            };
+        }
+
+
+        function PushFormDataFile(file) {
+            kendo.ui.progress($("body"), true);
+            parseExcel(file.rawFile);
+        }
+
+        function ProcessData() {
+            $("#grid").data("kendoGrid").options.excel = {
+                fileName: selectedPhongBan.text + ".xlsx",
+                filterable: true,
+                allPages: true
+            }
+            $("#grid").data("kendoGrid").saveHRM_TrangAnxcel();
+        }
+
+
+        function parseExcel(file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var workbook = XLSX.read(data, {
+                    type: 'binary'
+                });
+
+                workbook.SheetNames.forEach(function (sheetName) {
+                    // Here is your object
+                    var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                    var json_object = JSON.stringify(XL_row_object);
+
+                    jsondata = JSON.parse(json_object);
+                    $.each(jsondata, function (index, item) {
+                        item.Market_cap = Number(item.Market_cap);
+                        item.Total_assets = Number(item.Total_assets);
+                        item.Total_liabilities = Number(item.Total_liabilities);
+                        item.Debt_to_assets = Number(item.Debt_to_assets);
+                    })
+                    jsondata = jsondata.sort(compareValues('Market_cap'));
+                    lenght = jsondata.length;
+                    var dsgrid = new kendo.data.DataSource({
+                        data: jsondata,
+                        //pageSize: 50
+                    });
+                    $("#grid").data("kendoGrid").setDataSource(dsgrid);
+                    kendo.ui.progress($("body"), false);
+                    notification.show({ kValue: "Tải dữ liệu thành công" }, "success");
+                })
+
+            };
+
+            reader.onerror = function (ex) {
+                console.log(ex);
+            };
+
+            reader.readAsBinaryString(file);
+
+        };
+/**/</script>
+</head>
+
+<body>
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="wrong-pass">
+            <i class="fa fa-close" style="color:red;font-size:40px;"></i>
+            <p>#= kValue # </p>
+        </div>
+    </script>
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="upload-success">
+            <i class="fa fa-check" style="color:green;font-size:40px;"></i>
+            <p>#= kValue # </p>
+        </div>
+    </script>
+    <div class="row form-group" style="width:100%">
+        <div class="col-sm-3">
+            <input type="file" id="file" class="control-find" />
+            <ul class="k-upload-files k-reset">
+                <li class="k-file">
+                    <span class="k-progress" style="width: 100%;"></span>
+                    <span class="k-file-extension-wrapper">
+                        <span class="k-file-extension">?</span>
+                        <span class="k-file-state"></span>
+                    </span>
+                    <span class="k-file-name-size-wrapper">
+                        <span class="k-file-name" title="Chưa chọn file dữ liệu">Chưa chọn dữ liệu nguồn</span>
+                        <span class="k-file-size">52.83 KB</span>
+                    </span>
+                    <strong class="k-upload-status">
+                    </strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-default pdtop" onclick="ProcessData()">Tải dữ liêu về máy (xlsx)</a>
+        </div>
+    </div>
+    <div class="row form-group" style=" width: 100%;top:117px;position: fixed;">
+        <div class="col-sm-3">
+            <div id="treeview"></div>
+        </div>
+        <div class="col-sm-9">
+            <div id="grid"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿
+
+@{
+    ViewBag.Title = "Báo cáo học sinh nợ phiếu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <style>
+        .trang {
+            background-color: #fff;
+        }
+
+        .do {
+            background-color: #fc9595;
+        }
+
+        .xanh {
+            background-color: #78ff51;
+        }
+    </style>
+<script src="~/Scripts/js/baocao_js/baocaohocsinhnophieu.js"></script>
+<div id="rootContainer" style="display:none">
+    <div class="row">
+        <h2><b>Báo cáo học sinh nợ phiếu</b></h2>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-3">
+            <label style="width:100%">Tháng</label>
+            <input style="width:100%" id="comboThang" />
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%"> </label>
+            <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Xem báo cáo </i></button>
+            <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel </i></button>
+        </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+        <div id="gridData"></div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="template">
+    <div class="orders"></div>
+</script>

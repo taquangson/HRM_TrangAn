@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Quản lý dữ liệu điểm danh học sinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/quanlydulieudiemdanh.js"></script>
+<style>
+    .k-checkbox-label:before {
+        width: 25px;
+        height: 25px;
+        font-size: 23px;
+        line-height: 25px;
+        top: -5px;
+    }
+
+    #gridDiemDanh tr {
+        height: 40px;
+    }
+
+    .image-preview{
+
+    }
+
+    .sodo {
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: calc(100vh - 40px);
+        background-size: contain;
+    }
+</style>
+<div id="rootContainer" style="display:none">
+    <div id="dialogRoot"></div>
+    <div class="row">
+        <h2><b>Dữ liệu điểm danh</b></h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <label style="width:100%">Khối</label>
+            <div style="width:100%" id="comboKhoi"></div>
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Lớp</label>
+            <div style="width:100%" id="comboLop"></div>
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Ca học</label>
+            <div style="width:100%" id="comboCa"></div>
+        </div>
+        <div class="col-sm-3">
+            <label style="width:100%">Ngày</label>
+            <input style="width:100%" id="comboNgay" />
+        </div>
+    </div>
+    <div style="margin-top:20px;" id="gridDiemDanh"></div>
+</div>
+<div id="windowSoDo">
+    <div id="anhsodo" class="sodo"></div>
+</div>

@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng nhập</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnRedirectTraCuu").on("click touchstart", function () {
+                window.location.href = '/LichHoc/TraCuuLichHoc'
+            });
+            //document.getElementById("btnRedirectTraCuu").addEventListener("touchstart", RedirectTraCuu);
+        })
+
+/**/</script>
+</head>
+<body>
+    <div class="sidenav">
+        <span class="logo-login"></span>
+        <span class="background-login"></span>
+        <div class="login-main-text">
+            <h2 class="text-center">AMS MANAGERMENT SYSTEM</h2>
+            @*<h4>"Vì lợi ích mười năm trồng cây, vì lợi ích trăm năm trồng người"</h4>
+            <i style="width:100%;display:block" class="text-right">Trích lời chủ tịch Hồ Chí Minh</i>*@
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-8 col-sm-12">
+            <div class="login-form">
+                <form method="post" action="/User/UserLogin">
+                    <div class="form-group">
+                        <label>Tài khoản</label>
+                        <input type="text" name="UserName" required oninvalid="this.setCustomValidity('Vui lòng nhập tài khoản!')" oninput="setCustomValidity('')" class="form-control" placeholder="Tài khoản">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" name="Password" oninvalid="this.setCustomValidity('Vui lòng nhập mật khẩu!')" oninput="setCustomValidity('')" required class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="form-group">
+                        <input class="checkbox" name="Remember" style="float:left;width:20px" type="checkbox" /><span style="line-height:25px;vertical-align:bottom">Lưu mật khẩu</span>
+                    </div>
+                    <button type="submit" class="btn btn-black">Đăng nhập</button>
+                    @*<button type="button" id="btnRedirectTraCuu" class="btn btn-black">Tra cứu lịch học</button>*@
+                    <b class="btn-danger">@ViewBag.Error</b>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
