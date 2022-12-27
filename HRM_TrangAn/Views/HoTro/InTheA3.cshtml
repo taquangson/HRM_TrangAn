@@ -81,7 +81,7 @@
                     <img class="anhdaidien" src="@Model[i].AnhDaiDien.FilePath" />
                 }
                 <span class="ten">@Model[i].TenDayDu.ToUpper()</span>
-                <span class="ten1">NHÂN VIÊN CHỞ ĐÒ</span>
+                <span class="ten1">@Model[i].TenChucDanh.ToUpper().Substring(1) </span>
                 <span class="namsinh">TỔ ĐÒ: <b>@Model[i].MaToNhom.ToUpper()</b></span>
                 <span class="ma">Mã LĐ: <span>@Model[i].MaNhanVien.ToUpper()</span></span>
 
@@ -126,7 +126,7 @@
                         <img class="anhdaidien" src="@Model[i + 1].AnhDaiDien.FilePath" />
                     }
                     <span class="ten">@Model[i + 1].TenDayDu.ToUpper()</span>
-                    <span class="ten1">NHÂN VIÊN CHỞ ĐÒ</span>
+                    <span class="ten1">@Model[i].TenChucDanh.ToUpper().Substring(1) </span>
                     <span class="namsinh">TỔ ĐÒ: <b>@Model[i + 1].MaToNhom.ToUpper()</b></span>
                     <span class="ma">MÃ LĐ: <span>@Model[i + 1].MaNhanVien.ToUpper()</span></span>
 
