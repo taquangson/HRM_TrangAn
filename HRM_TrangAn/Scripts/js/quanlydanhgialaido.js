@@ -36,7 +36,7 @@ $(document).ready(function () {
             pageSize: 30,
         }),
         height: function () {
-            var height = $(window).height() - 170;
+            var height = $(window).height() - 270;
             return height;
         },
         scrollable: true,

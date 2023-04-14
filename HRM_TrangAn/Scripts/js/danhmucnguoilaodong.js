@@ -232,7 +232,7 @@ $(document).ready(function () {
                 field: "FileAnhDaiDien",
                 title: "Ảnh đại diện",
                 template: function (e) {
-                    if (e.FileAnhDaiDien) {
+                    if (e.FileAnhDaiDien != "0") {
                         return "<img class='avatar' src='" + e.FileAnhDaiDien + "'/>"
                     } else {
                         return "Chưa có ảnh";
@@ -242,7 +242,7 @@ $(document).ready(function () {
                 width: "100px",
                 filterable: {
                     cell: {
-                        operator: "contains",
+                        operator: "equals",
                         showOperators: false,
                         template: function (e) {
                             e.element.addClass("k-textbox").css("width", "100%")
@@ -3433,7 +3433,7 @@ function Huy() {
 function Xoa() {
     var bangDuLieu = $("#grid").data("kendoGrid");
     if (bangDuLieu.select().length > 0) {
-        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa " + bangDuLieu.select().length + " nhân viên?</b>", function () { XoaDuLieu(bangDuLieu); }, function () { });
+        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa " + bangDuLieu.select().length / 2 + " nhân viên?</b>", function () { XoaDuLieu(bangDuLieu); }, function () { });
     } else {
         openDialog(dialogRoot, "<b style='line-height:40px;'>Bạn phải chọn dữ liệu cần xóa</b>");
         //notification.show({kValue: "Bạn phải chọn dữ liệu cần xóa" }, "error");

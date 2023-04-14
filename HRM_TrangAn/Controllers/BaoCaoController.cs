@@ -136,7 +136,7 @@ namespace HRM_TrangAn.Controllers
             NhanVienDAO nvdao = new NhanVienDAO();
             NhanVienModel nv = nvdao.GetByMa(MaNhanVien);
             int day = DateTime.Now.Day;
-            DateTime fromd = DateTime.Now.AddDays(day * (-1));
+            DateTime fromd = DateTime.Now.AddDays((day - 1) * (-1));
             List<ChuyenDoModel> data1 = dao.GetChuyenDo_GetByNhanVien(fromd.Date, DateTime.Now, nv.ID);
 
             DataTable data2 = cdao.GetDataChotCongByNhanVien(fromd.Date, DateTime.Now, nv.ID);

@@ -359,6 +359,7 @@ function TimKiem() {
             }
         })
         $("#gridData").data("kendoGrid").setOptions({
+
             dataSource: new kendo.data.DataSource({
                 data: response,
                 schema: {

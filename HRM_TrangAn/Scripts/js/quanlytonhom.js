@@ -760,7 +760,8 @@ function LoadGridData() {
     $.ajax({
         url: '/ToNhom/GetAllToNhom',
         type: 'GET',
-    }).done(function successCallback(response) {
+    }).done(function successCallback(responsee) {
+        response = JSON.parse(responsee);
         for (var i = 0; i < response.length; i++) {
             response[i].TenToTruong = ""
             response[i].SDTToTruong = ""

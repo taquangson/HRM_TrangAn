@@ -971,6 +971,7 @@ function openAddNhanVienWindow() {
     }).done(function successCallback(response) {
         kendo.ui.progress($("#gridAddNhanVien"), true);
         var lstNhanVienNgoaiXuPhat = [];
+        response = JSON.parse(response);
         for (var i = 0; i < response.length; i++) {
             if (!CheckNhanVienTrongXuPhat(response[i].ID)) {
                 lstNhanVienNgoaiXuPhat.push(response[i])

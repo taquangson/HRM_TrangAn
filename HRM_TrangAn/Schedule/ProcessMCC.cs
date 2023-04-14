@@ -31,6 +31,7 @@ namespace HRM_TrangAn.Schedule
                     await GetData(dqt.DiaChiIP, int.Parse(dqt.Port), d.ID, dqt.ID_MayChamCong);
                 }
             }
+            DiemDanhHub.updateChamCong();
             return true;
         }
 
@@ -60,7 +61,8 @@ namespace HRM_TrangAn.Schedule
                 {
                     log.Info(deviceIp + ":" + port + " : Đã kết nối. Đang tải " + recordCount + " row");
                     byte[] data = AttLogHelper.downloadDataFile(izkem);
-                    AttLogHelper.GetAllListLogData(izkem, deviceIp, ID_May);
+                    //AttLogHelper.GetAllListLogData(izkem, deviceIp, ID_May);
+                    AttLogHelper.GetAllListLogDataV2(izkem, deviceIp, ID_May);
                     izkem.Disconnect();
                     //if (data != null)
                     //{
@@ -85,7 +87,6 @@ namespace HRM_TrangAn.Schedule
                 
             }
             lskndao.Insert(kn);
-            DiemDanhHub.updateChamCong();
             return dt;
         }
     }

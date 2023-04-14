@@ -3,6 +3,7 @@ using HRM_TrangAn.DataAccess.Helper;
 using HRM_TrangAn.DataAccess.Models;
 using HRM_TrangAn.Hubs;
 using log4net;
+using NPOI.SS.Formula.Functions;
 using Quartz.Util;
 using SuperSocket.SocketEngine.Configuration;
 using System;
@@ -11,6 +12,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,12 +148,12 @@ namespace HRM_TrangAn.Schedule
             TuyenDoDAO dao = new TuyenDoDAO();
             ChuyenDoDAO dm_dao = new ChuyenDoDAO();
             CongLaoDongDAO clddao = new CongLaoDongDAO();
+            List<TuyenDoModel> lstTuyen = dao.GetAll();
             int keypoint_tuyenchinh = int.Parse(System.Configuration.ConfigurationManager.AppSettings["KeyPointCheckRouter1"]);
             foreach (ChamCongModel i in result)
             {
                 i.ID = cc_dao.Insert(i, i.EnrollNumber, 0);
                 //List<TuyenDoModel> lstTuyen = dao.GetTuyenDoTheoDiemCuoi(ID_DiemQuetThe);
-                List<TuyenDoModel> lstTuyen = dao.GetAll();
                 //Tính chuyến đò chính
                 if (lstTuyen != null && i.ID_DiemQuetThe == keypoint_tuyenchinh)
                 {
@@ -204,6 +207,121 @@ namespace HRM_TrangAn.Schedule
                     }
                 }
                 //Tính chuyển khách mời
+            }
+            return result;
+        }
+
+        public static List<ChamCongModel> GetAllListLogDataV2(CZKEM axCZKEM1, string DeviceIP, int ID_DiemQuetThe)
+        {
+            int idwVerifyMode;
+            int idwInOutMode;
+            int idwYear;
+            int idwMonth;
+            int idwDay;
+            int idwHour;
+            int idwMinute;
+            int idwErrorCode = 0;
+            int iGLCount = 0;
+            int iIndex = 0;
+            int dwValue = 0;
+            int idwSecond;
+            int idwWorkcode = 0;
+            string sdwEnrollNumber;
+            List<ChamCongModel> result = new List<ChamCongModel>();
+            axCZKEM1.EnableDevice(1, false);//disable the device
+            if (axCZKEM1.ReadGeneralLogData(2))//read all the attendance records to the memory
+            {
+                while (axCZKEM1.SSR_GetGeneralLogData(iMachineNumber, out sdwEnrollNumber, out idwVerifyMode,
+                    out idwInOutMode, out idwYear, out idwMonth, out idwDay, out idwHour, out idwMinute, out idwSecond, ref idwWorkcode))//get records from the memory
+                {
+                    iGLCount++;
+                    ChamCongModel item = new ChamCongModel();
+                    NhanVienDAO nvdao = new NhanVienDAO();
+                    NhanVienModel nv = nvdao.GetByMa(sdwEnrollNumber.ToString());
+                    item.EnrollNumber = sdwEnrollNumber.ToString();
+                    item.VerifyMode = idwVerifyMode;
+                    item.InOutMode = idwInOutMode;
+                    item.WorkDate = new DateTime(idwYear, idwMonth, idwDay, idwHour, idwMinute, idwSecond);
+                    item.ThoiGian = item.WorkDate;
+                    item.Workcode = idwWorkcode;
+                    item.DiaChiIP = DeviceIP;
+                    item.ID_DiemQuetThe = ID_DiemQuetThe;
+                    if (nv != null)
+                    {
+                        item.ID_TaiKhoan = nv.ID;
+                        item.MaThuyen = nv.MaThuyen;
+                    }
+                    else
+                    {
+                        item.ID_TaiKhoan = 0;
+                        item.MaThuyen = "0";
+                    }
+
+                    result.Add(item);
+                    iIndex++;
+                }
+                if (axCZKEM1.GetDeviceStatus(2, 6, ref dwValue))
+                {
+                    log.Info("Records: " + dwValue.ToString());
+                }
+            }
+            else
+            {
+                axCZKEM1.GetLastError(ref idwErrorCode);
+            }
+            axCZKEM1.ClearGLog(iMachineNumber);
+            axCZKEM1.RefreshData(iMachineNumber);
+            axCZKEM1.EnableDevice(iMachineNumber, true);//enable the device
+            ChamCongDAO cc_dao = new ChamCongDAO();
+            TuyenDoDAO dao = new TuyenDoDAO();
+            ChuyenDoDAO dm_dao = new ChuyenDoDAO();
+            CongLaoDongDAO clddao = new CongLaoDongDAO();
+            List<TuyenDoModel> lstTuyen = dao.GetAll();
+            int keypoint_tuyenchinh = int.Parse(System.Configuration.ConfigurationManager.AppSettings["KeyPointCheckRouter1"]);
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            string ipaddress = "";
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    ipaddress += ";" + ip.ToString();
+                }
+            }
+            foreach (ChamCongModel i in result)
+            {
+                i.ID = cc_dao.Insert(i, i.EnrollNumber, 0);
+                //Tính chuyến đò chính
+                if (i.ID > 0 && (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009))
+                {
+                    if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
+                    {
+                        ChuyenDoModel model = new ChuyenDoModel();
+                        model.MaThuyen = i.MaThuyen;
+                        model.ID_NhanVien = i.ID_TaiKhoan;
+                        model.NgayDi = i.WorkDate;
+                        model.GhiChu = i.ID + ipaddress;
+                        model.IsManager = 0;
+                        model.TrangThai = 1;
+                        switch (i.ID_DiemQuetThe)
+                        {
+                            case 2007:
+                                model.ID_TuyenDo = 2005;
+                                break;
+                            case 2008:
+                                model.ID_TuyenDo = 1;
+                                break;
+                            case 2009:
+                                model.ID_TuyenDo = 2004;
+                                break;
+                        }
+                        int ID_New = dm_dao.InsertOrUpdate(model);
+                        if (ID_New > 0)
+                        {
+                            i.ID_ChuyenDo = ID_New;
+                            cc_dao.Update(i);
+                        }
+                    }
+                }
             }
             return result;
         }

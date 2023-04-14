@@ -220,6 +220,7 @@ function TimKiem() {
             }
         })
         $("#gridData").data("kendoGrid").setOptions({
+            height: 0,
             dataSource: new kendo.data.DataSource({
                 data: response,
                 schema: {

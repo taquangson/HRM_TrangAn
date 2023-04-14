@@ -3,7 +3,8 @@ $(document).ready(function () {
     $.ajax({
         url: '/NhanVien/GetAllNhanVien',
         type: 'GET',
-    }).done(function successCallback(response) {
+    }).done(function successCallback(responsee) {
+        var response = JSON.parse(responsee);
         var dataSource = new kendo.data.DataSource({
             data: response,
         });

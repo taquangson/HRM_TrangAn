@@ -335,7 +335,7 @@ function XuatExcel() {
     var grid = $('#gridData').data('kendoGrid');
 
     grid.options.excel = {
-        fileName: "CHuyenDoThemTay.xlsx",
+        fileName: "ChuyenDoThemTay.xlsx",
         filterable: true,
         allPages: true
     }

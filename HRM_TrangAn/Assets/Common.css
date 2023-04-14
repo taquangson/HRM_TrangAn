@@ -578,3 +578,7 @@ k-widget k-window {
     border-color: #ebebeb;
     width: 50%;
 }
+
+.k-pager-md .k-pager-info, .k-pager-sm .k-pager-info, .k-pager-sm .k-pager-numbers, .k-pager-sm .k-pager-sizes {
+    display: flex !important;
+}

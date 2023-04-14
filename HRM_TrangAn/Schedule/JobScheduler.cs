@@ -12,7 +12,7 @@ namespace HRM_TrangAn.Schedule
         public static IScheduler scheduler;
         private static ITrigger trigger;
         private static ITrigger trigger2;
-        private static ITrigger trigger3;
+        //private static ITrigger trigger3;
 
         public static async void Start()
         {
@@ -28,18 +28,11 @@ namespace HRM_TrangAn.Schedule
 
             trigger = TriggerBuilder.Create()
                 .WithIdentity("trigger1", "group1")
-                 //.WithDailyTimeIntervalSchedule
-                 //  (s =>
-                 //     s.WithIntervalInHours(24)
-                 //    .OnEveryDay()
-                 //    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0))
-                 //  )
-                 .StartNow()
-                 //.WithSimpleSchedule(x => x
-                //.WithIntervalInSeconds(10)
-                //.RepeatForever())
-                .WithCronSchedule("0 0/10 * * * ?")
-
+                .StartNow()
+                  .WithSimpleSchedule(x => x
+                    .WithIntervalInMinutes(5)
+                    .RepeatForever())
+                //.WithCronSchedule("0 0/4 * * * ?")
                 .Build();
 
             trigger2 = TriggerBuilder.Create()

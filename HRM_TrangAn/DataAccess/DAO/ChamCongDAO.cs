@@ -292,6 +292,31 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public int CountExistCheckpoint(int ID_TaiKhoan, int ID_DiemQuetThe, DateTime WorkDate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+
+                    new SqlParameter("@ID_TaiKhoan", ID_TaiKhoan),
+                    new SqlParameter("@ID_DiemQuetThe", ID_DiemQuetThe),
+                    new SqlParameter("@WorkDate", WorkDate)
+                };
+
+                object id = helper.ExecuteScalar("sp_ChamCong_GetExistsCheckPoint", pars);
+                if (id != null)
+                {
+                    return int.Parse(id.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChamCong_GetExistsCheckPoint " + ex.Message);
+            }
+
+            return 0;
+        }
+
 
         public int Insert(ChamCongModel model, string MaNhanVien, int ID_ChuyenDo)
         {
