@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using static HRM_TrangAn.DataAccess.DAO.BaoCaoDAO;
@@ -64,7 +65,8 @@ namespace HRM_TrangAn.Controllers
             return Json(serializedResult, JsonRequestBehavior.AllowGet);
         }
 
-        [SessionExpire]
+        //[SessionExpire]
+        [EnableCors("*","*","*")]
         [HttpGet]
         public ActionResult GetDataThuyenVeBen(DateTime ngay)
         {

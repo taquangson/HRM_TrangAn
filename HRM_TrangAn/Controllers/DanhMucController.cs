@@ -31,6 +31,13 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         [SessionAdminRole]
+        public ActionResult DanhMucNganHang()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        [SessionAdminRole]
         public ActionResult NguoiLaoDong()
         {
             return View();

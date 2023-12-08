@@ -1,6 +1,6 @@
 ﻿$(".main_container").hide();
 var anhnhanvien = [];
-var SERVERIMAGE = "http://localhost:56812/"
+var SERVERIMAGE = "https://hrm.disantrangan.vn/"
 
 function b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
@@ -2387,25 +2387,22 @@ $(document).ready(function () {
             ]
         }
     });
-    //$("#ComboChucVu").kendoComboBox({
-    //    dataTextField: "Name",
-    //    dataValueField: "ID",
-    //    filter: "contains",
-    //    suggest: true,
-    //    delay: 1000,
-    //    dataSource: {
-    //        data: [
-    //            {
-    //                ID: 0,
-    //                Name: "Tổ trưởng"
-    //            },
-    //            {
-    //                ID: 1,
-    //                Name: "NV Lái đò"
-    //            },
-    //        ]
-    //    }
-    //});
+    $.ajax({
+        url: 'https://api.vietqr.io/v2/banks',
+        type: 'GET',
+    }).done(function successCallback(response) {
+        var dataSource = new kendo.data.DataSource({
+            data: response.data,
+        });
+        $("#comboNganHang").kendoComboBox({
+            dataSource: dataSource,
+            dataTextField: "shortName",
+            dataValueField: "bin",
+            filter: "contains",
+            suggest: true,
+            delay: 1000
+        });
+    })
     $("#ComboLoaiLaiDo").kendoComboBox({
         dataTextField: "Name",
         dataValueField: "ID",
@@ -2927,6 +2924,9 @@ function openEditWindow() {
         $("#ComboCCTiengAnh").data("kendoComboBox").value(selectedItem.ID_TinhTrangCCTiengAnh);
         $("#ComboTinhTrang").data("kendoComboBox").value(selectedItem.TrangThai);
         $("#ComboHopDong").data("kendoComboBox").value(selectedItem.ID_LoaiHopDong);
+        $("#comboNganHang").data("kendoComboBox").value(selectedItem.MaNganHang);
+        $("#SoTaiKhoan").val(selectedItem.SoTaiKhoan);
+        $("#ChuTaiKhoan").val(selectedItem.ChuTaiKhoan);
         if (selectedItem.TrangThai == 2) {
             $("#NghiViec").show();
 
@@ -3396,6 +3396,10 @@ function Luu() {
                     NgayKetThucCCTiengAnh: kendo.toString($("#NgayKetThucCCTiengAnh").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     lstChucDanh: lstChucDanhIns,
                     LyDoNghi: $("#LyDoNghi").val(),
+                    MaNganHang: $("#comboNganHang").data("kendoComboBox").value(),
+                    TenNganHang: $("#comboNganHang").data("kendoComboBox").text(),
+                    SoTaiKhoan: $("#SoTaiKhoan").val(),
+                    ChuTaiKhoan: $("#ChuTaiKhoan").val(),
                     lstFile: anhnhanvien
                 }
             }).done(function successCallback(response) {

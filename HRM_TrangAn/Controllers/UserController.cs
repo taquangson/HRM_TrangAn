@@ -313,6 +313,21 @@ namespace HRM_TrangAn.Controllers
                 return Json(new { status = true, msg = "Xóa dữ liệu thất bại, vui lòng liên hệ quản trị" }, JsonRequestBehavior.AllowGet);
             }
         }
+        
+        [HttpPost]
+        public ActionResult UpdateToken(string token)
+        {
+            TaiKhoanDAO tk_dao = new TaiKhoanDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (tk_dao.UpdateToken(userinfor.ID, token))
+            {
+                return Json(new { status = true, msg = "Cập nhật token thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = true, msg = "Cập nhật token thất bại" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }

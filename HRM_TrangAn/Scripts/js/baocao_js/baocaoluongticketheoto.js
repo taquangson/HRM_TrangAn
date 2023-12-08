@@ -291,6 +291,60 @@
                     style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
                     class: "table-header-cell"
                 }
+            },           
+            {
+                field: "TenNganHang",
+                title: "Ngân hàng",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "SoTaiKhoan",
+                title: "STK",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "ChuTaiKhoan",
+                title: "Chủ TK",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
             },
             {
                 title: "Ký xác nhận",

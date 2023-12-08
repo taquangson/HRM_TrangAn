@@ -966,9 +966,6 @@ a {
 
 .main_menu_side {
     padding: 0;
-    height: calc(100vh - 160px);
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 .bs-docs-sidebar .nav > li > a {

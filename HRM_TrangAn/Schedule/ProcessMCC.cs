@@ -52,14 +52,17 @@ namespace HRM_TrangAn.Schedule
                 if (recordCount <= 0)
                 {
                     log.Info(deviceIp + ":" + port + " : Máy không có dữ liệu");
+                    kn.GhiChu = deviceIp + ":" + port + " : Máy không có dữ liệu";
                 }
                 else if (recordCount > 20000)
                 {
                     log.Info(deviceIp + ":" + port + ": Máy chưa clear dữ liệu");
+                    kn.GhiChu = deviceIp + ":" + port + ": Máy chưa clear dữ liệu, vượt quá 20000 bản ghi!";
                 }
                 else
                 {
                     log.Info(deviceIp + ":" + port + " : Đã kết nối. Đang tải " + recordCount + " row");
+                    kn.GhiChu = deviceIp + ":" + port + " : Đã kết nối. Đang tải " + recordCount + " row";
                     byte[] data = AttLogHelper.downloadDataFile(izkem);
                     //AttLogHelper.GetAllListLogData(izkem, deviceIp, ID_May);
                     AttLogHelper.GetAllListLogDataV2(izkem, deviceIp, ID_May);

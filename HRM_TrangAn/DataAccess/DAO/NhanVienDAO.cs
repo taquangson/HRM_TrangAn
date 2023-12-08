@@ -470,7 +470,11 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@NgayKetThucCCPCCC",((model.NgayKetThucCCPCCC.Year == 1 || model.NgayKetThucCCPCCC == null) ? (object)DBNull.Value : model.NgayKetThucCCPCCC)),
                 new SqlParameter("@NgayBatDauCCTiengAnh",((model.NgayBatDauCCTiengAnh.Year == 1 || model.NgayBatDauCCTiengAnh == null) ? (object)DBNull.Value : model.NgayBatDauCCTiengAnh)),
                 new SqlParameter("@NgayKetThucCCTiengAnh",((model.NgayKetThucCCTiengAnh.Year == 1 || model.NgayKetThucCCTiengAnh == null) ? (object)DBNull.Value : model.NgayKetThucCCTiengAnh)),
-                new SqlParameter("@ID_LoaiHopDong", model.ID_LoaiHopDong)
+                new SqlParameter("@ID_LoaiHopDong", model.ID_LoaiHopDong),
+                new SqlParameter("@MaNganHang", model.MaNganHang),
+                new SqlParameter("@TenNganHang", model.TenNganHang),
+                new SqlParameter("@SoTaiKhoan", model.SoTaiKhoan),
+                new SqlParameter("@ChuTaiKhoan", model.ChuTaiKhoan)
                 //new SqlParameter("@ID_ChiNhanh", model.ID_ChiNhanh),
                 };
 

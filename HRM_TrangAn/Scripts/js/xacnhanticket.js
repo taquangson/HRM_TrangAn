@@ -181,7 +181,7 @@ $(document).ready(function () {
                     //    }
                     //}
                     //return newArr.length + "/" + e.lstDiemTuyen.length;
-                    return "3/3";
+                    return "1/1";
                 },
                 width: "120px",
                 filterable: {

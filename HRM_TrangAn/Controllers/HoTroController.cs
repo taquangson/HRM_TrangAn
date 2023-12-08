@@ -42,6 +42,18 @@ namespace HRM_TrangAn.Controllers
 			return View();
 		}
 
+        public ActionResult InTheA5(int ID_ToNhom, string IDs)
+        {
+            NhanVienDAO hsdao = new NhanVienDAO();
+            List<NhanVienModel> data = hsdao.GetAllNhanVienTrongToNhom(ID_ToNhom).Where(x => x.TrangThai == 1).ToList();
+            if (!string.IsNullOrWhiteSpace(IDs))
+            {
+                List<string> lid = IDs.Split(',').ToList();
+                data = data.Where(x => lid.IndexOf(x.ID.ToString()) >= 0).ToList();
+            }
+            return View(data);
+        }
+
         public ActionResult InTheA4(int ID_ToNhom,string IDs)
         {
             NhanVienDAO hsdao = new NhanVienDAO();

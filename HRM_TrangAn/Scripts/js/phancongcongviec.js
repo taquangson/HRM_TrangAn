@@ -401,7 +401,12 @@ $(document).ready(function () {
 
     $("#NgayLamViec").kendoDatePicker({
         format: "dd/MM/yyyy",
-        dateInput: true
+        dateInput: true,
+        change: function () {
+            let ngay = $("#NgayLamViec").data("kendoDatePicker").value();
+            $("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(ngay);
+            $("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(ngay);
+        }
     })
     $("#NgayLamViec").data("kendoDatePicker")._dateInput.setOptions({
         messages: {

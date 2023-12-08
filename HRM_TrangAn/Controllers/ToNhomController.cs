@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 
 namespace HRM_TrangAn.Controllers
@@ -44,6 +45,14 @@ namespace HRM_TrangAn.Controllers
         {
             ToNhomDAO dao = new ToNhomDAO();
             List<ToNhomModel> data = dao.GetAllTheoLichSuCongViecNgay(ID_CongViec, Ngay);
+            return Content(JsonConvert.SerializeObject(data));
+        }
+
+        public ActionResult GetAllNhanVienTrongToNhomTheoCongViecNgay(int ID_ToNhom, int ID_CongViec, DateTime Ngay)
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            int ID_DiemQuetThe = int.Parse(System.Configuration.ConfigurationManager.AppSettings["KeyPointCheckRouter2"]);
+            List<NhanVienModel> data = dao.GetAllNhanVienTrongToNhomTheoCongViecNgay(ID_ToNhom, ID_CongViec, Ngay, ID_DiemQuetThe);
             return Content(JsonConvert.SerializeObject(data));
         }
 
@@ -155,7 +164,7 @@ namespace HRM_TrangAn.Controllers
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             NhanVien_ToNhomDAO nvtndao = new NhanVien_ToNhomDAO();
             NhanVienDAO nvdao = new NhanVienDAO();
-            if(nvdao.GetAllNhanVienTrongToNhom(ID).Count > 0)
+            if (nvdao.GetAllNhanVienTrongToNhom(ID).Count > 0)
             {
                 if (nvtndao.DeleteByIDToNhom(ID))
                 {

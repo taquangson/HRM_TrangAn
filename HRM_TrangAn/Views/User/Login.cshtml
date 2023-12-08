@@ -5,21 +5,25 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#355593" />
     <title>Đăng nhập</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/login.css" rel="stylesheet" />
     <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/icons/icon-180x180.png" />
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#btnRedirectTraCuu").on("click touchstart", function () {
-                window.location.href = '/LichHoc/TraCuuLichHoc'
-            });
-            //document.getElementById("btnRedirectTraCuu").addEventListener("touchstart", RedirectTraCuu);
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('/firebase-messaging-sw.js');
+                })
+            }
         })
-
-/**/</script>
+       
+        /**/</script>
 </head>
 <body>
     <div class="sidenav">

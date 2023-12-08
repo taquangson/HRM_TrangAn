@@ -128,8 +128,23 @@
                 return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
             }
         };
+        function closeWindow() {
+            $("#window").data("kendoWindow").close();
+        }
         $(document).ready(function () {
 
+            $("#window").kendoWindow({
+                width: "100%",
+                height: "90%",
+                title: "Thông báo",
+                visible: false,
+                modal: true,
+                resizable: false,
+                actions: [
+                    "Close"
+                ]
+            });
+            $("#window").data("kendoWindow").maximize().open();
             $("#TuNgay").kendoDatePicker({
                 format: "dd/MM/yyyy",
                 value: new Date(),
@@ -464,7 +479,18 @@
     </style>
 </head>
 <body>
+    <div style="visibility:hidden" id="window">
+        <div style="padding:5px;font-size:20px;">
+            <p style="text-align:center"><b>PNS thông báo chính sách đối với lái đò đang làm việc tại khu du lịch khi giới thiệu lái đò mới đến tuyển dụng sẽ hưởng các chế độ như sau:</b></p>
+            <p>- Sau khi giới thiệu lái đò mới vào tổ gắn bó với KDL:</p>
+            <p>+) Làm việc từ 01 tháng, lái đò giới thiệu được hưởng 03 chuyến đò.</p>
+            <p>+) Làm việc từ 02 tháng, lái đò giới thiệu được hưởng thêm 02 chuyến đò.</p>
+            <p>Thời gian áp dụng đến ngày 31/12/2023</p>
+        </div>
+        <button class="k-button" style="width: 100%; font-size: 20px;" onclick="closeWindow()">Đóng</button>
+    </div>
     <div class="container body" style=" background: rgb(255 255 255 / 60%); height: 100vh;overflow-y:scroll">
+
         <div class="row container">
             <div class="col-sm-3 text-center">
                 <img style="max-width: 200px;" src="~/Images/user_image.png" class="k-avatar-image" />

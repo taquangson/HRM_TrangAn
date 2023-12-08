@@ -1,4 +1,17 @@
-﻿$(document).ready(function () {
+﻿import { requestPermission, getToken } from 'firebase/messaging';
+
+
+requestPermission(messaging)
+    .then(() => getToken(messaging))
+    .then((token) => {
+        console.log('FCM Token:', token);
+        // Send this token to your server to associate it with the user
+    })
+    .catch((err) => {
+        console.error('Error getting FCM token:', err);
+    });
+
+$(document).ready(function () {
     $("#gridChamCong").kendoGrid({
         height: function () {
             var height = $(window).height() - 650;

@@ -152,6 +152,23 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<NhanVienModel> GetAllNhanVienTrongToNhomTheoCongViecNgay(int ID_ToNhom, int ID_CongViec, DateTime Ngay)
+        {
+            try
+            {
+                NhanVienDAO nvdao = new NhanVienDAO();
+                int ID_DiemQuetThe = int.Parse(System.Configuration.ConfigurationManager.AppSettings["KeyPointCheckRouter2"]);
+                List<NhanVienModel> result = new List<NhanVienModel>();
+                result = nvdao.GetAllNhanVienTrongToNhomTheoCongViecNgay(ID_ToNhom, ID_CongViec, Ngay, ID_DiemQuetThe);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("GetAllNhanVienTrongToNhomTheoCongViecNgay " + ex.Message);
+                return null;
+            }
+        }
+
         public List<ToNhomModel> GetByMa(string Ma)
         {
             try

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HRM_TrangAn</RootNamespace>
     <AssemblyName>HRM_TrangAn</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -28,6 +28,7 @@
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -160,6 +161,7 @@
       <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.5.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -167,18 +169,27 @@
     <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net45\System.Interactive.Async.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.9\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -219,6 +230,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -229,12 +241,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
@@ -803,10 +809,18 @@
     <Content Include="Assets\kendo\styles\Uniform\sprite_kpi_2x.png" />
     <Content Include="Assets\stringeeConfig.js" />
     <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.css.map" />
     <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css.map" />
     <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.css.map" />
     <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\vendors\bootstrap\dist\js\bootstrap.js" />
     <Content Include="Assets\vendors\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="Assets\vendors\bootstrap\dist\js\npm.js" />
@@ -836,22 +850,15 @@
     <Content Include="Assets\xlsx.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\danhsachloptheogiaovien.css" />
     <Content Include="Content\intheA3.css" />
+    <Content Include="Content\intheA5.css" />
     <Content Include="Content\intheA4.css" />
     <Content Include="Content\inthe.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\thitracnghiem.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\AnhDiemDanh\2019-8-26-144get-up-client-wants-more-changes-please-let-me-die-40938494.png" />
-    <Content Include="Images\AnhDiemDanh\2019\8\24\144\983794168.jpg" />
-    <Content Include="Images\AnhDiemDanh\2019\8\24\144\get-up-client-wants-more-changes-please-let-me-die-40938494.png" />
-    <Content Include="Images\AnhDiemDanh\2019\8\25\144\983794168.jpg" />
-    <Content Include="Images\AnhDiemDanh\2019\8\26\144\get-up-client-wants-more-changes-please-let-me-die-40938494.png" />
-    <Content Include="Images\AnhNhanVien_Temp\2022-9-26-anhchup.png" />
-    <Content Include="Images\AnhNhanVien_Temp\2022-9-26-thelaido.png" />
-    <Content Include="Images\AnhNhanVien_Temp\2022-9-30-anhchup.png" />
+    <Content Include="Images\13X21_2.png" />
     <Content Include="Images\app1.jpg" />
     <Content Include="Images\app2.jpg" />
     <Content Include="Images\background.jpg" />
@@ -871,18 +878,6 @@
     <Content Include="Images\new-folder-add.png" />
     <Content Include="Images\pdficon.png" />
     <Content Include="Images\sms.png" />
-    <Content Include="Images\SoDoLop\20190030050012Emerald5.jpg" />
-    <Content Include="Images\SoDoLop\20190930050904Emerald12.jpg" />
-    <Content Include="Images\SoDoLop\20191130051109Emerald11.jpg" />
-    <Content Include="Images\SoDoLop\20191130051119Emerald5.jpg" />
-    <Content Include="Images\SoDoLop\20192930042904Emerald6.jpg" />
-    <Content Include="Images\SoDoLop\20193130043117Emerald6.jpg" />
-    <Content Include="Images\SoDoLop\20194130044123Emerald7.jpg" />
-    <Content Include="Images\SoDoLop\20194230044205Emerald7.jpg" />
-    <Content Include="Images\SoDoLop\20194730044732Emerald7.jpg" />
-    <Content Include="Images\SoDoLop\20194930044959Emerald6.jpg" />
-    <Content Include="Images\SoDoLop\20195930045906Emerald5.jpg" />
-    <Content Include="Images\SoDoLop\Emerald6.jpg" />
     <Content Include="Images\Thelaido.png" />
     <Content Include="Images\Thelaido_matsau.png" />
     <Content Include="Images\Thenvvp.png" />
@@ -894,14 +889,6 @@
     <Content Include="Assets\vendors\bootstrap\.bower.json" />
     <Content Include="Assets\vendors\bootstrap\bower.json" />
     <Content Include="Assets\vendors\bootstrap\CHANGELOG.md" />
-    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.css.map" />
-    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css.map" />
-    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.css.map" />
-    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.min.css.map" />
-    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -1110,12 +1097,6 @@
     <Content Include="Assets\kendo\styles\kendo.uniform.mobile.min.css.map" />
     <Content Include="log4net.config" />
     <Content Include="Assets\serviceAccount.json" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucCongViec.xlsx" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucDiemQuetThe.xlsx" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucNguoiGiamSat_Khac.xlsx" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucNguoiGiamSat_LaoDong.xlsx" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucNguoiGiamSat_NhanVien.xlsx" />
-    <Content Include="Content\ExcelTemplate\Temp_DanhMucThuyen.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1304,13 +1285,18 @@
     <Content Include="Views\MayChamCong\LichSuKetNoiMCC.cshtml" />
     <Content Include="Views\HoTro\FormDanhGiaLaiDo.cshtml" />
     <Content Include="Views\HoTro\DanhGiaThanhCong.cshtml" />
+    <Content Include="Views\HoTro\InTheA5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ExcelTemplate\" />
+    <Folder Include="Images\AnhDiemDanh\" />
     <Folder Include="Images\AnhHocSinh\" />
+    <Folder Include="Images\AnhNhanVien_Temp\" />
     <Folder Include="Images\AnhThongBao\" />
     <Folder Include="Images\BaiKiemTra\" />
     <Folder Include="Images\HoTro\" />
+    <Folder Include="Images\SoDoLop\" />
     <Folder Include="Views\ChuyenDo\" />
   </ItemGroup>
   <ItemGroup>
@@ -1374,8 +1360,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

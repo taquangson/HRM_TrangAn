@@ -103,6 +103,11 @@ namespace HRM_TrangAn.DataAccess.Models
 
         public string TenToNhom { get; set; }
 
+        public string MaNganHang { get; set; }
+        public string TenNganHang { get; set; }
+        public string SoTaiKhoan { get; set; }
+        public string ChuTaiKhoan { get; set; }
+
         public DateTime NgayBatDauCCNghiepVu { get; set; }
         public DateTime NgayKetThucCCNghiepVu { get; set; }
         public DateTime NgayBatDauCCDuongThuy { get; set; }

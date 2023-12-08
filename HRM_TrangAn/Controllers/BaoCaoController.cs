@@ -222,6 +222,7 @@ namespace HRM_TrangAn.Controllers
             {
                 dt.Columns.Add("data" + date.ToString("yyyyMMdd"), typeof(float));
                 dt.Columns.Add("data2" + date.ToString("yyyyMMdd"), typeof(float));
+                dt.Columns.Add("data3" + date.ToString("yyyyMMdd"), typeof(float));
             }
             DataTable ticket = tk_dao.GetDataCongChuyenDo(TuNgay, DenNgay, ID_ToNhom);
             DataTable giamtru = tk_dao.GetDataCongGiamTru(TuNgay, DenNgay, ID_ToNhom);
@@ -235,6 +236,7 @@ namespace HRM_TrangAn.Controllers
                 {
                     dr["data" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     dr["data2" + date.ToString("yyyyMMdd")] = float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
+                    dr["data3" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString()) - float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     TongCong += float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString()) + float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
                 }
                 dr["ID"] = ticket.Rows[i]["ID"].ToString();

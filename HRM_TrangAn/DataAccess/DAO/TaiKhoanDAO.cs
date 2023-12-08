@@ -292,7 +292,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             return false;
         }
 
-        
+
 
         public TaiKhoanModel GetByTenTaiKhoanOrEmail(string TenTaiKhoan)
         {
@@ -614,6 +614,30 @@ namespace HRM_TrangAn.DataAccess.DAO
             {
                 log.Error("sp_PhanQuyenTaiKhoan_Delete " + ex.Message);
                 return false;
+            }
+
+            return false;
+        }
+
+        public bool UpdateToken(int ID, string Token)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ID", ID),
+                new SqlParameter("@FirebaseToken", Token),
+                };
+
+                int rowaff = helper.ExecuteNonQuery("sp_TaiKhoan_UpdateToken", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_TaiKhoan_UpdateToken " + ex.Message);
             }
 
             return false;

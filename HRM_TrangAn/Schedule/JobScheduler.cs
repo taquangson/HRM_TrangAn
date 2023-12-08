@@ -48,7 +48,7 @@ namespace HRM_TrangAn.Schedule
 
 
             await scheduler.ScheduleJob(job, trigger);
-            await scheduler.ScheduleJob(job2, trigger2);
+            //await scheduler.ScheduleJob(job2, trigger2);
             //await scheduler.ScheduleJob(job2, trigger3);
         }
 

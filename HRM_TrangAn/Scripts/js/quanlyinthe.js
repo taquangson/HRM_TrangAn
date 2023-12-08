@@ -213,6 +213,16 @@ $(document).ready(function () {
     $(".main_container").show();
 })
 
+function InTheA5() {
+    var ids = "";
+    $("#grid").data("kendoGrid").select().each(function () {
+        var dataItem = $("#grid").data("kendoGrid").dataItem(this);
+        var id = dataItem.ID;
+        ids += ',' + id;
+    });
+    window.open('/HoTro/InTheA5?ID_ToNhom=' + $("#comboToNhom").data("kendoComboBox").value() + '&IDs=' + ids.substr(1), '_blank');
+}
+
 function InTheA4() {
     var ids = "";
     $("#grid").data("kendoGrid").select().each(function () {

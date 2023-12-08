@@ -17,12 +17,27 @@ using System.IO;
 using System.Web.Script.Serialization;
 using System.Web;
 using static HRM_TrangAn.DataAccess.DAO.BaoCaoDAO;
+using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace HRM_TrangAn.Controllers
 {
     [RoutePrefix("api/appdata")]
     public class AppController : ApiController
     {
+        //[SessionExpire]
+        [EnableCors("*", "*", "*")]
+        [Route("GetDataThuyenVeBen")]
+        [HttpGet]
+        public HttpResponseMessage GetDataThuyenVeBen(DateTime ngay)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            ChamCongDAO ccdao = new ChamCongDAO();
+            List<ChamCongMonitorModel> data = ccdao.GetListMonitorChamCong_ByNgay(ngay, 2006);
+            var serializedResult = serializer.Serialize(data);
+            return Request.CreateResponse(HttpStatusCode.OK, serializedResult);
+        }
 
         [HttpPost]
         [Route("getToken")]
