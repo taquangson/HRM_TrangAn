@@ -122,8 +122,33 @@ namespace HRM_TrangAn.DataAccess.DAO
                 log.Error("sp_ChuyenDo_GetByNgay_NhanVien " + ex.Message);
                 return null;
             }
-        }        
-        
+        }
+
+        public ChuyenDoModel GetChuyenDoCuoi_NhanVien(DateTime ThoiGian, int ID_NhanVien)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ThoiGian", ThoiGian),
+                new SqlParameter("@ID_NhanVien", ID_NhanVien)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChuyenDo_GetChuyenCuoiByNgay_NhanVien", pars);
+                DataTable dt = ds.Tables[0];
+                ChuyenDoModel result = new ChuyenDoModel();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ChuyenDoModel model = GetChuyenDoFromDataRow(dr);
+                    result = model;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChuyenDo_GetChuyenCuoiByNgay_NhanVien " + ex.Message);
+                return null;
+            }
+        }
+
         public List<ChuyenDoModel> GetChuyenDo_GetByNhanVien(DateTime from, DateTime to, int ID_NhanVien)
         {
             try

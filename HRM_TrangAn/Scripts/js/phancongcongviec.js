@@ -404,7 +404,15 @@ $(document).ready(function () {
         dateInput: true,
         change: function () {
             let ngay = $("#NgayLamViec").data("kendoDatePicker").value();
+
+            var ThoiGianBatDauDuKien = $("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value() ?? ngay;
+            ngay.setHours(ThoiGianBatDauDuKien.getHours());
+            ngay.setMinutes(ThoiGianBatDauDuKien.getMinutes());
             $("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(ngay);
+
+            var ThoiGianKetThucDuKien = $("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value() ?? ngay;
+            ngay.setHours(ThoiGianKetThucDuKien.getHours());
+            ngay.setMinutes(ThoiGianKetThucDuKien.getMinutes());
             $("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(ngay);
         }
     })
@@ -2145,6 +2153,67 @@ function openEditWindow() {
 
 }
 
+function openCopyWindow() {
+    var arr = $("#grid").data("kendoGrid").selectedKeyNames();
+    if (arr.length != 1) {
+        openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sao chép");
+    } else {
+        var grid = $("#grid").data("kendoGrid");
+        var selectedItem = grid.dataItem(grid.select());
+        $("#btnSave").show();
+        console.log(selectedItem);
+        //$("#ID").val(selectedItem.ID);
+        $("#ComboCongViec").data("kendoMultiColumnComboBox").value(selectedItem.ID_CongViec);
+        $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").value(selectedItem.ID_NguoiGiamSat);
+        $("#TenCongViec").val(selectedItem.TenCongViec);
+        $("#Cong").val(selectedItem.Cong);
+        $("#NgayLamViec").data("kendoDatePicker").value(new Date());
+        $("#ThoiGianDuKien").val(selectedItem.ThoiGianDuKien);
+        $("#GhiChu").val(selectedItem.GhiChu);
+        $("#DiaDiem").val(selectedItem.DiaDiem);
+        $("#SoNguoiDuKien").val(selectedItem.SoNguoiDuKien);
+        var ThoiGianBatDauDuKien = new Date();
+        ThoiGianBatDauDuKien.setHours(selectedItem.ThoiGianBatDauDuKien.getHours());
+        ThoiGianBatDauDuKien.setMinutes(selectedItem.ThoiGianBatDauDuKien.getMinutes());
+        var ThoiGianKetThucDuKien = new Date();
+        ThoiGianKetThucDuKien.setHours(selectedItem.ThoiGianKetThucDuKien.getHours());
+        ThoiGianKetThucDuKien.setMinutes(selectedItem.ThoiGianKetThucDuKien.getMinutes());
+        $("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(ThoiGianBatDauDuKien);
+        $("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(ThoiGianKetThucDuKien);
+
+        var dataS = []
+        for (var i = 0; i < selectedItem.lstNhanVien.length; i++) {
+            if (selectedItem.lstNhanVien[i].TrangThai == 0) {
+                dataS.push(selectedItem.lstNhanVien[i])
+            }
+        }
+        var dataSource = new kendo.data.DataSource({
+            data: dataS,
+            schema: {
+                model: {
+                    ID: "ID",
+                    field: {
+                        NgaySinh: {
+                            type: 'date'
+                        }
+                    }
+                }
+            },
+            //pageSize: 20,
+        });
+
+        $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
+
+        if ($(window).width() > 800) {
+            $("#window").data("kendoWindow").center().open();
+        } else {
+            $("#window").data("kendoWindow").center().maximize().open();
+        }
+
+
+    }
+}
+
 function openUpdateWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
@@ -2749,7 +2818,7 @@ function openAddNhanVienToNhomWindow() {
     $.ajax({
         url: url,
         type: 'GET',
-    }).done(function successCallback(responsee) {        
+    }).done(function successCallback(responsee) {
         var response = JSON.parse(responsee);
         var dataNhanVienToNhomChuaPhanCong = []
         getDataNhanVienNgoaiTo(function (json) {

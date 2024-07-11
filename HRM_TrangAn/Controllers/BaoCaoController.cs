@@ -1,11 +1,13 @@
 ﻿using HRM_TrangAn.App_Start;
 using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Models;
+using Newtonsoft.Json;
 using NPOI.POIFS.Crypt.Dsig;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Sockets;
 using System.Web;
@@ -205,7 +207,7 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         [HttpPost]
-        public ActionResult GetData_BaoCaoTickeCuaToTrongThang(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
+        public ContentResult GetData_BaoCaoTickeCuaToTrongThang(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
             ChamCongDAO tk_dao = new ChamCongDAO();
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -254,13 +256,14 @@ namespace HRM_TrangAn.Controllers
                 }
                 parentRow.Add(childRow);
             }
-            return Json(parentRow, JsonRequestBehavior.AllowGet);
+            return Content(JsonConvert.SerializeObject(parentRow));
+            //return Json(parentRow, JsonRequestBehavior.AllowGet);
             //return Json(dt, JsonRequestBehavior.AllowGet);
         }
 
         [SessionExpire]
         [HttpPost]
-        public ActionResult GetData_BaoCaoCongTheoDanhMucCongViec(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
+        public ContentResult GetData_BaoCaoCongTheoDanhMucCongViec(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
             ChamCongDAO tk_dao = new ChamCongDAO();
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -310,7 +313,8 @@ namespace HRM_TrangAn.Controllers
                 }
                 parentRow.Add(childRow);
             }
-            return Json(parentRow, JsonRequestBehavior.AllowGet);
+            //return Json(parentRow, JsonRequestBehavior.AllowGet);
+            return Content(JsonConvert.SerializeObject(parentRow));
             //return Json(dt, JsonRequestBehavior.AllowGet);
         }
 
@@ -494,7 +498,7 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         [HttpPost]
-        public ActionResult GetData_BaoCaoChiTietChamCong(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
+        public ContentResult GetData_BaoCaoChiTietChamCong(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
             ChamCongDAO tk_dao = new ChamCongDAO();
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -551,7 +555,7 @@ namespace HRM_TrangAn.Controllers
                 }
                 parentRow.Add(childRow);
             }
-            return Json(parentRow, JsonRequestBehavior.AllowGet);
+            return Content(JsonConvert.SerializeObject(parentRow));
             //return Json(dt, JsonRequestBehavior.AllowGet);
         }
 

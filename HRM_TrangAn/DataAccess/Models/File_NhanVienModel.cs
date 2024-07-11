@@ -9,6 +9,7 @@ namespace HRM_TrangAn.DataAccess.Models
     {
         public int ID { get; set; }
         public int ID_NhanVien { get; set; }
+        public int ID_HoSoNhanSu { get; set; }
         public string FilePath { get; set; }
         public string FileName { get; set; }
         public int FileType { get; set; }

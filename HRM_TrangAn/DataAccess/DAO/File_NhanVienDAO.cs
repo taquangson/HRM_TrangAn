@@ -122,6 +122,31 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<File_NhanVienModel> GetAllByHoSoNhanSu(int ID_HoSoNhanSu)
+        {
+            List<File_NhanVienModel> result = new List<File_NhanVienModel>();
+
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_File_NhanVien_GetAllByHoSoNhanSu", pars);
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    File_NhanVienModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành ChucDanhModel
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_File_NhanVien_GetAllByHoSoNhanSu " + ex.Message);
+                return result;
+            }
+        }
+
         public File_NhanVienModel GetByPath(string Path)
         {
             File_NhanVienModel model = new File_NhanVienModel();

@@ -35,7 +35,7 @@
         excelExport: function (e) {
             var columns = e.workbook.sheets[0].columns;
             var sheet = e.workbook.sheets[0];
-            sheet.title = "Ticket";
+            sheet.title = "CheckPoint Connect Log";
             //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
             for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
                 var row = sheet.rows[rowIndex];

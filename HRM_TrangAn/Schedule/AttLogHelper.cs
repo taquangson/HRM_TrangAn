@@ -291,15 +291,18 @@ namespace HRM_TrangAn.Schedule
             {
                 i.ID = cc_dao.Insert(i, i.EnrollNumber, 0);
                 //Tính chuyến đò chính
-                if (i.ID > 0 && (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009))
+                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009)
                 {
-                    if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
+                    ChuyenDoModel model = new ChuyenDoModel();
+                    int ID_New = 0;
+                    if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, 0, i.WorkDate) == 0)//Check tất cả các điểm keypoint
+                    //if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
                     {
-                        ChuyenDoModel model = new ChuyenDoModel();
+
                         model.MaThuyen = i.MaThuyen;
                         model.ID_NhanVien = i.ID_TaiKhoan;
                         model.NgayDi = i.WorkDate;
-                        model.GhiChu = i.ID + ipaddress;
+                        model.GhiChu = "";
                         model.IsManager = 0;
                         model.TrangThai = 1;
                         switch (i.ID_DiemQuetThe)
@@ -313,13 +316,29 @@ namespace HRM_TrangAn.Schedule
                             case 2009:
                                 model.ID_TuyenDo = 2004;
                                 break;
+                            //case 3012:
+                            //    model.ID_TuyenDo = 3005;
+                            //    break;
                         }
-                        int ID_New = dm_dao.InsertOrUpdate(model);
-                        if (ID_New > 0)
-                        {
-                            i.ID_ChuyenDo = ID_New;
-                            cc_dao.Update(i);
-                        }
+
+                    }
+                    //else
+                    //{
+                    //    if (i.ID_DiemQuetThe == 3012)
+                    //    {
+                    //        model = dm_dao.GetChuyenDoCuoi_NhanVien(i.WorkDate, i.ID_TaiKhoan);
+                    //        if (model.ID_ChuyenDo > 0)
+                    //        {
+                    //            model.ID_TuyenDo = 3005;
+                    //        }
+                    //    }
+                    //}
+                    if (model.ID_TuyenDo > 0)
+                        ID_New = dm_dao.InsertOrUpdate(model);
+                    if (ID_New > 0)
+                    {
+                        i.ID_ChuyenDo = ID_New;
+                        cc_dao.Update(i);
                     }
                 }
             }

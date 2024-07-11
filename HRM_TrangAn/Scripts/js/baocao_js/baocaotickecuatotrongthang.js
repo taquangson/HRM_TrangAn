@@ -178,8 +178,9 @@ function TimKiem() {
             + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59"
             + "&ID_ToNhom=" + ($("#comboToNhom").data("kendoComboBox").value() ? $("#comboToNhom").data("kendoComboBox").value() : 0),
         type: 'POST',
-    }).done(function successCallback(response) {
-        console.log(response);
+    }).done(function successCallback(r) {
+        //console.log(response);
+        response = JSON.parse(r);
         var columns = [];
         var aggregates = [];
         var f = [];

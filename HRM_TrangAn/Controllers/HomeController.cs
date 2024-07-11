@@ -1,6 +1,7 @@
 ﻿using HRM_TrangAn.App_Start;
 using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Models;
+using Newtonsoft.Json;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -56,13 +57,14 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         [HttpGet]
-        public ActionResult GetDataChamCong(DateTime from, DateTime to, int ID_ToNhom)
+        public ContentResult GetDataChamCong(DateTime from, DateTime to, int ID_ToNhom)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             ChamCongDAO ccdao = new ChamCongDAO();
             List<ChamCongMonitorModel> data = ccdao.GetListMonitorChamCong_ByNgay(from, to, ID_ToNhom);
-            var serializedResult = serializer.Serialize(data);
-            return Json(serializedResult, JsonRequestBehavior.AllowGet);
+            //var serializedResult = serializer.Serialize(data);
+            return Content(JsonConvert.SerializeObject(data));
+            //return Json(serializedResult, JsonRequestBehavior.AllowGet);
         }
 
         //[SessionExpire]

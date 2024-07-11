@@ -43,6 +43,20 @@ namespace HRM_TrangAn.Controllers
             return View();
         }
 
+        [SessionExpire]
+        [SessionAdminRole]
+        public ActionResult CaLamViec()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        [SessionAdminRole]
+        public ActionResult DanhMucNgayLe()
+        {
+            return View();
+        }
+
         [SessionAdminRole]
         public ActionResult DanhMucTruongHoc()
         {
@@ -81,6 +95,79 @@ namespace HRM_TrangAn.Controllers
             {
                 return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult InsertOrUpdate_DanhMucNgayLe(DanhMucNgayLeModel model)
+        {
+            DanhMucNgayLeDAO dm_dao = new DanhMucNgayLeDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.InsertOrUpdate(model) > 0)
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult InsertOrUpdate_DanhMucLoi(DanhMucLoiModel model)
+        {
+            DanhMucLoiDAO dm_dao = new DanhMucLoiDAO();
+            if (dm_dao.InsertOrUpdate(model) > 0)
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult InsertOrUpdate_CaLamViec(CaLamViecModel model)
+        {
+            CaLamViecDAO dm_dao = new CaLamViecDAO();
+            if (dm_dao.InsertOrUpdate(model) > 0)
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
+        [HttpGet]
+        public ActionResult GetAll_DanhMucNgayLe()
+        {
+            DanhMucNgayLeDAO dm_dao = new DanhMucNgayLeDAO();
+            List<DanhMucNgayLeModel> dt = dm_dao.GetAll();
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [HttpGet]
+        public ActionResult GetAll_DanhMucLoi()
+        {
+            DanhMucLoiDAO dm_dao = new DanhMucLoiDAO();
+            List<DanhMucLoiModel> dt = dm_dao.GetAll();
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [HttpGet]
+        public ActionResult GetAll_CaLamViec()
+        {
+            CaLamViecDAO dm_dao = new CaLamViecDAO();
+            List<CaLamViecModel> dt = dm_dao.GetAll();
+            return Json(dt, JsonRequestBehavior.AllowGet);
         }
 
         [SessionExpire]
