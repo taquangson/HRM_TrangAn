@@ -154,7 +154,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@ID_XuPhat",ID_XuPhat ),
+                    new SqlParameter("@ID_XuPhat",ID_XuPhat )
                 };
                 int rowaff = helper.ExecuteNonQuery("sp_NhanVien_XuPhat_DeleteMultiByIDXuPhat", pars);
                 if (rowaff > 0)

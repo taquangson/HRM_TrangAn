@@ -123,11 +123,11 @@ namespace HRM_TrangAn.Controllers
             if (dao.InsertOrUpdateMulti(item))
             {
                 
-                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, msg = "Lưu dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, msg = "Lưu dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -143,11 +143,11 @@ namespace HRM_TrangAn.Controllers
                 if (nvdao.DeleteMultiByIDXuPhat(ID))
                 {
                 }
-                return Json(new { success = true, msg = "Xóa chuyến tổ thành công" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, msg = "Xóa dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { success = false, msg = "Xóa chuyến tổ thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, msg = "Xóa dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
             }
 
 

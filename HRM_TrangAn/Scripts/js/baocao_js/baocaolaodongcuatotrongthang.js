@@ -209,7 +209,7 @@ function TimKiem() {
             columns.push({
                 title: kendo.toString(item, 'dd/MM'),
                 field: 'data' + kendo.toString(item, 'yyyyMMdd'),
-                format: "{0:n1}",
+                format: "{0:n2}",
                 footerTemplate: "#=kendo.toString(sum,'n1')#",
                 aggregates: ["sum"],
                 filterable: {
@@ -243,7 +243,7 @@ function TimKiem() {
             field: "TongCongLDTrongThang",
             title: "Tổng",
             width: "100px",
-            format: "{0:n1}",
+            format: "{0:n2}",
             filterable: {
                 cell: {
                     operator: "contains",

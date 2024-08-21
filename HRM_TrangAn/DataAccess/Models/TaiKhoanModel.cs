@@ -21,6 +21,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public string TenChiNhanh { get; set; }
         public string DiaChiChiNhanh { get; set; }
         public string DienThoaiChiNhanh { get; set; }
+        public int ID_HoSoNhanSu { get; set; }
         public List<HocSinhModel> lstHocSinh { get; set; }
     }
 }

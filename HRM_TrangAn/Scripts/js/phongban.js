@@ -1,4 +1,5 @@
 ﻿var selectedPhongBan;
+var selectedNhanVien;
 $(document).ready(function () {
     $("#rootContainer").show();
     $("#dialogRoot").kendoDialog().data("kendoDialog").close();
@@ -7,6 +8,8 @@ $(document).ready(function () {
         dataValueField: "ID",
         select: function (e) {
             selectedPhongBan = $("#treeview").getKendoTreeView().dataItem(e.node)
+            $("#tabTitle2").text("Phân quyền truy cập chức năng cho BP: " + selectedPhongBan.TenPhongBan);
+            selectedNhanVien = null;
             LoadGridNhanVienTrongPhongBan();
             LoadGridChucNangTrongPhongBan();
         },
@@ -32,10 +35,30 @@ $(document).ready(function () {
             mode: "row",
         },
         pageable: pageableShort,
+        selectable: true,
+        change: function () {
+            let selectedItem = $("#gridNhanVienTrongPhongBan").data("kendoGrid").select();
+            if (selectedItem.length > 0) {
+                selectedNhanVien = $("#gridNhanVienTrongPhongBan").data("kendoGrid").dataItem(selectedItem);
+                $("#tabTitle2").text("Phân quyền truy cập chức năng cho NV: " + selectedNhanVien.TenDayDu);
+            } else {
+                selectedNhanVien = null
+                $("#tabTitle2").text("Phân quyền truy cập chức năng cho BP: " + selectedPhongBan.TenPhongBan);
+            }
+            LoadGridChucNangTrongPhongBan();
+        },
         dataBinding: function () {
             record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
         },
         columns: [
+            {
+                width: "10px",
+                selectable: true,
+                headerAttributes: {
+                    style: "text-align:left",
+                    class: "table-header-cell "
+                },
+            },
             {
                 title: " ",
                 field: 'ID',
@@ -132,6 +155,9 @@ $(document).ready(function () {
         ]
 
     });
+
+    $("#gridNhanVienTrongPhongBan").data("kendoGrid").tbody.on("click", ".k-checkbox", onClick);
+
     $("#gridNhanVienNgoaiPhongBan").kendoGrid({
         height: 498,
         scrollable: true,
@@ -235,6 +261,7 @@ $(document).ready(function () {
         ]
 
     });
+
     $("#gridChucNangTrongPhongBan").kendoGrid({
         height: function () {
             var height = $(window).height() - 185;
@@ -408,7 +435,7 @@ $(document).ready(function () {
     });
     $("#windowChonNhanVien").kendoWindow({
         width: 700,
-        height: 500,
+        height: 550,
         modal: true,
         resizable: false,
         visible: false,
@@ -424,7 +451,7 @@ $(document).ready(function () {
     });
     $("#windowPhongBan").kendoWindow({
         width: 400,
-        height: 200,
+        height: 250,
         modal: true,
         resizable: false,
         visible: false,
@@ -598,72 +625,155 @@ function XoaNhanVienKhoiNhom(uid, idtaikhoan) {
 
 function OpenGridChucNangNgoaiNhom() {
     $("#windowChonChucNang").data("kendoWindow").center().open();
-    $.ajax({
-        url: '/ChucNang/GetAllChucNangNgoaiPhongBan?ID_PhongBan=' + selectedPhongBan.ID,
-        type: 'GET',
-    }).done(function successCallback(response) {
-        kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), true);
-        var dataSource = new kendo.data.DataSource({
-            data: response,
-            schema: {
-                model: {
-                    id: "ID"
-                }
-            },
-            pageSize: 20,
+    if (selectedNhanVien == null) {
+        $.ajax({
+            url: '/ChucNang/GetAllChucNangNgoaiPhongBan?ID_PhongBan=' + selectedPhongBan.ID,
+            type: 'GET',
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), true);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID"
+                    }
+                },
+                pageSize: 20,
+            });
+            $("#gridChucNangNgoaiPhongBan").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), false);
         });
-        $("#gridChucNangNgoaiPhongBan").data("kendoGrid").setDataSource(dataSource);
-        kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), false);
-    });
+    } else {
+        $.ajax({
+            url: '/ChucNang/GetAllChucNangNgoaiNhanVien?ID_NhanVien=' + selectedNhanVien.ID,
+            type: 'GET'
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), true);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID"
+                    }
+                },
+                pageSize: 20,
+            });
+            $("#gridChucNangNgoaiPhongBan").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#gridChucNangNgoaiPhongBan"), false);
+        });
+    }
 }
 
 function LoadGridChucNangTrongPhongBan() {
-    $.ajax({
-        url: '/ChucNang/GetAllChucNangTrongPhongBan?ID_PhongBan=' + selectedPhongBan.ID,
-        type: 'GET',
-    }).done(function successCallback(response) {
-        kendo.ui.progress($("#gridChucNangTrongPhongBan"), true);
-        var dataSource = new kendo.data.DataSource({
-            data: response,
-            schema: {
-                model: {
-                    id: "ID"
-                }
-            },
-            pageSize: 20,
+    if (selectedNhanVien == null) {
+        $.ajax({
+            url: '/ChucNang/GetAllChucNangTrongPhongBan?ID_PhongBan=' + selectedPhongBan.ID,
+            type: 'GET',
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#gridChucNangTrongPhongBan"), true);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID"
+                    }
+                },
+                pageSize: 20,
+            });
+            $("#gridChucNangTrongPhongBan").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#gridChucNangTrongPhongBan"), false);
         });
-        $("#gridChucNangTrongPhongBan").data("kendoGrid").setDataSource(dataSource);
-        kendo.ui.progress($("#gridChucNangTrongPhongBan"), false);
-    });
+    } else {
+        $.ajax({
+            url: '/ChucNang/GetAllChucNangTrongNhanVien?ID_NhanVien=' + selectedNhanVien.ID,
+            type: 'GET',
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#gridChucNangTrongPhongBan"), true);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID"
+                    }
+                },
+                pageSize: 20,
+            });
+            $("#gridChucNangTrongPhongBan").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#gridChucNangTrongPhongBan"), false);
+        });
+    }
 }
 function ThemChucNangVaoNhom(uid, idchucnang) {
     var dataRow = $('#gridChucNangNgoaiPhongBan').data("kendoGrid").dataSource.getByUid(uid);
-    $.ajax({
-        url: '/ChucNang/ThemChucNangVaoPhongBan?ID_PhongBan=' + selectedPhongBan.ID + "&ID_ChucNang=" + idchucnang,
-        type: 'POST',
-    }).done(function successCallback(response) {
-        if (response.status) {
-            notification.show({ kValue: response.msg }, "success");
-            $('#gridChucNangNgoaiPhongBan').data("kendoGrid").dataSource.remove(dataRow);
-            LoadGridChucNangTrongPhongBan();
-        } else {
-            notification.show({ kValue: response.msg }, "error");
-        }
-    })
+    if (selectedNhanVien == null) {
+        $.ajax({
+            url: '/ChucNang/ThemChucNangVaoPhongBan?ID_PhongBan=' + selectedPhongBan.ID + "&ID_ChucNang=" + idchucnang,
+            type: 'POST',
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                $('#gridChucNangNgoaiPhongBan').data("kendoGrid").dataSource.remove(dataRow);
+                LoadGridChucNangTrongPhongBan();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        })
+    }
+    else {
+        $.ajax({
+            url: '/ChucNang/ThemChucNangChoNhanVien?ID_NhanVien=' + selectedNhanVien.ID + "&ID_ChucNang=" + idchucnang,
+            type: 'POST',
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                $('#gridChucNangNgoaiPhongBan').data("kendoGrid").dataSource.remove(dataRow);
+                LoadGridChucNangTrongPhongBan();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        })
+    }
 }
 
 
 function XoaChucNangKhoiNhom(uid, idchucnang) {
     var dataRow = $('#gridChucNangTrongPhongBan').data("kendoGrid").dataSource.getByUid(uid);
-    $.ajax({
-        url: '/ChucNang/XoaChucNangVaoPhongBan?ID_PhongBan=' + selectedPhongBan.ID + "&ID_ChucNang=" + idchucnang,
-        type: 'POST',
-    }).done(function successCallback(response) {
-        if (response.status) {
-            notification.show({ kValue: response.msg }, "success");
-            $('#gridChucNangTrongPhongBan').data("kendoGrid").dataSource.remove(dataRow);
-        } else {
-            notification.show({ kValue: response.msg }, "error");
-        }
-    })
+    if (selectedNhanVien == null) {
+        $.ajax({
+            url: '/ChucNang/XoaChucNangVaoPhongBan?ID_PhongBan=' + selectedPhongBan.ID + "&ID_ChucNang=" + idchucnang,
+            type: 'POST',
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                $('#gridChucNangTrongPhongBan').data("kendoGrid").dataSource.remove(dataRow);
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        })
+    } else {
+        $.ajax({
+            url: '/ChucNang/XoaChucNangKhoiNhanVien?ID_NhanVien=' + selectedNhanVien.ID + "&ID_ChucNang=" + idchucnang,
+            type: 'POST',
+        }).done(function successCallback(response) {
+            if (response.status) {
+                notification.show({ kValue: response.msg }, "success");
+                $('#gridChucNangTrongPhongBan').data("kendoGrid").dataSource.remove(dataRow);
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        })
+    }
 }
+
+function onClick(e) {
+    var grid = $("#gridNhanVienTrongPhongBan").data("kendoGrid");
+    var row = $(e.target).closest("tr");
+    if (row.hasClass("k-state-selected")) {
+        setTimeout(function (e) {
+            var grid = $("#gridNhanVienTrongPhongBan").data("kendoGrid");
+            grid.clearSelection();
+        })
+    } else {
+        grid.clearSelection();
+    };
+};

@@ -397,6 +397,9 @@
     display: -ms-flexbox;
     display: flex;
     z-index: 1;
+    height: calc(100vh - 160px);
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
     .nav-md .container.body .col-md-3.left_col.menu_fixed {
@@ -409,7 +412,7 @@ body .container.body .right_col {
 }
 
 .nav-md .container.body .right_col {
-    padding: 10px 20px 0;
+    padding: 10px 10px 0;
     margin-left: 230px;
 }
 
@@ -966,6 +969,9 @@ a {
 
 .main_menu_side {
     padding: 0;
+    /* height: calc(100vh - 160px);
+    overflow-x: hidden;
+    overflow-y: scroll; */
 }
 
 .bs-docs-sidebar .nav > li > a {

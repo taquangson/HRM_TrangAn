@@ -70,7 +70,19 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
+        public ActionResult QuanLyXuPhatNhanVien()
+        {
+            return View();
+        }
+
+        [SessionExpire]
         public ActionResult QuanLyPhatSinh()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult QuanLyDiMuonVeSom()
         {
             return View();
         }

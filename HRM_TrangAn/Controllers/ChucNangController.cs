@@ -52,11 +52,11 @@ namespace HRM_TrangAn.Controllers
             {
                 TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
                 List<ChucNangModel> lcn = cndao.GetChucNangByTaiKhoan(userinfor.ID);
-                if (userinfor.Role == -1)
+                if (userinfor.Role <= 0)
                 {
                     return Json(lstcn, JsonRequestBehavior.AllowGet);
                 }
-                if (userinfor.ID_ChiNhanh == 0)
+                if (userinfor.Role == 1)
                 {
                     lcn = cndao.GetAll();
                 }
@@ -116,6 +116,46 @@ namespace HRM_TrangAn.Controllers
             {
                 return Json(new { status = false, msg = "Xóa thông tin thất bại, vui lòng liên hệ Admin" }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult ThemChucNangChoNhanVien(int ID_ChucNang, int ID_NhanVien)
+        {
+            ChucNangDAO cndao = new ChucNangDAO();
+            if (cndao.ThemChucNangNhanVien(ID_ChucNang, ID_NhanVien))
+            {
+                return Json(new { status = true, msg = "Lưu thông tin thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = false, msg = "Lưu thông tin thất bại, vui lòng liên hệ Admin" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult XoaChucNangKhoiNhanVien(int ID_ChucNang, int ID_NhanVien)
+        {
+            ChucNangDAO cndao = new ChucNangDAO();
+            if (cndao.XoaChucNangNhanVien(ID_ChucNang, ID_NhanVien))
+            {
+                return Json(new { status = true, msg = "Xóa thông tin thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = false, msg = "Xóa thông tin thất bại, vui lòng liên hệ Admin" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult GetAllChucNangNgoaiNhanVien(int ID_NhanVien)
+        {
+            ChucNangDAO cndao = new ChucNangDAO();
+            List<ChucNangModel> lstcn = cndao.GetChucNangNgoaiNhanVien(ID_NhanVien);
+            return Json(lstcn, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAllChucNangTrongNhanVien(int ID_NhanVien)
+        {
+            ChucNangDAO cndao = new ChucNangDAO();
+            List<ChucNangModel> lstcn = cndao.GetChucNangTrongNhanVien(ID_NhanVien);
+            return Json(lstcn, JsonRequestBehavior.AllowGet);
         }
     }
 }

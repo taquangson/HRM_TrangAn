@@ -102,7 +102,10 @@ namespace HRM_TrangAn.Controllers
                 {
                     if (nvdao.InsertOrUpdate(up.ID_NhanVien, IDnew, up.Cong == 0 ? item.Cong : up.Cong, item.TrangThai == 1 ? 0 : 1) > 0)
                     {
-                        clddao.InsertOrUpdate(up.ID_NhanVien, 2, up.Cong == 0 ? item.Cong : up.Cong, IDnew, item.NgayLamViec);
+                        if (item.TrangThai == 2)
+                        {
+                            clddao.InsertOrUpdate(up.ID_NhanVien, 2, up.Cong == 0 ? item.Cong : up.Cong, IDnew, item.NgayLamViec);
+                        }
                     }
                     else
                     {

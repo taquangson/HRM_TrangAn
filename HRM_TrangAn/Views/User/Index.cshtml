@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
+    var dataSourceHoSo = null;
     $(document).ready(function () {
         $("#grid").kendoGrid({
             height: function () {
@@ -226,6 +227,35 @@
                 dataSource: dataSource
             })
         });
+
+        $.ajax({
+            url: '/HoSoNhanSu/GetAll',
+            type: 'GET',
+        }).done(function successCallback(response) {
+            dataSourceHoSo = new kendo.data.DataSource({
+                data: JSON.parse(response),
+                schema: {
+                    model: {
+                        id: "ID",
+                    }
+                }
+            });
+            $("#ComboHoSo").kendoComboBox({
+                dataTextField: "TenDayDu",
+                dataValueField: "ID",
+                filter: "contains",
+                suggest: true,
+                delay: 1000,
+                dataSource: dataSourceHoSo,
+                change: function (e) {
+                    console.log(e.sender.value());
+                    let item = dataSourceHoSo.get(e.sender.value());
+                    $("#Email").val(item.Email);
+                    $("#DienThoai").val(item.DienThoai);
+                    $("#DiaChi").val(item.DiaChi);
+                }
+            })
+        });
         $("#windowPhanQuyen").kendoWindow({
             width: "20%",
             height: "20%",
@@ -256,6 +286,7 @@
                 $("#DiaChi").val(response.DiaChi);
                 $("#MatKhau").val(response.MatKhau);
                 $("#ComboChiNhanh").data("kendoComboBox").value(response.ID_ChiNhanh);
+                $("#ComboHoSo").data("kendoComboBox").value(response.ID_HoSoNhanSu);
             });
             if ($(window).width() > 800) {
                 $("#window").data("kendoWindow").center().open();
@@ -325,6 +356,7 @@
                     DienThoai: $("#DienThoai").val(),
                     MatKhau: $("#MatKhau").val(),
                     DiaChi: $("#DiaChi").val(),
+                    ID_HoSoNhanSu: $("#ComboHoSo").data("kendoComboBox").value(),
                     ID_ChiNhanh: $("#ComboChiNhanh").data("kendoComboBox").value()
                 }
             }).done(function successCallback(response) {
@@ -444,6 +476,11 @@
             <label style="width:100%">Tên tài khoản:<span style="color:red">*</span></label>
             @*<a class="k-button btn-category" onclick="OpenDanhMucLoi()"><i class="fa fa-plus"></i></a>*@
             <input id="TenTaiKhoan" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="ComboHoSo">
+            <label style="width:100%">Hồ sơ nhân sự:<span style="color:red">*</span></label>
+            <input id="ComboHoSo" type="text" class="input" />
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
         <div class="form-group valid" toggle-valid="TenDayDu">

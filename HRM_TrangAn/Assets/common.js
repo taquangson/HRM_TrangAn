@@ -122,6 +122,15 @@ function SetValidate(input) {
         }
         return valid;
     }
+    if (inputtag.data("kendoComboBox") != undefined) {
+        if (inputtag.data("kendoComboBox").value() == "") {
+            valid = false;
+            inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("valid").addClass("invalid");
+        } else {
+            inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("invalid").addClass("valid");
+        }
+        return valid;
+    }
 
 
     return valid;

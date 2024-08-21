@@ -311,7 +311,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 log.Error("sp_TaiKhoan_GetByTenTaiKhoanOrEmail " + ex.Message);
             }
 
-            return null;
+            return new TaiKhoanModel();
         }
         public UserAppModel GetAppUserInfoByName(string TenTaiKhoan)
         {
@@ -374,6 +374,32 @@ namespace HRM_TrangAn.DataAccess.DAO
 
             return result;
         }
+
+        public List<TaiKhoanModel> GetAllNhanVienTrongXuPhatNhanVien(int ID_XuPhat)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ID_XuPhat", ID_XuPhat)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_TaiKhoan_XuPhat_GetAllNhanVien_TrongXuPhat", pars);
+                DataTable dt = ds.Tables[0];
+                List<TaiKhoanModel> result = new List<TaiKhoanModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    TaiKhoanModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành NhanVienModel
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_TaiKhoan_XuPhat_GetAllNhanVien_TrongXuPhat " + ex.Message);
+                return null;
+            }
+        }
+
+
         public List<UserAppModel> GetUserOnline_TinNhanMoi()
         {
             List<UserAppModel> result = new List<UserAppModel>();
@@ -449,7 +475,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@DiaChi", model.DiaChi),
                 new SqlParameter("@DienThoai", model.DienThoai),
                 new SqlParameter("@Email", model.Email),
-                new SqlParameter("@ID_ChiNhanh", model.ID_ChiNhanh)
+                new SqlParameter("@ID_ChiNhanh", model.ID_ChiNhanh),
+                new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu)
                 };
 
                 object id = helper.ExecuteScalar("sp_TaiKhoan_InsertOrUpdate", pars);

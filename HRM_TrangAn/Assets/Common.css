@@ -111,11 +111,12 @@ body {
     background-color: none !important;
 }
 
-.k-textbox,
+/*.k-textbox,
 .k-dropdown-wrap,
-.k-picker-wrap {
+.k-picker-wrap
+.k-multiselect-wrap {
     border-color: #929090 !important;
-}
+}*/
 
 k-widget k-window {
     background-color: none !important;

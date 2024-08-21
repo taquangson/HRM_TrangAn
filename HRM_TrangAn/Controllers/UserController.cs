@@ -147,6 +147,24 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
+        public ActionResult GetAllUser_DangKyLichNghi()
+        {
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            TaiKhoanDAO tk_dao = new TaiKhoanDAO();
+            if (userinfor.Role == 1)
+            {
+                List<TaiKhoanModel> result = tk_dao.GetAll();
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                List<TaiKhoanModel> result = new List<TaiKhoanModel>();
+                result.Add(userinfor);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
         public ActionResult GetAllAppUser()
         {
             TaiKhoanDAO tk_dao = new TaiKhoanDAO();
@@ -190,7 +208,8 @@ namespace HRM_TrangAn.Controllers
                 item.DiaChi = model.DiaChi;
                 item.DienThoai = model.DienThoai;
                 item.ID_ChiNhanh = model.ID_ChiNhanh;
-                if (tk_dao.GetByTenTaiKhoanOrEmail(item.Email).ID != item.ID)
+                item.ID_HoSoNhanSu = model.ID_HoSoNhanSu;
+                if (tk_dao.GetByTenTaiKhoanOrEmail(item.Email).ID != item.ID && tk_dao.GetByTenTaiKhoanOrEmail(item.Email).ID != 0)
                 {
                     return Json(new { status = false, msg = "Email đã được sử dụng cho tài khoản khác" }, JsonRequestBehavior.AllowGet);
                 }

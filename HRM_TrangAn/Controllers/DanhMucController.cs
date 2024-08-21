@@ -133,8 +133,19 @@ namespace HRM_TrangAn.Controllers
         public ActionResult InsertOrUpdate_CaLamViec(CaLamViecModel model)
         {
             CaLamViecDAO dm_dao = new CaLamViecDAO();
-            if (dm_dao.InsertOrUpdate(model) > 0)
+            CaLamViec_PhanBoCongDAO ca_dao = new CaLamViec_PhanBoCongDAO();
+            int id = 0;
+            id = dm_dao.InsertOrUpdate(model);
+            if (id > 0)
             {
+                ca_dao.DeleteByCaLamViec(model.ID);
+                if (model.PhanBo != null)
+                {
+                    foreach (CaLamViec_PhanBoCongModel item in model.PhanBo)
+                    {
+                        ca_dao.Insert(item);
+                    }
+                }
                 return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -166,7 +177,12 @@ namespace HRM_TrangAn.Controllers
         public ActionResult GetAll_CaLamViec()
         {
             CaLamViecDAO dm_dao = new CaLamViecDAO();
+            CaLamViec_PhanBoCongDAO ca_dao = new CaLamViec_PhanBoCongDAO();
             List<CaLamViecModel> dt = dm_dao.GetAll();
+            foreach(CaLamViecModel item in dt)
+            {
+                item.PhanBo = ca_dao.GetByCaLamViec(item.ID);
+            }
             return Json(dt, JsonRequestBehavior.AllowGet);
         }
 

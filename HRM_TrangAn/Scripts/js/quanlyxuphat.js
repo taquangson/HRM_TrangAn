@@ -289,7 +289,7 @@ $(document).ready(function () {
     LoadGridData();
     $("#windowNhanVien").kendoWindow({
         width: "800",
-        height: "400",
+        height: "450",
         title: "Danh sách nhân viên",
         visible: false,
         modal: true,
