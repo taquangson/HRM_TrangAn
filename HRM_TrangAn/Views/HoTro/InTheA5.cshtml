@@ -1,0 +1,68 @@
+﻿@using HRM_TrangAn.DataAccess.Models;
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>In thẻ</title>
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/img_OX2_icon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/qrcode.js"></script>
+    <script>
+        $(document).ready(function () {
+            var host = window.location.host;
+            @for (int i = 0; i < Model.Count; i++){
+                <text>
+            var QR_CODE@(i) = new QRCode("qrcode@(i)", {
+                width: 160,
+                height: 160,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+            ////QR_CODE@(i).makeCode("@Model[i].MaNhanVien");
+            QR_CODE@(i).makeCode("https://hrm.disantrangan.vn/B/DG?I=" +@Model[i].MaNhanVien);
+
+            var QR_CODEX@(i) = new QRCode("qrcodex@(i)", {
+                width: 160,
+                height: 160,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+            QR_CODEX@(i).makeCode("https://hrm.disantrangan.vn/B/DV?I=" +@Model[i].MaNhanVien);
+                </text>
+
+            }
+        });
+
+    </script>
+    <link href="~/Content/intheA5.css" rel="stylesheet" />
+</head>
+<body class="anhthe-panel">
+    <div class="background">
+        @for (int j = 0; j < Model.Count; j++)
+        {
+            <img style="width: 100%; border-radius: 14px " src="~/Images/13X21_2.png" />
+        }
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        if (i % 2 == 0)
+        {
+            <div class="page-break"></div>
+        }
+        <div class="hocsinh">
+            <div class="qrcode" id="qrcode@(i)"></div>
+            <div class="qrcode2" id="qrcodex@(i)"></div>
+            <span class="ma">@Model[i].MaNhanVien.ToUpper()</span>
+        </div>
+
+    }
+
+</body>
+</html>

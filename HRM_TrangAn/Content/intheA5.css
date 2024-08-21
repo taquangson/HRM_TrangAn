@@ -1,0 +1,132 @@
+﻿
+@media print {
+
+    html {
+        font-family: Arial;
+    }
+
+    .background {
+        position: absolute;
+        z-index: 1;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        width: 829px;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+
+    .anhthe-panel {
+        width: 829px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin: auto;
+    }
+
+
+    .hocsinh {
+        width: 670px;
+        height: 552.9px;
+        z-index: 1000;
+        font-size: 13px;
+    }
+
+
+
+        .hocsinh .qrcode {
+            display: block;
+            float: left;
+            margin-left: 127px;
+            margin-top: 284px;
+            /*position: absolute;*/
+        }
+
+        .hocsinh .qrcode2 {
+            display: block;
+            margin-left: 545px;
+            margin-top: 284px;
+            position: absolute;
+        }
+
+        .hocsinh .ma {
+            margin-left: 70px;
+            margin-top: 494px;
+            position: absolute;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+html {
+    font-family: Arial;
+}
+
+.background {
+    position: absolute;
+    z-index: 1;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    width: 829px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.anhthe-panel {
+    width: 829px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto;
+}
+
+
+.hocsinh {
+    width: 670px;
+    height: 552.9px;
+    z-index: 1000;
+    font-size: 13px;
+}
+
+
+
+    .hocsinh .qrcode {
+        display: block;
+        float: left;
+        margin-left: 127px;
+        margin-top: 284px;
+        /*position: absolute;*/
+    }
+
+    .hocsinh .qrcode2 {
+        display: block;
+        margin-left: 545px;
+        margin-top: 284px;
+        position: absolute;
+    }
+
+    .hocsinh .ma {
+        margin-left: 70px;
+        margin-top: 494px;
+        position: absolute;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }

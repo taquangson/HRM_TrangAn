@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/calamviec.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Danh mục ca làm việc</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div style="width:50%;float:left">
+            <div class="form-group valid" toggle-valid="TenCa">
+                <label style="width:100%">Tên ca: <span style="color:red">*</span></label>
+                <input id="TenCa" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="BatDau">
+                <label style="width:100%">Bắt đầu ca:</label>
+                <input id="BatDau" class="input" />
+            </div>
+            <div class="form-group valid" toggle-valid="BatDauTinhCa">
+                <label style="width:100%">Bắt đầu tính ca:</label>
+                <input id="BatDauTinhCa" class="input" />
+            </div>
+            <div class="form-group valid" toggle-valid="CaDem">
+                <input type="checkbox" value="1" id="CaDem" />
+                <label for="CaDem">Ca đêm</label>
+            </div>
+            <div class="form-group valid">
+                <label style="width:100%">Số giờ làm việc: </label>
+                <input id="SoGioLamViec" type="number" min="0" class="k-textbox input" />
+            </div>
+            <div class="form-group valid">
+                <label style="width:100%">Tổng số giờ nghỉ giữa ca: </label>
+                <input id="SoGioNghi" type="number" min="0" class="k-textbox input" />
+            </div>
+        </div>
+        <div style="width: 50%; float: left">
+            <div class="form-group valid" toggle-valid="MaCa">
+                <label style="width:100%">Mã ca: <span style="color:red">*</span></label>
+                <input id="MaCa" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="KetThuc">
+                <label style="width:100%">Kết thúc ca:</label>
+                <input id="KetThuc" class="input" />
+            </div>
+            <div class="form-group valid" toggle-valid="KetThucTinhCa">
+                <label style="width:100%">Kết thúc tính ca:</label>
+                <input id="KetThucTinhCa" class="input" />
+            </div>
+            <div class="form-group valid">
+                <label style="width:100%">Số công: </label>
+                <input id="SoCong" type="number" min="0" class="k-textbox input" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Phân bổ công theo giờ: </label>
+            <div id="gridPhanBo"></div>
+        </div>
+    </form>
+</div>

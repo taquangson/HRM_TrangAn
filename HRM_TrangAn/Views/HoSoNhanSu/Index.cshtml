@@ -1,0 +1,377 @@
+﻿
+
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .k-pager-sm .k-pager-info {
+        display: block;
+    }
+
+    .image-preview {
+        max-width: 110px;
+        max-height: 100px;
+        display: inline-block;
+        margin-right: 5px;
+        color: #b0b0b0;
+        text-align: center;
+        float: left;
+    }
+
+    .k-file-name-size-wrapper {
+        overflow-y: hidden;
+        max-width: calc(100% - 24px - 4em);
+    }
+
+    .k-upload-status {
+        display: none;
+    }
+
+    .k-upload-files {
+        /*min-height: 142px;*/
+        display: none;
+    }
+
+    .k-cell {
+        display: inline-grid;
+        padding-block: 10px;
+    }
+
+    #video {
+        position: absolute;
+    }
+
+    .overlay-container {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .overlay-container-left {
+        background-color: #111;
+        width: 88px;
+        height: 169px;
+        opacity: 0.7;
+    }
+
+    .overlay-container-right {
+        background-color: #111;
+        width: 94px;
+        height: 169px;
+        opacity: 0.7;
+    }
+</style>
+<script src="~/Scripts/js/hosonhansu.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Quản lý nhân sự bến</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Hồ sơ nhân sự</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    @*<button class="k-button bg-orange" onclick="openCopyWindow()"> <i class="fa fa-clone"> Nhân bản</i> </button>*@
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    @*<button class="k-button bg-red" onclick="NghiViec()"> <i class="fa fa-minus-circle"> Nghỉ việc</i> </button>*@
+    @*<button class="k-button bg-green" onclick="NhapExcel()"> <i class="fa fa-file-excel-o"> Nhập excel</i> </button>*@
+    @*<button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>*@
+
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <!--<div class="form-group valid" toggle-valid="TenTaiKhoan">-->
+        @*// class có thêm valid*@
+        <!--<label style="width:100%">Tên tài khoản:<span style="color:red">*</span></label>-->
+        @*<a class="k-button btn-category" onclick="OpenDanhMucLoi()"><i class="fa fa-plus"></i></a>*@
+        <!--<input id="TenTaiKhoan" type="text" class="k-textbox input" />--> @*class có thêm input*@
+        <!--<span class="fa fa-exclamation-triangle icon"></span>--> @*//có thêm icon cuối  thẻ input*@
+        <!--</div>-->
+        @*<label style="width: 100%; font-size: 20px; font-weight: bold; margin-left: 8px">Thông tin chi chung:</label>*@
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-user"></i> Thông tin cá nhân:</label>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            @*<div style="flex:1" class="form-group valid" toggle-valid="ComboThuyen">
+                <label style="width:100%">Mã số đò: </label>
+                <input id="ComboThuyen" type="text" class="input" />
+
+            </div>*@
+            <div style="flex:1" class="form-group valid" toggle-valid="MaNhanVien">
+                <label style="width:100%">Mã nhân viên: <span style="color:red">*</span></label>
+                <input id="MaNhanVien" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+            <div style="flex:1" class="form-group valid" toggle-valid="TenDayDu">
+                <label style="width:100%">Tên đầy đủ: <span style="color:red">*</span></label>
+                <input id="TenDayDu" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            @*<div style="flex:1" class="form-group valid" toggle-valid="ComboChucVu">
+            <label style="width:100%">Chức danh: <span style="color:red">*</span></label>
+            <div style="width: 100%; flex-direction:row; display: flex">
+                <a class="k-button btn-category" onclick="OpenAddChucDanh()"><i class="fa fa-plus"></i></a>
+                <input style="flex:1; margin-left: 8px" id="ComboChucVu" type="text" class="input" />
+            </div>
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>*@
+
+            <div style="flex:1" class="form-group valid" toggle-valid="Email">
+                <label style="width:100%">Email: <span style="color:red">*</span></label>
+                <input id="Email" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+
+            <div style="flex: 1; flex-direction: row; display: flex" class="form-group">
+                <div style="flex:5">
+                    <label style="width:100%">Ngày sinh:</label>
+                    <input id="NgaySinh" style="width:100%" class="input" />
+                </div>
+                <div style="flex:1"></div>
+                <div style="flex:5">
+                    <label style="width:100%">Giới tính:</label>
+                    <input id="ComboGioiTinh" type="text" style="width:100%" class="input" />
+
+                </div>
+            </div>
+
+        </div>
+
+        <div style="width: 100%; flex-direction:row; display: flex">
+
+            <div style="flex: 1; flex-direction: row; display: flex" class="form-group">
+                <div style="flex:5">
+                    <label style="width:100%">Loại hợp đồng:</label>
+                    <input id="ComboHopDong" type="text" style="width:100%" class="input" />
+                </div>
+                <div style="flex:1"></div>
+                <div style="flex:5">
+                    <label style="width:100%">Ngày vào làm:</label>
+                    <input id="NgayVao" style="width:100%" class="input" />
+                </div>
+            </div>
+            <div class="form-group" style="flex: 1; flex-direction: row; display: flex">
+                <div style="flex:5">
+                    <label style="width:100%">Ngày bắt đầu hợp đồng:</label>
+                    <input id="NgayBatDauHopDong" style="width:100%" class="input" />
+                </div>
+                <div style="flex:1"></div>
+                <div style="flex:5">
+                    <label style="width:100%">Ngày kết thúc hợp đồng:</label>
+                    <input id="NgayKetThucHopDong" style="width:100%" class="input" />
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group valid" toggle-valid="SoDienThoai">
+                <label style="width:100%">Điện thoại: <span style="color:red">*</span></label>
+                <input id="SoDienThoai" type="text" class="k-textbox input" /> @*input validate ko dduowwcj để style="width:100%"*@
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Ghi chú: </label>
+                <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+
+            </div>
+        </div>
+        <hr>
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-book"></i> Căn cước công dân:</label>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Số CMND/CCCD:</label>
+                <input id="CCCD" type="text" style="width:100%" class="k-textbox" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Ngày cấp:</label>
+                <input id="NgayCapCCCD" type="text" style="width:100%" class="input" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Nơi cấp:</label>
+                <input id="NoiCapCCCD" type="text" style="width:100%" class="k-textbox" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Mã thẻ BHYT:</label>
+                <input id="MaTheBH" type="text" style="width:100%" class="k-textbox" />
+            </div>
+        </div>
+
+        <hr>
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-map"></i> Địa chỉ cụ thể:</label>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Nơi đăng ký hộ khẩu: </label>
+            <textarea id="DiaChi" type="text" style="width:100%" class="k-textbox"></textarea>
+
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Tỉnh/ Thành phố:</label>
+                <input id="Tinh" type="text" style="width:100%" class="k-textbox" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Quận/ Huyện:</label>
+                <input id="Quan" style="width:100%" class="k-textbox" />
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Phường/ Xã:</label>
+                <input id="Phuong" style="width:100%" class="k-textbox" />
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Số nhà:</label>
+                <input id="DuongPho" type="text" style="width:100%" class="k-textbox" />
+            </div>
+        </div>
+        <hr>
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-copy"></i> Thông tin thuế:</label>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Mã số thuế:</label>
+                <input id="MaSoThue" type="text" style="width:100%" class="k-textbox" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Ngày cấp:</label>
+                <input id="NgayCapMaSoThue" type="text" style="width:100%" class="input" />
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Cơ quan thuế quản lý:</label>
+                <input id="CoQuanThueQuanLy" type="text" style="width:100%" class="k-textbox" />
+
+            </div>
+        </div>
+        <hr>
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-credit-card"></i> Thông tin ngân hàng:</label>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Ngân hàng:</label>
+                <input id="comboNganHang" type="text" style="width:100%" class="input" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Số tài khoản:</label>
+                <input id="SoTaiKhoan" type="text" style="width:100%" class="input k-textbox" />
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <label style="width:100%">Chủ tài khoản:</label>
+                <input id="ChuTaiKhoan" class="input k-textbox" type="text" style="width:100%" />
+
+            </div>
+        </div>
+        <hr>
+        <div class="form-group" style="background-color: #9e7ead; line-height: 30px; border-radius: 5px; color: #fff; padding-left: 5px;">
+            <label style="width:100%; font-size: 16px"><i class="fa fa-picture-o"></i> Hình ảnh:</label>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div style="flex:1" class="form-group">
+                <input type="file" id="fileManager" />
+            </div>
+            <div class="form-group">
+                <a class="k-button" id="start-camera">Mở camera</a>
+
+                <div class="container" style="width:300px;">
+                    <video id="video" width="300" autoplay>
+                    </video>
+                    @*<div class="overlay-container">
+                        <div class="overlay-container-left">
+                        </div>
+                        <div class="overlay-container-right">
+                        </div>
+                    </div>*@
+                </div>
+
+            </div>
+            <div style="flex:1" class="form-group">
+                <a class="k-button" id="click-photo">Chụp ảnh</a>
+                <div class="container">
+                    <canvas id="canvas" style="border: dashed 1px;" width="250" height="334"></canvas>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div class="form-group" id="previewimage"></div>
+        </div>
+
+
+    </form>
+</div>
+<div id="windowImport" style="visibility:hidden">
+    <div class="toolBarMenu">
+        <button class="k-button bg-green" onclick="DownloadTemp()"> <i class="fa fa-file-excel-o"> Tải mẫu excel</i> </button>
+        <button class="k-button bg-blue" onclick="LuuImport()"> <i class="fa fa-plus-square"> Lưu dữ liệu excel</i></button>
+        <button class="k-button bg-red" onclick="HuyImport()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formImport">
+        <br>
+        <div class="form-group">
+            <label style="width:100%">Chọn file excel: </label>
+            <input type="file" id="file" />
+        </div>
+
+        <div class="form-group">
+            <label>Dữ liệu trong file excel</label>
+            <div id="gridImport"></div>
+        </div>
+    </form>
+</div>
+<div style="visibility:hidden" id="windowAddChucDanh">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuChucDanh()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyChucDanh()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTietChucDanh">
+        <div class="form-group">
+            <input id="ID_ChucDanh" type="hidden" />
+        </div>
+
+        <div class="form-group valid" toggle-valid="TenChucDanh">
+            <label style="width:100%">Tên chức danh: </label>
+            <input id="TenChucDanh" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="MaChucDanh">
+            <label style="width:100%">Mã chức danh: </label>
+            <input id="MaChucDanh" type="text" class="k-textbox input" /> @*input validate ko dduowwcj để style="width:100%"*@
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+
+
+
+
+    </form>
+</div>

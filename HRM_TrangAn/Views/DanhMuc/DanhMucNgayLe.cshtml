@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/danhmucngayle.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Danh mục ngày lễ</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window" >
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+
+        <div class="form-group valid" toggle-valid="TenNgayNghi">
+            <label style="width:100%">Tên ngày nghỉ: <span style="color:red">*</span></label>
+            <input id="TenNgayNghi" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="SoNgayNghi">
+            <label style="width:100%">Số ngày nghỉ: <span style="color:red">*</span></label>
+            <input id="SoNgayNghi" type="number" min="0" step="0.5" class="k-textbox input" /> 
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid" toggle-valid="NgayBatDauNghi">
+            <label style="width:100%">Bắt đầu nghỉ:</label>
+            <input id="NgayBatDauNghi" class="input" />
+
+        </div>
+        <div class="form-group valid" toggle-valid="NgayKetThucNghi">
+            <label style="width:100%">Kết thúc nghỉ:</label>
+            <input id="NgayKetThucNghi" class="input" />
+
+        </div>
+        <div class="form-group valid">
+            <label style="width:100%">Hệ số tính công: </label>
+            <input id="TinhLuong" type="number" min="0" class="k-textbox input" />
+
+        </div>
+
+
+
+    </form>
+</div>
