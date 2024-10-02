@@ -63,6 +63,58 @@ namespace HRM_TrangAn.Controllers
             int ID_New = dm_dao.InsertOrUpdate(model);
             if (ID_New > 0)
             {
+                int countXoaFileErr = 0;
+                int countThemFileErr = 0;
+                File_NhanVienDAO filedao = new File_NhanVienDAO();
+                List<File_NhanVienModel> cur_lstFile = filedao.GetAllByHoSoNhanSu(model.ID);
+                if (model.files == null)
+                {
+                    model.files = new List<File_NhanVienModel>();
+                }
+                List<int> cur_lstFileID = cur_lstFile.Select(c => c.ID).ToList();
+                List<int> update_lstFileID = model.files.Select(c => c.ID).ToList();
+                List<int> delete_lstFileID = cur_lstFileID.Except<int>(update_lstFileID).ToList(); // Danh sách ảnh nhân viên bị xóa
+                List<int> insert_lstFileID = update_lstFileID.Except<int>(cur_lstFileID).ToList(); // Danh sách ảnh nhân viên được thêm
+                foreach (int idf in delete_lstFileID)
+                {
+                    foreach (File_NhanVienModel del in cur_lstFile) // Xóa các ảnh cũ
+                    {
+                        if (del.ID == idf)
+                        {
+                            if (filedao.Delete(del.ID))
+                            {
+                            }
+                            else
+                            {
+                                countXoaFileErr++;
+                            }
+                        }
+                    }
+                }
+                foreach (File_NhanVienModel itemfile in model.files)
+                {
+                    if (itemfile.ID == 0)
+                    {
+                        //if (itemfile.FileName == (StringHelper.RemoveVietNameseSign(model.TenDayDu.ToLower().Trim().Replace(" ", "")) + model.MaNhanVien.ToString() + ".jpg")
+                        //|| itemfile.FileName == (StringHelper.RemoveVietNameseSign(model.TenDayDu.ToLower().Trim().Replace(" ", "")) + model.MaNhanVien.ToString() + ".png")
+                        //|| itemfile.FileName == "anhchup.png")
+                        if (itemfile.FileName == model.MaNhanVien.ToString() + ".jpg"
+                       || itemfile.FileName == model.MaNhanVien.ToString() + ".png"
+                       || itemfile.FileName == "anhchup.png")
+                        {
+                            itemfile.FileType = 1;
+                            itemfile.FileStatus = 1;
+                        }
+                        if (filedao.Insert_FileNhanSu(ID_New, itemfile) > 0)
+                        {
+                        }
+                        else
+                        {
+                            countThemFileErr++;
+                        }
+                    }
+
+                }
                 return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
             }
             else

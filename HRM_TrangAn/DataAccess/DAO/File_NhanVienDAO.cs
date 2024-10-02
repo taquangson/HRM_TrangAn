@@ -195,6 +195,32 @@ namespace HRM_TrangAn.DataAccess.DAO
 
             return 0;
         }
+        
+        public int Insert_FileNhanSu(int ID_HoSoNhanSu, File_NhanVienModel model)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@FileName", model.FileName),
+                new SqlParameter("@FilePath", model.FilePath),
+                 new SqlParameter("@FileType", model.FileType),
+                new SqlParameter("@FileStatus", model.FileStatus),
+                new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu),
+                };
+
+                object id = helper.ExecuteScalar("sp_File_HoSoNhanSu_Insert", pars);
+                if (id != null)
+                {
+                    return int.Parse(id.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_File_NhanVien_Insert " + ex.Message);
+            }
+
+            return 0;
+        }
 
         public int InsertFile(File_NhanVienModel model)
         {

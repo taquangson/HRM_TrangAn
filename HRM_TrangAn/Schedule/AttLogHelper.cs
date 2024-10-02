@@ -291,7 +291,7 @@ namespace HRM_TrangAn.Schedule
             {
                 i.ID = cc_dao.Insert(i, i.EnrollNumber, 0);
                 //Tính chuyến đò chính
-                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009)
+                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009 || i.ID_DiemQuetThe == 3013)
                 {
                     ChuyenDoModel model = new ChuyenDoModel();
                     int ID_New = 0;
@@ -315,6 +315,9 @@ namespace HRM_TrangAn.Schedule
                                 break;
                             case 2009:
                                 model.ID_TuyenDo = 2004;
+                                break;
+                            case 3013:
+                                model.ID_TuyenDo = 3006;
                                 break;
                             //case 3012:
                             //    model.ID_TuyenDo = 3005;

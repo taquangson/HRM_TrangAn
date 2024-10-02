@@ -168,8 +168,8 @@ $(document).ready(function () {
                 field: "FileAnhDaiDien",
                 title: "Ảnh đại diện",
                 template: function (e) {
-                    if (e.FileAnhDaiDien != "0") {
-                        return "<img class='avatar' src='" + e.FileAnhDaiDien + "'/>"
+                    if (e.AnhDaiDien != "0") {
+                        return "<img class='avatar' src='" + e.AnhDaiDien + "'/>"
                     } else {
                         return "Chưa có ảnh";
                     }
@@ -1799,6 +1799,7 @@ $(document).ready(function () {
             ]
         }
     });
+
     $.ajax({
         url: '/ChucDanh/GetAllChucDanh',
         type: 'GET',
@@ -1859,7 +1860,7 @@ function PushFormDataFile2(fileInfo, wrapper) {
     var data = new FormData();
     data.append('file', fileInfo.rawFile, fileInfo.name);
     var t = $.ajax({
-        url: "/NhanVien/UploadFile",
+        url: "/HoSoNhanSu/UploadFile",
         processData: false,
         contentType: false,
         data: data,
@@ -2064,12 +2065,12 @@ function openEditWindow() {
         $("#SoTaiKhoan").val(selectedItem.SoTaiKhoan);
         $("#ChuTaiKhoan").val(selectedItem.ChuTaiKhoan);
 
-        var dataChucDanh = []
         $.ajax({
             url: '/NhanVien/GetListChucDanhNhanVien?ID_NhanVien=' + selectedItem.ID,
             type: 'GET',
         }).done(function successCallback(response) {
             selectedItem.lstChucDanh = response;
+            var dataChucDanh = [];
             if (selectedItem.lstChucDanh.length > 0 && selectedItem.lstChucDanh != null) {
                 for (var i = 0; i < selectedItem.lstChucDanh.length; i++) {
                     //dataChucDanh.push({
@@ -2088,13 +2089,13 @@ function openEditWindow() {
         context.clearRect(0, 0, canvas.width, canvas.height); //clear html5 canvas
         $("#previewimage").html("");
         $.ajax({
-            url: '/NhanVien/GetListFileNhanVien?ID_NhanVien=' + selectedItem.ID,
+            url: '/HoSoNhanSu/GetListFileNhanVien?ID_HoSoNhanSu=' + selectedItem.ID,
             type: 'GET',
         }).done(function successCallback(response) {
-            selectedItem.lstFile = response;
-            if (selectedItem.lstFile.length > 0 && selectedItem.lstFile != null) {
-                for (var i = 0; i < selectedItem.lstFile.length; i++) {
-                    var item = selectedItem.lstFile[i];
+            selectedItem.files = response;
+            if (selectedItem.files.length > 0 && selectedItem.files != null) {
+                for (var i = 0; i < selectedItem.files.length; i++) {
+                    var item = selectedItem.files[i];
                     let ext = item.FilePath.split('.').pop();
                     let preview = '';
                     if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
@@ -2332,7 +2333,7 @@ function Luu() {
                     TenNganHang: $("#comboNganHang").data("kendoComboBox").text(),
                     SoTaiKhoan: $("#SoTaiKhoan").val(),
                     ChuTaiKhoan: $("#ChuTaiKhoan").val(),
-                    lstFile: anhnhanvien
+                    files: anhnhanvien
                 }
             }).done(function successCallback(response) {
                 //response controller này trả về success và msg

@@ -12,6 +12,11 @@ namespace HRM_TrangAn.DataAccess.Models
         public string MoTa { get; set; }
         public float PhatTien { get; set; }
         public float PhatCong { get; set; }
+        public int LoaiLoi { get; set; }
+        public int SoPhutDiMuon { get; set; }
+        public int SoPhutVeSom { get; set; }
+        public int QuenChamCong { get; set; }
+        public int SoLanViPham { get; set; }
         public DateTime NgayTao { get; set; }
         public int TrangThai { get; set; }
 

@@ -287,6 +287,20 @@ namespace HRM_TrangAn.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult InsertCongNhanVien(TinhCongNhanVienModel model)
+        {
+            ChamCongNhanVienDAO ccnvdao = new ChamCongNhanVienDAO();
+            if (ccnvdao.InsertCongNhanVien(model))
+            {
+                return Json(new { success = true, msg = "Lưu dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult UpdatetLichSuDiMuonVeSom(int ID, int DaXuLy, int DaTinhCong)
         {
             ChamCongNhanVienDAO ccnvdao = new ChamCongNhanVienDAO();

@@ -206,10 +206,12 @@ namespace HRM_TrangAn.Controllers
             List<ChamCongModel> result1 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(from, to, 2007).Where(x => ID_TaiKhoan == 0 || x.ID_TaiKhoan == ID_TaiKhoan).ToList();
             List<ChamCongModel> result2 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(from, to, 2008).Where(x => ID_TaiKhoan == 0 || x.ID_TaiKhoan == ID_TaiKhoan).ToList();
             List<ChamCongModel> result3 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(from, to, 2009).Where(x => ID_TaiKhoan == 0 || x.ID_TaiKhoan == ID_TaiKhoan).ToList();
+            List<ChamCongModel> result4 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(from, to, 3013).Where(x => ID_TaiKhoan == 0 || x.ID_TaiKhoan == ID_TaiKhoan).ToList();
             List<ChamCongModel> result = new List<ChamCongModel>();
             result.AddRange(result1);
             result.AddRange(result2);
             result.AddRange(result3);
+            result.AddRange(result4);
             //foreach (ChamCongModel i in result)
             //{
             //    List<TuyenDoModel> lstTuyen = dao.GetAll().Where(x => ID_TuyenDo == 0 || ID_TuyenDo == x.ID).ToList();
@@ -268,7 +270,7 @@ namespace HRM_TrangAn.Controllers
             foreach (ChamCongModel i in result)
             {
                 //Tính chuyến đò chính
-                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009)
+                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009 || i.ID_DiemQuetThe == 3013)
                 {
                     if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
                     {
@@ -289,6 +291,9 @@ namespace HRM_TrangAn.Controllers
                                 break;
                             case 2009:
                                 model.ID_TuyenDo = 2004;
+                                break;
+                            case 3013:
+                                model.ID_TuyenDo = 3006;
                                 break;
                         }
                         int ID_New = dm_dao.InsertOrUpdate(model);

@@ -16,6 +16,7 @@ $(document).ready(function () {
         excel: {
             filterable: true
         },
+        editable: true,
         selectable: true,
         scrollable: true,
         persistSelection: true,
@@ -26,6 +27,40 @@ $(document).ready(function () {
             mode: "row",
         },
         pageable: false,
+        save: function (e) {
+            console.log(e);
+            let name = Object.keys(e.values)[0];
+            let date = new Date(name.substring(5, 9), parseInt(name.substring(9, 11)) - 1, name.substring(11, 13));
+            let socong = e.values[name];
+            console.log({
+                ID_TaiKhoan: e.model.ID,
+                Ngay: kendo.toString(date, 'yyyy-MM-dd'),
+                SoCong: socong
+            })
+            //if (e.values.ChuyenTo) {
+                try {
+                    $.ajax({
+                        url: '/ChamCongNhanVien/InsertCongNhanVien',
+                        data: {
+                            ID_TaiKhoan: e.model.ID,
+                            Ngay: kendo.toString(date, 'yyyy-MM-dd'),
+                            SoCong: socong,
+                            ID_CaLamViec:0
+                        },
+                        type: 'POST'
+                    }).done(function (response) {
+                        if (response.success) {
+                            notification.show({ kValue: response.msg }, "success");
+                            e.sender.refresh();
+                        } else {
+                            notification.show({ kValue: response.msg }, "error");
+                        }
+                    })
+                } catch (ex) {
+                    e.sender.refresh();
+                }
+            //}
+        },
         dataBinding: function () {
             record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
         },
@@ -341,6 +376,7 @@ function LoadGridData() {
                     class: "table-header-cell"
                 }
             });
+            f['data' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: true };
         });
         columns.push({
             title: 'Tổng công',
@@ -382,7 +418,7 @@ function LoadGridData() {
                     fields: {
                         ID: { type: "number", editable: false, nullable: false },
                         ID_Parent: { type: "number", nullable: true },
-                        TongCong: { type: "number", nullable: true },
+                        TongCong: { type: "number", nullable: true, editable: true },
                     }
                 },
                 parse: function (res) {
@@ -423,7 +459,8 @@ function LoadGridData() {
         $("#grid").data("kendoTreeList").setOptions({
             //$("#grid").data("kendoGrid").setOptions({
             dataSource: ds,
-            columns: columns
+            columns: columns,
+            editable: "incell"
         });
         kendo.ui.progress($("#grid"), false);
     });

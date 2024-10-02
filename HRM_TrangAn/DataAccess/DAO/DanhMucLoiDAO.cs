@@ -96,6 +96,11 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@TenLoi", model.TenLoi),
                 new SqlParameter("@PhatTien", model.PhatTien),
                 new SqlParameter("@PhatCong", model.PhatCong),
+                new SqlParameter("@LoaiLoi", model.LoaiLoi),
+                new SqlParameter("@SoPhutDiMuon", model.SoPhutDiMuon),
+                new SqlParameter("@SoPhutVeSom", model.SoPhutVeSom),
+                new SqlParameter("@QuenChamCong", model.QuenChamCong),
+                new SqlParameter("@SoLanViPham", model.SoLanViPham),
                 new SqlParameter("@MoTa", model.MoTa)
                 };
 

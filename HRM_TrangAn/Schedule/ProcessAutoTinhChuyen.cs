@@ -21,15 +21,17 @@ namespace HRM_TrangAn.Schedule
             TuyenDoDAO dao = new TuyenDoDAO();
             ChuyenDoDAO dm_dao = new ChuyenDoDAO();
             var now = DateTime.Now;
-            //List<ChamCongModel> result1 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2007).ToList();
-            //List<ChamCongModel> result2 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2008).ToList();
-            //List<ChamCongModel> result3 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2009).ToList();
+            List<ChamCongModel> result1 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2007).ToList();
+            List<ChamCongModel> result2 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2008).ToList();
+            List<ChamCongModel> result3 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 2009).ToList();
             List<ChamCongModel> result4 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 3012).ToList();
+            List<ChamCongModel> result5 = cc_dao.GetListChamCongBenLen_ByNgayByDiem(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), DateTime.Now, 3013).ToList();
             List<ChamCongModel> result = new List<ChamCongModel>();
-            //result.AddRange(result1);
-            //result.AddRange(result2);
-            //result.AddRange(result3);
+            result.AddRange(result1);
+            result.AddRange(result2);
+            result.AddRange(result3);
             result.AddRange(result4);
+            result.AddRange(result5);
             //foreach (ChamCongModel i in result)
             //{
             //    List<TuyenDoModel> lstTuyen = dao.GetAll().ToList();
@@ -90,59 +92,44 @@ namespace HRM_TrangAn.Schedule
             foreach (ChamCongModel i in result)
             {
                 //Tính chuyến đò chính
-                //if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009 || i.ID_DiemQuetThe == 3012)
-                //{
-                ChuyenDoModel model = new ChuyenDoModel();
-                int ID_New = 0;
-                //if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, 0, i.WorkDate) == 0)//Check tất cả các điểm keypoint
-                //if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
-                //{
-
-                //    model.MaThuyen = i.MaThuyen;
-                //    model.ID_NhanVien = i.ID_TaiKhoan;
-                //    model.NgayDi = i.WorkDate;
-                //    model.GhiChu = "";
-                //    model.IsManager = 0;
-                //    model.TrangThai = 1;
-                //    switch (i.ID_DiemQuetThe)
-                //    {
-                //        case 2007:
-                //            model.ID_TuyenDo = 2005;
-                //            break;
-                //        case 2008:
-                //            model.ID_TuyenDo = 1;
-                //            break;
-                //        case 2009:
-                //            model.ID_TuyenDo = 2004;
-                //            break;
-                //        case 3012:
-                //            model.ID_TuyenDo = 3005;
-                //            break;
-                //    }
-
-                //}
-                //else
-                //{
-                if (i.ID_DiemQuetThe == 3012)
+                if (i.ID_DiemQuetThe == 2007 || i.ID_DiemQuetThe == 2008 || i.ID_DiemQuetThe == 2009 || i.ID_DiemQuetThe == 3012 || i.ID_DiemQuetThe == 3013)
                 {
-                    model = dm_dao.GetChuyenDoCuoi_NhanVien(i.WorkDate, i.ID_TaiKhoan);
-                    if (model.ID_ChuyenDo > 0)
+                    if (cc_dao.CountExistCheckpoint(i.ID_TaiKhoan, i.ID_DiemQuetThe, i.WorkDate) == 0)
                     {
-                        model.ID_TuyenDo = 3005;
+                        ChuyenDoModel model = new ChuyenDoModel();
+                        model.MaThuyen = i.MaThuyen;
+                        model.ID_NhanVien = i.ID_TaiKhoan;
+                        model.NgayDi = i.WorkDate;
+                        model.GhiChu = "";
+                        model.IsManager = 0;
+                        model.TrangThai = 1;
+                        switch (i.ID_DiemQuetThe)
+                        {
+                            case 2007:
+                                model.ID_TuyenDo = 2005;
+                                break;
+                            case 2008:
+                                model.ID_TuyenDo = 1;
+                                break;
+                            case 2009:
+                                model.ID_TuyenDo = 2004;
+                                break;
+                            case 3012:
+                                model.ID_TuyenDo = 3005;
+                                break;
+                            case 3013:
+                                model.ID_TuyenDo = 3006;
+                                break;
+                        }
+                        int ID_New = dm_dao.InsertOrUpdate(model);
+                        if (ID_New > 0)
+                        {
+                            i.ID_ChuyenDo = ID_New;
+                            cc_dao.Update(i);
+                        }
                     }
                 }
-                //}
-                if (model.ID_TuyenDo > 0)
-                    ID_New = dm_dao.InsertOrUpdate(model);
-                if (ID_New > 0)
-                {
-                    i.ID_ChuyenDo = ID_New;
-                    cc_dao.Update(i);
-                    //}
-                }
             }
-
-            //dm_dao.AutoTinhCongTheoChuyenDo();
             return true;
         }
     }

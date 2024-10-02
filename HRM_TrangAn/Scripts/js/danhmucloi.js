@@ -103,7 +103,7 @@ $(document).ready(function () {
                 field: "PhatTien",
                 title: "Tiền phạt",
                 width: "150px",
-                format: "{0:N1}",
+                format: "{0:N0}",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -121,7 +121,7 @@ $(document).ready(function () {
             {
                 field: "PhatCong",
                 title: "Công phạt",
-                format: "{0:N1}",
+                format: "{0:N0}",
                 width: "150px",
                 filterable: {
                     cell: {
@@ -140,9 +140,19 @@ $(document).ready(function () {
         ]
     });
 
+    $("#ComboLoaiLoi").kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        clearButton: false,
+        dataSource: new kendo.data.DataSource({
+            data: [{ text: 'Đi muộn, về sớm', value: 1 },
+            { text: 'Quên chấm công', value: 2 }]
+        })
+    });
+
     $("#window").kendoWindow({
         width: "40%",
-        height: "42%",
+        height: "630",
         title: "Chi tiết",
         visible: false,
         modal: true,
@@ -174,12 +184,16 @@ function openEditWindow() {
         var grid = $("#grid").data("kendoGrid");
         var selectedItem = grid.dataItem(grid.select());
         console.log(selectedItem);
-      
+
         $("#ID").val(selectedItem.ID);
         $("#TenLoi").val(selectedItem.TenLoi);
         $("#MoTa").val(selectedItem.MoTa);
         $("#PhatTien").val(selectedItem.PhatTien);
         $("#PhatCong").val(selectedItem.PhatCong);
+        $("#SoPhutDiMuon").val(selectedItem.SoPhutDiMuon);
+        $("#SoPhutVeSom").val(selectedItem.SoPhutVeSom);
+        $("#SoLanViPham").val(selectedItem.SoLanViPham);
+        $("#ComboLoaiLoi").data('kendoComboBox').value(selectedItem.LoaiLoi);
 
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
@@ -247,7 +261,11 @@ function Luu() {
                     TenLoi: $("#TenLoi").val(),
                     MoTa: $("#MoTa").val(),
                     PhatTien: $("#PhatTien").val(),
-                    PhatCong: $("#PhatCong").val()
+                    PhatCong: $("#PhatCong").val(),
+                    SoPhutDiMuon: $("#SoPhutDiMuon").val(),
+                    SoPhutVeSom: $("#SoPhutVeSom").val(),
+                    SoLanViPham: $("#SoLanViPham").val(),
+                    LoaiLoi: $("#ComboLoaiLoi").data('kendoComboBox').value()
                 }
             }).done(function successCallback(response) {
                 //response controller này trả về success và msg
