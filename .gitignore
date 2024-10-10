@@ -50,6 +50,7 @@ Thumbs.db
 
 HRM_TrangAn/Logs/
 HRM_TrangAn/obj/
+HRM_TrangAn/bin/roslyn
 HRM_TrangAn/Images/AnhNhanVien_Temp/
 HRM_TrangAn/Images/SoDoLop/20190030050012Emerald5.jpg
 HRM_TrangAn/Images/HoTro/2020-1-9-TestData3.xlsx
@@ -59,18 +60,26 @@ HRM_TrangAn/Images/AnhDiemDanh/
 HRM_TrangAn/Images/HoTro/
 HRM_TrangAn/Content/danhsachloptheogiaovien.css
 HRM_TrangAn/Content/ExcelTemplate/
+HRM_TrangAn/bin
 <<<<<<< HEAD
-.vs/HRM_TrangAn/FileContentIndex/99f32714-27e6-4f94-aa7c-1926cdf1f5bf.vsidx
+.vs/HRM_TrangAn/FileContentIndex
 .vs/HRM_TrangAn/config/applicationhost.config
 .vs/HRM_TrangAn/FileContentIndex/afac0704-5f51-4037-b37c-1fcfb1bf8b1d.vsidx
 .vs/HRM_TrangAn/FileContentIndex/read.lock
 .vs/HRM_TrangAn/v17/.suo
 .vs/HRM_TrangAn/v17/fileList.bin
+.vs/HRM_TrangAn/v17/DocumentLayout.backup.json
+.vs/HRM_TrangAn/v17/DocumentLayout.json
 =======
 .vs/HRM_TrangAn/config/applicationhost.config
 .vs/HRM_TrangAn/FileContentIndex/028d241f-b767-4248-bacd-990a8fa82a44.vsidx
 .vs/HRM_TrangAn/FileContentIndex/b43236f9-8cda-4acf-a3d0-f596be352669.vsidx
 .vs/HRM_TrangAn/FileContentIndex/read.lock
+packages/Microsoft.AspNet.Cors.5.2.9
+packages/Microsoft.Net.Compilers.4.2.0
+packages/Microsoft.AspNet.WebApi.Cors.5.2.9
+packages/Microsoft.AspNet.WebApi.Core.5.2.9
+packages/Microsoft.AspNet.WebApi.Client.5.2.9
 >>>>>>> b430f12cde309334bde96f4282355a931efad2e2
 /packages
 /.vs/HRM_TrangAn
