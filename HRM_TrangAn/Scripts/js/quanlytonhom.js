@@ -65,7 +65,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -376,7 +376,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -590,7 +590,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",

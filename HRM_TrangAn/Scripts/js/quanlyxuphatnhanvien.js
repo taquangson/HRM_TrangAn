@@ -1,5 +1,17 @@
 ﻿$(".main_container").hide();
 $(document).ready(function () {
+    $("#TuNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
+        change: function (e) {
+            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+            $("#DenNgay").data("kendoDatePicker").value(d);
+        }
+    })
+    $("#DenNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
+    })
     $("#grid").kendoGrid({
         dataSource: new kendo.data.DataSource({
             data: [],
@@ -24,7 +36,7 @@ $(document).ready(function () {
             { field: 'PhatCong', aggregate: "sum" },]
         }),
         height: function () {
-            var height = $(window).height() - 160;
+            var height = $(window).height() - 200;
             return height;
         },
         scrollable: true,
@@ -65,7 +77,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -275,7 +287,7 @@ $(document).ready(function () {
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
-    LoadGridData();
+    //LoadGridData();
     $("#windowNhanVien").kendoWindow({
         width: "800",
         height: "450",
@@ -332,7 +344,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -486,7 +498,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -680,6 +692,81 @@ $(document).ready(function () {
     $(".main_container").show();
 })
 
+function TimKiem() {
+    var tuNgay = kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00";
+    var denNgay = kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59";
+    var url = "/XuPhatNhanVien/GetXuPhatNhanVienByDateRange?TuNgay=" + encodeURIComponent(tuNgay) + "&DenNgay=" + encodeURIComponent(denNgay);
+    console.log("TuNgay: ", tuNgay);
+    console.log("DenNgay: ", denNgay);
+    console.log("URL: ", url);
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            console.log("Response: ", response);
+
+            if (typeof response === 'string') {
+                try {
+                    response = JSON.parse(response);
+                } catch (e) {
+                    console.error("Failed to parse response: ", e);
+                    return;
+                }
+            }
+
+
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            NgayPhat: { type: 'date', editable: false },
+                            TenDayDu: { type: 'string' },
+                            GhiChu: { type: 'string' },
+                            SoTien: {
+                                type: 'number'
+                            }
+                        }
+                    }
+                },
+                pageSize: 20,
+                aggregate: [
+                    { field: 'PhatTien', aggregate: "sum" },
+                    { field: 'PhatCong', aggregate: "sum" }
+                ]
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            if (grid) {
+                grid.setDataSource(dataSource);
+            } else {
+                console.error("kendoGrid not initialized.");
+                $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    noRecords: {
+                        template: "<div>No records available</div>"
+                    },
+                    pageable: true,
+                    sortable: true,
+                    columns: [
+                        { field: "NgayPhat", title: "Ngày bị phạt", format: "{0:dd/MM/yyyy}", width: "120px" },
+                        { field: "TenDayDu", title: "Tên nhân viên", width: "150px" },
+                        { field: "GhiChu", title: "Ghi chú", width: "200px" },
+                    ]
+                });
+            }
+            kendo.ui.progress($("#grid"), false);
+        },
+        error: function (request, error) {
+            console.error("AJAX Error: ", error);
+            kendo.ui.progress($("#grid"), false);
+        }
+    });
+}
+
 function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
@@ -744,7 +831,7 @@ function LoadGridData() {
             },
             pageSize: 20,
             aggregate: [{ field: 'PhatTien', aggregate: "sum" },
-                { field: 'PhatCong', aggregate: "sum" },]
+            { field: 'PhatCong', aggregate: "sum" },]
         });
         $("#grid").data("kendoGrid").setDataSource(dataSource);
         kendo.ui.progress($("#grid"), false);

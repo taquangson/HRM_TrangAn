@@ -32,7 +32,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 hidden: true,
                 headerAttributes: {
@@ -286,7 +286,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 hidden: true,
                 headerAttributes: {
@@ -476,7 +476,7 @@ $(document).ready(function () {
         editable: true,
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 hidden: true,
                 headerAttributes: {
@@ -633,7 +633,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 hidden: true,
                 headerAttributes: {

@@ -20,5 +20,17 @@ namespace HRM_TrangAn.Controllers
         {
             return View();
         }
+
+        [SessionExpire]
+        public ActionResult PhanCongCongViecToTruong()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult PhieuGiaoViec()
+        {
+            return View();
+        }
     }
 }

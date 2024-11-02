@@ -50,7 +50,7 @@ $(document).ready(function () {
         //Danh sách cột của bảng dữ liệu
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -109,6 +109,26 @@ $(document).ready(function () {
                 field: "Cong",
                 title: "Công lao động",
                 width: "150px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+
+            {
+                field: "DonGia",
+                title: "Phụ cấp",
+                width: "150px",
+                format: "{0:N0}",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -249,6 +269,26 @@ $(document).ready(function () {
                     class: "table-header-cell"
                 }
             },
+
+            {
+                field: "DonGia",
+                title: "Phụ cấp",
+                format:"{0:N0}",
+                width: "150px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
             {
                 field: "ThoiGian",
                 title: "Thời gian/Ngày",
@@ -357,24 +397,24 @@ function parseExcel(file) {
         });
 
         //workbook.SheetNames.forEach(function (sheetName) {
-            // Here is your object
-            var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]);
-            var json_object = JSON.stringify(XL_row_object);
+        // Here is your object
+        var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]);
+        var json_object = JSON.stringify(XL_row_object);
 
-            jsondata = JSON.parse(json_object);
-            $.each(jsondata, function (index, item) {
-                item.STT = index + 1;
-                item.TenCongViec = item.TenCongViec;
-                item.ThoiGian = item.ThoiGian;
-                item.Cong = Number(item.Cong);
-                item.MaCongViec = item.MaCongViec;
-                item.GhiChu = item.GhiChu;
-            })
-            //lenght = jsondata.length;
-            var dsgrid = new kendo.data.DataSource({
-                data: jsondata,
-                //pageSize: 50
-            });
+        jsondata = JSON.parse(json_object);
+        $.each(jsondata, function (index, item) {
+            item.STT = index + 1;
+            item.TenCongViec = item.TenCongViec;
+            item.ThoiGian = item.ThoiGian;
+            item.Cong = Number(item.Cong);
+            item.MaCongViec = item.MaCongViec;
+            item.GhiChu = item.GhiChu;
+        })
+        //lenght = jsondata.length;
+        var dsgrid = new kendo.data.DataSource({
+            data: jsondata,
+            //pageSize: 50
+        });
         if (ValidateList(jsondata)) {
             $("#gridImport").data("kendoGrid").setDataSource(dsgrid);
             notification.show({ kValue: "Tải dữ liệu thành công" }, "success");
@@ -413,6 +453,7 @@ function openEditWindow() {
         $("#GhiChu").val(selectedItem.GhiChu);
         $("#MaCongViec").val(selectedItem.MaCongViec);
         $("#CongLaoDong").val(selectedItem.Cong);
+        $("#DonGia").val(selectedItem.DonGia);
         $("#ThoiGian").val(selectedItem.ThoiGian);
 
         //});
@@ -441,6 +482,7 @@ function openCopyWindow() {
         $("#GhiChu").val(selectedItem.GhiChu);
         $("#MaCongViec").val(selectedItem.MaCongViec);
         $("#CongLaoDong").val(selectedItem.Cong);
+        $("#DonGia").val(selectedItem.DonGia);
         $("#ThoiGian").val(selectedItem.ThoiGian);
 
         //});
@@ -496,9 +538,10 @@ function ValidateForm(callback) {
     var validten = SetValidate("TenCongViec");
     var validma = SetValidate("MaCongViec");
     var validcong = SetValidate("CongLaoDong");
+    var validdongia = SetValidate("DonGia");
     var validtg = SetValidate("ThoiGian");
 
-    var valid = validma && validten && validcong && validtg;
+    var valid = validma && validten && validcong && validtg && validdongia;
     if (valid) {
         var arr = $("#grid").data("kendoGrid").selectedKeyNames();
         if (arr.length != 1) {
@@ -551,6 +594,7 @@ function Luu() {
                     GhiChu: $("#GhiChu").val(),
                     MaCongViec: $("#MaCongViec").val(),
                     Cong: $("#CongLaoDong").val(),
+                    DonGia: $("#DonGia").val(),
                     ThoiGian: $("#ThoiGian").val(),
                 }
             }).done(function successCallback(response) {
@@ -637,10 +681,10 @@ function LuuList(data) {
         $("#windowImport").data("kendoWindow").close();
 
     }
-    
+
 }
 
-function CheckDublicate(arrayOfObjects ) {
+function CheckDublicate(arrayOfObjects) {
     const resultArray = [];
     //arrayOfObjects.map(item => {
     //    //for each item in arrayOfObjects check if the object exists in the resulting array
@@ -682,6 +726,7 @@ function LuuImport() {
         check_data.push({
             TenCongViec: item.TenCongViec,
             Cong: Number(item.Cong),
+            DonGia: Number(item.DonGia),
             MaCongViec: item.MaCongViec,
             ThoiGian: item.ThoiGian,
             GhiChu: item.GhiChu
@@ -689,16 +734,18 @@ function LuuImport() {
         checkall_data.push({
             TenCongViec: item.TenCongViec,
             Cong: Number(item.Cong),
+            DonGia: Number(item.DonGia),
             MaCongViec: item.MaCongViec,
             ThoiGian: item.ThoiGian,
             GhiChu: item.GhiChu
         })
-        
+
     });
     $.each(grid_data, function (index, item) {
         checkall_data.push({
             TenCongViec: item.TenCongViec,
             Cong: Number(item.Cong),
+            DonGia: Number(item.DonGia),
             MaCongViec: item.MaCongViec,
             ThoiGian: item.ThoiGian,
             GhiChu: item.GhiChu
@@ -715,6 +762,7 @@ function LuuImport() {
             valid_data.push({
                 TenCongViec: item.TenCongViec,
                 Cong: Number(item.Cong),
+                DonGia: Number(item.DonGia),
                 MaCongViec: item.MaCongViec,
                 ThoiGian: item.ThoiGian,
                 GhiChu: item.GhiChu
@@ -723,7 +771,7 @@ function LuuImport() {
         });
         openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn nhập " + count + " bản ghi danh mục công việc từ file excel?</b>", function () { LuuList(valid_data); }, function () { });
     }
-    
+
     console.log(valid_data);
 }
 
@@ -757,14 +805,14 @@ function DownloadTemp() {
     //    type: 'GET'
     //}).done(function (response) {
     //    if (response.success) {
-            //window.open('../Content/ExcelTemplate/Temp_DanhMucCongViec.xlsx', '_blank')
+    //window.open('../Content/ExcelTemplate/Temp_DanhMucCongViec.xlsx', '_blank')
     //    } else {
     //        notification.show({ kValue: response.msg }, "error");
     //    }
     //})
     window.open('../Content/ExcelTemplate/Temp_DanhMucCongViec.xlsx', '_blank')
 
-   
+
 }
 
 function Xoa() {

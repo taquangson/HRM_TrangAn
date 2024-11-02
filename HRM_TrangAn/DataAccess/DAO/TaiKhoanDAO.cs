@@ -476,7 +476,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@DienThoai", model.DienThoai),
                 new SqlParameter("@Email", model.Email),
                 new SqlParameter("@ID_ChiNhanh", model.ID_ChiNhanh),
-                new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu)
+                new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
+                new SqlParameter("@ID_NhanVien", model.ID_NhanVien)
                 };
 
                 object id = helper.ExecuteScalar("sp_TaiKhoan_InsertOrUpdate", pars);

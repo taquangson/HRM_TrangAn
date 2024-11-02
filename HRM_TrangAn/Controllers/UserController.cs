@@ -209,6 +209,7 @@ namespace HRM_TrangAn.Controllers
                 item.DienThoai = model.DienThoai;
                 item.ID_ChiNhanh = model.ID_ChiNhanh;
                 item.ID_HoSoNhanSu = model.ID_HoSoNhanSu;
+                item.ID_NhanVien = model.ID_NhanVien;
                 if (tk_dao.GetByTenTaiKhoanOrEmail(item.Email).ID != item.ID && tk_dao.GetByTenTaiKhoanOrEmail(item.Email).ID != 0)
                 {
                     return Json(new { status = false, msg = "Email đã được sử dụng cho tài khoản khác" }, JsonRequestBehavior.AllowGet);

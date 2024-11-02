@@ -69,6 +69,27 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<DanhMucCongViecModel> GetAllThueKhoan()
+        {
+            try
+            {
+                DataSet ds = helper.ExecuteDataSet("sp_CongViecThueKhoan_GetAll");
+                DataTable dt = ds.Tables[0];
+                List<DanhMucCongViecModel> result = new List<DanhMucCongViecModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DanhMucCongViecModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DanhMucCongViecModel
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_GetAll " + ex.Message);
+                return null;
+            }
+        }
+
         public List<DanhMucCongViecModel> GetByMa(string Ma)
         {
             try
@@ -94,6 +115,82 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<DanhMucCongViecModel> GetByMaThueKhoan(string Ma)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@MaCongViec", Ma ),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_CongViecThueKhoan_GetByMa", pars);
+                DataTable dt = ds.Tables[0];
+                List<DanhMucCongViecModel> result = new List<DanhMucCongViecModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DanhMucCongViecModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DanhMucCongViecModel
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_GetByMa " + ex.Message);
+                return new List<DanhMucCongViecModel>();
+            }
+        }
+
+
+        public DanhMucCongViecModel GetByID(int ID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID", ID ),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_CongViec_GetByID", pars);
+                DataTable dt = ds.Tables[0];
+                List<DanhMucCongViecModel> result = new List<DanhMucCongViecModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DanhMucCongViecModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DanhMucCongViecModel
+                    result.Add(model);
+                }
+                return result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViec_GetByID " + ex.Message);
+                return null;
+            }
+        }
+
+        public DanhMucCongViecModel GetByIDThueKhoan(int ID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID", ID ),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_CongViecThueKhoan_GetByID", pars);
+                DataTable dt = ds.Tables[0];
+                List<DanhMucCongViecModel> result = new List<DanhMucCongViecModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DanhMucCongViecModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DanhMucCongViecModel
+                    result.Add(model);
+                }
+                return result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_GetByID " + ex.Message);
+                return null;
+            }
+        }
+
         public int InsertOrUpdate(DanhMucCongViecModel model)
         {
             try
@@ -104,6 +201,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@GhiChu", model.GhiChu),
                     new SqlParameter("@TenCongViec", model.TenCongViec),
                     new SqlParameter("@Cong", model.Cong),
+                    new SqlParameter("@DonGia", model.DonGia),
                     new SqlParameter("@ThoiGian", model.ThoiGian),
                     new SqlParameter("@NgayTao", ((model.NgayTao.Year == 1 || model.NgayTao == null) ? (object)DBNull.Value : model.NgayTao)),
                     new SqlParameter("@TrangThai", model.TrangThai)
@@ -124,6 +222,36 @@ namespace HRM_TrangAn.DataAccess.DAO
             return 0;
         }
 
+        public int InsertOrUpdateThueKhoan(DanhMucCongViecModel model)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID", model.ID),
+                    new SqlParameter("@MaCongViec", model.MaCongViec),
+                    new SqlParameter("@GhiChu", model.GhiChu),
+                    new SqlParameter("@TenCongViec", model.TenCongViec),
+                    new SqlParameter("@DonGia", model.DonGia),
+                    new SqlParameter("@ThoiGian", model.ThoiGian),
+                    new SqlParameter("@NgayTao", ((model.NgayTao.Year == 1 || model.NgayTao == null) ? (object)DBNull.Value : model.NgayTao)),
+                    new SqlParameter("@TrangThai", model.TrangThai)
+                //new SqlParameter("@ID_ChiNhanh", model.ID_ChiNhanh),
+                };
+
+                object id = helper.ExecuteScalar("sp_CongViecThueKhoan_InsertOrUpdate", pars);
+                if (id != null)
+                {
+                    return int.Parse(id.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_InsertOrUpdate " + ex.Message);
+            }
+
+            return 0;
+        }
+
         public bool InsertOrUpdateMulti(List<DanhMucCongViecModel> model)
         {
             try
@@ -137,6 +265,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                         new SqlParameter("@GhiChu", dm.GhiChu),
                         new SqlParameter("@TenCongViec", dm.TenCongViec),
                         new SqlParameter("@Cong", dm.Cong),
+                        new SqlParameter("@DonGia", dm.DonGia),
                         new SqlParameter("@ThoiGian", dm.ThoiGian),
                         new SqlParameter("@NgayTao", ((dm.NgayTao.Year == 1 || dm.NgayTao == null) ? (object)DBNull.Value : dm.NgayTao)),
                         new SqlParameter("@TrangThai", dm.TrangThai)
@@ -153,6 +282,40 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_CongViec_InsertOrUpdate " + ex.Message);
+            }
+            return false;
+        }
+        
+        
+        public bool InsertOrUpdateMultiThueKhoan(List<DanhMucCongViecModel> model)
+        {
+            try
+            {
+                List<TransactionModel> param = new List<TransactionModel>();
+                foreach (DanhMucCongViecModel dm in model)
+                {
+                    SqlParameter[] pars = new SqlParameter[] {
+                        new SqlParameter("@ID", dm.ID),
+                        new SqlParameter("@MaCongViec", dm.MaCongViec),
+                        new SqlParameter("@GhiChu", dm.GhiChu),
+                        new SqlParameter("@TenCongViec", dm.TenCongViec),
+                        new SqlParameter("@DonGia", dm.DonGia),
+                        new SqlParameter("@ThoiGian", dm.ThoiGian),
+                        new SqlParameter("@NgayTao", ((dm.NgayTao.Year == 1 || dm.NgayTao == null) ? (object)DBNull.Value : dm.NgayTao)),
+                        new SqlParameter("@TrangThai", dm.TrangThai)
+                    };
+                    TransactionModel tranparam = new TransactionModel();
+                    tranparam.procName = "sp_CongViecThueKhoan_InsertOrUpdate";
+                    tranparam.procParams = pars;
+                    param.Add(tranparam);
+                }
+
+                bool success = helper.ExecuteTransaction(param);
+                return success;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_InsertOrUpdate " + ex.Message);
             }
             return false;
         }
@@ -181,6 +344,30 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return false;
             }
         }
+        public bool DeleteThueKhoan(int ID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID",ID ),
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_CongViecThueKhoan_Delete", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_Delete " + ex.Message);
+                return false;
+            }
+        }
 
         public bool DeleteMulti(string ID)
         {
@@ -203,6 +390,31 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_CongViec_DeleteMulti " + ex.Message);
+                return false;
+            }
+        }
+        
+        public bool DeleteMultiThueKhoan(string ID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID",ID ),
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_CongViecThueKhoan_DeleteMulti", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongViecThueKhoan_DeleteMulti " + ex.Message);
                 return false;
             }
         }

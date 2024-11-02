@@ -18,6 +18,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public int TrangThai { get; set; }
 
         public float Cong { get; set; }
+        public float DonGia { get; set; }
 
         public string GhiChu { get; set; }
 

@@ -74,11 +74,43 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public KeHoachModel GetById(int ID)
+        {
+            try
+            {
+                NhanVien_KeHoachDAO nvdao = new NhanVien_KeHoachDAO();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID",ID )
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_KeHoach_GetByID", pars);
+
+                DataTable dt = ds.Tables[0];
+                List<KeHoachModel> result = new List<KeHoachModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành KeHoachModel
+                    model.lstNhanVien = nvdao.GetAllNhanVienTrongKeHoach(model.ID);
+                    model.To_SoNguoiDuKien = GetTo_SoNguoi(model.ID, 0);
+                    model.To_SoNguoiThucTe = GetTo_SoNguoi(model.ID, 1);
+                    result.Add(model);
+                }
+                return result.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_KeHoach_GetByID " + ex.Message);
+                return null;
+            }
+        }
+
         public List<KeHoachModel> GetAllByNgay(DateTime Ngay)
         {
             try
             {
                 NhanVien_KeHoachDAO nvdao = new NhanVien_KeHoachDAO();
+                KeHoach_FileDAO fdao = new KeHoach_FileDAO();
+                ToNhom_KeHoachDAO tndao = new ToNhom_KeHoachDAO();
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@Ngay",Ngay )
@@ -90,7 +122,10 @@ namespace HRM_TrangAn.DataAccess.DAO
                 {
                     KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành KeHoachModel
                     model.lstNhanVien = nvdao.GetAllNhanVienTrongKeHoach(model.ID);
+                    model.lstToNhomKeHoach = tndao.GetAllByKeHoach(model.ID);
+                    model.lstFile = fdao.GetAllByKeHoach(model.ID);
                     model.To_SoNguoiDuKien = GetTo_SoNguoi(model.ID, 0);
+                    model.To_SoNguoiDuKien_Text = model.To_SoNguoiDuKien.Replace("</br>", ", ");
                     model.To_SoNguoiThucTe = GetTo_SoNguoi(model.ID, 1);
                     result.Add(model);
                 }
@@ -215,6 +250,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_CongViec", model.ID_CongViec),
                     new SqlParameter("@Cong", model.Cong),
                     new SqlParameter("@TenCongViec", model.TenCongViec),
+                    new SqlParameter("@MaPhieuPhanCong", model.MaPhieuPhanCong),
                     new SqlParameter("@DiaDiem", model.DiaDiem),
                     new SqlParameter("@ThoiGianDuKien", model.ThoiGianDuKien),
                     new SqlParameter("@ThoiGianThucTe", model.ThoiGianThucTe),

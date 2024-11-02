@@ -1,0 +1,86 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/danhmuccongviecthuekhoan.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Danh mục công việc thuê khoán</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-orange" onclick="openCopyWindow()"> <i class="fa fa-clone"> Nhân bản</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    @*<button class="k-button bg-green" onclick="NhapExcel()"> <i class="fa fa-file-excel-o"> Nhập excel</i> </button>*@
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="TenCongViec">
+            <label style="width:100%">Tên công việc: <span style="color:red">*</span></label>
+            <input id="TenCongViec" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="MaCongViec">
+            <label style="width:100%">Mã công việc: <span style="color:red">*</span></label>
+            <input id="MaCongViec" type="text" class="k-textbox input" /> @*input validate ko dduowwcj để style="width:100%"*@
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid" toggle-valid="DonGia">
+            <label style="width:100%">Đơn giá: <span style="color:red">*</span></label>
+            <input id="DonGia" type="number" class="k-textbox input" /> @*input validate ko dduowwcj để style="width:100%"*@
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid" toggle-valid="ThoiGian">
+            <label style="width:100%">Thời gian/1 ngày công: <span style="color:red">*</span></label>
+            <input id="ThoiGian" type="number" class="k-textbox input" /> 
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú: </label>
+            <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+
+        </div>
+    </form>
+</div>
+
+<div id="windowImport" style="visibility:hidden">
+    <div class="toolBarMenu">
+        <button class="k-button bg-green" onclick="DownloadTemp()"> <i class="fa fa-file-excel-o"> Tải mẫu excel</i> </button>
+        <button class="k-button bg-blue" onclick="LuuImport()"> <i class="fa fa-plus-square"> Lưu dữ liệu excel</i></button>
+        <button class="k-button bg-red" onclick="HuyImport()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formImport">
+        <br>
+        <div class="form-group">
+            <label style="width:100%">Chọn file excel: </label>
+            <input type="file" id="file" />
+        </div>
+
+        <div class="form-group">
+            <label>Dữ liệu trong file excel</label>
+            <div id="gridImport"></div>
+        </div>
+    </form>
+</div>

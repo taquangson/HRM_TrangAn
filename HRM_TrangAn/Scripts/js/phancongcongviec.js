@@ -3,6 +3,7 @@ var itemToSelect = [];
 var selectUID = [];
 var selectdNhanVien = [];
 var listGridSelected = [];
+var SERVERIMAGE = "http://localhost:56812/";
 $(document).ready(function () {
     $("#Ngay").kendoDatePicker({
         format: "dd/MM/yyyy",
@@ -44,7 +45,7 @@ $(document).ready(function () {
         //Danh sách cột của bảng dữ liệu
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -1206,7 +1207,7 @@ $(document).ready(function () {
         //},
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -1634,6 +1635,15 @@ $(document).ready(function () {
             }
         })
     });
+
+    $("#previewimage").kendoTooltip({
+        filter: "img",
+        position: "top",
+        content: function (e) {
+            var target = e.target;
+            return "<img style='max-width:800px;' src='" + target[0].currentSrc + "' />"
+        }
+    }).data("kendoTooltip");
     //LoadGridData();
     //TimKiem();
     $("#dialogRoot").kendoDialog().data("kendoDialog").close();
@@ -1782,7 +1792,7 @@ function detailInit(e) {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -2300,6 +2310,23 @@ function openUpdateWindow() {
             //pageSize: 20,
         });
         $("#gridNhanVienDK").data("kendoGrid").setDataSource(dataSource);
+        $("#previewimage").html('');
+        for (var i = 0; i < selectedItem.lstFile.length; i++) {
+            var item = selectedItem.lstFile[i];
+            let ext = item.FilePath.split('.').pop();
+            let preview = '';
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
+                preview = $("<div class='image-preview'><img style='max-width:90px;max-height:90px' data-src=" + SERVERIMAGE + item.FilePath + " src=" + SERVERIMAGE + item.FilePath + "></img><p><a class='k-link' href='" + SERVERIMAGE + item.FilePath + "' target='_blank'>" + item.FileName + "</a></p></div>");
+            } else if (ext == 'pdf') {
+                preview = $("<div class='image-preview'><img style='max-width:90px;max-height:90px' data-src=" + SERVERIMAGE + item.FilePath + " src='../Images/pdficon.jpg'></img><p><a class='k-link' href='" + SERVERIMAGE + item.FilePath + "' target='_blank'>" + item.FileName + "</a></p></div>");
+            } else if (ext == 'doc' || ext == 'docx') {
+                preview = $("<div class='image-preview'><img style='max-width:90px;max-height:90px' data-src=" + SERVERIMAGE + item.FilePath + " src='../Images/docicon.png'></img></span><p><a class='k-link' href='" + SERVERIMAGE + item.FilePath + "' target='_blank'>" + item.FileName + "</a></p></div>");
+            } else if (ext == 'xls' || ext == 'xlsx') {
+                preview = $("<div class='image-preview'><img style='max-width:90px;max-height:90px' data-src=" + SERVERIMAGE + item.FilePath + " src='../Images/xlsicon.png'></img><p><a class='k-link' href='" + SERVERIMAGE + item.FilePath + "' target='_blank'>" + item.FileName + "</a></p></div>");
+            }
+            $("#previewimage").append(preview);
+        }
+
         //});
         if (selectedItem.TrangThai == 2) {
             $("#btnUpdate").hide();
@@ -3041,7 +3068,7 @@ function LuuAddNhanVienToNhom() {
             DiaChi: item.DiaChi,
             TrangThai: item.TrangThai,
             MaNhanVien: item.MaNhanVien,
-            Cong: parseFloat($('#Cong').val())
+            Cong: parseFloat($('#CongThucTe').val())
         });
         arr_idnhanvien.push(item.ID);
     })
@@ -3056,7 +3083,7 @@ function LuuAddNhanVienToNhom() {
             DiaChi: item.DiaChi,
             TrangThai: item.TrangThai,
             MaNhanVien: item.MaNhanVien,
-            Cong: parseFloat($('#Cong').val())
+            Cong: parseFloat($('#CongThucTe').val())
         });
         arr_idnhanvien.push(item.ID);
     });
@@ -3066,13 +3093,13 @@ function LuuAddNhanVienToNhom() {
         type: 'POST',
         data: {
             lst_id: arr_idnhanvien.join(','),
-            from: kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-            to: kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss')
+            from: kendo.toString($("#ThoiGianBatDauThucTe").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
+            to: kendo.toString($("#ThoiGianKetThucThucTe").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss')
         }
     }).done(function successCallback(r) {
         var response = JSON.parse(r);
         $.each(response, function (index, item) {
-            item.Cong = parseFloat($('#Cong').val())
+            item.Cong = parseFloat($('#CongThucTe').val())
         })
         if (response) {
             var dataSource = new kendo.data.DataSource({

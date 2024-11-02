@@ -464,6 +464,27 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return null;
             }
         }
+        
+        public DataTable GetDataCongTinhTien(DateTime from, DateTime to, int ID_ToNhom)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@fromdate", from),
+                    new SqlParameter("@todate", to),
+                    new SqlParameter("@ID_ToNhom", ID_ToNhom)
+                };
+
+                DataSet ds = helper.ExecuteDataSet("sp_ChamCong_BaoCaoCongTinhTien", pars);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChamCong_BaoCaoCongTinhTien " + ex.Message);
+                return null;
+            }
+        }
 
         public DataTable GetDataCongChuyenDoTheoDanhMucCongViec(DateTime from, DateTime to, int ID_ToNhom)
         {

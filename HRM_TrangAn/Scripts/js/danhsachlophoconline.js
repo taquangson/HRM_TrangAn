@@ -18,7 +18,7 @@
         },
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",

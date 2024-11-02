@@ -75,6 +75,32 @@ namespace HRM_TrangAn.DataAccess.DAO
             return obj;
         }
 
+        private ChinhSachLuong_NhanVienModel GetObjCSL_NVFromDataRow(DataRow dr)
+        {
+            ChinhSachLuong_NhanVienModel obj = new ChinhSachLuong_NhanVienModel();
+            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties())
+            {
+                if (dr.Table.Columns.IndexOf(propertyInfo.Name) >= 0)
+                {
+
+                    if (!string.IsNullOrWhiteSpace(dr[propertyInfo.Name].ToString()))
+                    {
+                        var value = Convert.ChangeType(dr[propertyInfo.Name], propertyInfo.PropertyType);
+                        propertyInfo.SetValue(obj, value);
+                    }
+                    else
+                    {
+                        propertyInfo.SetValue(obj, null);
+                    }
+                }
+                else
+                {
+                    propertyInfo.SetValue(obj, null);
+                }
+            }
+            return obj;
+        }
+
 
         public List<NhanVienModel> GetAll()
         {
@@ -218,7 +244,38 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return null;
             }
         }
-        
+
+        public List<NhanVienModel> GetAllNhanVienTrongMultiToNhom(string ID_ToNhom)
+        {
+            try
+            {
+                File_NhanVienDAO fdao = new File_NhanVienDAO();
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ID_ToNhom", ID_ToNhom)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_NhanVien_ToNhom_GetAllNhanVien_TrongMultiToNhom", pars);
+                DataTable dt = ds.Tables[0];
+                List<NhanVienModel> result = new List<NhanVienModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    NhanVienModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành NhanVienModel
+                    //model.AnhDaiDien = fdao.GetAllByNhanVien(model.ID).Where(x => x.FileType == 1).FirstOrDefault();
+                    //if (model.AnhDaiDien == null)
+                    //{
+                    //    model.AnhDaiDien = new File_NhanVienModel();
+                    //    model.AnhDaiDien.FileType = 0;
+                    //}
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_NhanVien_ToNhom_GetAllNhanVien_TrongMultiToNhom " + ex.Message);
+                return null;
+            }
+        }
+
         public List<NhanVienModel> GetAllNhanVienTrongToNhomTheoCongViec(int ID_ToNhom, int ID_CongViec)
         {
             try
@@ -759,6 +816,81 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_NhanVien_StartWork " + ex.Message);
+                return false;
+            }
+        }
+
+        public List<ChinhSachLuong_NhanVienModel> GetByID_ChinhSachLuong(int ID_ChinhSachLuong)
+        {
+            try
+            {
+                List<ChinhSachLuong_NhanVienModel> result = new List<ChinhSachLuong_NhanVienModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_ChinhSachLuong",ID_ChinhSachLuong),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_NhanVien_GetByID_ChinhSachLuong", pars);
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ChinhSachLuong_NhanVienModel model = GetObjCSL_NVFromDataRow(dr);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_GetByID_ChinhSachLuong " + ex.Message);
+                return new List<ChinhSachLuong_NhanVienModel>();
+            }
+        }
+
+        public List<ChinhSachLuong_NhanVienModel> GetByNotID_ChinhSachLuong(int ID_ChinhSachLuong)
+        {
+            try
+            {
+                List<ChinhSachLuong_NhanVienModel> result = new List<ChinhSachLuong_NhanVienModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_ChinhSachLuong",ID_ChinhSachLuong),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_NhanVien_GetByNotID_ChinhSachLuong", pars);
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ChinhSachLuong_NhanVienModel model = GetObjCSL_NVFromDataRow(dr);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_GetByNotID_ChinhSachLuong " + ex.Message);
+                return new List<ChinhSachLuong_NhanVienModel>();
+            }
+        }
+
+        public bool XuatHoSoNhanSu(string StringID_NhanVien)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("StringID_NhanVien", StringID_NhanVien)
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_NhanVien_XuatHoSoNhanSu", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_NhanVien_XuatHoSoNhanSu " + ex.Message);
                 return false;
             }
         }

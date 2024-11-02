@@ -25,9 +25,9 @@ $(document).ready(function () {
                     id: "ID_NhanVien",
                     fields: {
                         ID_NhanVien: { type: 'number', editable: false },
-                        MaThuyen: { type: 'text', editable: false },
+                        MaThuyen: { type: 'number', editable: false },
                         TenToNhom: { type: 'text', editable: false },
-                        MaNhanVien: { type: 'text', editable: false },
+                        MaNhanVien: { type: 'number', editable: false },
                         TenNhanVien: { type: 'text', editable: false },
                         ChuyenDoHRM: { type: 'number', editable: false },
                         ChuyenDoThem: { type: 'number', editablle: true, validation: { min: 0 } },
@@ -354,9 +354,9 @@ function TimKiem() {
                     id: "ID_NhanVien",
                     fields: {
                         ID_NhanVien: { type: 'number', editable: false },
-                        MaThuyen: { type: 'text', editable: false },
+                        MaThuyen: { type: 'number', editable: false },
                         TenToNhom: { type: 'text', editable: false },
-                        MaNhanVien: { type: 'text', editable: false },
+                        MaNhanVien: { type: 'number', editable: false },
                         TenNhanVien: { type: 'text', editable: false },
                         ChuyenDoHRM: { type: 'number', editable: false },
                         ChuyenDoThem: { type: 'number', editablle: true, validation: { min: 0 } },
@@ -436,7 +436,7 @@ function detailInit(e) {
             },
             columns: [
                 {
-                    width: "26px",
+                    width: "35px",
                     selectable: true,
                     headerAttributes: {
                         style: "text-align:left",

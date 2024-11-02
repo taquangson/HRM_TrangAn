@@ -53,7 +53,7 @@ $(document).ready(function () {
         //Danh sách cột của bảng dữ liệu
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -849,7 +849,7 @@ function detailInit(e) {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",

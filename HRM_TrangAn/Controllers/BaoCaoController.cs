@@ -500,7 +500,7 @@ namespace HRM_TrangAn.Controllers
         [HttpPost]
         public ContentResult GetData_BaoCaoChiTietChamCong(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
-            ChamCongDAO tk_dao = new ChamCongDAO();
+            ChamCongDAO tk_dao = new ChamCongDAO();            
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
@@ -521,8 +521,10 @@ namespace HRM_TrangAn.Controllers
                 dt.Columns.Add("data" + date.ToString("yyyyMMdd"), typeof(float));
                 dt.Columns.Add("data2" + date.ToString("yyyyMMdd"), typeof(float));
                 dt.Columns.Add("data3" + date.ToString("yyyyMMdd"), typeof(float));
+                dt.Columns.Add("data4" + date.ToString("yyyyMMdd"), typeof(float));
             }
             DataTable conglaodong = tk_dao.GetDataCong(TuNgay, DenNgay, ID_ToNhom);
+            DataTable congtinhtien = tk_dao.GetDataCongTinhTien(TuNgay, DenNgay, ID_ToNhom);
             DataTable nghiphep = tk_dao.GetDataNghiPhep(TuNgay, DenNgay, ID_ToNhom);
             DataTable ticket = tk_dao.GetDataCongChuyenDo_TruGiamTru(TuNgay, DenNgay, ID_ToNhom);
             DataTable chotcong = tk_dao.GetDataChotCong(TuNgay, DenNgay, ID_ToNhom);
@@ -546,6 +548,7 @@ namespace HRM_TrangAn.Controllers
                     dr["data" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     dr["data2" + date.ToString("yyyyMMdd")] = float.Parse(conglaodong.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     dr["data3" + date.ToString("yyyyMMdd")] = float.Parse(nghiphep.Rows[i][date.ToString("yyyyMMdd")].ToString());
+                    dr["data4" + date.ToString("yyyyMMdd")] = float.Parse(congtinhtien.Rows[i][date.ToString("yyyyMMdd")].ToString());
                 }
                 dt.Rows.Add(dr);
                 childRow = new Dictionary<string, object>();

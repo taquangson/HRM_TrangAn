@@ -18,6 +18,10 @@
         height: 27px;
         display: block;
     }
+
+/*    .k-tooltip, .k-tooltip.k-popup, .k-tooltip.k-widget {
+        height: auto;
+    }*/
 </style>
 <div id="rootContainer" style="display:none">
     <div class="row">
@@ -51,19 +55,18 @@
 <script id="templateTooltip" type="text/x-kendo-template">
     #var idnv = target.attr("data-idnhanvien"); #
     #var ngay = target.attr("data-ngay"); #
-    #loadChiTietChuyenDo(idnv,ngay)#
+    #var type = target.attr("data-type"); #
+    # if(type == 'congld') loadChiTietChuyenDo(idnv,ngay); #
+    # if(type == 'congps') loadChiTietPhatSinh(idnv,ngay); #
+    # if(type == 'congtt') loadChiTietTinhTien(idnv,ngay); #
     <div id="contentgrid">
-        <div id="gridChiTietChuyenDo">
-        </div>
     </div>
 </script>
 
-<script id="templateTooltipPS" type="text/x-kendo-template">
+@*<script id="templateTooltipPS" type="text/x-kendo-template">
     #var idnv = target.attr("data-idnhanvien"); #
     #var ngay = target.attr("data-ngay"); #
     #loadChiTietPhatSinh(idnv,ngay)#
     <div id="contentgridPS">
-        <div id="gridChiTietPhatSinh">
-        </div>
     </div>
-</script>
+</script>*@

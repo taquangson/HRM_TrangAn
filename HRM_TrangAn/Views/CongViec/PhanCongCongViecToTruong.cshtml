@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Phân công công việc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-cell {
+        display: inline-grid;
+        padding-block: 10px;
+    }
+
+    .k-card-title {
+        font-size: 15px;
+    }
+    .k-card-header {
+        border-color: #ccc;
+        color: #333;
+        background-color: #decce1;
+    }
+</style>
+<script src="~/Scripts/js/phancongcongviectotruong.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Quản lý phân công việc</b>
+</span>
+<div class="row k-d-flex" style="margin-top:10px;">
+    <div style="width:200px;margin-left:5px;">
+        <label style="width:100%">Ngày làm việc:</label>
+        <input style="width:100%" id="Ngay" />
+    </div>
+    <div style="width: 120px; margin-left: 5px; ">
+        <label style="width:100%;height:15px;"> </label>
+        <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Tải dữ liệu </i></button>
+    </div>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    @*<button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>*@
+    @*<button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>*@
+    @*<button class="k-button bg-blue" onclick="openCopyWindow()"> <i class="fa fa-clone"> Sao chép</i> </button>*@
+
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button id="btnSave" class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div style="width:100%;float:left">
+            <div class="form-group valid" toggle-valid="NgayLamViec">
+                <label style="width:100%">Ngày làm việc: <span style="color:red">*</span></label>
+                <input id="NgayLamViec" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+            <div class="form-group valid" toggle-valid="ComboCongViec">
+                <label style="width:100%">Nội dung công việc: <span style="color:red">*</span></label>
+                <input id="ComboCongViec" type="text" class=" input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+            <div class="form-group valid" toggle-valid="ComboNguoiGiamSat">
+                <label style="width:100%">Người giám sát: <span style="color:red">*</span></label>
+                <input id="ComboNguoiGiamSat" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+            <div class="form-group valid" toggle-valid="DiaDiem">
+                <label style="width:100%">Địa điểm: <span style="color:red">*</span></label>
+                <textarea id="DiaDiem" type="text" rows="2" style="width:100%;padding:2px;" class="k-textbox"></textarea>
+
+                <span class="fa fa-exclamation-triangle icon"></span>
+
+            </div>
+
+            <div class="form-group valid" toggle-valid="Cong">
+                <label style="width:100%">Công/người: <span style="color:red">*</span></label>
+                <input id="Cong" type="number" class="k-textbox input" onchange="UpdateTimeDK(this.value)" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="ThoiGianDuKien" hidden>
+                <label style="width:100%">Thời gian: <span style="color:red">*</span></label>
+                <input id="ThoiGianDuKien" type="number" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="ThoiGianBatDauDuKien">
+                <label style="width:100%">Thời gian bắt đầu: <span style="color:red">*</span></label>
+                <input id="ThoiGianBatDauDuKien" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="ThoiGianKetThucDuKien">
+                <label style="width:100%">Thời gian kết thúc: <span style="color:red">*</span></label>
+                <input id="ThoiGianKetThucDuKien" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group valid" toggle-valid="SoNguoiDuKien">
+                <label style="width:100%">Số lao động: <span style="color:red">*</span></label>
+                <input id="SoNguoiDuKien" type="number" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Ghi chú: </label>
+                <textarea id="GhiChu" type="text" rows="2" style="width:100%;padding:2px;" class="k-textbox"></textarea>
+
+            </div>
+        </div>
+        <div style="width:100%;float:left">
+            <div class="form-group valid" toggle-valid="ComboToNhom">
+                <label style="width:100%">Tổ nhóm:<span style="color:red">*</span></label>
+                <input id="ComboToNhom" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>
+            <div class="form-group">
+                <label>Danh sách tổ nhóm được phân công:</label>
+                <div id="gridToNhom"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/x-kendo-template" id="wo-template">
+    <div class="k-card">
+        <div class="k-card-header">
+            <h5 class="k-card-title">#: MaPhieuPhanCong #</h5>
+            <h6 class="k-card-subtitle">#: kendo.toString(NgayTao,'dd/MM/yyyy HH:mm') #</h6>
+        </div>
+        <div class="k-card-body">
+            <p>- Ngày làm việc: #: kendo.toString(NgayLamViec,'dd/MM/yyyy') # .</p>
+            <p> - Th/gian làm việc từ: #: kendo.toString(ThoiGianBatDauDuKien,'HH:mm') # đến #: kendo.toString(ThoiGianKetThucDuKien,'HH:mm') #
+            <p>- Công việc: #: TenCongViec #. </p>
+            <p>- Địa điểm: #: DiaDiem #. </p>
+            <p>- Phân công kế hoạch: #: To_SoNguoiDuKien_Text # </p>
+        </div>
+        <div class="k-actions k-card-actions k-actions-stretched">
+            <span class="k-card-action"><button onclick="editPhieu('#: uid #')" class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Chi tiết</button></span>
+            <span class="k-card-action"><button onclick="phancong('#: uid #')"  class="k-button k-button-flat-primary k-button-flat k-button-md k-rounded-md">Phân công</button></span>
+        </div>
+    </div>
+</script>

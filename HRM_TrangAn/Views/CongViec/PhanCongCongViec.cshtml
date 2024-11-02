@@ -175,12 +175,12 @@
                 </div>
                 <div class="form-group valid" toggle-valid="ThoiGianBatDauDuKienDK">
                     <label style="width:100%">Thời gian bắt đầu: <span style="color:red">*</span></label>
-                    <input id="ThoiGianBatDauDuKienDK" type="text" class="input" readonly/>
+                    <input id="ThoiGianBatDauDuKienDK" type="text" class="input" readonly />
                     <span class="fa fa-exclamation-triangle icon"></span>
                 </div>
                 <div class="form-group valid" toggle-valid="ThoiGianKetThucDuKienDK">
                     <label style="width:100%">Thời gian kết thúc: <span style="color:red">*</span></label>
-                    <input id="ThoiGianKetThucDuKienDK" type="text" class="input" readonly/>
+                    <input id="ThoiGianKetThucDuKienDK" type="text" class="input" readonly />
                     <span class="fa fa-exclamation-triangle icon"></span>
                 </div>
                 <div class="form-group valid" toggle-valid="SoNguoiDK">
@@ -263,8 +263,17 @@
                 <div id="gridNhanVienThucTe"></div>
             </div>
         </div>
+        <div style="width:100%;float:left">
+            <div class="form-group">
+                <label>Tài liệu, hình ảnh <i>(Bấm vào tên tệp để xem đầy đủ)</i>:</label>
+            </div>
+        </div>
+        <div style="width: 100%; flex-direction:row; display: flex">
+            <div class="form-group" id="previewimage"></div>
+        </div>
     </form>
 </div>
+
 <div id="windowNhanVien">
     <div class="toolBarMenu">
         <button class="k-button bg-blue" onclick="LuuAddNhanVien()"> <i class="fa fa-plus-square"> Lưu </i></button>

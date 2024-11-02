@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/danhmucchinhsachluong.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Danh mục chính sách lương</b>
+</span>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="NhapExcel()"> <i class="fa fa-file-excel-o"> Nhập excel</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="Ten">
+            <label style="width:100%">Tên: <span style="color:red">*</span></label>
+            <input id="Ten" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="Ma">
+            <label style="width:100%">Mã chính sách lương: <span style="color:red">*</span></label>
+            <input id="Ma" type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid">
+            <label style="width:100%">Loại hợp đồng: <span style="color:red">*</span></label>
+            <input id="ComboHopDong" style="width:100%" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid">
+            <label style="width:100%">Loại chính sách: <span style="color:red">*</span></label>
+            <input id="ComboLoaiChinhSach" style="width:100%" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid">
+            <label style="width:100%">Kỳ Hạn Thanh Toán: <span style="color:red">*</span></label>
+            <input id="ComboKyHanThanhToan" style="width:100%" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú: </label>
+            <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group">
+            <div id="gridNhanVien"></div>
+        </div>
+    </form>
+</div>
+<div id="windowNhanVien">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddNhanVien()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-2">
+                <label style="width:100%">Áp dụng từ ngày</label>
+                <input style="width:100%" id="TuNgay" />
+            </div>
+            <div class="col-sm-2">
+                <label style="width:100%">Áp dụng đến ngày</label>
+                <input style="width:100%" id="DenNgay" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách nhân viên:</label>
+        <div id="gridAddNhanVien"></div>
+    </div>
+</div>
+
+
+<div id="windowCH">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuCauHinh()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyCauHinh()"> <i class="fa fa-trash-o"> Huỷ </i></button>
+    </div>
+    <form id="formCauHinh">
+        <br />
+        <div style="width:50%;float:left">
+            <div class="form-group">
+                <label style="width:100%">Áp dụng từ ngày</label>
+                <input style="width:100%" id="NgayBatDau" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Công chuẩn</label>
+                <input type="number" class="k-textbox" style="width:100%" id="CongChuan" />
+            </div>
+
+            <div class="form-group">
+                <label style="width:100%">Doanh số tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="DoanhSoToiThieu" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Lượng khách tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="LuongKhachToiThieu" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Ngày công tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="NgayCongToiThieu" />
+            </div>
+        </div>
+        <div style="width:50%;float:left">
+            <div class="form-group">
+                <label style="width:100%">Áp dụng đến ngày</label>
+                <input type="checkbox" style="width:100%" id="NgayKetThuc" />
+            </div>
+            <div class="form-group" style="margin-top:75px;">
+                <label style="width:100%">Luỹ kế</label>
+                <input type="checkbox"  id="LuyKe_DoanhSoToiThieu" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%">Luỹ kế</label>
+                <input type="checkbox"  id="LuyKe_LuongKhachToiThieu" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%">Luỹ kế</label>
+                <input type="checkbox"  id="LuyKe_NgayCongToiThieu" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú</label>
+            <textarea class="k-textbox" style="width:100%" id="GhiChu"></textarea>
+        </div>
+    </form>
+</div>

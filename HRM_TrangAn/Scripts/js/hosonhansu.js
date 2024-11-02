@@ -105,7 +105,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 locked: true,
                 headerAttributes: {

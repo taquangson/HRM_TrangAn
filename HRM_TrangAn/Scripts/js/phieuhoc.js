@@ -20,7 +20,7 @@
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -169,7 +169,7 @@
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -179,7 +179,7 @@
             {
                 title: "STT",
                 template: "#= ++record #",
-                width: "30px",
+                width: "35px",
                 attributes: {
                     class: "text-center"
                 },

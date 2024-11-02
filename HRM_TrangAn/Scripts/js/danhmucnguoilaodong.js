@@ -105,7 +105,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 locked: true,
                 headerAttributes: {
@@ -3908,4 +3908,34 @@ function LoadDataChucDanh() {
             dataSource: dataSource,
         });
     });
+}
+
+function XuatHoSoNhanSu() {
+    var grid = $("#grid").data("kendoGrid");
+    if (grid.select().length > 0) {
+        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xuất hồ sơ nhân sự của " + grid.select().length / 2 + " nhân viên?</b>", function () { XacNhanXuat(grid); }, function () { });
+    } else {
+        openDialog(dialogRoot, "<b style='line-height:40px;'>Bạn phải chọn dữ liệu cần xóa</b>");
+    }
+}
+
+function XacNhanXuat(grid) {
+    var selectedNhanVien = []
+    grid.select().each(function (index, item) {
+        var dataItem = grid.dataItem(item);
+        selectedNhanVien.push(dataItem.ID);
+    })
+    selectedNhanVien = selectedNhanVien.splice(0, selectedNhanVien.length/2)
+    console.log(selectedNhanVien);
+    $.ajax({
+        url: '/NhanVien/XuatHoSoNhanSu?StringID_NhanVien=' + selectedNhanVien.join(','),
+        type: 'POST'
+    }).done(function successCallback(response) {
+        if (response.status) {
+            notification.show({ kValue: response.msg }, "success");
+            LoadGridData();
+        } else {
+            notification.show({ kValue: response.msg }, "error");
+        }
+    })
 }

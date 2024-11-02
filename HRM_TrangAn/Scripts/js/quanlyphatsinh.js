@@ -42,7 +42,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -318,7 +318,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -495,7 +495,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "26px",
+                width: "35px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -608,7 +608,7 @@ $(document).ready(function () {
         type: 'GET',
     }).done(function successCallback(response) {
         var dataSource = new kendo.data.DataSource({
-            data: response,
+            data: JSON.parse(response),
 
         });
         $("#ComboNhanVien").kendoMultiColumnComboBox({

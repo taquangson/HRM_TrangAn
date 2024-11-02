@@ -25,11 +25,26 @@ namespace HRM_TrangAn.Controllers
             List<DanhMucCongViecModel> data = dao.GetAll();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        
+        public ActionResult GetAllDanhMucCongViecThueKhoan()
+        {
+            DanhMucCongViecDAO dao = new DanhMucCongViecDAO();
+            List<DanhMucCongViecModel> data = dao.GetAllThueKhoan();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult GetByMaDanhMucCongViec(string MaCongViec)
         {
             DanhMucCongViecDAO dao = new DanhMucCongViecDAO();
             List<DanhMucCongViecModel> data = dao.GetByMa(MaCongViec);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpGet]
+        public ActionResult GetByMaDanhMucCongViecThueKhoan(string MaCongViec)
+        {
+            DanhMucCongViecDAO dao = new DanhMucCongViecDAO();
+            List<DanhMucCongViecModel> data = dao.GetByMaThueKhoan(MaCongViec);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
@@ -38,6 +53,21 @@ namespace HRM_TrangAn.Controllers
             DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             if (dm_dao.InsertOrUpdate(model) > 0)
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
+        [HttpPost]
+        public ActionResult InsertOrUpdate_DanhMucCongViecThueKhoan(DanhMucCongViecModel model)
+        {
+            DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.InsertOrUpdateThueKhoan(model) > 0)
             {
                 return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
             }
@@ -62,6 +92,23 @@ namespace HRM_TrangAn.Controllers
             }
 
         }
+        
+        
+        [HttpPost]
+        public ActionResult InsertOrUpdate_ListDanhMucCongViecThueKhoan(List<DanhMucCongViecModel> list)
+        {
+            DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.InsertOrUpdateMultiThueKhoan(list))
+            {
+                return Json(new { success = true, msg = "Lưu file thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu file thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
         [HttpPost]
         public ActionResult Delete_DanhMucCongViec(int ID)
@@ -77,6 +124,21 @@ namespace HRM_TrangAn.Controllers
                 return Json(new { success = false, msg = "Xóa danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
             }
         }
+        
+        [HttpPost]
+        public ActionResult Delete_DanhMucCongViecThueKhoan(int ID)
+        {
+            DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.DeleteThueKhoan(ID))
+            {
+                return Json(new { success = true, msg = "Xóa danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Xóa danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         [HttpPost]
         public ActionResult DeleteMulti_DanhMucCongViec(string ID)
@@ -84,6 +146,21 @@ namespace HRM_TrangAn.Controllers
             DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             if (dm_dao.DeleteMulti(ID))
+            {
+                return Json(new { success = true, msg = "Xóa danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Xóa danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        
+        [HttpPost]
+        public ActionResult DeleteMulti_DanhMucCongViecThueKhoan(string ID)
+        {
+            DanhMucCongViecDAO dm_dao = new DanhMucCongViecDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.DeleteMultiThueKhoan(ID))
             {
                 return Json(new { success = true, msg = "Xóa danh mục thành công" }, JsonRequestBehavior.AllowGet);
             }

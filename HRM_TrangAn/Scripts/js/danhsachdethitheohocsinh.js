@@ -40,7 +40,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "30px",
+                width: "35px",
                 selectable: true,
                 hidden: true,
                 headerAttributes: {

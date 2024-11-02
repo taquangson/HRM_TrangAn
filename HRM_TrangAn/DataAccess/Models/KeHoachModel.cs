@@ -9,8 +9,10 @@ namespace HRM_TrangAn.DataAccess.Models
     {
         public int ID { get; set; }
         public int ID_CongViec { get; set; }
+        public string MaPhieuPhanCong { get; set; }
         public string TenCongViec { get; set; }
         public float Cong { get; set; }
+        public float PhuCap { get; set; }
         public int ID_CongViecThucTe { get; set; }
         public string TenCongViecThucTe { get; set; }
         public float CongThucTe { get; set; }
@@ -20,11 +22,14 @@ namespace HRM_TrangAn.DataAccess.Models
         public string GhiChu { get; set; }
         public int TrangThai { get; set; }
         public string To_SoNguoiDuKien { get; set; }
+        public string To_SoNguoiDuKien_Text { get; set; }
         public string To_SoNguoiThucTe { get; set; }
         public DateTime NgayLamViec { get; set; }
         public DateTime NgayTao { get; set; }
+        public List<ToNhom_KeHoachModel> lstToNhomKeHoach { get; set; } // Param để insert + update + delete
         public List<NhanVien_KeHoachModel> lstNhanVienKeHoach { get; set; } // Param để insert + update + delete
         public List<NhanVien_KeHoachModel> lstNhanVien { get; set; } // Param để view datagrid
+        public List<KeHoach_FileModel> lstFile { get; set; }
         public int SoNguoiDuKien { get; set; }
         public int SoNguoiThucTe { get; set; }
 

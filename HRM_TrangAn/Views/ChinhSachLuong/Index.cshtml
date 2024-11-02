@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .itemchinhsach {
+        padding: 3px 10px;
+        background-color: #4CAF50;
+        border: solid 1px;
+        border-radius: 5px;
+        margin-left:3px;
+    }
+</style>
+<script src="~/Scripts/js/chinhsachluongnhanvien.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Chính sách lương cho nhân viên</b>
+</span>
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Phòng ban</label>
+        <input style="width:100%" id="treePhongBan" />
+    </div>
+    @*<div class="col-sm-2">
+        <label style="width:100%">Từ ngày</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày</label>
+        <input style="width:100%" id="DenNgay" />
+    </div>*@
+    <div class="col-sm-3">
+        <label style="width:100%"> </label>
+
+        @*<button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel </i></button>*@
+    </div>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Tải dữ liệu </i></button>
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Áp dụng chính sách </i></button>
+    @*<button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>*@
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+
+    <div id="grid"></div>
+</div>
+
+<div style="visibility:hidden" id="window">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <input type="hidden" id="ID_HoSoNhanSu" />
+        <input type="hidden" id="ID_PhongBan" />
+        <div class="form-group valid" toggle-valid="Ten">
+            <label id="TenDoiTuong" style="width:100%"></label>
+            <input id="Ten" readonly type="text" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="ComboChinhSachLuong">
+            <label style="width:100%">Chính sách lương:</label>
+            <div class="input" id="ComboChinhSachLuong"></div>
+        </div>
+        <div class="form-group valid" toggle-valid="MucLuong">
+            <label style="width:100%">Mức lương:</label>
+            <input id="MucLuong" class="k-textbox input" type="number"/>
+        </div>
+        <div class="form-group valid" toggle-valid="BatDau">
+            <label style="width:100%">Từ ngày:</label>
+            <input id="BatDau" class="input" />
+        </div>
+        <div class="form-group valid" toggle-valid="KetThuc">
+            <label style="width:100%">Đến ngày:</label>
+            <input id="KetThuc" class="input" />
+        </div>
+        <div class="form-group valid" toggle-valid="GhiChu">
+            <label style="width:100%">Ghi chú:</label>
+            <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+    </form>
+</div>

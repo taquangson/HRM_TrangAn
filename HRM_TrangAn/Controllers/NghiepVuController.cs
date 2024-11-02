@@ -80,9 +80,21 @@ namespace HRM_TrangAn.Controllers
         {
             return View();
         }
+        
+        [SessionExpire]
+        public ActionResult QuanLyCongTinhTien()
+        {
+            return View();
+        }
 
         [SessionExpire]
         public ActionResult QuanLyDiMuonVeSom()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult QuanLyChuyenCong()
         {
             return View();
         }

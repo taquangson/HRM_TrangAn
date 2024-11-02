@@ -179,13 +179,13 @@
 
     });
 
-    LoadDataChamCong();
-    LoadDataThuyen();
-    LoadData_SoLaiDoCoTichKeTrongThang();
-    LoadData_GetTinhTrangChungChi();
-    LoadData_SoHopDongSapHetHan();
-    LoadData_GetDataMatKetNoi();
-    LoadData_SoLaiDoDangLam_DaNghi();
+    //LoadDataChamCong();
+    //LoadDataThuyen();
+    //LoadData_SoLaiDoCoTichKeTrongThang();
+    //LoadData_GetTinhTrangChungChi();
+    //LoadData_SoHopDongSapHetHan();
+    //LoadData_GetDataMatKetNoi();
+    //LoadData_SoLaiDoDangLam_DaNghi();
 })
 
 function LoadDataChamCong() {
