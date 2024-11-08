@@ -978,7 +978,7 @@ function openAddNhanVienWindow(uid) {
     var grid = $("#grid").data("kendoGrid");
     var selectedItem = grid.dataItem(grid.select());
     var selectedTo = selectedItem.lstToNhomKeHoach.map(function (x) { return x.ID_ToNhom });
-    console.log(selectedItem.lstNhanVien);
+    console.log(selectedItem);
     $.ajax({
         url: '/NhanVien/GetAllNhanVienTrongMultiToNhom?ID_ToNhom=' + selectedTo.join(','),
         type: 'GET',

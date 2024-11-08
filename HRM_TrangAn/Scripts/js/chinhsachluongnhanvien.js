@@ -323,6 +323,9 @@ function LoadGridData() {
 }
 
 function ThemMoi() {
+    $("#ID_HoSoNhanSu").val(0);
+    $("#ID_PhongBan").val(0);
+
     var treeList = $("#grid").data("kendoTreeList");
     var row = treeList.select();
     if (row.length != 1) {

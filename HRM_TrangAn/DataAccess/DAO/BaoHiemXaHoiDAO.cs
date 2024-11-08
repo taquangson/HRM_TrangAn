@@ -124,7 +124,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             try
             {
                 SqlParameter[] pars = new SqlParameter[] {
-                    new SqlParameter("@ID", model.ID),
                     new SqlParameter("@ID", model.ID > 0 ? model.ID : (object)DBNull.Value),
                     new SqlParameter("@MucLuongDongBaoHiem", model.MucLuongDongBaoHiem),
                     new SqlParameter("@SDLD_BHXH", model.SDLD_BHXH),
@@ -138,8 +137,6 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@NLD_Tong", model.NLD_Tong),
                     new SqlParameter("@NLD_ThucTe", model.NLD_ThucTe),
                     new SqlParameter("@Tong", model.Tong),
-                    new SqlParameter("@GhiChu", model.GhiChu),
-                    new SqlParameter("@MoTa", model.MoTa),
                     new SqlParameter("@GhiChu", model.GhiChu ?? (object)DBNull.Value),
                     new SqlParameter("@MoTa", model.MoTa ?? (object)DBNull.Value),
                 };

@@ -54,7 +54,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@Thang", Thang),
                     new SqlParameter("@Nam", Nam),
                 };
-                DataSet ds = helper.ExecuteDataSet("sp_BaoHiemXaHoi_LichSu_GetByThang");
+                DataSet ds = helper.ExecuteDataSet("sp_BaoHiemXaHoi_LichSu_GetByThang",pars);
                 DataTable dt = ds.Tables[0];
                 List<BaoHiemXaHoi_LichSuModel> result = new List<BaoHiemXaHoi_LichSuModel>();
                 foreach (DataRow dr in dt.Rows)
@@ -79,7 +79,6 @@ namespace HRM_TrangAn.DataAccess.DAO
                 foreach (BaoHiemXaHoi_LichSuModel model in list)
                 {
                     SqlParameter[] pars = new SqlParameter[] {
-                        new SqlParameter("@ID", model.ID),
                         new SqlParameter("@MucLuongDongBaoHiem", model.MucLuongDongBaoHiem),
                         new SqlParameter("@SDLD_BHXH", model.SDLD_BHXH),
                         new SqlParameter("@SDLD_BHYT", model.SDLD_BHYT),
@@ -92,9 +91,11 @@ namespace HRM_TrangAn.DataAccess.DAO
                         new SqlParameter("@NLD_Tong", model.NLD_Tong),
                         new SqlParameter("@NLD_ThucTe", model.NLD_ThucTe),
                         new SqlParameter("@Tong", model.Tong),
-                        new SqlParameter("@GhiChu", model.GhiChu),
-                        new SqlParameter("@MoTa", model.MoTa),
+                        new SqlParameter("@GhiChu", (model.GhiChu == null)?"":model.GhiChu),
+                        new SqlParameter("@MoTa", (model.MoTa == null)?"":model.MoTa),
                         new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
+                        new SqlParameter("@ID_BaoHiemXaHoi", model.ID_BaoHiemXaHoi),
+                        new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
                         new SqlParameter("@Thang", model.Thang),
                         new SqlParameter("@Nam", model.Nam),
                     };

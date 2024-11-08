@@ -1,6 +1,7 @@
 ﻿using HRM_TrangAn.App_Start;
 using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace HRM_TrangAn.Controllers
         {
             BaoHiemXaHoi_LichSuDAO dao = new BaoHiemXaHoi_LichSuDAO();
             List<BaoHiemXaHoi_LichSuModel> data = dao.GetByThang(Thang,Nam);
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return Content(JsonConvert.SerializeObject(data));
         }
 
         [HttpPost]
@@ -31,6 +32,10 @@ namespace HRM_TrangAn.Controllers
         {
             BaoHiemXaHoi_LichSuDAO dao = new BaoHiemXaHoi_LichSuDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            foreach (BaoHiemXaHoi_LichSuModel item in list)
+            {
+                item.ID_NguoiTao = userinfor.ID;
+            }
             if (dao.InsertOrUpdate(list))
             {
                 return Json(new { success = true, msg = "Lưu lịch sử thành công" }, JsonRequestBehavior.AllowGet);

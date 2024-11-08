@@ -7,7 +7,6 @@ namespace HRM_TrangAn.DataAccess.Models
 {
     public class BaoHiemXaHoi_LichSuModel
     {
-        public int ID { get; set; }
         public decimal MucLuongDongBaoHiem { get; set; }
         public decimal SDLD_BHXH { get; set; }
         public decimal SDLD_BHYT { get; set; }
@@ -24,9 +23,15 @@ namespace HRM_TrangAn.DataAccess.Models
         public string MoTa { get; set; }
         public int TrangThai { get; set; }
         public DateTime NgayTao { get; set; }
+        public int ID_NguoiTao { get; set; }
         public int ID_HoSoNhanSu { get; set; }
+        public int ID_BaoHiemXaHoi {  get; set; }
         public int Thang { get; set; }
         public int Nam { get; set; }
+        public string MaNhanVien { get; set; }
+        public string TenDayDu { get; set; }
+        public string TenChucDanh { get; set; }
+        public string TenPhongBan { get; set; }
 
     }
 }

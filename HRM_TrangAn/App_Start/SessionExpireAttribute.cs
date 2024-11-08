@@ -17,7 +17,10 @@ namespace HRM_TrangAn.App_Start
             HttpContext ctx = HttpContext.Current;
             if (HttpContext.Current.Session["UserInfor"] == null)
             {
-                filterContext.Result = new RedirectResult("~/User/Login");
+                if (filterContext.HttpContext.Request.Url.AbsolutePath != "/")
+                    filterContext.Result = new RedirectResult("~/User/Login?PreviewousUrl=" + filterContext.HttpContext.Request.Url.AbsolutePath);
+                else
+                    filterContext.Result = new RedirectResult("~/User/Login");
                 return;
             }
             else

@@ -151,6 +151,31 @@ namespace HRM_TrangAn.DataAccess.DAO
 
 
         }
+
+        public List<HoSoNhanSuModel> GetByNotID_BaoHiemXaHoi(int ID_BaoHiemXaHoi)
+        {
+            try
+            {
+                List<HoSoNhanSuModel> result = new List<HoSoNhanSuModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_BaoHiemXaHoi",ID_BaoHiemXaHoi),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_HoSoNhanSu_GetByNotID_BaoHiemXaHoi", pars);
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    HoSoNhanSuModel model = GetObjFromDataRow(dr);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_HoSoNhanSu_GetByNotID_BaoHiemXaHoi " + ex.Message);
+                return new List<HoSoNhanSuModel>();
+            }
+        }
         public int InsertOrUpdate(HoSoNhanSuModel model)
         {
             try
@@ -253,5 +278,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return false;
             }
         }
+
+        
+       
     }
 }

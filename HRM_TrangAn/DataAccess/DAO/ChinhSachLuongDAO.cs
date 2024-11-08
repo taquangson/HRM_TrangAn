@@ -217,6 +217,29 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<ChinhSachLuongModel> GetCSLByID_HSNS(int ID_HoSoNhanSu)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_GetCSLByID_HSNS", pars);
+                DataTable dt = ds.Tables[0];
+                List<ChinhSachLuongModel> result = new List<ChinhSachLuongModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    result.Add(GetObjFromDataRow(dr));
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_GetByIDCSL " + ex.Message);
+                return new List<ChinhSachLuongModel>();
+            }
+        }
+
         public List<ChinhSachLuong_CauHinhModel> GetCH_ByIDCSL(int ID_ChinhSachLuong)
         {
             try

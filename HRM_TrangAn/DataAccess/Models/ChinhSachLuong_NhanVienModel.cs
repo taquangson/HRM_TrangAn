@@ -23,6 +23,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime NgayKetThuc { get; set; }
         
         
+        public decimal TienLuong { get; set; }
         public string TenDayDu { get; set; }
         public string MaNhanVien { get; set; }
         public string SoDienThoai { get; set; }

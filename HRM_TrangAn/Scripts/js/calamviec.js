@@ -258,14 +258,15 @@ function LoadGridPhanBo(data) {
     //    url: '/LichHoc/GetLichHocByLop?ID_Lop=' + ID_Lop,
     //    type: 'GET'
     //}).done(function (response) {
+    var defaultDate = new Date().setHours(0,0,0);
     var ds = new kendo.data.DataSource({
         data: data,
         schema: {
             model: {
                 id: "id",
                 fields: {
-                    BatDau: { type: 'text', editable: true },
-                    KetThuc: { type: 'text', editable: true },
+                    BatDau: { type: 'text', editable: true, defaultValue: new Date(defaultDate) },
+                    KetThuc: { type: 'text', editable: true, defaultValue: new Date(defaultDate) },
                     SoCong: { type: 'number', editablle: true },
                     TangCa: { type: 'number', editablle: true }
                 }
@@ -273,15 +274,20 @@ function LoadGridPhanBo(data) {
             parse: function (res) {
                 for (var i = 0; i < res.length; i++) {
                     let bd = new Date();
-                    bd.setHours(res[i].BatDau.Hours);
-                    bd.setMinutes(res[i].BatDau.Minutes);
+                    if (res[i].BatDau) {
+                        bd.setHours(res[i].BatDau.Hours);
+                        bd.setMinutes(res[i].BatDau.Minutes);
+                    }
                     res[i].BatDau = bd;
 
                     let kt = new Date();
-                    kt.setHours(res[i].KetThuc.Hours);
-                    kt.setMinutes(res[i].KetThuc.Minutes);
+                    if (res[i].KetThuc) {
+                        kt.setHours(res[i].KetThuc.Hours);
+                        kt.setMinutes(res[i].KetThuc.Minutes);
+                    }
                     res[i].KetThuc = kt;
                 }
+                console.log(res);
                 return res;
             }
         },
@@ -320,7 +326,11 @@ function openEditWindow() {
         } else {
             $("#CaDem").removeProp('checked')
         }
-        LoadGridPhanBo(selectedItem.PhanBo)
+        if (selectedItem.PhanBo.length > 0) {
+            LoadGridPhanBo(selectedItem.PhanBo)
+        } else {
+
+        }
         //});
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
@@ -402,7 +412,11 @@ function createGridPhanBo() {
                     title: "Th/gian bắt đầu",
                     width: 160,
                     template: function (e) {
-                        return e.BatDau.getHours() + ' giờ ' + e.BatDau.getMinutes() + ' phút';
+                        if (e.BatDau != undefined) {
+                            return e.BatDau.getHours() + ' giờ ' + e.BatDau.getMinutes() + ' phút';
+                        } else {
+                            return "";
+                        }
                     },
                     editor: function (container, options) {
                         $('<input required name="' + options.field + '"/>').appendTo(container).kendoTimePicker({
@@ -433,7 +447,11 @@ function createGridPhanBo() {
                     title: "Th/gian kết thúc",
                     width: 160,
                     template: function (e) {
-                        return e.KetThuc.getHours() + ' giờ ' + e.KetThuc.getMinutes() + ' phút';
+                        if (e.KetThuc != undefined) {
+                            return e.KetThuc.getHours() + ' giờ ' + e.KetThuc.getMinutes() + ' phút';
+                        } else {
+                            return "";
+                        }
                     },
                     editor: function (container, options) {
                         $('<input required name="' + options.field + '"/>').appendTo(container).kendoTimePicker({

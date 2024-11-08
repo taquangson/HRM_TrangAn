@@ -299,5 +299,11 @@ namespace HRM_TrangAn.Controllers
         {
             return View();
         }
+
+        [SessionExpire]
+        public ActionResult DoanhSo_LuongKhach()
+        {
+            return View();
+        }
     }
 }

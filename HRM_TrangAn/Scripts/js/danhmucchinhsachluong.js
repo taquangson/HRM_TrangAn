@@ -628,18 +628,18 @@ $(document).ready(function () {
                     Value: 1,
                     Label: "Ngày"
                 },
-                {
-                    Value: 2,
-                    Label: "Tuần"
-                },
+                //{
+                //    Value: 2,
+                //    Label: "Tuần"
+                //},
                 {
                     Value: 3,
                     Label: "Tháng"
                 },
-                {
-                    Value: 4,
-                    Label: "Quý"
-                },
+                //{
+                //    Value: 4,
+                //    Label: "Quý"
+                //},
                 {
                     Value: 5,
                     Label: "Năm"
@@ -967,6 +967,7 @@ function openAddNhanVienWindow() {
 }
 
 function openCauHinhWindow(ID_ChinhSach) {
+    HuyCauHinh();
     $("#ID").val(ID_ChinhSach);
     $.ajax({
         url: '/ChinhSachLuong/GetChinhSachLuongCauHinh?ID_ChinhSachLuong=' + ID_ChinhSach,

@@ -1214,15 +1214,19 @@ function openAcceptWindow() {
 
     $("#ID").val(selectedItem.ID);
     $("#MucLuongDongBaoHiemRead").val(selectedItem.MucLuongDongBaoHiem);
-    $("#TyLeDongBaoHiemRead").val(selectedItem.TyLeDongBaoHiem);// gasn duwx lieeuj cho input numbertyledongbh
-    if ($("#ThoiGianBatDauRead").data("kendoDatePicker")) {
-        $("#ThoiGianBatDauRead").data("kendoDatePicker").value(selectedItem.ThoiGianBatDau);
-    }
-    if ($("#ThoiGianKetThucRead").data("kendoDatePicker")) {
-        $("#ThoiGianKetThucRead").data("kendoDatePicker").value(selectedItem.ThoiGianKetThuc);
-    }
-    $("#CongTyDongRead").val(selectedItem.CongTyDong);
-    $("#NhanVienDongRead").val(selectedItem.NhanVienDong);
+    $("#SDLDBaoHiemXaHoiRead").val(selectedItem.SDLD_BHXH);
+    $("#SDLDBaoHiemYTeRead").val(selectedItem.SDLD_BHYT);
+    $("#SDLDBaoHiemThatNghiepRead").val(selectedItem.SDLD_BHTN);
+    $("#SDLDTongRead").val(selectedItem.SDLD_Tong);
+    $("#SDLDThucTeRead").val(selectedItem.SDLD_ThucTe);
+    $("#NLDBaoHiemXaHoiRead").val(selectedItem.NLD_BHXH);
+    $("#NLDBaoHiemYTeRead").val(selectedItem.NLD_BHYT);
+    $("#NLDBaoHiemThatNghiepRead").val(selectedItem.NLD_BHTN);
+    $("#NLDTongRead").val(selectedItem.NLD_Tong);
+    $("#NLDThucTeRead").val(selectedItem.NLD_ThucTe);
+    $("#TongTienRead").val(selectedItem.Tong);
+    $("#MoTaRead").val(selectedItem.MoTa);
+    $("#GhiChuRead").val(selectedItem.GhiChu);
 
     isEdit = true;
 
@@ -1336,8 +1340,6 @@ function LuuAddNhanVien() {
             MaNhanVien: dataItem.MaNhanVien,
             SoDienThoai: dataItem.SoDienThoai,
             TenDayDu: dataItem.TenDayDu,
-            BatDauApDung: $("#ThoiGianBatDauRead").data("kendoDatePicker").value(),
-            KetThucApDung: $("#ThoiGianKetThucRead").data("kendoDatePicker").value(),
         })
     });
     var result = dataSourceAddNV.filter((item) => !listSelectedID_HSNS.includes(item.ID));
@@ -1421,6 +1423,7 @@ function LuuAddNhanVien() {
 }*/
 
 function Huy() {
+    document.getElementById("formChiTiet").reset();
     $("#ID").val('');
     $("#window").data("kendoWindow").close();
     $("#grid").data("kendoGrid").clearSelection();
@@ -1488,13 +1491,22 @@ function ValidateForm() {
 }
 
 function ValidateForm1() {
-    var validmucluongdong = SetValidate("MucLuongDongBaoHiemRead");
-    var validtyle = SetValidate("TyLeDongBaoHiemRead");
-    var validngaybatdau = SetValidate("ThoiGianBatDauRead");
-    var validngayketthuc = SetValidate("ThoiGianKetThucRead");
-    var validcongty = SetValidate("CongTyDongRead");
-    var validnhanvien = SetValidate("NhanVienDongRead");
-    var valid = validmucluongdong && validtyle && validngaybatdau && validngayketthuc && validcongty && validnhanvien;
+    var validmucluong = SetValidate("MucLuongDongBaoHiemRead");
+    var validsdldbhxh = SetValidate("SDLDBaoHiemXaHoiRead");
+    var validsdldbhyt = SetValidate("SDLDBaoHiemYTeRead");
+    var validsdldbhtn = SetValidate("SDLDBaoHiemThatNghiepRead");
+    var validsdldtong = SetValidate("SDLDTongRead");
+    var validsdldthucte = SetValidate("SDLDThucTeRead");
+    var validnldbhxh = SetValidate("NLDBaoHiemXaHoiRead");
+    var validnldbhyt = SetValidate("NLDBaoHiemYTeRead");
+    var validnldbhtn = SetValidate("NLDBaoHiemThatNghiepRead");
+    var validnldtong = SetValidate("NLDTongRead");
+    var validnldthucte = SetValidate("NLDThucTeRead");
+    var validtong = SetValidate("TongTienRead");
+    var valid = validmucluong && validsdldbhxh && validsdldbhyt &&
+        validsdldbhtn && validsdldtong && validsdldthucte &&
+        validnldbhxh && validnldbhyt && validnldbhtn &&
+        validnldtong && validnldthucte && validtong;
 
     console.log(valid);
     return valid;
@@ -1508,21 +1520,21 @@ function LuuApDung() {
     $.each(dataSourceNhanVien, function (index, item) {
         var fixitem = {
             ID_BaoHiemXaHoi: $("#ID").val(),
-            ID_HoSoNhanSu: item.ID,
-
-            BatDauApDung: $("#ThoiGianBatDauRead").data("kendoDatePicker").value(),
-            KetThucApDung: $("#ThoiGianKetThucRead").data("kendoDatePicker").value(),
-        }
+            ID_HoSoNhanSu: item.ID_HoSoNhanSu,
+            BatDauApDung: null, // Khởi tạo với null
+            KetThucApDung: null, // Khởi tạo với null
+        };
         if (item.BatDauApDung != null) {
-            fixitem.BatDauApDung = item.BatDauApDung;
+            fixitem.BatDauApDung = kendo.toString(item.BatDauApDung, "yyyy/MM/dd");
         }
         if (item.KetThucApDung != null) {
-            fixitem.KetThucApDung = item.KetThucApDung;
+            fixitem.KetThucApDung = kendo.toString(item.KetThucApDung, "yyyy/MM/dd");
         }
-        if (item.BatDauApDung != null || item.KetThucApDung != null) {
+
+        if (fixitem.BatDauApDung || fixitem.KetThucApDung) {
             if (fixitem.BatDauApDung > fixitem.KetThucApDung) {
-                openDialog(dialogRoot, "<b style='line-height:40px;'>Thời gian bắt đầu phải nhỏ hơn thời gian kết thú</b>");
-                return 0;
+                openDialog(dialogRoot, "<b style='line-height:40px;'>Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc</b>");
+                return false;
             }
         }
         listHS.push(fixitem);
@@ -1537,9 +1549,9 @@ function LuuApDung() {
     $.ajax({
         url: '/BaoHiem/InsertOrUpdateWithHoSo',
         type: 'POST',
-        data: JSON.stringify(listHS), // Chuyển đổi danh sách thành chuỗi JSON
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
+        data: {
+            list: listHS,
+        },
         success: function (response) {
             console.log(response);
         },

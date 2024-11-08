@@ -95,7 +95,7 @@
             {
                 field: "TenNhanVien",
                 title: "Tên Nhân Viên",
-                width: "100px",
+                width: "150px",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -135,7 +135,7 @@
                 }
             },
             {
-                field: "Tiền",
+                field: "Tien",
                 title: "Số Tiền",
                 format: "{0:n0}",
                 aggregates: ["sum"],
@@ -173,27 +173,12 @@
                     style: "text-align: center;",
                 }
             },
-            {
-                field: "NoiDung",
-                title: "Nội Dung",
-                width: "300px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                }
-            },
+
             {
                 field: "TenNguoiTao",
                 title: "Người Tạo",
+                width: "120px",
+
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -223,7 +208,24 @@
                 attributes: {
                     style: "text-align: center;",
                 }
-            }
+            },
+            {
+                field: "NoiDung",
+                title: "Nội Dung",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
         ]
 
     });
@@ -263,7 +265,7 @@
     })
 
     $.ajax({
-        url: '/NhanVien/GetAllNhanVien',
+        url: '/HoSoNhanSu/GetAll',
         type: 'GET'
     }).done(function successCallback(response) {
         response = JSON.parse(response);
@@ -393,7 +395,7 @@ function openEditWindow() {
         $("#Tien").val(selectedItem.Tien);
         $("#NoiDung").val(selectedItem.NoiDung);
         $("#NgayHuongPhuCap").data("kendoDatePicker").value(selectedItem.NgayHuongPhuCap);
-        $("#NhanVien").data("kendoMultiColumnComboBox").value(selectedItem.ID_NhanVien);
+        $("#NhanVien").data("kendoMultiColumnComboBox").value(selectedItem.ID_HoSoNhanSu);
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
         } else {
@@ -414,10 +416,10 @@ function Luu() {
     if (ValidateForm()) {
         var dataItem = {
             ID: $("#ID").val(),
-            ID_NhanVien: $("#NhanVien").data("kendoMultiColumnComboBox").value(),
+            ID_HoSoNhanSu: $("#NhanVien").data("kendoMultiColumnComboBox").value(),
             Tien: $("#Tien").val(),
             NoiDung: $("#NoiDung").val(),
-            NgayHuongPhuCap: $("#NgayHuongPhuCap").data("kendoDatePicker").value(),
+            NgayHuongPhuCap: kendo.toString($("#NgayHuongPhuCap").data("kendoDatePicker").value(),'yyyy-MM-dd'),
             ID_NguoiTao: 0,
         }
         console.log(dataItem)
@@ -443,7 +445,7 @@ function Huy() {
     $("#Tien").val(0);
     $("#NoiDung").val('');
     $("#NhanVien").data("kendoMultiColumnComboBox").value(0);
-    $("#NgayHuongPhuCap").data("kendoDateicker").value(null);
+    $("#NgayHuongPhuCap").data("kendoDatePicker").value(null);
     $("#window").data("kendoWindow").close();
     $("#grid").data("kendoGrid").clearSelection();
 }

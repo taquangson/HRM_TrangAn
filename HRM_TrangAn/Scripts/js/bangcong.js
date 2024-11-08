@@ -38,27 +38,27 @@ $(document).ready(function () {
                 SoCong: socong
             })
             //if (e.values.ChuyenTo) {
-                try {
-                    $.ajax({
-                        url: '/ChamCongNhanVien/InsertCongNhanVien',
-                        data: {
-                            ID_TaiKhoan: e.model.ID,
-                            Ngay: kendo.toString(date, 'yyyy-MM-dd'),
-                            SoCong: socong,
-                            ID_CaLamViec:0
-                        },
-                        type: 'POST'
-                    }).done(function (response) {
-                        if (response.success) {
-                            notification.show({ kValue: response.msg }, "success");
-                            e.sender.refresh();
-                        } else {
-                            notification.show({ kValue: response.msg }, "error");
-                        }
-                    })
-                } catch (ex) {
-                    e.sender.refresh();
-                }
+            try {
+                $.ajax({
+                    url: '/ChamCongNhanVien/InsertCongNhanVien',
+                    data: {
+                        ID_TaiKhoan: e.model.ID,
+                        Ngay: kendo.toString(date, 'yyyy-MM-dd'),
+                        SoCong: socong,
+                        ID_CaLamViec: 0
+                    },
+                    type: 'POST'
+                }).done(function (response) {
+                    if (response.success) {
+                        notification.show({ kValue: response.msg }, "success");
+                        e.sender.refresh();
+                    } else {
+                        notification.show({ kValue: response.msg }, "error");
+                    }
+                })
+            } catch (ex) {
+                e.sender.refresh();
+            }
             //}
         },
         dataBinding: function () {
@@ -111,22 +111,26 @@ $(document).ready(function () {
     //    value: new Date()
     //})
 
-
-
-
-
-    $("#TuNgay").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
-        change: function (e) {
-            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
-            $("#DenNgay").data("kendoDatePicker").value(d);
-        }
+    $("#comboThang").kendoDatePicker({
+        format: "MM/yyyy",
+        start: "year",
+        depth: "year",
     })
-    $("#DenNgay").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
-    })
+
+
+
+    //$("#TuNgay").kendoDatePicker({
+    //    format: "dd/MM/yyyy",
+    //    value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
+    //    change: function (e) {
+    //        var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+    //        $("#DenNgay").data("kendoDatePicker").value(d);
+    //    }
+    //})
+    //$("#DenNgay").kendoDatePicker({
+    //    format: "dd/MM/yyyy",
+    //    value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
+    //})
 
 
     LoadTreeview();
@@ -191,7 +195,7 @@ function GuiBangCong() {
         var selectedItem = treeList.dataItem(row);
         if (selectedItem.MaNhanVien != null) {
             $.ajax({
-                url: '/ChamCongNhanVien/SendEmailBangCongNhanVien?ID_TaiKhoan=' + selectedItem.ID + '&Thang=' + ($("#TuNgay").data("kendoDatePicker").value().getMonth() + 1) + '&Nam=' + $("#TuNgay").data("kendoDatePicker").value().getFullYear(),
+                url: '/ChamCongNhanVien/SendEmailBangCongNhanVien?ID_TaiKhoan=' + selectedItem.ID + '&Thang=' + kendo.toString($("#comboThang").data("kendoDatePicker").value(), "MM") + '&Nam=' + kendo.toString($("#comboThang").data("kendoDatePicker").value(), "yyyy"),
                 type: 'GET',
             }).done(function successCallback(response) {
                 if (response == "OK") {
@@ -240,23 +244,16 @@ function openEditWindow() {
 
 }
 
-function LoadDataLichNghi() {
-    $.ajax({
-        url: '/DangKyLichNghi/GetDangKyLichNghiByDate'
-            + "?from=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-            + "&to=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
-        type: 'GET',
-    }).done(function successCallback(response) {
-        dataLichNghi = response;
-    });
-}
-
 function LoadGridData() {
-    //LoadDataLichNghi();
+    var date = $("#comboThang").data("kendoDatePicker").value();
+    var from = new Date(kendo.toString(date, "yyyy/MM") + "/01")
+    var to = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    console.log(from);
+    console.log(to);
     $.ajax({
         url: '/ChamCongNhanVien/CongNhanSu_GetDataTree'
-            + "?from=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-            + "&to=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59"
+            + "?from=" + kendo.toString(from, "yyyy/MM/dd") + " 00:00:00"
+            + "&to=" + kendo.toString(to, "yyyy/MM/dd") + " 23:59:59"
             + "&ID_PhongBan=" + ($("#treePhongBan").data("kendoDropDownTree").value() ? $("#treePhongBan").data("kendoDropDownTree").value() : 0),
         type: 'GET',
     }).done(function successCallback(response) {
@@ -348,9 +345,66 @@ function LoadGridData() {
                     style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
                     class: "table-header-cell"
                 }
+            },
+            {
+                field: "ThoiGianGuiMail",
+                title: "Th/gian gửi email",
+                format: "{0:dd/MM/yyyy HH:mm}",
+                width: "120px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "ThoiGianXemBangCong",
+                title: "Th/gian xem bảng công",
+                format: "{0:dd/MM/yyyy HH:mm}",
+                width: "120px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "ThoiGianChotCong",
+                title: "Th/gian chốt công",
+                format: "{0:dd/MM/yyyy HH:mm}",
+                width: "120px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
             }
         )
-        var dates = getDates($("#TuNgay").data("kendoDatePicker").value(), $("#DenNgay").data("kendoDatePicker").value());
+        var dates = getDates(from, to);
         $.each(dates, function (index, item) {
             columns.push({
                 title: kendo.toString(item, 'dd/MM'),
@@ -419,6 +473,9 @@ function LoadGridData() {
                         ID: { type: "number", editable: false, nullable: false },
                         ID_Parent: { type: "number", nullable: true },
                         TongCong: { type: "number", nullable: true, editable: true },
+                        ThoiGianChotCong: { type: "date", nullable: true, editable: false },
+                        ThoiGianGuiMail: { type: "date", nullable: true, editable: false },
+                        ThoiGianXemBangCong: { type: "date", nullable: true, editable: false },
                     }
                 },
                 parse: function (res) {

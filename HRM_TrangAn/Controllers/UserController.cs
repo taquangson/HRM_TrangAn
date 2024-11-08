@@ -65,10 +65,13 @@ namespace HRM_TrangAn.Controllers
             }
 
         }
-        // GET: User
-        public ActionResult Login()
+
+        public ActionResult Login(string PreviewousUrl)
         {
-            log.Info("Login");
+            if (!string.IsNullOrWhiteSpace(PreviewousUrl))
+            {
+                ViewBag.PreviewousUrl = PreviewousUrl;
+            }
             if (TempData["Error"] != null)
             {
                 ViewBag.Error = TempData["Error"].ToString();
@@ -79,6 +82,7 @@ namespace HRM_TrangAn.Controllers
             }
             return View();
         }
+
 
         public ActionResult LogOff()
         {
@@ -92,7 +96,14 @@ namespace HRM_TrangAn.Controllers
             if (tk_dao.CheckLogin(model.UserName, model.Password))
             {
                 Session["UserInfor"] = tk_dao.GetByTenTaiKhoanOrEmail(model.UserName);
-                return RedirectToAction("Index", "Home");
+                if (string.IsNullOrWhiteSpace(model.PreviewousUrl))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction(model.PreviewousUrl.Split('/')[2], model.PreviewousUrl.Split('/')[1]);
+                }
             }
             else if (tk_dao.CheckLogin_AppForChangePass(model.UserName, model.Password))
             {

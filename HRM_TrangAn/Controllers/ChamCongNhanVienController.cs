@@ -49,7 +49,7 @@ namespace HRM_TrangAn.Controllers
                 }
                 model.Title = "BẢNG TÍNH CÔNG THÁNG " + Thang + "/" + Nam + " - NV: " + tk.TenDayDu;
                 viewmodel.ThoiGianXemBangCong = DateTime.Now;
-                if(viewmodel.ThoiGianChotBangCong.Year > 1)
+                if (viewmodel.ThoiGianChotBangCong.Year > 1)
                 {
                     model.ShowbtnChotCong = false;
                 }
@@ -112,6 +112,7 @@ namespace HRM_TrangAn.Controllers
         public ActionResult CongNhanSu_GetDataTree(DateTime from, DateTime to, int ID_PhongBan)
         {
             ChamCongNhanVienDAO dao = new ChamCongNhanVienDAO();
+            LichSuThaoTacBangCongDAO daobc = new LichSuThaoTacBangCongDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             DataTable dt = dao.CongNhanSu_GetDataTree(from, to, ID_PhongBan);
             List<DangKyLichNghiModel> lichnghi = new DangKyLichNghiDAO().GetByDate(from, to);
@@ -120,14 +121,30 @@ namespace HRM_TrangAn.Controllers
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 float TongCong = 0;
-                List<DangKyLichNghiModel> lichnghinv = lichnghi.Where(x => x.TrangThai == 2 && x.ID_TaiKhoan == int.Parse(dt.Rows[i]["ID"].ToString())).ToList();
+                int ID_TaiKhoan = int.Parse(dt.Rows[i]["ID"].ToString());
+                List <DangKyLichNghiModel> lichnghinv = lichnghi.Where(x => x.TrangThai == 2 && x.ID_TaiKhoan == ID_TaiKhoan).ToList();
+                LichSuThaoTacBangCongModel lsuchotcong = daobc.GetLichSu(ID_TaiKhoan, from.Month, from.Year);
                 for (var date = from; date <= to; date = date.AddDays(1))
                 {
                     TongCong += float.Parse(dt.Rows[i][date.ToString("yyyyMMdd")].ToString());
                 }
                 TongCong += lichnghinv.Where(x => x.KyHieu == "DO" || x.KyHieu == "PH").Count();
+
                 childRow = new Dictionary<string, object>();
                 childRow.Add("TongCong", TongCong);
+
+                if (lsuchotcong != null)
+                {
+                    childRow.Add("ThoiGianChotCong", lsuchotcong.ThoiGianChotBangCong);
+                    childRow.Add("ThoiGianGuiMail", lsuchotcong.ThoiGianGuiMail);
+                    childRow.Add("ThoiGianXemBangCong", lsuchotcong.ThoiGianXemBangCong);
+                }
+                else
+                {
+                    childRow.Add("ThoiGianChotCong", "");
+                    childRow.Add("ThoiGianGuiMail", "");
+                    childRow.Add("ThoiGianXemBangCong", "");
+                }
                 float check = 0;
                 foreach (DataColumn col in dt.Columns)
                 {

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Tràng An - HRM System";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/quanlybangluong.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-cogs"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-user"></i> Quản lý bảng lương</b>
+</span>
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Tháng</label>
+        <input style="width:100%" id="Thang" />
+    </div>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Tải dữ liệu </i></button>
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Xuất Bảng Lương </i></button>
+</div>
+<div class="row">
+
+    <div id="grid"></div>
+</div>

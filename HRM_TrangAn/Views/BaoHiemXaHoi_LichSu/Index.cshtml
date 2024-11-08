@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin bảo hiểm xã hội của nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/js/lichsubaohiemxahoi.js"></script>
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-database"></i> Danh mục</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-users"></i> Lịch sử bảo hiểm xã hội của nhân viên</b>
+</span>
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%"> Trong Tháng</label>
+        <input style="width:100%" id="month" />
+    </div>
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Tìm kiếm dữ liệu </i></button>
+    <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-floppy-o"> Lưu </i></button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
