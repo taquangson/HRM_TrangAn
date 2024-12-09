@@ -7,12 +7,15 @@ $(document).ready(function () {
                 model: {
                     id: "ID",
                     fields: {
-                        NgayPhat: {
-                            type: 'date'
-                        },
-                        SoTien: {
-                            type: 'number'
-                        }
+                        ID_NhanVien: { type: 'number', editable: false },
+                        MaThuyen: { type: 'string', editable: false },
+                        TenToNhom: { type: 'string', editable: false },
+                        MaNhanVien: { type: 'string', editable: false },
+                        TenDayDu: { type: 'string', editable: false },
+                        NgayPhat: { type: 'date', editable: false },
+                        LyDo: { type: 'string', editable: false },
+                        SoTien: { type: 'number', editable: false },
+                        GhiChu: { type: 'string', editable: false },
                     }
                 }
             },
@@ -20,7 +23,7 @@ $(document).ready(function () {
             aggregate: [{ field: 'SoTien', aggregate: "sum" }]
         }),
         height: function () {
-            var height = $(window).height() - 160;
+            var height = $(window).height() - 195;
             return height;
         },
         scrollable: true,
@@ -227,6 +230,20 @@ $(document).ready(function () {
         ]
 
     });
+    $("#TuNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
+        dateInput: true,
+        change: function (e) {
+            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+            $("#DenNgay").data("kendoDatePicker").value(d);
+        }
+    });
+    $("#DenNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        dateInput: true,
+        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
+    });
     $("#window").kendoWindow({
         width: "100%",
         height: "100%",
@@ -286,7 +303,7 @@ $(document).ready(function () {
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
-    LoadGridData();
+    /*LoadGridData();*/
     $("#windowNhanVien").kendoWindow({
         width: "800",
         height: "450",
@@ -643,52 +660,101 @@ $(document).ready(function () {
             dataSource: dataSource
         })
     });
+    //$.ajax({
+    //    url: '/NhanVien/GetAllNhanVien',
+    //    type: 'GET',
+    //}).done(function successCallback(response) {
+    //    var dataSource = new kendo.data.DataSource({
+    //        data: response,
+
+    //    });
+    $("#ComboNhanVien").kendoMultiColumnComboBox({
+        dataTextField: "TenDayDu",
+        dataValueField: "ID",
+        columns: [
+            {
+                field: "TenDayDu",
+                title: "Tên lái đò",
+                width: "200px",
+            },
+            {
+                field: "MaNhanVien",
+                title: "Mã Nhân viên/Mã Số Ticket",
+                width: "200px",
+            },
+            {
+                field: "MaThuyen",
+                title: "Mã số đò",
+                width: "200px",
+            },
+            {
+                field: "TenToNhom",
+                title: "Tên tổ",
+                width: "200px",
+            },
+        ],
+        footerTemplate: 'Tổng #: instance.dataSource.total() # lái đò',
+        filter: "contains",
+        filterFields: ["TenDayDu", "MaThuyen", "MaNhanVien", "TenToNhom"],
+        suggest: true,
+        delay: 1000,
+        //dataSource: dataSource,
+        select: function (e) {
+
+        }
+    })
+    //});
+    $(".main_container").show();
+})
+
+function TimKiem() {
+    console.log(kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00");
+    console.log(kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",);
+    kendo.ui.progress($("#grid"), true);
+    console.log("/XuPhat/GetAllXuPhatByDateRange"
+        + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
+        + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59")
     $.ajax({
-        url: '/NhanVien/GetAllNhanVien',
+        url: "/XuPhat/GetAllXuPhatByDateRange"
+            + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
+            + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
         type: 'GET',
+        error: function (request, error) {
+            console.log(error);
+        },
     }).done(function successCallback(response) {
         var dataSource = new kendo.data.DataSource({
             data: response,
-
+            schema: {
+                model: {
+                    id: "ID",
+                    fields: {
+                        ID_NhanVien: { type: 'number', editable: false },
+                        MaThuyen: { type: 'string', editable: false },
+                        TenToNhom: { type: 'string', editable: false },
+                        MaNhanVien: { type: 'string', editable: false },
+                        TenDayDu: { type: 'string', editable: false },
+                        NgayPhat: { type: 'date', editable: false },
+                        LyDo: { type: 'string', editable: false },
+                        SoTien: { type: 'number', editable: false },
+                        GhiChu: { type: 'string', editable: false },
+                    }
+                }
+            },
+            aggregate: [{ field: 'SoTien', aggregate: "sum" }],
+            pageSize:30,
         });
-        $("#ComboNhanVien").kendoMultiColumnComboBox({
-            dataTextField: "TenDayDu",
-            dataValueField: "ID",
-            columns: [
-                {
-                    field: "TenDayDu",
-                    title: "Tên lái đò",
-                    width: "200px",
-                },
-                {
-                    field: "MaNhanVien",
-                    title: "Mã Nhân viên/Mã Số Ticket",
-                    width: "200px",
-                },
-                {
-                    field: "MaThuyen",
-                    title: "Mã số đò",
-                    width: "200px",
-                },
-                {
-                    field: "TenToNhom",
-                    title: "Tên tổ",
-                    width: "200px",
-                },
-            ],
-            footerTemplate: 'Tổng #: instance.dataSource.total() # lái đò',
-            filter: "contains",
-            filterFields: ["TenDayDu", "MaThuyen", "MaNhanVien", "TenToNhom"],
-            suggest: true,
-            delay: 1000,
-            dataSource: dataSource,
-            select: function (e) {
-
-            }
-        })
+        if (dataSource === undefined || dataSource === null) {
+            console.log("void");
+        } else {
+            console.log(dataSource);
+            console.log($("#grid").data("kendoGrid"));
+            $("#grid").data("kendoGrid").setDataSource(dataSource);
+            kendo.ui.progress($("#grid"), false);
+        }
+        kendo.ui.progress($("#grid"), false);
     });
-    $(".main_container").show();
-})
+}
 
 function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
@@ -744,7 +810,7 @@ function LoadGridData() {
                             type: 'date'
                         },
                         SoTien: {
-                            type:'number'
+                            type: 'number'
                         }
                     }
                 }
@@ -825,7 +891,7 @@ function Luu() {
                 if (response.success) {
                     notification.show({ kValue: response.msg }, "success");
                     Huy();
-                    LoadGridData();
+                    TimKiem();
                 } else {
                     notification.show({ kValue: response.msg }, "error");
                 }
@@ -858,7 +924,7 @@ function Luu() {
                     if (response.success) {
                         notification.show({ kValue: response.msg }, "success");
                         Huy();
-                        LoadGridData();
+                        TimKiem();
                     } else {
                         notification.show({ kValue: response.msg }, "error");
                     }
@@ -951,7 +1017,7 @@ function XoaDuLieu(bangDuLieu) {
     }).done(function (response) {
         if (response.success) {
             $("#grid").data("kendoGrid").clearSelection();
-            LoadGridData();
+            TimKiem();
             notification.show({ kValue: response.msg }, "success");
         } else {
             notification.show({ kValue: response.msg }, "error");

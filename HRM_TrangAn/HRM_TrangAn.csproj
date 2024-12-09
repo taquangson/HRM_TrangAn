@@ -262,6 +262,7 @@
     <Compile Include="Controllers\CaLamViecNhanVienController.cs" />
     <Compile Include="Controllers\ChamCongNhanVienController.cs" />
     <Compile Include="Controllers\ChatMessageController.cs" />
+    <Compile Include="Controllers\ChinhSachLuongController.cs" />
     <Compile Include="Controllers\ChucDanhController.cs" />
     <Compile Include="Controllers\ChucNangController.cs" />
     <Compile Include="Controllers\ChuyenDoController.cs" />
@@ -308,6 +309,7 @@
     <Compile Include="DataAccess\DAO\CaLamViec_NhanVienDAO.cs" />
     <Compile Include="DataAccess\DAO\CaLamViec_PhanBoCongDAO.cs" />
     <Compile Include="DataAccess\DAO\ChamCongNhanVienDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChinhSachLuongDAO.cs" />
     <Compile Include="DataAccess\DAO\CongLaoDong_TransferDAO.cs" />
     <Compile Include="DataAccess\DAO\DangKyLichNghiDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhGiaDiemDAO.cs" />
@@ -402,6 +404,8 @@
     <Compile Include="DataAccess\Models\ChamCongNhanVienModel .cs" />
     <Compile Include="DataAccess\Models\ChatSessionModel.cs" />
     <Compile Include="DataAccess\Models\CheckInSuKienModel.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuongModel.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuong_NhanVienModel.cs" />
     <Compile Include="DataAccess\Models\ChucDanhModel.cs" />
     <Compile Include="DataAccess\Models\ChuyenDoModel.cs" />
     <Compile Include="DataAccess\Models\ChuyenToModel.cs" />
@@ -925,8 +929,6 @@
     <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
     <Content Include="bin\roslyn\vbc.exe" />
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Icons\icon-128x128.png" />
     <Content Include="Content\Icons\icon-144x144.png" />
     <Content Include="Content\Icons\icon-152x152.png" />
@@ -1008,8 +1010,6 @@
     <Content Include="Images\user_image.png" />
     <Content Include="Images\xlsicon.png" />
     <Content Include="img_OX2_icon.ico" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\vendors\bootstrap\.bower.json" />
     <Content Include="Assets\vendors\bootstrap\bower.json" />
     <Content Include="Assets\vendors\bootstrap\CHANGELOG.md" />
@@ -1252,6 +1252,7 @@
     <Content Include="Scripts\js\calamviec.js" />
     <Content Include="Scripts\js\calamviecnhanvien.js" />
     <Content Include="Scripts\js\dangkylichnghi.js" />
+    <Content Include="Scripts\js\danhmucchinhsachluong.js" />
     <Content Include="Scripts\js\danhmucloi.js" />
     <Content Include="Scripts\js\danhmucngayle.js" />
     <Content Include="Scripts\js\hosonhansu.js" />
@@ -1443,6 +1444,7 @@
     <Content Include="Views\HoSoNhanSu\Index.cshtml" />
     <Content Include="Views\DanhMuc\CaLamViec.cshtml" />
     <Content Include="Views\DanhMuc\DanhMucNgayLe.cshtml" />
+    <Content Include="Views\DanhMuc\ChinhSachLuong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1454,6 +1456,7 @@
     <Folder Include="Images\BaiKiemTra\" />
     <Folder Include="Images\HoTro\" />
     <Folder Include="Images\SoDoLop\" />
+    <Folder Include="Views\ChinhSachLuong\" />
     <Folder Include="Views\ChuyenDo\" />
   </ItemGroup>
   <ItemGroup>

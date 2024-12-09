@@ -72,6 +72,34 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<XuPhatModel> GetByDateRange(DateTime TuNgay, DateTime DenNgay)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("TuNgay", TuNgay),
+                    new SqlParameter("DenNgay", DenNgay),
+                };
+                NhanVienDAO nvdao = new NhanVienDAO();
+                DataSet ds = helper.ExecuteDataSet("sp_XuPhat_GetByDateRange",pars);
+                DataTable dt = ds.Tables[0];
+                List<XuPhatModel> result = new List<XuPhatModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    XuPhatModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành XuPhatModel
+                    model.lstNhanVien = nvdao.GetAllNhanVienTrongXuPhat(model.ID);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_XuPhat_GetByDateRange " + ex.Message);
+                return null;
+            }
+        }
+
         public bool Delete(int ID)
         {
             try

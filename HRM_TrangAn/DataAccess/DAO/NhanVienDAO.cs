@@ -48,8 +48,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             return obj;
         }
-      
-
+        
         private SelectNhanVienForKeHoachModel GetSelectNhanVienForKeHoachModelFromDataRow(DataRow dr)
         {
             SelectNhanVienForKeHoachModel obj = new SelectNhanVienForKeHoachModel();
@@ -131,39 +130,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_NhanVien_GetAll " + ex.Message);
-                return null;
-            }
-        }
-
-        public List<NhanVienModel> GetAllWithTrangThai()
-        {
-            try
-            {
-                NhanVien_ChucDanhDAO cddao = new NhanVien_ChucDanhDAO();
-
-
-                DataSet ds = helper.ExecuteDataSet("sp_NhanVien_GetAllWithTrangThai");
-                DataTable dt = ds.Tables[0];
-                List<NhanVienModel> result = new List<NhanVienModel>();
-                //File_NhanVienDAO fdao = new File_NhanVienDAO();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    NhanVienModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành NhanVienModel
-                    //model.lstChucDanh = cddao.GetAllByNhanVien(model.ID);
-                    //model.TenChucDanh = GetTenChucDanh(model.ID);
-                    //model.AnhDaiDien = fdao.GetAllByNhanVien(model.ID).Where(x => x.FileType == 1).FirstOrDefault();
-                    //if(model.AnhDaiDien == null)
-                    //{
-                    //    model.AnhDaiDien = new File_NhanVienModel();
-                    //    model.AnhDaiDien.FileType = 0;
-                    //}
-                    result.Add(model);
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                log.Error("sp_NhanVien_GetAllWithTrangThai " + ex.Message);
                 return null;
             }
         }
@@ -274,30 +240,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_NhanVien_ToNhom_GetAllNhanVien_TrongToNhom " + ex.Message);
-                return null;
-            }
-        }
-        
-        public List<NhanVienModel> GetAllNhanVienTrongMultiToNhom(string ID_ToNhom)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[] {
-                new SqlParameter("@ID_ToNhom", ID_ToNhom)
-                };
-                DataSet ds = helper.ExecuteDataSet("sp_NhanVien_ToNhom_GetAllNhanVien_TrongMultiToNhom", pars);
-                DataTable dt = ds.Tables[0];
-                List<NhanVienModel> result = new List<NhanVienModel>();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    NhanVienModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành NhanVienModel
-                    result.Add(model);
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                log.Error("sp_NhanVien_ToNhom_GetAllNhanVien_TrongMultiToNhom " + ex.Message);
                 return null;
             }
         }
@@ -893,33 +835,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             {
                 log.Error("sp_ChinhSachLuong_NhanVien_GetByNotID_ChinhSachLuong " + ex.Message);
                 return new List<ChinhSachLuong_NhanVienModel>();
-            }
-        }
-
-       
-
-        public bool XuatHoSoNhanSu(string StringID_NhanVien)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("StringID_NhanVien", StringID_NhanVien)
-                };
-                int rowaff = helper.ExecuteNonQuery("sp_NhanVien_XuatHoSoNhanSu", pars);
-                if (rowaff > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error("sp_NhanVien_XuatHoSoNhanSu " + ex.Message);
-                return false;
             }
         }
     }

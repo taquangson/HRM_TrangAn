@@ -45,7 +45,7 @@ $(document).ready(function () {
         //Danh sách cột của bảng dữ liệu
         columns: [
             {
-                width: "35px",
+                width: "26px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -101,6 +101,24 @@ $(document).ready(function () {
                 }
             },
             {
+                field: "SoTien",
+                title: "Số tiền",
+                width: "150px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
                 field: "KyHanThanhToan",
                 title: "Kỳ hạn thanh toán",
                 width: "150px",
@@ -132,61 +150,6 @@ $(document).ready(function () {
                 }
             },
             {
-                field: "ID_LoaiHopDong",
-                title: "Loại hợp đồng",
-                width: "150px",
-                template: function (dataItem) {
-                    if (dataItem.ID_LoaiHopDong === 0) {
-                        return "Thử việc";
-                    } else if (dataItem.ID_LoaiHopDong === 1) {
-                        return "Chính thức";
-                    } else if (dataItem.ID_LoaiHopDong === 2) {
-                        return "Học việc";
-                    }
-                },
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "Loai",
-                title: "Loại",
-                template: function (e) {
-                    if (e.Loai == 1) {
-                        return "<b>Lương</b>";
-                    } else {
-                        return "<b>Phụ cấp</b>";
-                    }
-                },
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: center;",
-                }
-            },
-            {
                 field: "GhiChu",
                 title: "Ghi chú",
                 filterable: {
@@ -207,21 +170,6 @@ $(document).ready(function () {
                     class: "table-header-cell"
                 }
             },
-            {
-                title: "Cấu hình",
-                field: 'ID',
-                template: function (e) {
-                    return "<i onclick='openCauHinhWindow(" + e.ID + ")' style='color:blue' class='fa fa-cogs'></i>";
-                },
-                width: 150,
-                attributes: {
-                    class: "text-center"
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; ",
-                    class: "table-header-cell"
-                },
-            }
 
         ]
 
@@ -232,12 +180,6 @@ $(document).ready(function () {
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
-    $("#grid").on("click", ".config-icon", function (e) {
-        var row = $(this).closest("tr");
-        var grid = $("#grid").data("kendoGrid");
-        var dataItem = grid.dataItem(row);
-        selectedRowID = dataItem.ID;
-    });
 
     $("#gridNhanVien").kendoGrid({
         height: function () {
@@ -284,7 +226,7 @@ $(document).ready(function () {
         //Danh sách cột của bảng dữ liệu
         columns: [
             {
-                width: "35px",
+                width: "30px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -307,10 +249,10 @@ $(document).ready(function () {
                     cell: {
                         operator: "contains",
                         showOperators: false,
-                        //template: function (e) {
-                        //    e.element.parent().html("<a class='k-button' title='Thêm nhân viên vào chính sách lương' style='width:50%; height:25px;float: left; position: relative;' onclick='openAddNhanVienWindow()'><i class='fa fa-plus'></i></a><a class='k-button' title='Xóa nhân viên đã chọn' style='width:50%; height:25px;float: left; position: relative;' onclick='DeleteMultiRowGridNV()'><i class='fa fa-minus'></i></a>")
+                        template: function (e) {
+                            e.element.parent().html("<a class='k-button' title='Thêm nhân viên vào chính sách lương' style='width:50%; height:25px;float: left; position: relative;' onclick='openAddNhanVienWindow()'><i class='fa fa-plus'></i></a><a class='k-button' title='Xóa nhân viên đã chọn' style='width:50%; height:25px;float: left; position: relative;' onclick='DeleteMultiRowGridNV()'><i class='fa fa-minus'></i></a>")
 
-                        //}
+                        }
                     }
                 },
             },
@@ -345,6 +287,68 @@ $(document).ready(function () {
                 },
                 headerAttributes: {
                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "SoDienThoai",
+                title: "Số Điện Thoại",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "ID_GioiTinh",
+                title: "Giới Tính",
+                template: function (dataItem) {
+                    if (dataItem.ID_GioiTinh === 0) {
+                        return "<strong>nam</strong>";
+                    } else if (dataItem.ID_GioiTinh === 1) {
+                        return "<strong>nữ</strong>";
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "DiaChi",
+                title: "Địa Chỉ",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: right; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
                     class: "table-header-cell"
                 }
             },
@@ -447,7 +451,7 @@ $(document).ready(function () {
         },
         columns: [
             {
-                width: "35px",
+                width: "30px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -486,23 +490,6 @@ $(document).ready(function () {
             {
                 field: "MaNhanVien",
                 title: "Mã Nhân viên",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "TenPhongBan",
-                title: "Bộ phận",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -594,38 +581,20 @@ $(document).ready(function () {
             "Close"
         ]
     });
-
     $("#TuNgay").kendoDatePicker({
         format: "dd/MM/yyyy",
+        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
         dateInput: true,
-
+        change: function (e) {
+            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+            $("#DenNgay").data("kendoDatePicker").value(d);
+        }
     });
     $("#DenNgay").kendoDatePicker({
         format: "dd/MM/yyyy",
         dateInput: true,
+        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
     });
-    $("#NgayBatDau").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true,
-
-    });
-    $("#NgayKetThuc").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true,
-    });
-
-    $("#windowCH").kendoWindow({
-        width: "700",
-        height: "520",
-        title: "Cấu hình tham số hưởng chính sách",
-        visible: false,
-        modal: true,
-        resizable: false,
-        actions: [
-            "Close"
-        ]
-    });
-
     $("#window").kendoWindow({
         width: "100%",
         height: "100%",
@@ -637,41 +606,6 @@ $(document).ready(function () {
             "Close"
         ]
     });
-
-    $('#ComboLoai').kendoComboBox({
-        dataTextField: "text",
-        dataValueField: "value",
-        autoBind: false,
-        dataSource: new kendo.data.DataSource({
-            data: [{ text: "Lương", value: 1 }, { text: "Phụ cấp", value: 2 }]
-        }),
-    })
-
-    $("#ComboHopDong").kendoComboBox({
-        dataTextField: "Name",
-        dataValueField: "ID",
-        filter: "contains",
-        suggest: true,
-        delay: 1000,
-        dataSource: {
-            data: [
-                {
-                    ID: 0,
-                    Name: "Thử việc"
-                },
-                {
-                    ID: 1,
-                    Name: "Chính thức"
-                },
-                {
-                    ID: 2,
-                    Name: "Học việc"
-                },
-            ]
-        }
-    });
-
-
     $("#ComboKyHanThanhToan").kendoComboBox({
         dataTextField: "Label",
         dataValueField: "Value",
@@ -682,18 +616,18 @@ $(document).ready(function () {
                     Value: 1,
                     Label: "Ngày"
                 },
-                //{
-                //    Value: 2,
-                //    Label: "Tuần"
-                //},
+                {
+                    Value: 2,
+                    Label: "Tuần"
+                },
                 {
                     Value: 3,
                     Label: "Tháng"
                 },
-                //{
-                //    Value: 4,
-                //    Label: "Quý"
-                //},
+                {
+                    Value: 4,
+                    Label: "Quý"
+                },
                 {
                     Value: 5,
                     Label: "Năm"
@@ -737,7 +671,7 @@ function ThemMoi() {
         $("#window").data("kendoWindow").center().maximize().open();
     }
     $.ajax({
-        url: '/HoSoNhanSu/GetAll',
+        url: '/NhanVien/GetAllNhanVien',
         type: 'GET',
     }).done(function successCallback(response) {
         kendo.ui.progress($("#gridAddNhanVien"), true);
@@ -769,11 +703,8 @@ function openEditWindow() {
         $("#Ma").val(selectedItem.Ma);
         $("#SoTien").val(selectedItem.SoTien);
         $("#ComboKyHanThanhToan").data("kendoComboBox").value(selectedItem.KyHanThanhToan);
-        $("#ComboHopDong").data("kendoComboBox").value(selectedItem.ID_LoaiHopDong);
-        $("#ComboLoai").data("kendoComboBox").value(selectedItem.Loai);
         $("#GhiChu").val(selectedItem.GhiChu);
         isEdit = true;
-        document.getElementById("gridNhanVien").style.display = "block"
         loadGridNVData(selectedItem.ID);
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
@@ -784,25 +715,23 @@ function openEditWindow() {
 
 }
 function Luu() {
-    //var dataSourceNV = $("#gridNhanVien").data("kendoGrid").dataSource.data();
-    //var listID_NhanVien = [];
-    //$.each(dataSourceNV, function () {
-    //    listID_NhanVien.push(this.ID);
-    //})
-    //var StringID_NhanVien = listID_NhanVien.toString();
+    var dataSourceNV = $("#gridNhanVien").data("kendoGrid").dataSource.data();
+    var listID_NhanVien = [];
+    $.each(dataSourceNV, function () {
+        listID_NhanVien.push(this.ID);
+    })
+    var StringID_NhanVien = listID_NhanVien.toString();
     ValidateForm(function (valid) {
         if (valid) {
             $.ajax({
-                url: '/ChinhSachLuong/InsertOrUpdate_ChinhSachLuong',
+                url: '/ChinhSachLuong/InsertOrUpdate_ChinhSachLuong?ListID_NhanVien=' + StringID_NhanVien,
                 type: 'POST',
                 data: {
                     ID: $("#ID").val(),
                     Ten: $("#Ten").val(),
                     Ma: $("#Ma").val(),
                     SoTien: $("#SoTien").val(),
-                    Loai: $("#ComboLoai").data("kendoComboBox").value(),
-                    KyHanThanhToan: $("#ComboKyHanThanhToan").data("kendoComboBox").value(),
-                    ID_LoaiHopDong: $("#ComboHopDong").data("kendoComboBox").value(),
+                    KyHanThanhToan:$("#ComboKyHanThanhToan").data("kendoComboBox").value(),
                     GhiChu: $("#GhiChu").val(),
                 }
             }).done(function successCallback(response) {
@@ -823,11 +752,9 @@ function Luu() {
 function ValidateForm(callback) {
     var validten = SetValidate("Ten");
     var validma = SetValidate("Ma");
-    var validloai = SetValidate("ComboLoai");
-    var validComboHopDong = SetValidate("ComboHopDong");
-    var validKyHanThanhToan = SetValidate("ComboKyHanThanhToan");
+    var validtien = SetValidate("SoTien");
 
-    var valid = validma && validten && validComboHopDong && validKyHanThanhToan && validloai;
+    var valid = validma && validten && validtien ;
     if (valid) {
         if ($("#ID").val() === '') {
             CheckMa($("#Ma").val(), function (stt) {
@@ -838,59 +765,6 @@ function ValidateForm(callback) {
         }
     } else {
         callback(valid);
-    }
-}
-
-function ValidateForm1(callback) {
-    //var validca = SetValidate("ComboCa");
-    var validtungay = SetValidate("NgayBatDau");
-    var validdenngay = SetValidate("NgayKetThuc");
-    var validcongchuan = SetValidate("CongChuan");
-    var validdoangsotoithieu = SetValidate("DoanhSoToiThieu");
-    var validluongkhachtoithieu = SetValidate("LuongKhachToiThieu");
-    var validngaycongtoithieu = SetValidate("NgayCongToiThieu");
-    var validluykedoanhso = SetValidate("LuyKe_DoanhSoToiThieu");
-    var validluykeluongkhach = SetValidate("LuyKe_LuongKhachToiThieu");
-    var validluykengaycong = SetValidate("LuyKe_NgayCongToiThieu");
-
-    var valid = validtungay && validdenngay && validcongchuan && validdoangsotoithieu && validluongkhachtoithieu && validdenngay && validngaycongtoithieu && validluykedoanhso && validluykeluongkhach && validluykengaycong;
-    console.log(valid);
-    return valid;
-}
-
-function LuuCauHinh() {
-    if (ValidateForm1()) {
-        var dataItem = {
-            ID_ChinhSachLuong: $("#ID").val(),
-            NgayBatDau: kendo.toString($("#NgayBatDau").data("kendoDatePicker").value(), "yyyy/MM/dd"),
-            NgayKetThuc: kendo.toString($("#NgayKetThuc").data("kendoDatePicker").value(), "yyyy/MM/dd"),
-            CongChuan: $("#CongChuan").val(),
-            DoanhSoToiThieu: $("#DoanhSoToiThieu").val(),
-            LuongKhachToiThieu: $("#LuongKhachToiThieu").val(),
-            NgayCongToiThieu: $("#NgayCongToiThieu").val(),
-            CongChuanTheoThang: $("#CongChuanTheoThang").is(":checked") ? 1 : 0,
-            LuyKe_DoanhSoToiThieu: $("#LuyKe_DoanhSoToiThieu").is(":checked") ? 1 : 0,
-            LuyKe_LuongKhachToiThieu: $("#LuyKe_LuongKhachToiThieu").is(":checked") ? 1 : 0,
-            LuyKe_NgayCongToiThieu: $("#LuyKe_NgayCongToiThieu").is(":checked") ? 1 : 0,
-            GhiChu: $("#GhiChu").val(),
-        }
-        console.log(dataItem)
-        $.ajax({
-            url: '/ChinhSachLuong/InsertCSL_CHFromChinhSachLuong',
-            type: 'POST',
-            data: dataItem,
-        }).done(function successCallback(response) {
-            console.log(response);
-            if (response.success) {
-                $("#grid").data("kendoGrid").clearSelection();
-                //TimKiem();
-                HuyCauHinh();
-                LoadGridData()
-                notification.show({ kValue: response.msg }, "success");
-            } else {
-                notification.show({ kValue: response.msg }, "error");
-            }
-        });
     }
 }
 
@@ -918,7 +792,6 @@ function Huy() {
     $("#window").data("kendoWindow").close();
     $("#grid").data("kendoGrid").clearSelection();
     $("#ComboKyHanThanhToan").data("kendoComboBox").value(1);
-    $("#ComboHopDong").data("kendoComboBox").value(1);
     var dataSource = new kendo.data.DataSource({
         data: [],
         schema: {
@@ -929,12 +802,6 @@ function Huy() {
         pageSize: 20,
     });
     $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
-}
-
-function HuyCauHinh() {
-    document.getElementById("formCauHinh").reset();
-    $("#windowCH").data("kendoWindow").close();
-
 }
 
 function Xoa() {
@@ -971,7 +838,7 @@ function XoaDuLieu(bangDuLieu) {
 
 function loadGridNVData(ID_CS) {
     $.ajax({
-        url: '/ChinhSachLuong/GetChinhSachLuongNhanVien?ID_ChinhSachLuong=' + ID_CS + '&ID_NhanVien=0',
+        url: '/NhanVien/GetByID_ChinhSachLuong?ID_ChinhSachLuong=' + ID_CS,
         type: 'GET',
     }).done(function successCallback(response) {
         console.log(response);
@@ -1022,59 +889,6 @@ function openAddNhanVienWindow() {
     } else {
         $("#windowNhanVien").data("kendoWindow").center().maximize().open();
     }
-}
-
-function UpdateCongChuanTheoThang() {
-    if ($("#CongChuanTheoThang").is(":checked")) {
-        $("#CongChuan").val(0);
-        $("#CongChuan").prop('readonly', true);
-    } else {
-        $("#CongChuan").prop('readonly', false);
-    }
-}
-
-function openCauHinhWindow(ID_ChinhSach) {
-    HuyCauHinh();
-    $("#ID").val(ID_ChinhSach);
-    $.ajax({
-        url: '/ChinhSachLuong/GetChinhSachLuongCauHinh?ID_ChinhSachLuong=' + ID_ChinhSach,
-        type: 'GET',
-    }).done(function successCallback(response) {
-        if (response.length > 0) {
-            var data = response[0]; // Lấy đối tượng đầu tiên trong mảng
-
-            $("#NgayBatDau").data("kendoDatePicker").value(data.NgayBatDau);
-            $("#NgayKetThuc").data("kendoDatePicker").value(data.NgayKetThuc);
-
-            $("#DoanhSoToiThieu").val(data.DoanhSoToiThieu);
-            $("#LuongKhachToiThieu").val(data.LuongKhachToiThieu);
-            $("#NgayCongToiThieu").val(data.NgayCongToiThieu);
-            $("#CongChuanTheoThang").prop("checked", Number(data.CongChuanTheoThang) === 1);
-            $("#LuyKe_DoanhSoToiThieu").prop("checked", Number(data.LuyKe_DoanhSoToiThieu) === 1);
-            $("#LuyKe_LuongKhachToiThieu").prop("checked", Number(data.LuyKe_LuongKhachToiThieu) === 1);
-            $("#LuyKe_NgayCongToiThieu").prop("checked", Number(data.LuyKe_NgayCongToiThieu) === 1);
-            $("#GhiChu").val(data.GhiChu);
-            if (Number(data.CongChuanTheoThang) === 1) {
-                $("#CongChuan").val(0);
-                $("#CongChuan").prop('readonly', true);
-            } else {
-                $("#CongChuan").val(data.CongChuan);
-                $("#CongChuan").prop('readonly', false);
-            }
-
-            if ($(window).width() > 800) {
-                $("#windowCH").data("kendoWindow").center().open();
-            } else {
-                $("#windowCH").data("kendoWindow").center().maximize().open();
-            }
-        } else {
-            if ($(window).width() > 800) {
-                $("#windowCH").data("kendoWindow").center().open();
-            } else {
-                $("#windowCH").data("kendoWindow").center().maximize().open();
-            }
-        }
-    })
 }
 
 function DeleteMultiRowGridNV() {

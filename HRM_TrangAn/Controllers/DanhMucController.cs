@@ -259,12 +259,6 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
-        public ActionResult CongViecThueKhoan()
-        {
-            return View();
-        }
-
-        [SessionExpire]
         public ActionResult QuanLyNguoiLaoDong()
         {
             return View();
@@ -293,21 +287,9 @@ namespace HRM_TrangAn.Controllers
         {
             return View();
         }
-        
+
         [SessionExpire]
         public ActionResult ChinhSachLuong()
-        {
-            return View();
-        }
-
-        [SessionExpire]
-        public ActionResult DoanhSo_LuongKhach()
-        {
-            return View();
-        }
-
-        [SessionExpire]
-        public ActionResult NoiDungPhuCap()
         {
             return View();
         }

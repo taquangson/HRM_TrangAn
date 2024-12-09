@@ -105,366 +105,17 @@
             height: 100px;
             border-radius: 20%;
         }
+
+        #loadBtnContainer {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #loadDataBtn {
+            margin: 10px;
+        }
     </style>
-    <script>
-        var MaNhanVien = @Model;
-        var isMobile = {
-            Android: function () {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function () {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function () {
-                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-            },
-            Opera: function () {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function () {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function () {
-                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-            }
-        };
-        function closeWindow() {
-            $("#window").data("kendoWindow").close();
-        }
-        $(document).ready(function () {
-
-            $("#window").kendoWindow({
-                width: "100%",
-                height: "90%",
-                title: "Thông báo",
-                visible: false,
-                modal: true,
-                resizable: false,
-                actions: [
-                    "Close"
-                ]
-            });
-            $("#window").data("kendoWindow").maximize().open();
-            $("#TuNgay").kendoDatePicker({
-                format: "dd/MM/yyyy",
-                value: new Date(),
-                change: function (e) {
-                    loadData();
-                }
-            })
-            $("#DenNgay").kendoDatePicker({
-                format: "dd/MM/yyyy",
-                value: new Date(),
-                change: function (e) {
-                    loadData();
-                }
-            })
-
-
-
-            $("#gridchamcong").kendoGrid({
-                height: function () {
-                    var height = $(window).height() - 450;
-                    if (isMobile.any()) {
-                        height = 300;
-                    }
-                    return height;
-                },
-                scrollable: true,
-                persistSelection: true,
-                autoFitColumn: true,
-                resizable: true,
-                sortable: true,
-                //filterable: {
-                //    mode: "row",
-                //},
-                /*                pageable: pageableShort,*/
-                dataBinding: function () {
-                    record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
-                },
-                columns: [
-                    //{
-                    //    width: "35px",
-                    //    selectable: true,
-                    //    headerAttributes: {
-                    //        style: "text-align:left",
-                    //        class: "table-header-cell "
-                    //    },
-                    //},
-                    {
-                        title: "STT",
-                        template: "#= ++record #",
-                        filterable: false,
-                        width: "50px",
-                        attributes: {
-                            class: "text-center"
-                        },
-                        headerAttributes: {
-                            style: "text-align: center; font-size: 12px; font-weight:bold",
-                            class: "table-header-cell"
-                        }
-                    },
-                    {
-                        field: "WorkDate",
-                        format: "{0:dd/MM/yyyy HH:mm:ss}",
-                        title: "Thời gian chấm công",
-                        width: "130px",
-                        filterable: {
-                            cell: {
-                                operator: "contains",
-                                showOperators: false,
-                                template: function (e) {
-                                    e.element.addClass("k-textbox").css("width", "100%")
-                                }
-                            }
-                        },
-                        headerAttributes: {
-                            style: "text-align: center; font-size: 12px; font-weight:bold",
-                            class: "table-header-cell"
-                        },
-                        attributes: {
-                            style: "text-align: center;",
-                        }
-                    },
-                    {
-                        field: "TenDiem",
-                        title: "Tên điểm",
-                        width: "130px",
-                        filterable: {
-                            cell: {
-                                operator: "contains",
-                                showOperators: false,
-                                template: function (e) {
-                                    e.element.addClass("k-textbox").css("width", "100%")
-                                }
-                            }
-                        },
-                        headerAttributes: {
-                            style: "text-align: center; font-size: 12px; font-weight:bold",
-                            class: "table-header-cell"
-                        },
-                        //attributes: { style: "color: green;" },
-                        template: function (e) {
-                            if (e.ID_ChuyenDo > 0) {
-                                return "<span style='color:green'>" + e.TenDiem + "</span>";
-                            } else {
-                                return e.TenDiem;
-                            }
-                        }
-                    },
-                    //{
-                    //    field: "DiaDiem",
-                    //    title: "Vị trí",
-                    //    width: "100px",
-                    //    filterable: {
-                    //        cell: {
-                    //            operator: "contains",
-                    //            showOperators: false,
-                    //            template: function (e) {
-                    //                e.element.addClass("k-textbox").css("width", "100%")
-                    //            }
-                    //        }
-                    //    },
-                    //    headerAttributes: {
-                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
-                    //        class: "table-header-cell"
-                    //    }
-                    //},
-                    //{
-                    //    field: "DiaChiIP",
-                    //    title: "IP",
-                    //    width: "100px",
-                    //    filterable: {
-                    //        cell: {
-                    //            operator: "contains",
-                    //            showOperators: false,
-                    //            template: function (e) {
-                    //                e.element.addClass("k-textbox").css("width", "100%")
-                    //            }
-                    //        }
-                    //    },
-                    //    headerAttributes: {
-                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
-                    //        class: "table-header-cell"
-                    //    }
-                    //}
-
-                ]
-
-            });
-
-
-            if (MaNhanVien != null) {
-                $("#MaNhanVien").val(MaNhanVien);
-                loadData();
-
-            }
-            $("#MaNhanVien").on('keyup', function (e) {
-                if (e.key === 'Enter' || e.keyCode === 13) {
-                    loadData();
-                }
-            });
-            $("#MaNhanVien").focus();
-        })
-        var timer = 0;
-        function reload() {
-            timer++;
-            if (timer < 20)
-                $("#timer").text((20 - timer) + 's');
-            if (timer == 21) {
-                location.reload();
-            }
-        }
-        function loadData() {
-            kendo.ui.progress($("#gridchamcong"), true);
-            //$("#timer").text('20s');
-            $.ajax({
-                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&From=' + kendo.toString(new Date(), 'yyyy-MM-ddT00:00:00') + '&to=' + kendo.toString(new Date(), 'yyyy-MM-ddT23:59:59'),
-                url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + MaNhanVien
-                    + "&from=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-                    + "&to=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
-                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&from=2022-09-03T00:00:00&to=2022-09-03T23:59:59',
-                type: 'GET',
-            }).done(function successCallback(response) {
-                console.log(response);
-                if (response.nv.AnhDaiDien) {
-                    $("img.k-avatar-image").attr("src", response.nv.AnhDaiDien.FilePath);
-                }
-                $("#TenLaiDo").text(response.nv.TenDayDu);
-                $("#MaLaiDo").text("Mã lái đò: " + response.nv.MaNhanVien);
-                $("#MaSoDo").text("Số đò: " + response.nv.MaThuyen);
-                $("#TenTo").text(response.nv.TenToNhom);
-                $("#chuyendotrongngay").text(response.data1.length);
-
-                $("#conglaodongtrongthang").text(response.data2.TongCongLDTrongThang);
-                $("#chuyendotrongthang").text(response.data2.Ticket);
-                $("#nocong").text(response.data2.NoCongTonDau);
-                $("#luongtamtinh").text(kendo.toString(response.data2.Ticket * 200000,'N0'));
-                $("#luotdanhgia").text(response.data2.LuotDanhGia);
-
-                var dataSource = new kendo.data.DataSource({
-                    data: response.data3,
-                    schema: {
-                        model: {
-                            fields: {
-                                WorkDate: {
-                                    type: 'date'
-                                },
-                            }
-                        }
-                    },
-                    pageSize: 100
-                });
-                $("#gridchamcong").data('kendoGrid').setDataSource(dataSource);
-                kendo.ui.progress($("#gridchamcong"), false);
-                $("#MaNhanVien").blur();
-
-                var star1 = 0;
-                var star2 = 0;
-                var star3 = 0;
-                var star4 = 0;
-                var star5 = 0;
-                var star1t = 0;
-                var star2t = 0;
-                var star3t = 0;
-                var star4t = 0;
-                var star5t = 0;
-
-                var sum = 0;
-                var avg = 0;
-                var sumt = 0;
-                var avgt = 0;
-                $.each(response.data4, function (index, r) {
-
-                    sum += r.DiemDanhGia;
-                    if (r.DiemDanhGia == 1) {
-                        star1++;
-                    }
-                    else if (r.RaDiemDanhGiate == 2) {
-                        star2++;
-                    }
-                    else if (r.DiemDanhGia == 3) {
-                        star3++;
-                    }
-                    else if (r.DiemDanhGia == 4) {
-                        star4++;
-                    }
-                    else if (r.DiemDanhGia == 5) {
-                        star5++;
-                    }
-                });
-                if (response.data4.length == 0) {
-                    avg = 0;
-                }
-                else {
-                    avg = sum / response.data4.length;
-                }
-                var pstar1 = star1 * 100 / response.data4.length;
-                var pstar2 = star2 * 100 / response.data4.length;
-                var pstar3 = star3 * 100 / response.data4.length;
-                var pstar4 = star4 * 100 / response.data4.length;
-                var pstar5 = star5 * 100 / response.data4.length;
-                console.log(avg);
-                $("#avg").html(kendo.toString(avg,'N2'));
-                $("#star1").html(star1);
-                $("#star2").html(star2);
-                $("#star3").html(star3);
-                $("#star4").html(star4);
-                $("#star5").html(star5);
-                $("#pstar5").css("width", pstar5 + "%");
-                $("#pstar4").css("width", pstar4 + "%");
-                $("#pstar3").css("width", pstar3 + "%");
-                $("#pstar2").css("width", pstar2 + "%");
-                $("#pstar1").css("width", pstar1 + "%");
-                //setInterval(reload, 1000);
-
-
-            $.each(response.data5, function (index, r) {
-
-                sumt += r.DiemDanhGia;
-                if (r.DiemDanhGia == 1) {
-                    star1t++;
-                }
-                else if (r.RaDiemDanhGiate == 2) {
-                    star2t++;
-                }
-                else if (r.DiemDanhGia == 3) {
-                    star3t++;
-                }
-                else if (r.DiemDanhGia == 4) {
-                    star4t++;
-                }
-                else if (r.DiemDanhGia == 5) {
-                    star5t++;
-                }
-            });
-            if (response.data5.length == 0) {
-                avgt = 0;
-            }
-            else {
-                avgt = sumt / response.data5.length;
-            }
-
-            $("#avgt").html(kendo.toString(avgt, 'N2'));
-                $("#star1t").html(star1t);
-                $("#star2t").html(star2t);
-                $("#star3t").html(star3t);
-                $("#star4t").html(star4t);
-                $("#star5t").html(star5t);
-                var pstar1t = star1t * 100 / response.data5.length;
-                var pstar2t = star2t * 100 / response.data5.length;
-                var pstar3t = star3t * 100 / response.data5.length;
-                var pstar4t = star4t * 100 / response.data5.length;
-                var pstar5t = star5t * 100 / response.data5.length;
-                $("#pstar5t").css("width", pstar5t + "%");
-                $("#pstar4t").css("width", pstar4t + "%");
-                $("#pstar3t").css("width", pstar3t + "%");
-                $("#pstar2t").css("width", pstar2t + "%");
-                $("#pstar1t").css("width", pstar1t + "%");
-
-        });
-        }
-    </script>
     <style>
         body {
             height: 100vh;
@@ -479,7 +130,7 @@
     </style>
 </head>
 <body>
-    <div style="visibility:hidden" id="window">
+    <div style="display: none" id="window">
         <div style="padding:5px;font-size:20px;">
             <p style="text-align:center"><b>PNS thông báo chính sách đối với lái đò đang làm việc tại khu du lịch khi giới thiệu lái đò mới đến tuyển dụng sẽ hưởng các chế độ như sau:</b></p>
             <p>- Sau khi giới thiệu lái đò mới vào tổ gắn bó với KDL:</p>
@@ -489,7 +140,7 @@
         </div>
         <button class="k-button" style="width: 100%; font-size: 20px;" onclick="closeWindow()">Đóng</button>
     </div>
-    <div class="container body" style=" background: rgb(255 255 255 / 60%); height: 100vh;overflow-y:scroll">
+    <div class="container body" id="dataContainer" style=" background: rgb(255 255 255 / 60%); height: 100vh;overflow-y:scroll">
 
         <div class="row container">
             <div class="col-sm-3 text-center">
@@ -696,6 +347,9 @@
                         <label style="width:100%">Đến ngày</label>
                         <input style="width:100%" id="DenNgay" />
                     </div>
+                    <div class="col-sm-3">
+                        <button class="k-button" style="width: 100%; margin-top:29px" onclick="loadData()">xem dữ liệu chấm công</button>
+                    </div>
                 </div>
                 <div class="form-group">
 
@@ -704,5 +358,358 @@
             </div>
         </div>
     </div>
+    <script>
+        @*var MaNhanVien = @Model;*@
+        var isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function () {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+        function closeWindow() {
+            $("#window").data("kendoWindow").close();
+        };
+        $(document).ready(function () {
 
+            $("#window").kendoWindow({
+                width: "100%",
+                height: "90%",
+                title: "Thông báo",
+                visible: false,
+                modal: true,
+                resizable: false,
+                actions: [
+                    "Close"
+                ]
+            });
+            $("#window").data("kendoWindow").maximize().open();
+            $("#TuNgay").kendoDatePicker({
+                format: "dd/MM/yyyy",
+                value: new Date(),
+            })
+            $("#DenNgay").kendoDatePicker({
+                format: "dd/MM/yyyy",
+                value: new Date(),
+            })
+
+
+
+            $("#gridchamcong").kendoGrid({
+                height: function () {
+                    var height = $(window).height() - 450;
+                    if (isMobile.any()) {
+                        height = 300;
+                    }
+                    return height;
+                },
+                scrollable: true,
+                persistSelection: true,
+                autoFitColumn: true,
+                resizable: true,
+                sortable: true,
+                //filterable: {
+                //    mode: "row",
+                //},
+                /*                pageable: pageableShort,*/
+                dataBinding: function () {
+                    record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+                },
+                columns: [
+                    //{
+                    //    width: "26px",
+                    //    selectable: true,
+                    //    headerAttributes: {
+                    //        style: "text-align:left",
+                    //        class: "table-header-cell "
+                    //    },
+                    //},
+                    {
+                        title: "STT",
+                        template: "#= ++record #",
+                        filterable: false,
+                        width: "50px",
+                        attributes: {
+                            class: "text-center"
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        }
+                    },
+                    {
+                        field: "WorkDate",
+                        format: "{0:dd/MM/yyyy HH:mm:ss}",
+                        title: "Thời gian chấm công",
+                        width: "130px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        attributes: {
+                            style: "text-align: center;",
+                        }
+                    },
+                    {
+                        field: "TenDiem",
+                        title: "Tên điểm",
+                        width: "130px",
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold",
+                            class: "table-header-cell"
+                        },
+                        //attributes: { style: "color: green;" },
+                        template: function (e) {
+                            if (e.ID_ChuyenDo > 0) {
+                                return "<span style='color:green'>" + e.TenDiem + "</span>";
+                            } else {
+                                return e.TenDiem;
+                            }
+                        }
+                    },
+                    //{
+                    //    field: "DiaDiem",
+                    //    title: "Vị trí",
+                    //    width: "100px",
+                    //    filterable: {
+                    //        cell: {
+                    //            operator: "contains",
+                    //            showOperators: false,
+                    //            template: function (e) {
+                    //                e.element.addClass("k-textbox").css("width", "100%")
+                    //            }
+                    //        }
+                    //    },
+                    //    headerAttributes: {
+                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
+                    //        class: "table-header-cell"
+                    //    }
+                    //},
+                    //{
+                    //    field: "DiaChiIP",
+                    //    title: "IP",
+                    //    width: "100px",
+                    //    filterable: {
+                    //        cell: {
+                    //            operator: "contains",
+                    //            showOperators: false,
+                    //            template: function (e) {
+                    //                e.element.addClass("k-textbox").css("width", "100%")
+                    //            }
+                    //        }
+                    //    },
+                    //    headerAttributes: {
+                    //        style: "text-align: center; font-size: 12px; font-weight:bold",
+                    //        class: "table-header-cell"
+                    //    }
+                    //}
+
+                ]
+
+            });
+
+
+            
+            $("#MaNhanVien").on('keyup', function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13) {
+                    loadData();
+                }
+            });
+            $("#MaNhanVien").focus();
+        })
+        var timer = 0;
+        function reload() {
+            timer++;
+            if (timer < 20)
+                $("#timer").text((20 - timer) + 's');
+            if (timer == 21) {
+                location.reload();
+            }
+        }
+        function loadData() {
+            kendo.ui.progress($("#gridchamcong"), true);
+            if ($("#TuNgay").data("kendoDatePicker").value() >= $("#DenNgay").data("kendoDatePicker").value()) {
+                alert("ngày bắt đầu lớn hơn ngày kết thúc");
+                return;
+            }
+            //$("#timer").text('20s');
+            $.ajax({
+                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&From=' + kendo.toString(new Date(), 'yyyy-MM-ddT00:00:00') + '&to=' + kendo.toString(new Date(), 'yyyy-MM-ddT23:59:59'),
+                url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + MaNhanVien
+                    + "&from=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
+                    + "&to=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
+                //url: '/BaoCao/GetData_BaoCaoForLaiDo?MaNhanVien=' + $("#MaNhanVien").val() + '&from=2022-09-03T00:00:00&to=2022-09-03T23:59:59',
+                type: 'GET',
+            }).done(function successCallback(response) {
+                console.log(response);
+                if (response.nv.AnhDaiDien) {
+                    $("img.k-avatar-image").attr("src", response.nv.AnhDaiDien.FilePath);
+                }
+                $("#TenLaiDo").text(response.nv.TenDayDu);
+                $("#MaLaiDo").text("Mã lái đò: " + response.nv.MaNhanVien);
+                $("#MaSoDo").text("Số đò: " + response.nv.MaThuyen);
+                $("#TenTo").text(response.nv.TenToNhom);
+                $("#chuyendotrongngay").text(response.data1.length);
+
+                $("#conglaodongtrongthang").text(response.data2.TongCongLDTrongThang);
+                $("#chuyendotrongthang").text(response.data2.Ticket);
+                $("#nocong").text(response.data2.NoCongTonDau);
+                $("#luongtamtinh").text(kendo.toString(response.data2.Ticket * 200000,'N0'));
+                $("#luotdanhgia").text(response.data2.LuotDanhGia);
+
+                var dataSource = new kendo.data.DataSource({
+                    data: response.data3,
+                    schema: {
+                        model: {
+                            fields: {
+                                WorkDate: {
+                                    type: 'date'
+                                },
+                            }
+                        }
+                    },
+                    pageSize: 100
+                });
+                $("#gridchamcong").data('kendoGrid').setDataSource(dataSource);
+                kendo.ui.progress($("#gridchamcong"), false);
+                $("#MaNhanVien").blur();
+
+                var star1 = 0;
+                var star2 = 0;
+                var star3 = 0;
+                var star4 = 0;
+                var star5 = 0;
+                var star1t = 0;
+                var star2t = 0;
+                var star3t = 0;
+                var star4t = 0;
+                var star5t = 0;
+
+                var sum = 0;
+                var avg = 0;
+                var sumt = 0;
+                var avgt = 0;
+                $.each(response.data4, function (index, r) {
+
+                    sum += r.DiemDanhGia;
+                    if (r.DiemDanhGia == 1) {
+                        star1++;
+                    }
+                    else if (r.RaDiemDanhGiate == 2) {
+                        star2++;
+                    }
+                    else if (r.DiemDanhGia == 3) {
+                        star3++;
+                    }
+                    else if (r.DiemDanhGia == 4) {
+                        star4++;
+                    }
+                    else if (r.DiemDanhGia == 5) {
+                        star5++;
+                    }
+                });
+                if (response.data4.length == 0) {
+                    avg = 0;
+                }
+                else {
+                    avg = sum / response.data4.length;
+                }
+                var pstar1 = star1 * 100 / response.data4.length;
+                var pstar2 = star2 * 100 / response.data4.length;
+                var pstar3 = star3 * 100 / response.data4.length;
+                var pstar4 = star4 * 100 / response.data4.length;
+                var pstar5 = star5 * 100 / response.data4.length;
+                console.log(avg);
+                $("#avg").html(kendo.toString(avg,'N2'));
+                $("#star1").html(star1);
+                $("#star2").html(star2);
+                $("#star3").html(star3);
+                $("#star4").html(star4);
+                $("#star5").html(star5);
+                $("#pstar5").css("width", pstar5 + "%");
+                $("#pstar4").css("width", pstar4 + "%");
+                $("#pstar3").css("width", pstar3 + "%");
+                $("#pstar2").css("width", pstar2 + "%");
+                $("#pstar1").css("width", pstar1 + "%");
+                //setInterval(reload, 1000);
+
+
+            $.each(response.data5, function (index, r) {
+
+                sumt += r.DiemDanhGia;
+                if (r.DiemDanhGia == 1) {
+                    star1t++;
+                }
+                else if (r.RaDiemDanhGiate == 2) {
+                    star2t++;
+                }
+                else if (r.DiemDanhGia == 3) {
+                    star3t++;
+                }
+                else if (r.DiemDanhGia == 4) {
+                    star4t++;
+                }
+                else if (r.DiemDanhGia == 5) {
+                    star5t++;
+                }
+            });
+            if (response.data5.length == 0) {
+                avgt = 0;
+            }
+            else {
+                avgt = sumt / response.data5.length;
+            }
+
+            $("#avgt").html(kendo.toString(avgt, 'N2'));
+                $("#star1t").html(star1t);
+                $("#star2t").html(star2t);
+                $("#star3t").html(star3t);
+                $("#star4t").html(star4t);
+                $("#star5t").html(star5t);
+                var pstar1t = star1t * 100 / response.data5.length;
+                var pstar2t = star2t * 100 / response.data5.length;
+                var pstar3t = star3t * 100 / response.data5.length;
+                var pstar4t = star4t * 100 / response.data5.length;
+                var pstar5t = star5t * 100 / response.data5.length;
+                $("#pstar5t").css("width", pstar5t + "%");
+                $("#pstar4t").css("width", pstar4t + "%");
+                $("#pstar3t").css("width", pstar3t + "%");
+                $("#pstar2t").css("width", pstar2t + "%");
+                $("#pstar1t").css("width", pstar1t + "%");
+
+        });
+        }
+    </script>
 </body>
+</html>

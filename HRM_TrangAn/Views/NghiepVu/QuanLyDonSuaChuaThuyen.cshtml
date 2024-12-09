@@ -13,6 +13,17 @@
     <i class="fa fa-chevron-right"></i>
     <b><i class="fa fa-ship"></i> Quản lý thông tin sửa chữa thuyền</b>
 </span>
+<div class="row" style="margin-bottom:10px">
+    <div class="col-sm-2">
+        <label style="width:100%">Từ ngày lập đơn</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày lập đơn</label>
+        <input style="width:100%" id="DenNgay" />
+    </div>
+    <button class="k-button bg-blue" onclick="TimKiem()" style="margin-top: 26px"> <i class="fa fa-search"> Xem danh sách thông tin sửa chữa thuyền </i></button>
+</div>
 <div class="row toolBarMenu">
     <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> 1.Thêm </i></button>
     <button class="k-button bg-blue" onclick="openUpdate2Window()"> <i class="fa fa-star-o"> 2.Kiểm tra</i> </button>
@@ -49,19 +60,19 @@
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
         @*<div class="form-group valid" toggle-valid="SoTienSua">
-            <label style="width:100%">Số tiền sửa: <span style="color:red">*</span></label>
-            <input id="SoTienSua" type="text" class="k-textbox input" />
-            <span class="fa fa-exclamation-triangle icon"></span>
-        </div>*@
+                <label style="width:100%">Số tiền sửa: <span style="color:red">*</span></label>
+                <input id="SoTienSua" type="text" class="k-textbox input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>*@
         @*<div class="form-group valid" toggle-valid="ComboTinhTrang">
-            <label style="width:100%">Tình trạng:<span style="color:red">*</span></label>
-            <input id="ComboTinhTrang" type="text" class="input" />
-            <span class="fa fa-exclamation-triangle icon"></span>
-        </div>*@
+                <label style="width:100%">Tình trạng:<span style="color:red">*</span></label>
+                <input id="ComboTinhTrang" type="text" class="input" />
+                <span class="fa fa-exclamation-triangle icon"></span>
+            </div>*@
         @*<div class="form-group">
-            <label style="width:100%">Ngày hoàn thành:</label>
-            <input id="NgayHoanThanh" style="width:100%" class="input" />
-        </div>*@
+                <label style="width:100%">Ngày hoàn thành:</label>
+                <input id="NgayHoanThanh" style="width:100%" class="input" />
+            </div>*@
         <div class="form-group">
             <label style="width:100%">Ghi chú:</label>
             <textarea id="GhiChu1" type="text" style="width:100%" class="k-textbox"></textarea>

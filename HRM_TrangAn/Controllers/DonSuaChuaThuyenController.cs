@@ -23,6 +23,18 @@ namespace HRM_TrangAn.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetAllDonSuaChuaThuyenByDateRange(string TuNgay, string DenNgay)
+        {
+            DateTime TuNgayDate = DateTime.ParseExact(TuNgay, "yyyy/MM/dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            DateTime DenNgayDate = DateTime.ParseExact(DenNgay, "yyyy/MM/dd HH:mm:ss",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            DonSuaChuaThuyenDAO dao = new DonSuaChuaThuyenDAO();
+            List<DonSuaChuaThuyenModel> data = dao.GetByDateRange(TuNgayDate, DenNgayDate);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult InsertOrUpdate_DonSuaChuaThuyen(DonSuaChuaThuyenModel model)
         {
