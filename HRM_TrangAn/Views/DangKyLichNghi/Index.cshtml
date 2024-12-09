@@ -51,6 +51,7 @@
 <div class="row toolBarMenu">
     <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Tải dữ liệu </i></button>
     <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-blue" onclick="ThemNhieu()"> <i class="fa fa-plus-square"> Thêm nhiều </i></button>
     <button class="k-button bg-green" onclick="GuiYeuCau()"> <i class="fa fa-send"> Gửi yêu cầu phê duyệt </i></button>
     <button class="k-button bg-green" onclick="DuyetYeuCau()"> <i class="fa fa-send"> Duyệt đơn nghỉ </i></button>
     <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
@@ -104,4 +105,38 @@
     </form>
 </div>
 
+<div style="visibility:hidden" id="windowAddMulti">
 
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuMulti()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-green" onclick="LuuMultiVaGui()"> <i class="fa fa-send-o"> Lưu và gửi yêu cầu phê duyệt</i></button>
+        <button class="k-button bg-red" onclick="HuyAddHS()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet1">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="Tag_NhanVien">
+            <label style="width:100%">Người phụ trách:<span style="color:red">*</span></label>
+            <input id="Tag_NhanVien1" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <div id="gridHoSo"></div>
+        </div>
+    </form>
+</div>
+
+<div id="windowAddHoSo">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddHoSo()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách nhân viên:</label>
+        <div id="gridAddHoSo"></div>
+    </div>
+</div>

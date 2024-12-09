@@ -133,7 +133,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             catch (Exception ex)
             {
-                log.Error("sp_KeHoach_GetAll " + ex.Message);
+                log.Error("sp_KeHoach_GetAllByNgay " + ex.Message);
                 return null;
             }
         }
@@ -161,6 +161,35 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_KeHoach_GetAll " + ex.Message);
+                return null;
+            }
+        }
+
+        public List<KeHoachModel> GetBaoCaoKeHoach(DateTime from, DateTime to)
+        {
+            try
+            {
+                NhanVien_KeHoachDAO nvdao = new NhanVien_KeHoachDAO();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@from",from ),
+                    new SqlParameter("@to",to ),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_KeHoach_GetBaoCaoKeHoach", pars);
+                DataTable dt = ds.Tables[0];
+                List<KeHoachModel> result = new List<KeHoachModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành KeHoachModel
+                    model.lstNhanVien = nvdao.GetAllNhanVienTrongKeHoach(model.ID);
+                    model.To_SoNguoiThucTe = GetTo_SoNguoi(model.ID, 1);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_KeHoach_GetBaoCaoKeHoach " + ex.Message);
                 return null;
             }
         }

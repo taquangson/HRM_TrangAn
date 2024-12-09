@@ -41,6 +41,12 @@
             <span class="fa fa-exclamation-triangle icon"></span>
 
         </div>
+        <div class="form-group valid" toggle-valid="ComboLoai">
+            <label style="width:100%">Loại: <span style="color:red">*</span></label>
+            <input id="ComboLoai" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
         <div class="form-group valid">
             <label style="width:100%">Loại hợp đồng: <span style="color:red">*</span></label>
             <input id="ComboHopDong" style="width:100%" class="input" />
@@ -123,17 +129,21 @@
                 <label style="width:100%">Áp dụng đến ngày</label>
                 <input type="checkbox" style="width:100%" id="NgayKetThuc" />
             </div>
-            <div class="form-group" style="margin-top:75px;">
-                <label style="width:100%">Luỹ kế</label>
-                <input type="checkbox"  id="LuyKe_DoanhSoToiThieu" />
+            <div class="form-group" >
+                <label style="width:100%" for="CongChuanTheoThang">Công chuẩn theo tháng</label>
+                <input type="checkbox" onchange="UpdateCongChuanTheoThang()" id="CongChuanTheoThang" />
             </div>
             <div class="form-group" style="margin-top:20px;">
-                <label style="width:100%">Luỹ kế</label>
-                <input type="checkbox"  id="LuyKe_LuongKhachToiThieu" />
+                <label style="width:100%" for="LuyKe_DoanhSoToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_DoanhSoToiThieu" />
             </div>
             <div class="form-group" style="margin-top:20px;">
-                <label style="width:100%">Luỹ kế</label>
-                <input type="checkbox"  id="LuyKe_NgayCongToiThieu" />
+                <label style="width:100%" for="LuyKe_LuongKhachToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_LuongKhachToiThieu" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%" for="LuyKe_NgayCongToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_NgayCongToiThieu" />
             </div>
         </div>
         <div class="form-group">

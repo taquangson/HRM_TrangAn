@@ -340,6 +340,9 @@ function ThemMoi() {
             $("#Ten").val(selectedItem.TenDayDu);
             $("#ID_NhomNhanVien").val(selectedItem.ID - 10000);
         }
+
+        $("#BatDau").data("kendoDatePicker").value($("#TuNgay").data("kendoDatePicker").value())
+        $("#KetThuc").data("kendoDatePicker").value($("#DenNgay").data("kendoDatePicker").value())
         if ($(window).width() > 600) {
             $("#window").data("kendoWindow").center().open();
         } else {

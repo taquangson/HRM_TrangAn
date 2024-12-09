@@ -606,23 +606,23 @@ $(document).ready(function () {
         $("#ComboCongViec").kendoMultiColumnComboBox({
             dataTextField: "TenCongViec",
             dataValueField: "ID",
+            height: 300,
             columns: [
                 {
                     field: "TenCongViec",
                     title: "Tên công việc",
-                    width: "200px",
                 },
                 {
                     field: "Cong",
                     title: "Công/Người",
-                    width: "200px",
+                    width: "90px",
                 },
             ],
             footerTemplate: 'Tổng #: instance.dataSource.total() # ',
             filter: "contains",
             filterFields: ["TenCongViec", "Cong"],
             suggest: true,
-            delay: 1000,
+            //delay: 1000,
             dataSource: dataSource,
             select: function (e) {
 
@@ -696,25 +696,25 @@ $(document).ready(function () {
             columns: [
                 {
                     field: "TenDayDu",
-                    title: "Tên công việc",
-                    width: "200px",
+                    title: "Tên đầy đủ",
+                    width: "120px",
                 },
                 {
                     field: "DienThoai",
                     title: "Số điện thoại",
-                    width: "200px",
+                    width: "100px",
                 },
                 {
                     field: "DiaDiemLamViec",
                     title: "Địa điểm làm việc",
-                    width: "200px",
-                },
+                }
             ],
             footerTemplate: 'Tổng #: instance.dataSource.total() # ',
             filter: "contains",
             filterFields: ["TenDayDu", "DienThoai", "DiaDiemLamViec"],
             suggest: true,
-            delay: 1000,
+            //delay: 1000,
+            height: 300,
             dataSource: dataSource,
             select: function (e) {
             }

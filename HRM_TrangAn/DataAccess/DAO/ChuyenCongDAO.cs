@@ -109,7 +109,6 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_NguoiChuyenCong", model.ID_NguoiChuyenCong),
                     new SqlParameter("@ID_NguoiNhanCong", model.ID_NguoiNhanCong),
                     new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
-                    new SqlParameter("@TrangThai", model.TrangThai),
                     new SqlParameter("@CongChuyen", model.CongChuyen),
                     new SqlParameter("@NgayTinhCong", model.NgayTinhCong),
                 };

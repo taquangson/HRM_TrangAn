@@ -100,6 +100,32 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<HoSoNhanSuModel> GetByIDPhongBan(int ID_PhongBan)
+        {
+            try
+            {
+                List<HoSoNhanSuModel> result = new List<HoSoNhanSuModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_PhongBan",ID_PhongBan),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_HoSoNhanSu_GetNhanVienByPhongBan", pars);
+                DataTable dt = ds.Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    HoSoNhanSuModel model = GetObjFromDataRow(dr);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_HoSoNhanSu_GetNhanVienByPhongBan " + ex.Message);
+                return new List<HoSoNhanSuModel>();
+            }
+        }
+
+
         public HoSoNhanSuModel GetByID_TaiKhoan(int ID_TaiKhoan)
         {
             try
@@ -191,7 +217,6 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@NgaySinh", ((model.NgaySinh.Year == 1 || model.NgaySinh == null) ? (object)DBNull.Value : model.NgaySinh)),
                 new SqlParameter("@NgayBatDauLamViec", ((model.NgayBatDauLamViec.Year == 1 || model.NgayBatDauLamViec == null) ? (object)DBNull.Value : model.NgayBatDauLamViec)),
                 new SqlParameter("@NgayKetThucLamViec",((model.NgayKetThucLamViec.Year == 1 || model.NgayKetThucLamViec == null) ? (object)DBNull.Value : model.NgayKetThucLamViec)),
-                new SqlParameter("@TrangThai", model.TrangThai),
                 new SqlParameter("@ID_ChucVu", model.ID_ChucVu),
                 new SqlParameter("@ID_GioiTinh", model.ID_GioiTinh),
                 new SqlParameter("@MaTheBH", model.MaTheBH),

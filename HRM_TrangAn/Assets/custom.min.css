@@ -266,6 +266,9 @@
     width: 210px;
     z-index: 4000;
     background: #641a85;
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
     display: none;
 }
 

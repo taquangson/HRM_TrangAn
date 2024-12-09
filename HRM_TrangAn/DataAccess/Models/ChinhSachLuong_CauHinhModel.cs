@@ -10,6 +10,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public int ID { get; set; }
         public int ID_ChinhSachLuong { get; set; }
         public float CongChuan { get; set; }
+        public int CongChuanTheoThang { get; set; }
         public float DoanhSoToiThieu { get; set; }
         public int LuyKe_DoanhSoToiThieu { get; set; }
         public float LuongKhachToiThieu { get; set; }

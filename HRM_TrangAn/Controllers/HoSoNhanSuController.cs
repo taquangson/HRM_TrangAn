@@ -40,6 +40,14 @@ namespace HRM_TrangAn.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetByIDPhongBan(int ID_PhongBan)
+        {
+            HoSoNhanSuDAO dao = new HoSoNhanSuDAO();
+            List<HoSoNhanSuModel> data = dao.GetByIDPhongBan(ID_PhongBan);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetListFileNhanVien(int ID_HoSoNhanSu)
         {
             File_NhanVienDAO fdao = new File_NhanVienDAO();

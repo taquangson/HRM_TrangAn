@@ -139,6 +139,13 @@ namespace HRM_TrangAn.Controllers
             return Content(JsonConvert.SerializeObject(data));
         }
 
+        public ActionResult GetAllNhanVienWithTrangThai()
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            List<NhanVienModel> data = dao.GetAllWithTrangThai();
+            return Content(JsonConvert.SerializeObject(data));
+        }
+
         public ActionResult GetNhanVienById(int ID)
         {
             NhanVienDAO dao = new NhanVienDAO();

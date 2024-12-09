@@ -883,6 +883,13 @@ $(document).ready(function () {
                 field: "SoDienThoai",
                 title: "Số điện thoại",
                 width: "100px",
+                //template: function (e) {
+                //    if (e.SoDienThoai) {
+                //        return '<a href="tel:' + e.SoDienThoai + '">' + e.SoDienThoai + '</a>';
+                //    } else {
+                //        return '';
+                //    }
+                //},
                 filterable: {
                     cell: {
                         operator: "contains",

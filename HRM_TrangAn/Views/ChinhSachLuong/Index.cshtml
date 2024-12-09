@@ -9,7 +9,11 @@
         background-color: #4CAF50;
         border: solid 1px;
         border-radius: 5px;
-        margin-left:3px;
+        margin-left: 3px;
+    }
+
+    .k-tooltip, .k-tooltip.k-popup, .k-tooltip.k-widget {
+        background-color: #fff;
     }
 </style>
 <script src="~/Scripts/js/chinhsachluongnhanvien.js"></script>
@@ -27,13 +31,13 @@
         <input style="width:100%" id="treePhongBan" />
     </div>
     @*<div class="col-sm-2">
-        <label style="width:100%">Từ ngày</label>
-        <input style="width:100%" id="TuNgay" />
-    </div>
-    <div class="col-sm-2">
-        <label style="width:100%">Đến ngày</label>
-        <input style="width:100%" id="DenNgay" />
-    </div>*@
+            <label style="width:100%">Từ ngày</label>
+            <input style="width:100%" id="TuNgay" />
+        </div>
+        <div class="col-sm-2">
+            <label style="width:100%">Đến ngày</label>
+            <input style="width:100%" id="DenNgay" />
+        </div>*@
     <div class="col-sm-3">
         <label style="width:100%"> </label>
 
@@ -71,7 +75,7 @@
         </div>
         <div class="form-group valid" toggle-valid="MucLuong">
             <label style="width:100%">Mức lương:</label>
-            <input id="MucLuong" class="k-textbox input" type="number"/>
+            <input id="MucLuong" class="k-textbox input" type="number" />
         </div>
         <div class="form-group valid" toggle-valid="BatDau">
             <label style="width:100%">Từ ngày:</label>
@@ -87,3 +91,8 @@
         </div>
     </form>
 </div>
+
+<script id="templateTooltip" type="text/x-kendo-template">
+    <p>Mức lương : #= target.attr('data-mucluong')# </p>
+    <p>Áp dụng: #= target.attr('data-info')#</p>
+</script>

@@ -75,6 +75,22 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpPost]
+        public ActionResult InsertMulti(PhuCapModel model, string StringID)
+        {
+            PhuCapDAO dao = new PhuCapDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            model.ID_NguoiTao = userinfor.ID;
+            if (dao.InsertMulti(model, StringID))
+            {
+                return Json(new { success = true, msg = "Thêm hoặc sửa dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Thêm hoặc sửa dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
         public ActionResult DeleteMulti(string ID)
         {
             PhuCapDAO dao = new PhuCapDAO();

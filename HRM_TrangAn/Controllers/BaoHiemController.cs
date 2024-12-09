@@ -48,6 +48,14 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetNVByID_BaoHiemXaHoi(int ID_BaoHiemXaHoi)
+        {
+            NhanVien_BaoHiemXaHoiDAO dao = new NhanVien_BaoHiemXaHoiDAO();
+            List<NhanVien_BaoHiemXaHoiModel> data = dao.GetByID_BaoHiemXaHoi(ID_BaoHiemXaHoi);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult GetByNotID_BaoHiemXaHoi(int ID_BaoHiemXaHoi)
         {
             HoSoNhanSuDAO dao = new HoSoNhanSuDAO();

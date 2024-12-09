@@ -1,5 +1,18 @@
 ﻿$(".main_container").hide();
 $(document).ready(function () {
+    $("#TuNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
+        change: function (e) {
+            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+            $("#DenNgay").data("kendoDatePicker").value(d);
+        }
+    })
+    $("#DenNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
+    })
+
     $("#grid").kendoGrid({
         dataSource: new kendo.data.DataSource({
             data: [],
@@ -22,7 +35,7 @@ $(document).ready(function () {
             pageSize: 20,
         }),
         height: function () {
-            var height = $(window).height() - 160;
+            var height = $(window).height() - 200;
             return height;
         },
         scrollable: true,
@@ -284,10 +297,10 @@ $(document).ready(function () {
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
-    LoadGridData();
+    //LoadGridData();
     $("#windowNhanVien").kendoWindow({
-        width: "800",
-        height: "400",
+        width: "1200",
+        height: "800",
         title: "Danh sách nhân viên",
         visible: false,
         modal: true,
@@ -298,7 +311,7 @@ $(document).ready(function () {
     });
     $("#gridNhanVien").kendoGrid({
         height: function () {
-            var height = 300;
+            var height = 500;
             return height;
         },
         scrollable: true,
@@ -498,7 +511,7 @@ $(document).ready(function () {
     });
     $("#gridAddNhanVien").kendoGrid({
         height: function () {
-            var height = 300;
+            var height = 670;
             return height;
         },
         scrollable: true,
@@ -559,6 +572,28 @@ $(document).ready(function () {
             {
                 field: "MaThuyen",
                 title: "Mã số đò",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                }
+            },
+
+            {
+                field: "MaToNhom",
+                title: "Tổ nhóm",
                 width: "100px",
                 filterable: {
                     cell: {
@@ -774,7 +809,7 @@ function openEditWindow() {
 
 function LoadGridData() {
     $.ajax({
-        url: '/LaoDongThueKhoan/GetAllLaoDongThueKhoan',
+        url: '/LaoDongThueKhoan/GetAllLaoDongThueKhoan?From=' + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), 'yyyy/MM/dd') + '&To=' + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), 'yyyy/MM/dd') + ' 23:59:59',
         type: 'GET',
     }).done(function successCallback(response) {
         kendo.ui.progress($("#grid"), true);
@@ -857,6 +892,7 @@ function Luu() {
                 type: 'POST',
                 data: {
                     ID: $("#ID_Update").val(),
+                    ThanhTien: $("#ThanhTien_Update").val(),
                     Cong: $("#Cong_Update").val(),
                     NgayApDung: kendo.toString($("#NgayApDung_Update").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     ID_CongViec: $("#ComboCongViec_Update").data("kendoMultiColumnComboBox").value(),

@@ -14,6 +14,7 @@ namespace HRM_TrangAn.Controllers
     public class ChinhSachLuongController : Controller
     {
         // GET: ChinhSachLuong
+        [SessionExpire]
         public ActionResult Index()
         {
             return View();
@@ -44,7 +45,7 @@ namespace HRM_TrangAn.Controllers
         public ActionResult GetChinhSachLuongNhanVien(int ID_ChinhSachLuong, int ID_NhanVien)
         {
             ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
-            List<ChinhSachLuong_NhanVienModel> data = dao.GetNV_ByIDCSL(ID_ChinhSachLuong, ID_NhanVien);
+            List<ChinhSachLuong_NhanVienModel> data = dao.GetNV_ByIDCSL(ID_ChinhSachLuong, ID_NhanVien, null, null);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -107,11 +108,11 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteCSL_NVFromChinhSachLuong(int ID_ChinhSachLuong, int ID_NhanVien)
+        public ActionResult DeleteCSL_NVFromChinhSachLuong(int ID_ChinhSachLuong_NhanVien)
         {
             ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
 
-            if (dao.DeleteCSL_NV(ID_ChinhSachLuong, ID_NhanVien))
+            if (dao.DeleteCSL_NV(ID_ChinhSachLuong_NhanVien))
             {
                 return Json(new { success = true, msg = "Xóa chính sách thành công" }, JsonRequestBehavior.AllowGet);
             }

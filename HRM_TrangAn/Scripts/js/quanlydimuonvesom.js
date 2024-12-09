@@ -287,7 +287,7 @@ function TimKiem() {
     }).done(function successCallback(response) {
 
         var dataSource = new kendo.data.DataSource({
-            data: response,
+            data: JSON.parse(response),
             schema: {
                 model: {
                     fields: {
@@ -512,13 +512,14 @@ function Luu() {
             }
         }).done(function successCallback(response) {
             $.ajax({
-                url: '/XuPhatNhanVien/InsertOrUpdate_XuPhat',
+                url: '/XuPhatNhanVien/InsertOrUpdate_XuPhatFromDiMuon',
                 type: 'POST',
                 data: {
                     ID_TaiKhoan: $("#ID_TaiKhoan").val(),
                     NgayPhat: kendo.toString($("#NgayPhat").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     ID_DanhMucLoi: $("#ComboLoi").data('kendoComboBox').value(),
                     GhiChu: $("#GhiChu").val(),
+                    FromDMVS: 1,
                     lstNhanVienXuPhat: [{ ID_NhanVien: $("#ID_TaiKhoan").val() }]
                 }
             }).done(function successCallback(response) {

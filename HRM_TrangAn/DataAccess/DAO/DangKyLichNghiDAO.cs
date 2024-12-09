@@ -173,7 +173,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             catch (Exception ex)
             {
-                log.Error("sp_DangKyLichNghi_GetByNhanVien " + ex.Message);
+                log.Error("sp_DangKyLichNghi_GetByID " + ex.Message);
                 return null;
             }
         }
@@ -233,6 +233,38 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
 
             return 0;
+        }
+
+        public bool MultiInsert(List<DangKyLichNghiModel> list)
+        {
+            try
+            {
+                List<TransactionModel> param = new List<TransactionModel>();
+                foreach (DangKyLichNghiModel model in list) {
+                    SqlParameter[] pars = new SqlParameter[] {
+                        new SqlParameter("@ID", model.ID),
+                        new SqlParameter("@ID_TaiKhoan", model.ID_TaiKhoan),
+                        new SqlParameter("@Loai", model.Loai),
+                        new SqlParameter("@TrangThai", model.TrangThai),
+                        new SqlParameter("@BatDauNghi", model.BatDauNghi),
+                        new SqlParameter("@KetThucNghi", model.KetThucNghi),
+                        new SqlParameter("@GhiChu", model.GhiChu),
+                        new SqlParameter("@Tag_NhanVien", string.Join(",", model.Tag_NhanVien)),
+                        new SqlParameter("@NgayPheDuyet",((model.NgayPheDuyet.Year == 1 || model.NgayPheDuyet == null) ? (object)DBNull.Value : model.NgayPheDuyet)),
+                    };
+                    TransactionModel tranparam = new TransactionModel();
+                    tranparam.procName = "sp_DangKyLichNghi_InsertOrUpdate";
+                    tranparam.procParams = pars;
+                    param.Add(tranparam);
+                }
+                bool success = helper.ExecuteTransaction(param);
+                return success;
+            }
+            catch(Exception ex)
+            {
+                log.Error("sp_DangKyLichNghi_InsertOrUpdate" + ex.Message);
+                return false;
+            }
         }
 
         public int UpdateTrangThai(DangKyLichNghiModel model)

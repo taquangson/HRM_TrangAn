@@ -50,12 +50,12 @@ $(document).ready(function () {
 
     $("#BatDau").kendoDatePicker({
         format: "dd/MM/yyyy",
-        value: new Date()
+        //value: new Date()
     })
 
     $("#KetThuc").kendoDatePicker({
         format: "dd/MM/yyyy",
-        value: new Date()
+        //value: new Date()
     })
 
 
@@ -265,7 +265,23 @@ function LoadGridData() {
                         } else {
                             let html = "";
                             $.each(e.chinhsachluong, function (index, item) {
-                                html += "<span class='itemchinhsach'><b>" + item.TenChinhSach + "</b><i onclick='XoaChinhSach(\"" + item.TenChinhSach + "\"," + item.ID_ChinhSachLuong + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-times'></i></span>"
+                                let ngaybatdau = toDate(item.NgayBatDau);
+                                let ngayketthuc = toDate(item.NgayKetThuc);
+                                let info = '';
+                                if (ngaybatdau.getFullYear() != 2000) {
+                                    info += 'Từ ngày:  <b>' + kendo.toString(ngaybatdau, 'dd/MM/yyyy') + '</b> ';
+                                } else {
+                                    info += 'Từ ngày: <b>Không xác định</b>'
+                                }
+                                if (ngayketthuc.getFullYear() != 2100) {
+                                    info += 'đến ngày:  <b>' + kendo.toString(ngayketthuc, 'dd/MM/yyyy') + '</b> ';
+                                } else {
+                                    info += 'đến ngày: <b>Không xác định</b>'
+                                }
+                                html += "<span data-mucluong='<b>" + kendo.toString(item.MucLuong,'N0') + " VNĐ</b>' "
+                                    + "data-info='" + (info != '' ? info : 'Không xác định') + "' "
+                                    + "' class='itemchinhsach'><b>" + item.TenChinhSach
+                                    + "</b><i onclick='XoaChinhSach(\"" + item.TenChinhSach + "\"," + item.ID + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-times'></i></span>"
                             })
                             return html;
                         }
@@ -318,6 +334,13 @@ function LoadGridData() {
             dataSource: ds,
             columns: columns
         });
+        $("#grid").kendoTooltip({
+    /*        width: "200px",*/
+            //height: "100px",
+            autoHide: true,
+            filter: "span.itemchinhsach",
+            content: kendo.template($("#templateTooltip").html()),
+        });
         kendo.ui.progress($("#grid"), false);
     });
 }
@@ -366,62 +389,62 @@ function ValidateForm(callback) {
 
 
 function Luu() {
-    ValidateForm(function (valid) {
-        if (valid) {
-            if ($("#ID_HoSoNhanSu").val() == 0 || $("#ID_HoSoNhanSu").val() == '' || $("#ID_HoSoNhanSu").val() == null) {
-                var dataSource = $("#grid").data("kendoTreeList").dataSource._pristineData
-                var ID_PhongBan = $("#ID_PhongBan").val();
-                var listHSNS = dataSource.filter((item) => (item.ID_Parent == ID_PhongBan && item.ID_HoSoNhanSu < 10000));
-                $.each(listHSNS, function (index, item) {
-                    $.ajax({
-                        url: '/ChinhSachLuong/InsertCSL_NVFromChinhSachLuong',
-                        type: 'POST',
-                        data: {
-                            ID_ChinhSachLuong: $("#ComboChinhSachLuong").data("kendoComboBox").value(),
-                            MucLuong: $("#MucLuong").val(),
-                            ID_HoSoNhanSu: item.ID_HoSoNhanSu,
-                            GhiChu: $("#GhiChu").val(),
-                            NgayBatDau: kendo.toString($("#BatDau").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
-                            NgayKetThuc: kendo.toString($("#KetThuc").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
-                        }
-                    }).done(function successCallback(response) {
-                        //response controller này trả về success và msg
-                        if (response.success) {
-                            notification.show({ kValue: response.msg }, "success");
-                        } else {
-                            notification.show({ kValue: response.msg }, "error");
-                        }
-                    });
-                })
-                LoadGridData();
-                setTimeout(function () {
-                    Huy();
-                }, 4000);
-            } else {
-                $.ajax({
-                    url: '/ChinhSachLuong/InsertCSL_NVFromChinhSachLuong',
-                    type: 'POST',
-                    data: {
-                        ID_ChinhSachLuong: $("#ComboChinhSachLuong").data("kendoComboBox").value(),
-                        MucLuong: $("#MucLuong").val(),
-                        ID_HoSoNhanSu: $("#ID_HoSoNhanSu").val(),
-                        GhiChu: $("#GhiChu").val(),
-                        NgayBatDau: kendo.toString($("#BatDau").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
-                        NgayKetThuc: kendo.toString($("#KetThuc").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
-                    }
-                }).done(function successCallback(response) {
-                    //response controller này trả về success và msg
-                    if (response.success) {
-                        notification.show({ kValue: response.msg }, "success");
-                        Huy();
-                        LoadGridData();
-                    } else {
-                        notification.show({ kValue: response.msg }, "error");
-                    }
-                });
+    //ValidateForm(function (valid) {
+    //if (valid) {
+    if ($("#ID_HoSoNhanSu").val() == 0 || $("#ID_HoSoNhanSu").val() == '' || $("#ID_HoSoNhanSu").val() == null) {
+        var dataSource = $("#grid").data("kendoTreeList").dataSource._pristineData
+        var ID_PhongBan = $("#ID_PhongBan").val();
+        var listHSNS = dataSource.filter((item) => (item.ID_Parent == ID_PhongBan && item.ID_HoSoNhanSu < 10000));
+        $.each(listHSNS, function (index, item) {
+            $.ajax({
+                url: '/ChinhSachLuong/InsertCSL_NVFromChinhSachLuong',
+                type: 'POST',
+                data: {
+                    ID_ChinhSachLuong: $("#ComboChinhSachLuong").data("kendoComboBox").value(),
+                    MucLuong: $("#MucLuong").val(),
+                    ID_HoSoNhanSu: item.ID_HoSoNhanSu,
+                    GhiChu: $("#GhiChu").val(),
+                    NgayBatDau: kendo.toString($("#BatDau").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
+                    NgayKetThuc: kendo.toString($("#KetThuc").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
+                }
+            }).done(function successCallback(response) {
+                //response controller này trả về success và msg
+                if (response.success) {
+                    notification.show({ kValue: response.msg }, "success");
+                } else {
+                    notification.show({ kValue: response.msg }, "error");
+                }
+            });
+        })
+        LoadGridData();
+        setTimeout(function () {
+            Huy();
+        }, 4000);
+    } else {
+        $.ajax({
+            url: '/ChinhSachLuong/InsertCSL_NVFromChinhSachLuong',
+            type: 'POST',
+            data: {
+                ID_ChinhSachLuong: $("#ComboChinhSachLuong").data("kendoComboBox").value(),
+                MucLuong: $("#MucLuong").val(),
+                ID_HoSoNhanSu: $("#ID_HoSoNhanSu").val(),
+                GhiChu: $("#GhiChu").val(),
+                NgayBatDau: kendo.toString($("#BatDau").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
+                NgayKetThuc: kendo.toString($("#KetThuc").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
             }
-        }
-    })
+        }).done(function successCallback(response) {
+            //response controller này trả về success và msg
+            if (response.success) {
+                notification.show({ kValue: response.msg }, "success");
+                Huy();
+                LoadGridData();
+            } else {
+                notification.show({ kValue: response.msg }, "error");
+            }
+        });
+    }
+    //}
+    //})
 
 }
 
@@ -467,7 +490,7 @@ function Xoa() {
 
 }
 
-function XoaChinhSach(TenChinhSach, ID_ChinhSach) {
+function XoaChinhSach(TenChinhSach, ID_ChinhSach_NhanSu) {
 
     setTimeout(function () {
         var treeList = $("#grid").data("kendoTreeList");
@@ -476,16 +499,16 @@ function XoaChinhSach(TenChinhSach, ID_ChinhSach) {
             openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 nhân viên hoặc 1 phòng ban cần xóa ca làm việc");
         } else {
             var selectedItem = treeList.dataItem(row);
-            openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa áp dụng chính sách " + TenChinhSach + " của nhân viên: " + selectedItem.TenNhanVien + " ?</b>", function () { XoaDuLieu(selectedItem, ID_ChinhSach); }, function () { });
+            openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa áp dụng chính sách " + TenChinhSach + " của nhân viên: " + selectedItem.TenNhanVien + " ?</b>", function () { XoaDuLieu(selectedItem, ID_ChinhSach_NhanSu); }, function () { });
         }
     }, 500)
 }
-function XoaDuLieu(dulieu, ID_ChinhSach) {
+function XoaDuLieu(dulieu, ID_ChinhSach_NhanSu) {
     console.log(dulieu);
     if (dulieu.MaNhanVien != null) {
         console.log(dulieu.MaNhanVien);
         $.ajax({
-            url: '/ChinhSachLuong/DeleteCSL_NVFromChinhSachLuong?ID_NhanVien=' + dulieu.ID_HoSoNhanSu + '&ID_ChinhSachLuong=' + ID_ChinhSach,
+            url: '/ChinhSachLuong/DeleteCSL_NVFromChinhSachLuong?ID_ChinhSachLuong_NhanVien=' + ID_ChinhSach_NhanSu,
             type: 'POST'
         }).done(function (response) {
             if (response.success) {
@@ -537,4 +560,10 @@ function getDates(startDate, stopDate) {
         currentDate = currentDate.addDays(1);
     }
     return dateArray;
+}
+
+function toDate(value) {
+    var dateRegExp = /^\/Date\((.*?)\)\/$/;
+    var date = dateRegExp.exec(value);
+    return new Date(parseInt(date[1]));
 }

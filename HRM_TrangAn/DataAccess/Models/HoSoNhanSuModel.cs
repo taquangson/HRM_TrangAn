@@ -23,6 +23,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime NgayKetThucLamViec { get; set; }
         public int TrangThai { get; set; }
         public int ID_ChucVu { get; set; }
+        public string TenPhongBan { get; set; }
         public int ID_GioiTinh { get; set; }
         public int ID_LoaiHopDong { get; set; }
         public DateTime NgayBatDauHopDong { get; set; }

@@ -114,6 +114,38 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpPost]
+        public ActionResult MultiInsert(List<DangKyLichNghiModel> list)
+        {
+            DangKyLichNghiModel model = list.FirstOrDefault();
+            DangKyLichNghiDAO dao = new DangKyLichNghiDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dao.MultiInsert(list))
+            {
+                if(model.TrangThai == 1)
+                {
+                    EmailHelper helper = new EmailHelper();
+                    HoSoNhanSuDAO hsdao = new HoSoNhanSuDAO();
+                    foreach (string id in model.Tag_NhanVien)
+                    {
+                        HoSoNhanSuModel hs = hsdao.GetByID_TaiKhoan(int.Parse(id));
+                        TaiKhoanModel tk = new TaiKhoanDAO().GetById(int.Parse(id));
+                        foreach (DangKyLichNghiModel item in list)
+                        {
+                            var html = RazorViewToString.RenderRazorViewToString(this, "ThongBaoNSDangKyLichNghi", item);
+                            helper.SendEmail(html.ToString(), tk.Email, "Thông báo nhân sự đăng ký lịch nghỉ!");
+                        }
+
+                    }
+                }
+                return Json(new { success = true, msg = "Lưu thông tin thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu thông tin thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
         public ActionResult DeleteMutli_DangKyLichNghi(string ID)
         {
             DangKyLichNghiDAO dm_dao = new DangKyLichNghiDAO();

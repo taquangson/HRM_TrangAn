@@ -124,6 +124,44 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
+        public ActionResult BaoCaoChamCong()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult BaoCaoKeHoachCongViec()
+        {
+            return View();
+        }
+
+        [SessionExpire]
+        public ActionResult BaoCaoXuPhatTheoDanhMucViPham()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetBangChamCong(int ID_PhongBan, string ListID_HSNS, DateTime from, DateTime to)
+        {
+            ChamCongNhanVienDAO dao = new ChamCongNhanVienDAO();
+            DataTable data = dao.GetBangChamCong(ID_PhongBan, ListID_HSNS, from, to);
+            List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+            Dictionary<string, object> childRow;
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow dr = data.Rows[i];
+                childRow = new Dictionary<string, object>();
+                foreach (DataColumn col in data.Columns)
+                {
+                    childRow.Add(col.ColumnName, dr[col]);
+                }
+                parentRow.Add(childRow);
+            }
+            return Json(parentRow, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
         public ActionResult GetData_BaoCaoChuyenDoNhapTay(DateTime from, DateTime to, int ID_ToNhom)
         {
             ChuyenDoDAO cdao = new ChuyenDoDAO();

@@ -1,4 +1,5 @@
-﻿using HRM_TrangAn.App_Start;
+﻿using FirebaseAdmin.Auth;
+using HRM_TrangAn.App_Start;
 using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Models;
 using HRM_TrangAn.Helper;
@@ -20,6 +21,11 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult BangLuongNhanVien()
         {
             return View();
         }
@@ -76,8 +82,8 @@ namespace HRM_TrangAn.Controllers
                 {
                     BangLuongModel BLModel = new BangLuongModel();
                     BLModel.ID_ChinhSachLuong_NhanSu = cslnv.ID;
-                    BLModel.NgayBatDau = from;
-                    BLModel.NgayKetThuc = to;
+                    BLModel.NgayBatDau = cslnv.NgayBatDau;
+                    BLModel.NgayKetThuc = cslnv.NgayKetThuc;
                     BLModel.ID_ChinhSachLuong = cslnv.ID_ChinhSachLuong;
                     BLModel.ID_NhanSu = cslnv.ID_HoSoNhanSu;
                     BLModel.Ngay = ngay;
@@ -88,6 +94,21 @@ namespace HRM_TrangAn.Controllers
 
                     ChinhSachLuongModel csl = csldao.GetByID(cslnv.ID_ChinhSachLuong);
                     ChinhSachLuong_CauHinhModel cslch = csldao.GetCH_ByIDCSL(cslnv.ID_ChinhSachLuong).Where(x => x.TrangThai == 1).FirstOrDefault();
+                    if (cslch.CongChuan == 0 && cslch.CongChuanTheoThang == 1)
+                    {
+                        if (thang > 0 && to.Day == 28)
+                        {
+                            cslch.CongChuan = 24;
+                        }
+                        else if (thang > 0 && to.Day == 30)
+                        {
+                            cslch.CongChuan = 26;
+                        }
+                        else if (thang > 0 && to.Day == 31)
+                        {
+                            cslch.CongChuan = 27;
+                        }
+                    }
                     DoanhSo_LuongKhachDAO dslkdao = new DoanhSo_LuongKhachDAO();
                     DoanhSo_LuongKhachModel dslk = dslkdao.GetByDateRange(from, to).FirstOrDefault();
                     switch (csl.KyHanThanhToan)
@@ -137,7 +158,7 @@ namespace HRM_TrangAn.Controllers
                             if (cslch.CongChuan > 0)
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
-                                decimal TienLuong = cslnv.MucLuong * (decimal)model.SoCong / CongChuan;
+                                decimal TienLuong = cslnv.MucLuong * (decimal)cslnv.SoCong / CongChuan;
                                 cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
@@ -263,21 +284,41 @@ namespace HRM_TrangAn.Controllers
             Dictionary<string, object> childRow;
             BangLuongDAO dao = new BangLuongDAO();
             ChinhSachLuongDAO csdao = new ChinhSachLuongDAO();
+            NoiDungPhuCapDAO pcdao = new NoiDungPhuCapDAO();
             List<ChinhSachLuongModel> lstcs = csdao.GetAll();
+            List<NoiDungPhuCapModel> lstpc = pcdao.GetAll();
             DataTable dt = dao.GetDataBangLuong(thang, nam);
-            dt.Columns.Add("TongTienLuong");
+            dt.Columns.Add("TongTienLuong", typeof(decimal));
+            dt.Columns.Add("TongTienPhuCap", typeof(decimal));
+            dt.Columns.Add("TongTienGiamTru", typeof(decimal));
+            dt.Columns.Add("LuongThucNhan", typeof(decimal));
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 DataRow dr = dt.Rows[i];
-                float TongienLuong = 0;
+                decimal TongienLuong = 0;
+                decimal TongTienPhuCap = 0;
+                decimal TongTienGiamTru = 0;
                 foreach (DataColumn col in dt.Columns)
                 {
                     if (lstcs.Any(x => x.Ma == col.ColumnName))
                     {
-                        TongienLuong += string.IsNullOrWhiteSpace(dr[col].ToString()) ? 0 : float.Parse(dr[col].ToString());
+                        TongienLuong += string.IsNullOrWhiteSpace(dr[col].ToString()) ? 0 : decimal.Parse(dr[col].ToString());
+                    }
+                    if (lstpc.Where(z => z.Loai == 1).Any(x => x.Ma == col.ColumnName))
+                    {
+                        TongTienPhuCap += string.IsNullOrWhiteSpace(dr[col].ToString()) ? 0 : decimal.Parse(dr[col].ToString());
+                    }
+                    if (lstpc.Where(z => z.Loai == -1).Any(x => x.Ma == col.ColumnName))
+                    {
+                        TongTienGiamTru += string.IsNullOrWhiteSpace(dr[col].ToString()) ? 0 : decimal.Parse(dr[col].ToString());
                     }
                 }
+                TongTienGiamTru += string.IsNullOrWhiteSpace(dr["NLD_ThucTe"].ToString()) ? 0 : decimal.Parse(dr["NLD_ThucTe"].ToString());
+                TongTienGiamTru += string.IsNullOrWhiteSpace(dr["TienPhat"].ToString()) ? 0 : decimal.Parse(dr["TienPhat"].ToString());
                 dr["TongTienLuong"] = TongienLuong;
+                dr["TongTienPhuCap"] = TongTienPhuCap;
+                dr["TongTienGiamTru"] = TongTienGiamTru;
+                dr["LuongThucNhan"] = TongienLuong + TongTienPhuCap - TongTienGiamTru;
 
                 childRow = new Dictionary<string, object>();
                 foreach (DataColumn col in dt.Columns)
@@ -287,6 +328,26 @@ namespace HRM_TrangAn.Controllers
                 parentRow.Add(childRow);
             }
             return Content(JsonConvert.SerializeObject(parentRow));
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult GetDataBangLuongByHSNS(string MatKhau, int ID_HoSoNhanSu, int Thang, int Nam)
+        {
+            TaiKhoanDAO tk_dao = new TaiKhoanDAO();
+            HoSoNhanSuDAO hsdao = new HoSoNhanSuDAO();
+            HoSoNhanSuModel hoso = hsdao.GetByID(ID_HoSoNhanSu);
+            TaiKhoanModel tk = tk_dao.GetById(hoso.ID_TaiKhoan);
+            if (tk_dao.CheckLogin(tk.TaiKhoan, MatKhau))
+            {
+                BangLuongDAO dao = new BangLuongDAO();
+                PhieuLuongModel data = dao.GetDataBangLuongByHSNS(ID_HoSoNhanSu, Thang, Nam);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { ID_HoSoNhanSu = 0 }, JsonRequestBehavior.AllowGet);
+            }
         }
 
     }

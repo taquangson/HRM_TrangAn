@@ -49,12 +49,17 @@ namespace HRM_TrangAn.DataAccess.DAO
             return obj;
         }
 
-        public List<LaoDongThueKhoanModel> GetAll()
+        public List<LaoDongThueKhoanModel> GetAll(DateTime from, DateTime to)
         {
             try
             {
+                SqlParameter[] pars = new SqlParameter[]
+               {
+                    new SqlParameter("@fromdate",from ),
+                    new SqlParameter("@todate",to)
+               };
                 NhanVienDAO nvdao = new NhanVienDAO();
-                DataSet ds = helper.ExecuteDataSet("sp_LaoDongThueKhoan_GetAll");
+                DataSet ds = helper.ExecuteDataSet("sp_LaoDongThueKhoan_GetAll", pars);
                 DataTable dt = ds.Tables[0];
                 List<LaoDongThueKhoanModel> result = new List<LaoDongThueKhoanModel>();
                 foreach (DataRow dr in dt.Rows)

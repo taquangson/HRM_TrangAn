@@ -902,6 +902,7 @@ function Luu() {
                     NgayPhat: kendo.toString($("#NgayPhat_Update").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     ID_DanhMucLoi: $("#ComboLoi_Update").data('kendoComboBox').value(),
                     GhiChu: $("#GhiChu_Update").val(),
+                    FromDMVS:0,
                     lstNhanVienXuPhat: bangDuLieuNhanVienXuPhat
                 }
             }).done(function successCallback(response) {
@@ -934,6 +935,7 @@ function Luu() {
                         NgayPhat: kendo.toString($("#NgayPhat").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                         ID_DanhMucLoi: $("#ComboLoi").data('kendoComboBox').value(),
                         GhiChu: $("#GhiChu").val(),
+                        FromDMVS: 0,
                         lstNhanVienXuPhat: bangDuLieuNhanVienXuPhat
                     }
                 }).done(function successCallback(response) {

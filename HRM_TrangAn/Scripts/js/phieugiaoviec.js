@@ -1012,11 +1012,13 @@ function openAddNhanVienWindow(uid) {
         $("#gridAddNhanVien").data("kendoGrid").setDataSource(dataSource);
         $("#gridAddNhanVien").data("kendoGrid").clearSelection();
 
-        $.each(selectedItem.lstNhanVien, function (index, item) {
-            let idx = $("#gridAddNhanVien").data("kendoGrid").dataSource.get(item.ID);
-            var row = $("#gridAddNhanVien").data("kendoGrid").table.find("[data-uid=" + idx.uid + "]");
-            $("#gridAddNhanVien").data("kendoGrid").select(row);
-        });
+        if (lstNhanVienChuaPhanCong.length > 0) {
+            $.each(selectedItem.lstNhanVien, function (index, item) {
+                let idx = $("#gridAddNhanVien").data("kendoGrid").dataSource.get(item.ID);
+                var row = $("#gridAddNhanVien").data("kendoGrid").table.find("[data-uid=" + idx.uid + "]");
+                $("#gridAddNhanVien").data("kendoGrid").select(row);
+            });
+        }
 
         kendo.ui.progress($("#gridAddNhanVien"), false);
         if ($(window).width() > 800) {

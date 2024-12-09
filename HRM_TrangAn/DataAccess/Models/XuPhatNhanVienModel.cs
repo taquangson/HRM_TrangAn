@@ -9,6 +9,7 @@ namespace HRM_TrangAn.DataAccess.Models
     {
         public int ID { get; set; }
         public int ID_TaiKhoan { get; set; }
+        public int FromDMVS { get; set; }
         public string TenDayDu { get; set; }
         public int ID_DanhMucLoi { get; set; }
         public string GhiChu { get; set; }

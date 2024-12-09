@@ -1,5 +1,6 @@
 ﻿using HRM_TrangAn.DataAccess.Helper;
 using HRM_TrangAn.DataAccess.Models;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -159,7 +160,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             try
             {
                 SqlParameter[] pars = new SqlParameter[] {
-                
+
                     new SqlParameter("@EnrollNumber", model.EnrollNumber),
                     new SqlParameter("@VerifyMode", 1),
                     new SqlParameter("@InOutMode", 0),
@@ -286,8 +287,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return null;
             }
         }
-        
-        
+
+
         public DataTable CongNhanSu_GetDataTree(DateTime from, DateTime to, int ID_PhongBan)
         {
             try
@@ -354,6 +355,29 @@ namespace HRM_TrangAn.DataAccess.DAO
             {
                 log.Error("sp_LichSuChotCong_Insert " + ex.Message);
                 return false;
+            }
+        }
+
+
+        public DataTable GetBangChamCong(int ID_PhongBan, string ListID_HSNS, DateTime from, DateTime to)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_PhongBan",ID_PhongBan),
+                    new SqlParameter("@ListID_HSNS",ListID_HSNS),
+                    new SqlParameter("@from",from),
+                    new SqlParameter("@to",to),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChamCongNhanVien_GetBangChamCong", pars);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChamCongNhanVien_GetBangChamCong " + ex.Message);
+                return null;
             }
         }
     }

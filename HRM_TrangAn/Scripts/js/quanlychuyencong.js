@@ -23,6 +23,27 @@
             data: response
         });
         $("#NguoiTaoCombobox").data("kendoComboBox").setDataSource(dataSource);
+        //var data = [{
+        //    TenDayDu: "Tất cả",
+        //    ID: 0
+        //}]
+        //$.each(response, function (index, item) {
+        //    data.push({
+        //        TenDayDu: item.TenDayDu,
+        //        ID: item.ID
+        //    })
+        //})
+        //var dataSource = new kendo.data.DataSource({
+        //    data: data
+        //});
+        //$("#NguoiTaoCombobox").kendoComboBox({
+        //    dataTextField: 'TenDayDu',
+        //    dataValueField: 'ID',
+        //    dataSource: dataSource,
+        //    filter: "contains"
+        //});
+        //console.log($("#NguoiTaoCombobox").kendoComboBox());
+        $("#NguoiTaoCombobox").data("kendoComboBox").value(1);
     })
 
     $("#grid").kendoGrid({
@@ -69,7 +90,7 @@
         },
         columns: [
             {
-                width: "35px",
+                width: "26px",
                 selectable: true,
                 headerAttributes: {
                     style: "text-align:left",
@@ -171,6 +192,7 @@
             },
             {
                 field: "NgayTao",
+                format: "{0:dd/MM/yyyy hh:mm:ss}",
                 title: "Ngày Tạo",
                 width: "120px",
                 filterable: {
@@ -186,6 +208,7 @@
             },
             {
                 field: "NgayTinhCong",
+                format: "{0:dd/MM/yyyy hh:mm:ss}",
                 title: "Ngày Tính Công",
                 width: "120px",
                 filterable: {
@@ -212,7 +235,7 @@
 
     $("#window").kendoWindow({
         width: "800px",
-        height: "320px",
+        height: "400px",
         title: "Chi tiết",
         visible: false,
         modal: true,
@@ -224,105 +247,106 @@
 
     $("#NgayTinhCong").kendoDatePicker({
         format: "dd/MM/yyyy",
-        //value: new Date(),
+        value: new Date(),
         change: function () {
             var date = this.value()
             console.log(date);
             var TuNgay = kendo.toString(new Date(date.getFullYear(), date.getMonth(), 1), "yyyy/MM/dd") + " 00:00:00";
             var DenNgay = kendo.toString(new Date(date.getFullYear(), date.getMonth() + 1, 0), "yyyy/MM/dd") + " 23:59:59";
+            console.log(TuNgay)
+            console.log(DenNgay)
             $.ajax({
-                url: '/ChuyenCong/GetNoCong?ID_ToNhom=0&from=' + TuNgay + '&to=' + DenNgay,
+                url: '/NoCong/GetNoCong'
+                    + '?TuNgay=' + TuNgay
+                    + '&DenNgay=' + DenNgay
+                    + '&ID_ToNhom=' + 0,
                 type: 'GET'
             }).done(function successCallback(response) {
-
-                var dataSource = new kendo.data.DataSource({
-                    data: JSON.parse(response)
-                });
-                $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
-                $("#NguoiNhanCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
-            })
+                response = JSON.parse(response);
+                console.log(response);
+                if (response && response.length > 0) {
+                    var dataSource = new kendo.data.DataSource({
+                        data: response,
+                        schema: {
+                            model: {
+                                id: "ID",
+                                fields: {
+                                    TenDayDu: { type: 'string' },
+                                    MaNhanVien: { type: 'string' },
+                                    MaThuyen: { type: 'string' },
+                                    NoCong: { type: 'number' }
+                                }
+                            }
+                        }
+                    });
+                    $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
+                } else {
+                    console.error("Data is missing the field TenDayDu or is empty");
+                }
+            });
         }
     })
 
     $("#NguoiChuyenCong").kendoMultiColumnComboBox({
-        dataTextField: "TenDayDuView",
+        dataTextField: "TenDayDu",
         dataValueField: "ID",
         columns: [
             {
-                field: "FileAnhDaiDien",
-                title: "Ảnh đại diện",
-                width: "120px",
-                template: function (e) {
-                    if (e.FileAnhDaiDien != "0") {
-                        return "<img class='avatar' src='" + e.FileAnhDaiDien + "'/>"
-                    } else {
-                        return "Chưa có ảnh";
-                    }
-
-                }
-            },
-            {
                 field: "TenDayDu",
-                title: "Tên đầy đủ",
+                title: "Tên Đầy Đủ",
+                width: "200px",
             },
             {
                 field: "MaNhanVien",
-                title: "Mã nhân viên",
-                width: "120px",
+                title: "Mã Nhân viên/Mã Số Ticket",
+                width: "200px",
             },
             {
                 field: "MaThuyen",
                 title: "Mã Thuyền",
-                width: "120px",
+                width: "200px",
             },
             {
                 field: "NoCong",
                 title: "Nợ Công",
-                width: "120px",
+                width: "200px",
             },
         ],
         filter: "contains",
         filterFields: ["TenDayDu", "MaThuyen", "MaNhanVien"],
         suggest: true,
         delay: 1000,
-        dataSource: new kendo.data.DataSource()
-    })
+        dataSource: new kendo.data.DataSource(),
+        select: function (e) {
+            var item = e.item;
+            var dataItem = $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").dataItem(item);
+            $("#CongTon").val(dataItem.NoCong);
+        }
+    });
 
     $("#NguoiNhanCong").kendoMultiColumnComboBox({
-        dataTextField: "TenDayDuView",
+        dataTextField: "TenDayDu",
         dataValueField: "ID",
         columns: [
             {
-                field: "FileAnhDaiDien",
-                title: "Ảnh đại diện",
-                width: "120px",
-                template: function (e) {
-                    if (e.FileAnhDaiDien != "0") {
-                        return "<img class='avatar' src='" + e.FileAnhDaiDien + "'/>"
-                    } else {
-                        return "Chưa có ảnh";
-                    }
-
-                }
-            },
-            {
                 field: "TenDayDu",
-                title: "Tên đầy đủ",
+                title: "Tên Đầy Đủ",
+                width: "200px",
             },
             {
                 field: "MaNhanVien",
-                title: "Mã nhân viên",
-                width: "120px",
+                title: "Mã Nhân viên/Mã Số Ticket",
+                width: "200px",
             },
             {
                 field: "MaThuyen",
                 title: "Mã Thuyền",
-                width: "120px",
+                width: "200px",
             },
             {
                 field: "NoCong",
                 title: "Nợ Công",
-                width: "120px",
+                width: "200px",
             },
         ],
         filter: "contains",
@@ -332,26 +356,58 @@
         dataSource: new kendo.data.DataSource()
     })
 
+     $.ajax({
+         url: '/NoCong/GetNoCong'
+             + '?TuNgay=' + kendo.toString(new Date((new Date()).getFullYear(), (new Date()).getMonth(), 1), "yyyy/MM/dd") + " 00:00:00"
+             + '&DenNgay=' + kendo.toString(new Date((new Date()).getFullYear(), (new Date()).getMonth() + 1, 0), "yyyy/MM/dd") + " 23:59:59"
+             + '&ID_ToNhom=' + 0,
+         type: 'GET'
+     }).done(function successCallback(response) {
+         response = JSON.parse(response);
+         var dataSource = new kendo.data.DataSource({
+             data: response,
+             schema: {
+                 model: {
+                     id: "ID",
+                     fields: {
+                         TenDayDu: { type: 'string' },
+                         MaNhanVien: { type: 'string' },
+                         MaThuyen: { type: 'string' },
+                         NoCong: { type: 'number' },
+                     }
+                 }
+             },
+         });
+         $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
+         $("#NguoiNhanCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
+     });
+ 
 })
 
 function TimKiem() {
-    var date = $("#month").data("kendoDatePicker").value()
+    var date = $("#month").data("kendoDatePicker").value();
+
     var TuNgay = kendo.toString(new Date(date.getFullYear(), date.getMonth(), 1), "yyyy/MM/dd") + " 00:00:00";
     var DenNgay = kendo.toString(new Date(date.getFullYear(), date.getMonth() + 1, 0), "yyyy/MM/dd") + " 23:59:59";
-    console.log(TuNgay);
-    console.log(DenNgay);
     var ID_NguoiTao = $("#NguoiTaoCombobox").data("kendoComboBox").value();
+    if (ID_NguoiTao == null) {
+        ID_NguoiTao = 0
+    }
+    var url = `/ChuyenCong/GetLichSuChuyenCongByThangAndNguoiTao?TuNgay=${TuNgay}&DenNgay=${DenNgay}&ID_NguoiTao=${ID_NguoiTao}`;
+
+    console.log(url);
+
     kendo.ui.progress($("#grid"), true);
+
     $.ajax({
-        url: "/ChuyenCong/GetLichSuChuyenCongByThangAndNguoiTao"
-            + "?TuNgay=" + TuNgay
-            + "&DenNgay=" + DenNgay
-            + "&ID_NguoiTao=" + ID_NguoiTao > 0 ? ID_NguoiTao : 0,
+        url: url,
         type: 'GET',
         error: function (request, error) {
             console.log(error);
         },
     }).done(function successCallback(response) {
+
+        response = JSON.parse(response);
         var dataSource = new kendo.data.DataSource({
             data: response,
             schema: {
@@ -365,17 +421,12 @@ function TimKiem() {
             },
             pageSize: 30,
         });
-        if (dataSource === undefined || dataSource === null) {
-            console.log("void");
-        } else {
-            console.log(dataSource);
-            console.log($("#grid").data("kendoGrid"));
-            $("#grid").data("kendoGrid").setDataSource(dataSource);
-            kendo.ui.progress($("#grid"), false);
-        }
+        console.log(dataSource);
+        $("#grid").data("kendoGrid").setDataSource(dataSource);
         kendo.ui.progress($("#grid"), false);
     });
 }
+
 
 function ThemMoi() {
     Huy();
@@ -389,19 +440,46 @@ function ThemMoi() {
 function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
-        openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sửa");
+        openDialog(dialogRoot, "Vui lòng chọn 1 bản ghi để sửa");
     } else {
+        var selectedItem = $("#grid").data("kendoGrid").dataItem($("#grid").data("kendoGrid").select());
+        $("#ID").val(selectedItem.ID);
+        $("#CongChuyen").val(selectedItem.CongChuyen);
+        $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").value(selectedItem.ID_NguoiChuyenCong);
+        $("#NguoiNhanCong").data("kendoMultiColumnComboBox").value(selectedItem.ID_NguoiNhanCong);
+        $("#NgayTinhCong").data("kendoDatePicker").value(new Date(selectedItem.NgayTinhCong));
+        var item = $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").item;
+        var CongTonVal = $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").dataItem(item).NoCong;
+        $("#CongTon").val(CongTonVal);
+        $.ajax({
+            url: '/NoCong/GetNoCong'
+                + '?TuNgay=' + kendo.toString(new Date((new Date(selectedItem.NgayTinhCong)).getFullYear(), (new Date(selectedItem.NgayTinhCong)).getMonth(), 1), "yyyy/MM/dd") + " 00:00:00"
+                + '&DenNgay=' + kendo.toString(new Date((new Date(selectedItem.NgayTinhCong)).getFullYear(), (new Date(selectedItem.NgayTinhCong)).getMonth() + 1, 0), "yyyy/MM/dd") + " 23:59:59"
+                + '&ID_ToNhom=' + 0,
+            type: 'GET'
+        }).done(function successCallback(response) {
+            response = JSON.parse(response);
+            var dataSource = new kendo.data.DataSource({
+                data: response,
+                schema: {
+                    model: {
+                        id: "ID",
+                        fields: {
+                            TenDayDu: { type: 'string' },
+                            MaNhanVien: { type: 'string' },
+                            MaThuyen: { type: 'string' },
+                            NoCong: { type: 'number' },
+                        }
+                    }
+                },
+            });
+            $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").setDataSource(dataSource);
+        });
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
         } else {
             $("#window").data("kendoWindow").center().maximize().open();
         }
-        var selectedItem = $("#grid").data("kendoGrid").dataItem($("#grid").data("kendoGrid").select());
-        $("#ID").val(selectedItem.ID);
-        $("#CongChuyen").val(selectedItem.CongChuyen);
-        $("#NguoiChuyenCong").data("kendoComboBox").value(selectedItem.ID_NguoiChuyenCong);
-        $("#NguoiNhanCong").data("kendoComboBox").value(selectedItem.ID_NguoiNhanCong);
-        $("#NgayTinhCong").data("kendoDatePicker").value(toDate(selectedItem.NgaySinh));
     }
 }
 
@@ -410,7 +488,7 @@ function Huy() {
     $("#CongChuyen").val(0);
     $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").value(0);
     $("#NguoiNhanCong").data("kendoMultiColumnComboBox").value(0);
-    $("#NgayTinhCong").data("kendoDatePicker").value("");
+    $("#NgayTinhCong").data("kendoDatePicker").value(new Date());
     $("#window").data("kendoWindow").close();
 }
 
@@ -419,18 +497,20 @@ function Luu() {
         var dataItem = {
             ID: $("#ID").val(),
             CongChuyen: $("#CongChuyen").val(),
-            NgayTinhCong: kendo.toString($("#NgayTinhCong").data("kendoDatePicker").value(), "yyyy/MM/dd"),
-            ID_NguoiChuyenCong: $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").value,
-            ID_NguoiNhanCong: $("#NguoiNhanCong").data("kendoMultiColumnComboBox").value,
+            NgayTinhCong: kendo.toString($("#NgayTinhCong").data("kendoDatePicker").value(), "yyyy-MM-ddTHH:mm:ss"),
+            ID_NguoiChuyenCong: $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").value(),
+            ID_NguoiNhanCong: $("#NguoiNhanCong").data("kendoMultiColumnComboBox").value(),
             ID_NguoiTao: 0,
         }
         console.log(dataItem)
         $.ajax({
-            url: '',
+            url: '/ChuyenCong/InsertOrUpdate_ChuyenCong',
             type: 'POST',
+            data: dataItem
         }).done(function successCallback(response) {
             if (response.success) {
                 $("#grid").data("kendoGrid").clearSelection();
+                Huy()
                 TimKiem();
                 notification.show({ kValue: response.msg }, "success");
             } else {
@@ -448,10 +528,23 @@ function ValidateForm() {
     var dataItem = $("#NguoiChuyenCong").data("kendoMultiColumnComboBox").dataItem(item);
     var congTon = dataItem.NoCong;
     var congChuyen = $("#CongChuyen").val();
+    console.log(dataItem);
+    if ($("#NguoiChuyenCong").data("kendoMultiColumnComboBox").value() == 0) {
+        openDialog(dialogRoot, "Cần chọn 1 nhân viên chuyển công");
+        return false;
+    } else if ($("#NguoiNhanCong").data("kendoMultiColumnComboBox").value() == 0) {
+        openDialog(dialogRoot, "Cần chọn 1 nhân viên nhận công");
+        return false;
+    }
     if (congTon < 0) {
-
+        openDialog(dialogRoot, "Nhân viên không còn công");
+        return false;
     } else if (congTon < congChuyen) {
-
+        openDialog(dialogRoot, "Nhân viên không đủ công để chuyển");
+        return false;
+    } else if (congChuyen <= 0) {
+        openDialog(dialogRoot, "Công chuyển phải lớn hơn 0");
+        return false;
     }
     var valid = validcong && validnguoichuyen && validnguoinhan;
     return valid
@@ -499,7 +592,7 @@ function betweenFilter(args) {
 function Xoa() {
     var grid = $("#grid").data("kendoGrid");
     if (grid.select().length > 0) {
-        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa " + grid.select().length + " lịch sử chuyển công?</b>", function () { XoaDuLieu(bangDuLieu); }, function () { });
+        openConfirm(dialogRoot, "<b style='line-height:40px;'>Bạn có chắc chắn muốn xóa " + grid.select().length + " lịch sử chuyển công?</b>", function () { XoaDuLieu(grid); }, function () { });
     } else {
         openDialog(dialogRoot, "<b style='line-height:40px;'>Bạn phải chọn dữ liệu cần xóa</b>");
         //notification.show({ kValue: "Bạn phải chọn dữ liệu cần xóa" }, "error");
@@ -514,7 +607,7 @@ function XoaDuLieu(bangDuLieu) {
         ids.push(id);
     });
     $.ajax({
-        url: '',
+        url: '/ChuyenCong/DeleteMulti_ChuyenCong?string_ID_ChuyenCong=' + ids.join(','),
         type: 'POST'
     }).done(function (response) {
         if (response.success) {

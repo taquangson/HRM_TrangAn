@@ -113,6 +113,8 @@ function SetValidate(input) {
     } else {
         inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("invalid").addClass("valid");
     }
+
+
     if (inputtag.data("kendoDropDownTree") != undefined) {
         if (inputtag.data("kendoDropDownTree").value() == "") {
             valid = false;
@@ -124,6 +126,16 @@ function SetValidate(input) {
     }
     if (inputtag.data("kendoComboBox") != undefined) {
         if (inputtag.data("kendoComboBox").value() == "") {
+            valid = false;
+            inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("valid").addClass("invalid");
+        } else {
+            inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("invalid").addClass("valid");
+        }
+        return valid;
+    }
+
+    if (inputtag.data("kendoMultiColumnComboBox") != undefined) {
+        if (inputtag.data("kendoMultiColumnComboBox").value() == "") {
             valid = false;
             inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("valid").addClass("invalid");
         } else {

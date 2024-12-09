@@ -12,6 +12,9 @@ namespace HRM_TrangAn.DataAccess.Models
         public decimal Tien { get; set; }
         public string NoiDung { get; set; }
         public int TrangThai { get; set; }
+        public int ID_NoiDungPhuCap { get; set; }
+        public string TenPhuCap { get; set; }
+        public string MaPhuCap { get; set; }
         public DateTime NgayTao { get;set; }
         public DateTime NgayHuongPhuCap { get;set; }
         public int ID_NguoiTao { get; set; }

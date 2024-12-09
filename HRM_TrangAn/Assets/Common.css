@@ -167,6 +167,10 @@ k-widget k-window {
     line-height: 26px;
     color: red;
 }
+.invalid .k-dropdown-wrap {
+    width: 90%;
+    border-color: #a51c1c !important;
+}
 
 .toolBarMenu {
     height: 30px;

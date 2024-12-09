@@ -159,6 +159,34 @@ $(document).ready(function () {
                 }
             },
             {
+                field: "Loai",
+                title: "Loại",
+                template: function (e) {
+                    if (e.Loai == 1) {
+                        return "<b>Lương</b>";
+                    } else {
+                        return "<b>Phụ cấp</b>";
+                    }
+                },
+                width: "150px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                }
+            },
+            {
                 field: "GhiChu",
                 title: "Ghi chú",
                 filterable: {
@@ -473,6 +501,23 @@ $(document).ready(function () {
                 }
             },
             {
+                field: "TenPhongBan",
+                title: "Bộ phận",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
                 field: "SoDienThoai",
                 title: "Số Điện Thoại",
                 filterable: {
@@ -592,6 +637,15 @@ $(document).ready(function () {
             "Close"
         ]
     });
+
+    $('#ComboLoai').kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        autoBind: false,
+        dataSource: new kendo.data.DataSource({
+            data: [{ text: "Lương", value: 1 }, { text: "Phụ cấp", value: 2 }]
+        }),
+    })
 
     $("#ComboHopDong").kendoComboBox({
         dataTextField: "Name",
@@ -716,6 +770,7 @@ function openEditWindow() {
         $("#SoTien").val(selectedItem.SoTien);
         $("#ComboKyHanThanhToan").data("kendoComboBox").value(selectedItem.KyHanThanhToan);
         $("#ComboHopDong").data("kendoComboBox").value(selectedItem.ID_LoaiHopDong);
+        $("#ComboLoai").data("kendoComboBox").value(selectedItem.Loai);
         $("#GhiChu").val(selectedItem.GhiChu);
         isEdit = true;
         document.getElementById("gridNhanVien").style.display = "block"
@@ -745,6 +800,7 @@ function Luu() {
                     Ten: $("#Ten").val(),
                     Ma: $("#Ma").val(),
                     SoTien: $("#SoTien").val(),
+                    Loai: $("#ComboLoai").data("kendoComboBox").value(),
                     KyHanThanhToan: $("#ComboKyHanThanhToan").data("kendoComboBox").value(),
                     ID_LoaiHopDong: $("#ComboHopDong").data("kendoComboBox").value(),
                     GhiChu: $("#GhiChu").val(),
@@ -767,10 +823,11 @@ function Luu() {
 function ValidateForm(callback) {
     var validten = SetValidate("Ten");
     var validma = SetValidate("Ma");
+    var validloai = SetValidate("ComboLoai");
     var validComboHopDong = SetValidate("ComboHopDong");
     var validKyHanThanhToan = SetValidate("ComboKyHanThanhToan");
 
-    var valid = validma && validten && validComboHopDong && validKyHanThanhToan;
+    var valid = validma && validten && validComboHopDong && validKyHanThanhToan && validloai;
     if (valid) {
         if ($("#ID").val() === '') {
             CheckMa($("#Ma").val(), function (stt) {
@@ -811,6 +868,7 @@ function LuuCauHinh() {
             DoanhSoToiThieu: $("#DoanhSoToiThieu").val(),
             LuongKhachToiThieu: $("#LuongKhachToiThieu").val(),
             NgayCongToiThieu: $("#NgayCongToiThieu").val(),
+            CongChuanTheoThang: $("#CongChuanTheoThang").is(":checked") ? 1 : 0,
             LuyKe_DoanhSoToiThieu: $("#LuyKe_DoanhSoToiThieu").is(":checked") ? 1 : 0,
             LuyKe_LuongKhachToiThieu: $("#LuyKe_LuongKhachToiThieu").is(":checked") ? 1 : 0,
             LuyKe_NgayCongToiThieu: $("#LuyKe_NgayCongToiThieu").is(":checked") ? 1 : 0,
@@ -966,6 +1024,15 @@ function openAddNhanVienWindow() {
     }
 }
 
+function UpdateCongChuanTheoThang() {
+    if ($("#CongChuanTheoThang").is(":checked")) {
+        $("#CongChuan").val(0);
+        $("#CongChuan").prop('readonly', true);
+    } else {
+        $("#CongChuan").prop('readonly', false);
+    }
+}
+
 function openCauHinhWindow(ID_ChinhSach) {
     HuyCauHinh();
     $("#ID").val(ID_ChinhSach);
@@ -978,14 +1045,22 @@ function openCauHinhWindow(ID_ChinhSach) {
 
             $("#NgayBatDau").data("kendoDatePicker").value(data.NgayBatDau);
             $("#NgayKetThuc").data("kendoDatePicker").value(data.NgayKetThuc);
-            $("#CongChuan").val(data.CongChuan);
+
             $("#DoanhSoToiThieu").val(data.DoanhSoToiThieu);
             $("#LuongKhachToiThieu").val(data.LuongKhachToiThieu);
             $("#NgayCongToiThieu").val(data.NgayCongToiThieu);
+            $("#CongChuanTheoThang").prop("checked", Number(data.CongChuanTheoThang) === 1);
             $("#LuyKe_DoanhSoToiThieu").prop("checked", Number(data.LuyKe_DoanhSoToiThieu) === 1);
             $("#LuyKe_LuongKhachToiThieu").prop("checked", Number(data.LuyKe_LuongKhachToiThieu) === 1);
             $("#LuyKe_NgayCongToiThieu").prop("checked", Number(data.LuyKe_NgayCongToiThieu) === 1);
             $("#GhiChu").val(data.GhiChu);
+            if (Number(data.CongChuanTheoThang) === 1) {
+                $("#CongChuan").val(0);
+                $("#CongChuan").prop('readonly', true);
+            } else {
+                $("#CongChuan").val(data.CongChuan);
+                $("#CongChuan").prop('readonly', false);
+            }
 
             if ($(window).width() > 800) {
                 $("#windowCH").data("kendoWindow").center().open();
@@ -993,7 +1068,7 @@ function openCauHinhWindow(ID_ChinhSach) {
                 $("#windowCH").data("kendoWindow").center().maximize().open();
             }
         } else {
-             if ($(window).width() > 800) {
+            if ($(window).width() > 800) {
                 $("#windowCH").data("kendoWindow").center().open();
             } else {
                 $("#windowCH").data("kendoWindow").center().maximize().open();

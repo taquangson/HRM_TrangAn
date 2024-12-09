@@ -46,105 +46,106 @@
                     class: "table-header-cell"
                 }
             },
-             {
-                 field: "MaNhanVien",
-                 title: "Mã nhân viên",
-                 width: "150px",
-                 editable: function () {
-                     return false;
-                 },
-                 filterable: {
-                     cell: {
-                         operator: "contains",
-                         showOperators: false,
-                         template: function (e) {
-                             e.element.addClass("k-textbox").css("width", "100%")
-                         }
-                     }
-                 },
-                 headerAttributes: {
-                     style: "text-align: center; font-size: 12px; font-weight:bold",
-                     class: "table-header-cell"
-                 },
-                 attributes: {
-                     style: "text-align: left;",
-                 }
-             },
-             {
-                 field: "TenDayDu",
-                 title: "Tên nhân viên",
-                 width: "150px",
-                 editable: function () {
-                     return false;
-                 },
-                 filterable: {
-                     cell: {
-                         operator: "contains",
-                         showOperators: false,
-                         template: function (e) {
-                             e.element.addClass("k-textbox").css("width", "100%")
-                         }
-                     }
-                 },
-                 headerAttributes: {
-                     style: "text-align: center; font-size: 12px; font-weight:bold",
-                     class: "table-header-cell"
-                 },
-                 attributes: {
-                     style: "text-align: left;",
-                 }
-             },
-             {
-                 field: "TenChucDanh",
-                 title: "Chức vụ",
-                 width: "150px",
-                 editable: function () {
-                     return false;
-                 },
-                 filterable: {
-                     cell: {
-                         operator: "contains",
-                         showOperators: false,
-                         template: function (e) {
-                             e.element.addClass("k-textbox").css("width", "100%")
-                         }
-                     }
-                 },
-                 headerAttributes: {
-                     style: "text-align: center; font-size: 12px; font-weight:bold",
-                     class: "table-header-cell"
-                 },
-                 attributes: {
-                     style: "text-align: left;",
-                 }
-             },
-             {
-                 field: "TenPhongBan",
-                 title: "Phòng ban",
-                 width: "150px",
-                 editable: function () {
-                     return false;
-                 },
-                 filterable: {
-                     cell: {
-                         operator: "contains",
-                         showOperators: false,
-                         template: function (e) {
-                             e.element.addClass("k-textbox").css("width", "100%")
-                         }
-                     }
-                 },
-                 headerAttributes: {
-                     style: "text-align: center; font-size: 12px; font-weight:bold",
-                     class: "table-header-cell"
-                 },
-                 attributes: {
-                     style: "text-align: left;",
-                 }
-             },
+            {
+                field: "MaNhanVien",
+                title: "Mã nhân viên",
+                width: "150px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
+            {
+                field: "TenDayDu",
+                title: "Tên nhân viên",
+                width: "150px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
+            {
+                field: "TenChucDanh",
+                title: "Chức vụ",
+                width: "150px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
+            {
+                field: "TenPhongBan",
+                title: "Phòng ban",
+                width: "150px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
             {
                 field: "MucLuongDongBaoHiem",
                 title: "Mức lương",
+                format: '{0:N0}',
                 width: "150px",
                 filterable: {
                     cell: {
@@ -177,6 +178,7 @@
                     {
                         field: "SDLD_BHXH",
                         title: "BHXH 17,5%",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -202,6 +204,7 @@
                     {
                         field: "SDLD_BHYT",
                         title: "BHYT 3%",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -227,6 +230,7 @@
                     {
                         field: "SDLD_BHTN",
                         title: "BHTN",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -254,6 +258,7 @@
             {
                 field: "SDLD_Tong",
                 title: "Tổng công ty đóng 21,5%",
+                format: '{0:N0}',
                 width: "150px",
                 filterable: {
                     cell: {
@@ -279,6 +284,7 @@
             {
                 field: "SDLD_ThucTe",
                 title: "Tổng công ty đóng thực tế%",
+                format: '{0:N0}',
                 width: "150px",
                 filterable: {
                     cell: {
@@ -311,6 +317,7 @@
                     {
                         field: "NLD_BHXH",
                         title: "BHXH 8%",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -336,6 +343,7 @@
                     {
                         field: "NLD_BHYT",
                         title: "BHYT 1,5%",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -361,6 +369,7 @@
                     {
                         field: "NLD_BHTN",
                         title: "BHTN 1%",
+                        format: '{0:N0}',
                         width: "150px",
                         filterable: {
                             cell: {
@@ -388,6 +397,7 @@
             {
                 field: "NLD_Tong",
                 title: "Tổng NLĐ đóng 10,5%",
+                format: '{0:N0}',
                 width: "150px",
                 filterable: {
                     cell: {
@@ -413,6 +423,7 @@
             {
                 field: "NLD_ThucTe",
                 title: "Tổng NLĐ đóng thực tế",
+                format: '{0:N0}',
                 width: "150px",
                 filterable: {
                     cell: {
@@ -438,6 +449,7 @@
             {
                 field: "Tong",
                 title: "Tổng 32%",
+                format: '{0:N0}',
                 width: "100px",
                 filterable: {
                     cell: {
@@ -452,6 +464,18 @@
                         }
                     }
                 },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;"
+                }
+            },
+            {
+                field: "GhiChu",
+                title: "Ghi chú",
+                width: "250px",
                 headerAttributes: {
                     style: "text-align: center; font-size: 12px; font-weight:bold",
                     class: "table-header-cell"

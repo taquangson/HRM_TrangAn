@@ -1,5 +1,6 @@
 ﻿using HRM_TrangAn.DataAccess.Helper;
 using HRM_TrangAn.DataAccess.Models;
+using Microsoft.Office.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -84,6 +85,70 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             return obj;
         }
+        private PhieuLuongModel GetObjPLFromDataRow(DataRow dr)
+        {
+            PhieuLuongModel obj = new PhieuLuongModel();
+            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties())
+            {
+                try
+                {
+                    if (dr.Table.Columns.IndexOf(propertyInfo.Name) >= 0)
+                    {
+
+                        if (!string.IsNullOrWhiteSpace(dr[propertyInfo.Name].ToString()))
+                        {
+                            var value = Convert.ChangeType(dr[propertyInfo.Name], propertyInfo.PropertyType);
+                            propertyInfo.SetValue(obj, value);
+                        }
+                        else
+                        {
+                            propertyInfo.SetValue(obj, null);
+                        }
+                    }
+                    else
+                    {
+                        propertyInfo.SetValue(obj, null);
+                    }
+                }
+                catch
+                {
+                    propertyInfo.SetValue(obj, null);
+                }
+            }
+            return obj;
+        }
+        private ChiTietPhieuLuongModel GetObjCTPLFromDataRow(DataRow dr)
+        {
+            ChiTietPhieuLuongModel obj = new ChiTietPhieuLuongModel();
+            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties())
+            {
+                try
+                {
+                    if (dr.Table.Columns.IndexOf(propertyInfo.Name) >= 0)
+                    {
+
+                        if (!string.IsNullOrWhiteSpace(dr[propertyInfo.Name].ToString()))
+                        {
+                            var value = Convert.ChangeType(dr[propertyInfo.Name], propertyInfo.PropertyType);
+                            propertyInfo.SetValue(obj, value);
+                        }
+                        else
+                        {
+                            propertyInfo.SetValue(obj, null);
+                        }
+                    }
+                    else
+                    {
+                        propertyInfo.SetValue(obj, null);
+                    }
+                }
+                catch
+                {
+                    propertyInfo.SetValue(obj, null);
+                }
+            }
+            return obj;
+        }
 
         public List<BangLuongModel> GetBangLuong(DateTime from, DateTime to)
         {
@@ -111,8 +176,8 @@ namespace HRM_TrangAn.DataAccess.DAO
             };
 
         }
-        
-        
+
+
         public DataTable GetDataBangLuong(int Thang, int Nam)
         {
             try
@@ -125,12 +190,56 @@ namespace HRM_TrangAn.DataAccess.DAO
                 };
                 DataSet ds = helper.ExecuteDataSet("sp_BangLuong_GetData", pars);
                 DataTable dt = ds.Tables[0];
-               
+
                 return dt;
             }
             catch (Exception ex)
             {
                 log.Error("sp_BangLuong_GetData " + ex.Message);
+                return null;
+            };
+
+        }
+
+        public PhieuLuongModel GetDataBangLuongByHSNS(int ID_HoSoNhanSu, int Thang, int Nam)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu),
+                new SqlParameter("@Thang", Thang),
+                new SqlParameter("@Nam", Nam)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_BangLuong_GetDataByHSNS", pars);
+                DataTable dtTTCN = ds.Tables[0];
+                DataTable dtSNC = ds.Tables[1];
+                DataTable dtTCN = ds.Tables[2];
+                DataTable dtTGP = ds.Tables[3];
+                PhieuLuongModel result = GetObjPLFromDataRow(dtTTCN.Rows[0]);
+                PhieuLuongModel tempSC = GetObjPLFromDataRow(dtSNC.Rows[0]);
+                result.SoNgayCongTrongThang = tempSC.SoNgayCongTrongThang;
+                result.SoNgayCongLeTet = tempSC.SoNgayCongLeTet;
+                result.listCTPLNhan = new List<ChiTietPhieuLuongModel>();
+                result.listCTPLGiam = new List<ChiTietPhieuLuongModel>();
+                result.Thang = Thang;
+                result.Nam = Nam;
+                result.ID_HoSoNhanSu = ID_HoSoNhanSu;
+                foreach (DataRow dr in dtTCN.Rows)
+                {
+                    ChiTietPhieuLuongModel model = GetObjCTPLFromDataRow(dr);
+                    result.listCTPLNhan.Add(model);
+                }
+                foreach (DataRow dr in dtTGP.Rows)
+                {
+                    ChiTietPhieuLuongModel model = GetObjCTPLFromDataRow(dr);
+                    result.listCTPLGiam.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_BangLuong_GetDataByHSNS " + ex.Message);
                 return null;
             };
 
@@ -152,7 +261,15 @@ namespace HRM_TrangAn.DataAccess.DAO
                 foreach (DataRow dr in dt.Rows)
                 {
                     TinhBangLuongModel model = GetObjTBLFromDataRow(dr);
-                    model.listChinhSachLuong = dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu);
+                    //if (model.NgayBatDauHoppDong >= from && model.NgayBatDauHoppDong <= to)
+                    //{
+                    //    model.listChinhSachLuong = dao.GetNV_ByIDCSL_ThuViec(0, model.ID_HoSoNhanSu, from, model.NgayBatDauHoppDong);
+                    //    model.listChinhSachLuong.AddRange(dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu, model.NgayBatDauHoppDong, to));
+                    //}
+                    //else
+                    //{
+                    model.listChinhSachLuong = dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu, from, to);
+                    //}
                     result.Add(model);
                 }
                 return result;
@@ -164,8 +281,10 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
-        public bool InsertOrUpdate(BangLuongModel model) {
-            try {
+        public bool InsertOrUpdate(BangLuongModel model)
+        {
+            try
+            {
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@ID_ChinhSachLuong_NhanSu", model.ID_ChinhSachLuong_NhanSu),
@@ -202,7 +321,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             try
             {
                 List<TransactionModel> param = new List<TransactionModel>();
-                foreach(BangLuongModel model in list)
+                foreach (BangLuongModel model in list)
                 {
                     SqlParameter[] pars = new SqlParameter[]
                     {

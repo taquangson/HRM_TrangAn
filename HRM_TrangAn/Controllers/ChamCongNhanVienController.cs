@@ -3,6 +3,7 @@ using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Helper;
 using HRM_TrangAn.DataAccess.Models;
 using Newtonsoft.Json;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -122,7 +123,7 @@ namespace HRM_TrangAn.Controllers
             {
                 float TongCong = 0;
                 int ID_TaiKhoan = int.Parse(dt.Rows[i]["ID"].ToString());
-                List <DangKyLichNghiModel> lichnghinv = lichnghi.Where(x => x.TrangThai == 2 && x.ID_TaiKhoan == ID_TaiKhoan).ToList();
+                List<DangKyLichNghiModel> lichnghinv = lichnghi.Where(x => x.TrangThai == 2 && x.ID_TaiKhoan == ID_TaiKhoan).ToList();
                 LichSuThaoTacBangCongModel lsuchotcong = daobc.GetLichSu(ID_TaiKhoan, from.Month, from.Year);
                 for (var date = from; date <= to; date = date.AddDays(1))
                 {
@@ -248,13 +249,17 @@ namespace HRM_TrangAn.Controllers
 
                 DateTime batdautinhca = ca.NgayLamViec.AddHours(model.CaLam.BatDauTinhCa.Hours).AddMinutes(model.CaLam.BatDauTinhCa.Minutes);
                 DateTime ketthuctinhca = ca.NgayLamViec.AddHours(model.CaLam.KetThucTinhCa.Hours).AddMinutes(model.CaLam.KetThucTinhCa.Minutes);
+                if (model.CaLam.IsCaDem == 1)
+                {
+                    ketthuctinhca = ketthuctinhca.AddDays(1);
+                }
                 model.lstChamCong = ccnvdao.GetListChamCong_ByNgay_NhanVien(ca.ID_TaiKhoan, batdautinhca, ketthuctinhca);
 
                 DateTime batdau = ca.NgayLamViec.AddHours(model.CaLam.BatDau.Hours).AddMinutes(model.CaLam.BatDau.Minutes);
                 DateTime ketthuc = ca.NgayLamViec.AddHours(model.CaLam.KetThuc.Hours).AddMinutes(model.CaLam.KetThuc.Minutes);
                 if (model.CaLam.IsCaDem == 1)
                 {
-                    ketthuc = ca.NgayLamViec.AddDays(1);
+                    ketthuc = ketthuc.AddDays(1);
                 }
                 if (model.lstChamCong.Count > 0)
                 {
@@ -276,7 +281,7 @@ namespace HRM_TrangAn.Controllers
                                 ketthuc = ca.NgayLamViec.AddHours(phanbo.KetThuc.Hours).AddMinutes(phanbo.KetThuc.Minutes);
                                 if (model.CaLam.IsCaDem == 1)
                                 {
-                                    ketthuc = ca.NgayLamViec.AddDays(1);
+                                    ketthuc = ketthuc.AddDays(1);
                                 }
                                 if (model.lstChamCong.First().WorkDate < batdau && model.lstChamCong.Last().WorkDate > ketthuc)
                                 {
@@ -284,6 +289,14 @@ namespace HRM_TrangAn.Controllers
                                     if (ngaynghi != null)
                                     {
                                         model.SoCong = model.SoCong * ngaynghi.TinhLuong;
+                                    }
+                                    if (phanbo.TangCa == 1)
+                                    {
+                                        model.SoCongTangCa += phanbo.SoCong;
+                                    }
+                                    if (model.SoCongTangCa >= 0.5f)
+                                    {
+                                        model.XuatAn = 1;
                                     }
                                 }
                             }
@@ -323,7 +336,6 @@ namespace HRM_TrangAn.Controllers
             ChamCongNhanVienDAO ccnvdao = new ChamCongNhanVienDAO();
             if (ccnvdao.UpdateLichSuDiMuonVeSom(ID, DaTinhCong, DaXuLy))
             {
-
                 return Json(new { success = true, msg = "Lưu dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -360,7 +372,8 @@ namespace HRM_TrangAn.Controllers
                     }
                 }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            //return Json(result, JsonRequestBehavior.AllowGet);
+            return Content(JsonConvert.SerializeObject(result));
         }
 
 

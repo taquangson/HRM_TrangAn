@@ -27,7 +27,7 @@
         <label style="width:100%">Đến ngày</label>
         <input style="width:100%" id="DenNgay" />
     </div>
-    <button class="k-button bg-blue" onclick="TimKiem()" style="margin-top: 26px"> <i class="fa fa-search"> Xem ngày hưởng phụ cấp </i></button>
+    <button class="k-button bg-blue" onclick="TimKiem()" style="margin-top: 26px"> <i class="fa fa-search"> Xem dữ liệu </i></button>
 </div>
 <div class="row toolBarMenu">
     <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
@@ -57,14 +57,64 @@
             <input id="Tien" type="number" class="k-textbox input" />
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
+        <div class="form-group valid" toggle-valid="NoiDungPhuCap">
+            <label style="width:100%">Loại: <span style="color:red">*</span></label>
+            <input id="NoiDungPhuCap" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
         <div class="form-group" toggle-valid="NoiDung">
-            <label style="width:100%">Nội Dung: <span style="color:red">*</span></label>
+            <label style="width:100%">Nội Dung:</label>
             <textarea id="NoiDung" type="text" style="width:100%" class="k-textbox"></textarea>
         </div>
         <div class="form-group" toggle-valid="NgayHuongPhuCap">
-            <label style="width:100%">Ngày hưởng phụ cấp: <span style="color:red">*</span></label>
-            <input id="NgayHuongPhuCap" />
+            <label style="width:100%">Ngày áp dụng: <span style="color:red">*</span></label>
+            <input id="NgayHuongPhuCap" style="width:100%" />
         </div>
     </form>
+</div>
+
+<div style="visibility:hidden" id="windowInsert">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuInsert()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyInsert()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group valid" toggle-valid="TienInsert">
+            <label style="width:100%">Số Tiền: <span style="color:red">*</span></label>
+            <input id="TienInsert" type="number" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="NoiDungPhuCapInsert">
+            <label style="width:100%">Loại: <span style="color:red">*</span></label>
+            <input id="NoiDungPhuCapInsert" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group" toggle-valid="NoiDungInsert">
+            <label style="width:100%">Nội Dung:</label>
+            <textarea id="NoiDungInsert" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group" toggle-valid="NgayHuongPhuCapInsert">
+            <label style="width:100%">Ngày áp dụng: <span style="color:red">*</span></label>
+            <input id="NgayHuongPhuCapInsert" type="text" style="width:100%" class="input" />
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Bảng nhân viên: </label>
+            <div id="gridNhanVien"></div>
+        </div>
+    </form>
+</div>
+
+<div id="windowAddNhanVien">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddNhanVien()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách nhân viên:</label>
+        <div id="gridAddNhanVien"></div>
+    </div>
 </div>
 

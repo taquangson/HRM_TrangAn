@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "";
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Bảng lương - HRM Tràng An</title>
+
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.common-bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/kendo/styles/kendo.bootstrap.mobile.min.css" />
+    <link rel="stylesheet" href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Assets/kendo/kendo.all.min.js"></script>
+    <style>
+        body {
+            margin: 0 20px;
+            background-color: #808080;
+        }
+
+        tbody td {
+            font-size: 12px;
+            border-bottom: solid 1px #979797;
+            height: 30px;
+            padding-left: 3px;
+        }
+
+        .container {
+            background-color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+    <script src="~/Scripts/js/bangluongnhanvien.js"></script>
+    <div class="container" style="max-width: 800px;">
+        <div class="row text-center" style="background-color: #376d16">
+            <h3><b>PHIẾU LƯƠNG THÁNG 10 NĂM 2024</b></h3>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-12">
+                <table style="width:100%" border="1">
+                    <tbody style="border-bottom: solid 1px;">
+                        <tr>
+                            <td rowspan="8" style="width:30%;text-align:center">
+                                <img style="width:90%" src="~/Images/user_image.png" />
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width:30%">Họ và tên: </td>
+                            <td><span id="TenNhanVien"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Mã nhân viên: </td>
+                            <td><span id="MaNhanVien"></span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Số tài khoản: </td>
+                            <td><span id="SoTaiKhoan"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Ngân hàng: </td>
+                            <td><span id="TenNganHang"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Số ngày công trong tháng: </td>
+                            <td><span id="SoNgayCongTrongThang"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Số ngày công lễ tết: </td>
+                            <td><span id="SoNgayCongLeTet"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Số lượng xuất ăn: </td>
+                            <td><span id="SoLuongSuatAn"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-12">
+                <table style="width:100%" border="1">
+                    <tbody id="bodyTableCTPLNhan">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-12">
+                <table style="width:100%" border="1">
+                    <tbody id="bodyTableCTPLGiam">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+            <div class="col-sm-12">
+                <table style="width:100%" border="1">
+                    <tbody style="background-color:#76aa57">
+                        <tr>
+                            <td style="width:60%"><b>Lương thực nhận</b></td>
+                            <td class="text-right"><b id="TongTien"></b></td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <b>Ghi chú:</b>
+                                <textarea type="text" class="k-textbox" style="width: 90%; margin-left: 10px"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <span style=" width: 100%; display: block; padding: 5px; background-color: #cfcfcf; margin-top: 20px;"> </span>
+            </div>
+        </div>
+    </div>
+
+    <div style="visibility:hidden" id="window">
+        <div class="form-group valid" toggle-valid="MatKhau">
+            <label style="width:100%">Mật khẩu:</label>
+            <input style="width:100%" id="MatKhau" name="MatKhau" type="password" class="k-textbox input" />
+            <span style="color:red" id="errorMessage"></span>
+        </div>
+        <div style="display:flex; position: relative">
+            <button style="width:100%" class="k-button bg-blue" onclick="XacNhanMK()"> Xác Nhận</button>
+        </div>
+    </div>
+</body>
+</html>

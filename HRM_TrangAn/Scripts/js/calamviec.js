@@ -258,7 +258,8 @@ function LoadGridPhanBo(data) {
     //    url: '/LichHoc/GetLichHocByLop?ID_Lop=' + ID_Lop,
     //    type: 'GET'
     //}).done(function (response) {
-    var defaultDate = new Date().setHours(0,0,0);
+    console.log(data);
+    var defaultDate = new Date().setHours(0, 0, 0);
     var ds = new kendo.data.DataSource({
         data: data,
         schema: {
@@ -271,25 +272,25 @@ function LoadGridPhanBo(data) {
                     TangCa: { type: 'number', editablle: true }
                 }
             },
-            parse: function (res) {
-                for (var i = 0; i < res.length; i++) {
-                    let bd = new Date();
-                    if (res[i].BatDau) {
-                        bd.setHours(res[i].BatDau.Hours);
-                        bd.setMinutes(res[i].BatDau.Minutes);
-                    }
-                    res[i].BatDau = bd;
+            //parse: function (res) {
+            //    for (var i = 0; i < res.length; i++) {
+            //        let bd = new Date();
+            //        if (res[i].BatDau) {
+            //            bd.setHours(res[i].BatDau.Hours);
+            //            bd.setMinutes(res[i].BatDau.Minutes);
+            //        }
+            //        res[i].BatDau = bd;
 
-                    let kt = new Date();
-                    if (res[i].KetThuc) {
-                        kt.setHours(res[i].KetThuc.Hours);
-                        kt.setMinutes(res[i].KetThuc.Minutes);
-                    }
-                    res[i].KetThuc = kt;
-                }
-                console.log(res);
-                return res;
-            }
+            //        let kt = new Date();
+            //        if (res[i].KetThuc) {
+            //            kt.setHours(res[i].KetThuc.Hours);
+            //            kt.setMinutes(res[i].KetThuc.Minutes);
+            //        }
+            //        res[i].KetThuc = kt;
+            //    }
+            //    console.log(res);
+            //    return res;
+            //}
         },
         pageSize: 100
     });
@@ -413,16 +414,23 @@ function createGridPhanBo() {
                     width: 160,
                     template: function (e) {
                         if (e.BatDau != undefined) {
-                            return e.BatDau.getHours() + ' giờ ' + e.BatDau.getMinutes() + ' phút';
+                            return e.BatDau.Hours + ' giờ ' + e.BatDau.Minutes + ' phút';
                         } else {
                             return "";
                         }
                     },
                     editor: function (container, options) {
-                        $('<input required name="' + options.field + '"/>').appendTo(container).kendoTimePicker({
+                        $('<input />').appendTo(container).kendoTimePicker({
                             dateInput: false,
+                            value: options.model.BatDau.Hours + ":" + options.model.BatDau.Minutes,
                             format: "H:mm",
-                            componentType: "modern"
+                            componentType: "modern",
+                            change: function (e) {
+                                options.model.BatDau = {
+                                    Hours: kendo.toString(e.sender.value(), "HH"),
+                                    Minutes: kendo.toString(e.sender.value(), "mm"),
+                                }
+                            }
                         })
                     },
                     filterable: {
@@ -448,16 +456,23 @@ function createGridPhanBo() {
                     width: 160,
                     template: function (e) {
                         if (e.KetThuc != undefined) {
-                            return e.KetThuc.getHours() + ' giờ ' + e.KetThuc.getMinutes() + ' phút';
+                            return e.KetThuc.Hours + ' giờ ' + e.KetThuc.Minutes + ' phút';
                         } else {
                             return "";
                         }
                     },
                     editor: function (container, options) {
-                        $('<input required name="' + options.field + '"/>').appendTo(container).kendoTimePicker({
+                        $('<input />').appendTo(container).kendoTimePicker({
                             dateInput: false,
                             format: "H:mm",
-                            componentType: "modern"
+                            value: options.model.KetThuc.Hours + ":" + options.model.KetThuc.Minutes,
+                            componentType: "modern",
+                            change: function (e) {
+                                options.model.KetThuc = {
+                                    Hours: kendo.toString(e.sender.value(), "HH"),
+                                    Minutes: kendo.toString(e.sender.value(), "mm"),
+                                }
+                            }
                         })
                     },
                     filterable: {
@@ -503,7 +518,7 @@ function createGridPhanBo() {
                     title: "Tăng ca",
                     width: 160,
                     template: function (e) {
-                        if (e.CaDem == 0) {
+                        if (e.TangCa == 0) {
                             return '';
                         } else {
                             return 'Tính tăng ca';
@@ -611,10 +626,10 @@ function Luu() {
             $.each($("#gridPhanBo").data("kendoGrid").dataSource.data(), function (index, item) {
                 lstPhanBo.push({
                     ID_CaLamViec: $("#ID").val(),
-                    BatDau: kendo.toString(item.BatDau, 'HH:mm'),
-                    KetThuc: kendo.toString(item.KetThuc, 'HH:mm'),
-                    SoCong: item.SoCong.toString().replace('.', ','),
-                    CaDem: item.CaDem
+                    BatDau: item.BatDau.Hours + ":" + item.BatDau.Minutes,
+                    KetThuc: item.KetThuc.Hours + ":" + item.KetThuc.Minutes,
+                    SoCong: item.SoCong.toString(),
+                    TangCa: item.TangCa
                 })
             })
             $.ajax({
@@ -624,9 +639,9 @@ function Luu() {
                     ID: $("#ID").val(),
                     TenCa: $("#TenCa").val(),
                     MaCa: $("#MaCa").val(),
-                    SoGioLamViec: $("#SoGioLamViec").val().replace('.', ','),
-                    SoGioNghi: $("#SoGioNghi").val().replace('.', ','),
-                    SoCong: $("#SoCong").val().replace('.', ','),
+                    SoGioLamViec: $("#SoGioLamViec").val(),
+                    SoGioNghi: $("#SoGioNghi").val(),
+                    SoCong: $("#SoCong").val(),
                     BatDau: kendo.toString($("#BatDau").data("kendoTimePicker").value(), 'HH:mm'),
                     KetThuc: kendo.toString($("#KetThuc").data("kendoTimePicker").value(), 'HH:mm'),
                     BatDauTinhCa: kendo.toString($("#BatDauTinhCa").data("kendoTimePicker").value(), 'HH:mm'),

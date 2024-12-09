@@ -145,6 +145,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
                     new SqlParameter("@Tien", model.Tien),
                     new SqlParameter("@NoiDung", model.NoiDung),
+                    new SqlParameter("@ID_NoiDungPhuCap", model.ID_NoiDungPhuCap),
                     new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
                     new SqlParameter("@NgayHuongPhuCap", ((model.NgayHuongPhuCap.Year == 1 || model.NgayHuongPhuCap == null) ? (object)DBNull.Value : model.NgayHuongPhuCap)),
                 };
@@ -161,6 +162,37 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_PhuCap_InsertOrUpdate " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool InsertMulti(PhuCapModel model, string StringID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID", model.ID),
+                    new SqlParameter("@StringID_HoSoNhanSu", StringID),
+                    new SqlParameter("@Tien", model.Tien),
+                    new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
+                    new SqlParameter("@NoiDung", model.NoiDung),
+                    new SqlParameter("@NgayHuongPhuCap", ((model.NgayHuongPhuCap.Year == 1 || model.NgayHuongPhuCap == null) ? (object)DBNull.Value : model.NgayHuongPhuCap)),
+                    new SqlParameter("@ID_NoiDungPhuCap", model.ID_NoiDungPhuCap),
+                };
+
+                int rowaff = helper.ExecuteNonQuery("sp_PhuCap_InsertMulti", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_PhuCap_InsertMulti " + ex.Message);
                 return false;
             }
         }

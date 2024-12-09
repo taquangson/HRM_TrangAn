@@ -1643,7 +1643,7 @@ $(document).ready(function () {
             "dayperiod": "am/pm",
         }
     });
-  
+
 
     $("#NgayCapCCCD").kendoDatePicker({
         format: "dd/MM/yyyy",
@@ -1776,29 +1776,24 @@ $(document).ready(function () {
         });
     })
 
-    $("#ComboHopDong").kendoComboBox({
-        dataTextField: "Name",
-        dataValueField: "ID",
-        filter: "contains",
-        suggest: true,
-        delay: 1000,
-        dataSource: {
-            data: [
-                {
-                    ID: 0,
-                    Name: "Thử việc"
-                },
-                {
-                    ID: 1,
-                    Name: "Chính thức"
-                },
-                {
-                    ID: 2,
-                    Name: "Học việc"
-                },
-            ]
-        }
-    });
+    $.ajax({
+        url: '/DanhMuc/GetAll_DanhMuc?TenBang=LoaiHopDong',
+        type: 'POST',
+    }).done(function successCallback(response) {
+        var dataSource = new kendo.data.DataSource({
+            data: response,
+        });
+        $("#ComboHopDong").kendoComboBox({
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            suggest: true,
+            delay: 1000,
+            dataSource: dataSource
+        });
+    })
+
+
 
     $.ajax({
         url: '/ChucDanh/GetAllChucDanh',
@@ -1807,7 +1802,7 @@ $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({
             data: response,
         });
-        $("#ComboChucVu").kendoMultiSelect({
+        $("#ComboChucVu").kendoComboBox({
             dataTextField: "TenChucDanh",
             dataValueField: "ID",
             autoBind: false,
@@ -2064,26 +2059,8 @@ function openEditWindow() {
         $("#comboNganHang").data("kendoComboBox").value(selectedItem.MaNganHang);
         $("#SoTaiKhoan").val(selectedItem.SoTaiKhoan);
         $("#ChuTaiKhoan").val(selectedItem.ChuTaiKhoan);
+        $("#ComboChucVu").data("kendoComboBox").value(selectedItem.ID_ChucVu);
 
-        $.ajax({
-            url: '/NhanVien/GetListChucDanhNhanVien?ID_NhanVien=' + selectedItem.ID,
-            type: 'GET',
-        }).done(function successCallback(response) {
-            selectedItem.lstChucDanh = response;
-            var dataChucDanh = [];
-            if (selectedItem.lstChucDanh.length > 0 && selectedItem.lstChucDanh != null) {
-                for (var i = 0; i < selectedItem.lstChucDanh.length; i++) {
-                    //dataChucDanh.push({
-                    //    ID: selectedItem.lstChucDanh[i].ID_ChucDanh,
-                    //    TenChucDanh: selectedItem.lstChucDanh[i].TenChucDanh,
-                    //})
-                    dataChucDanh.push(
-                        selectedItem.lstChucDanh[i].ID_ChucDanh
-                    )
-                }
-            }
-            $("#ComboChucVu").data("kendoMultiSelect").value(dataChucDanh);
-        })
         anhnhanvien = [];
         let context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height); //clear html5 canvas
@@ -2178,13 +2155,13 @@ function LoadGridData() {
     }).done(function successCallback(responsee) {
         response = JSON.parse(responsee);
         for (var i = 0; i < response.length; i++) {
-        
+
             if (response[i].ID_GioiTinh == 1) {
                 response[i].GioiTinh = "Nữ";
             } else {
                 response[i].GioiTinh = "Nam";
             }
-         
+
         }
         var dataSource = new kendo.data.DataSource({
             data: response,
@@ -2209,7 +2186,7 @@ function LoadGridData() {
                         },
                         NgayKetThucHopDong: {
                             type: 'date', editable: false
-                        },                  
+                        },
                         SoDienThoai: { type: "text", editable: false },
                         DiaChi: { type: "text", editable: false },
                         MaNhanVien: { type: "text", editable: false },
@@ -2326,9 +2303,9 @@ function Luu() {
                     NgayCapMaSoThue: kendo.toString($("#NgayCapMaSoThue").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     NgayBatDauHopDong: kendo.toString($("#NgayBatDauHopDong").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
                     NgayKetThucHopDong: kendo.toString($("#NgayKetThucHopDong").data("kendoDatePicker").value(), 'yyyy-MM-dd hh:mm:ss'),
-                    ID_LoaiHopDong : $("#ComboHopDong").data("kendoComboBox").value(),
+                    ID_LoaiHopDong: $("#ComboHopDong").data("kendoComboBox").value(),
                     ID_GioiTinh: $("#ComboGioiTinh").data("kendoComboBox").value(),
-                    ID_ChucVu: 0,
+                    ID_ChucVu: $("#ComboChucVu").data("kendoComboBox").value(),
                     MaNganHang: $("#comboNganHang").data("kendoComboBox").value(),
                     TenNganHang: $("#comboNganHang").data("kendoComboBox").text(),
                     SoTaiKhoan: $("#SoTaiKhoan").val(),
@@ -2753,7 +2730,7 @@ function LoadDataChucDanh() {
         var dataSource = new kendo.data.DataSource({
             data: response,
         });
-        $("#ComboChucVu").kendoMultiSelect({
+        $("#ComboChucVu").kendoComboBox({
             dataTextField: "TenChucDanh",
             dataValueField: "ID",
             autoBind: false,

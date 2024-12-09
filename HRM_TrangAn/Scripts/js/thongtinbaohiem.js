@@ -38,66 +38,66 @@
         })
     })
 
-   /* $("#ThoiGianBatDau").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true
-    });
-    $("#ThoiGianBatDau").data("kendoDatePicker")._dateInput.setOptions({
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
-        }
-    });
-    $("#ThoiGianKetThuc").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true
-    })
-    $("#ThoiGianKetThuc").data("kendoDatePicker")._dateInput.setOptions({
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
-        }
-    });
-    $("#ThoiGianBatDauRead").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true
-    });
-    $("#ThoiGianBatDauRead").data("kendoDatePicker")._dateInput.setOptions({
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
-        }
-    });
-    $("#ThoiGianKetThucRead").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true
-    })
-    $("#ThoiGianKetThucRead").data("kendoDatePicker")._dateInput.setOptions({
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
-        }
-    });*/
+    /* $("#ThoiGianBatDau").kendoDatePicker({
+         format: "dd/MM/yyyy",
+         dateInput: true
+     });
+     $("#ThoiGianBatDau").data("kendoDatePicker")._dateInput.setOptions({
+         messages: {
+             "year": "yyyy",
+             "month": "mm",
+             "day": "dd",
+             "hour": "hh",
+             "minute": "mm",
+             "second": "ss",
+             "dayperiod": "am/pm",
+         }
+     });
+     $("#ThoiGianKetThuc").kendoDatePicker({
+         format: "dd/MM/yyyy",
+         dateInput: true
+     })
+     $("#ThoiGianKetThuc").data("kendoDatePicker")._dateInput.setOptions({
+         messages: {
+             "year": "yyyy",
+             "month": "mm",
+             "day": "dd",
+             "hour": "hh",
+             "minute": "mm",
+             "second": "ss",
+             "dayperiod": "am/pm",
+         }
+     });
+     $("#ThoiGianBatDauRead").kendoDatePicker({
+         format: "dd/MM/yyyy",
+         dateInput: true
+     });
+     $("#ThoiGianBatDauRead").data("kendoDatePicker")._dateInput.setOptions({
+         messages: {
+             "year": "yyyy",
+             "month": "mm",
+             "day": "dd",
+             "hour": "hh",
+             "minute": "mm",
+             "second": "ss",
+             "dayperiod": "am/pm",
+         }
+     });
+     $("#ThoiGianKetThucRead").kendoDatePicker({
+         format: "dd/MM/yyyy",
+         dateInput: true
+     })
+     $("#ThoiGianKetThucRead").data("kendoDatePicker")._dateInput.setOptions({
+         messages: {
+             "year": "yyyy",
+             "month": "mm",
+             "day": "dd",
+             "hour": "hh",
+             "minute": "mm",
+             "second": "ss",
+             "dayperiod": "am/pm",
+         }
+     });*/
 
     $("#grid").kendoGrid({
         /*dataSource: new kendo.data.DataSource({
@@ -129,10 +129,10 @@
         excel: {
             filterable: true
         },
-        /*excelExport: function (e) {
+        excelExport: function (e) {
             var columns = e.workbook.sheets[0].columns;
             var sheet = e.workbook.sheets[0];
-            sheet.title = "Danh sách chuyển công";
+            sheet.title = "Thông tin bảo hiểm xã hội";
             for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
                 var row = sheet.rows[rowIndex];
                 var flag = false;
@@ -147,10 +147,10 @@
                     row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
                     row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
                     row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
-                    row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderLeft = { color: "#000", size: 1 };
                 }
             }
-        },*/
+        },
         filterable: {
             mode: "row",
         },
@@ -179,111 +179,111 @@
                     class: "table-header-cell"
                 }
             },
-           /* {
-                field: "MaNhanVien",
-                title: "Mã nhân viên",
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: left;",
-                }
-            },
-            {
-                field: "TenDayDu",
-                title: "Tên nhân viên",
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: left;",
-                }
-            },
-            {
-                field: "SoDo",
-                title: "Số đò",
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: left;",
-                }
-            },
-            {
-                field: "ChucVu",
-                title: "Chức vụ",
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: left;",
-                }
-            },
-            {
-                field: "ToDo",
-                title: "Tổ đò",
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: left;",
-                }
-            },*/
+            /* {
+                 field: "MaNhanVien",
+                 title: "Mã nhân viên",
+                 width: "150px",
+                 filterable: {
+                     cell: {
+                         operator: "contains",
+                         showOperators: false,
+                         template: function (e) {
+                             e.element.addClass("k-textbox").css("width", "100%")
+                         }
+                     }
+                 },
+                 headerAttributes: {
+                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                     class: "table-header-cell"
+                 },
+                 attributes: {
+                     style: "text-align: left;",
+                 }
+             },
+             {
+                 field: "TenDayDu",
+                 title: "Tên nhân viên",
+                 width: "150px",
+                 filterable: {
+                     cell: {
+                         operator: "contains",
+                         showOperators: false,
+                         template: function (e) {
+                             e.element.addClass("k-textbox").css("width", "100%")
+                         }
+                     }
+                 },
+                 headerAttributes: {
+                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                     class: "table-header-cell"
+                 },
+                 attributes: {
+                     style: "text-align: left;",
+                 }
+             },
+             {
+                 field: "SoDo",
+                 title: "Số đò",
+                 width: "150px",
+                 filterable: {
+                     cell: {
+                         operator: "contains",
+                         showOperators: false,
+                         template: function (e) {
+                             e.element.addClass("k-textbox").css("width", "100%")
+                         }
+                     }
+                 },
+                 headerAttributes: {
+                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                     class: "table-header-cell"
+                 },
+                 attributes: {
+                     style: "text-align: left;",
+                 }
+             },
+             {
+                 field: "ChucVu",
+                 title: "Chức vụ",
+                 width: "150px",
+                 filterable: {
+                     cell: {
+                         operator: "contains",
+                         showOperators: false,
+                         template: function (e) {
+                             e.element.addClass("k-textbox").css("width", "100%")
+                         }
+                     }
+                 },
+                 headerAttributes: {
+                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                     class: "table-header-cell"
+                 },
+                 attributes: {
+                     style: "text-align: left;",
+                 }
+             },
+             {
+                 field: "ToDo",
+                 title: "Tổ đò",
+                 width: "150px",
+                 filterable: {
+                     cell: {
+                         operator: "contains",
+                         showOperators: false,
+                         template: function (e) {
+                             e.element.addClass("k-textbox").css("width", "100%")
+                         }
+                     }
+                 },
+                 headerAttributes: {
+                     style: "text-align: center; font-size: 12px; font-weight:bold",
+                     class: "table-header-cell"
+                 },
+                 attributes: {
+                     style: "text-align: left;",
+                 }
+             },*/
             {
                 field: "MucLuongDongBaoHiem",
                 title: "Mức lương",
@@ -611,6 +611,363 @@
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
+
+    $("#gridHoSo").kendoGrid({
+        height: function () {
+            var height = $(window).height() - 435;
+            return height;
+        },
+        scrollable: true,
+        selectable: "multiple, row",
+        persistSelection: true,
+        autoFitColumn: true,
+        resizable: true,
+        sortable: true,
+        excelExport: function (e) {
+            var columns = e.workbook.sheets[0].columns;
+            var sheet = e.workbook.sheets[0];
+            sheet.title = "Danh sách công việc";
+            //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
+            for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
+                var row = sheet.rows[rowIndex];
+                var flag = false;
+                if (rowIndex == 0) {
+                    flag = true;
+                }
+                for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                    if (flag) {
+                        row.cells[cellIndex].textAlign = 'center';
+                        row.cells[cellIndex].bold = true;
+                    }
+                    row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                }
+            }
+        },
+        filterable: {
+            mode: "row",
+        },
+        editable: true,
+        pageable: pageableShort,
+
+        dataBinding: function () {
+            record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+        },
+        //Danh sách cột của bảng dữ liệu
+        columns: [
+            {
+                width: "30px",
+                selectable: true,
+                headerAttributes: {
+                    style: "text-align:left",
+                    class: "table-header-cell "
+                }
+            },
+            {
+                title: "STT",
+                field: "MaNhanVien",
+                template: "#= ++record #",
+                width: "100px",
+                editable: function () {
+                    return false;
+                },
+                attributes: {
+                    class: "text-center"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.parent().html("<a class='k-button' title='Thêm nhân viên vào chính sách lương' style='width:50%; height:25px;float: left; position: relative;' onclick='openAddNhanVienWindow()'><i class='fa fa-plus'></i></a><a class='k-button' title='Xóa nhân viên đã chọn' style='width:50%; height:25px;float: left; position: relative;' onclick='DeleteMultiRowGridNV()'><i class='fa fa-minus'></i></a>")
+
+                        }
+                    }
+                },
+            },
+            {
+                field: "TenDayDu",
+                title: "Tên Nhân Viên",
+                width: "250px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "MaNhanVien",
+                title: "Mã Nhân viên",
+                width: "100px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "SoDienThoai",
+                title: "Số Điện Thoại",
+                width: "150px",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "DiaChi",
+                title: "Địa Chỉ",
+                editable: function () {
+                    return false;
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: right; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                    class: "table-header-cell"
+                }
+            }, {
+                field: "BatDauApDung",
+                title: "Thời gian bắt đầu",
+                format: "{0:dd/MM/yyyy}",
+                width: "200px",
+                editable: function () {
+                    return true;
+
+                },
+
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "KetThucApDung",
+                title: "Thời gian kết thúc",
+                format: "{0:dd/MM/yyyy}",
+                width: "200px",
+                editable: function () {
+                    return true;
+
+                },
+
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+        ]
+
+    });
+    $("#gridAddHoSo").kendoGrid({
+        height: function () {
+            var height = 300;
+            return height;
+        },
+        scrollable: true,
+        selectable: "multiple, row",
+        persistSelection: true,
+        autoFitColumn: true,
+        resizable: true,
+        sortable: true,
+        excel: {
+            filterable: true
+        },
+        filterable: {
+            mode: "row",
+        },
+        pageable: pageableShort,
+        dataBinding: function () {
+            record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+        },
+        columns: [
+            {
+                width: "30px",
+                selectable: true,
+                headerAttributes: {
+                    style: "text-align:left",
+                    class: "table-header-cell "
+                }
+            },
+            {
+                title: "STT",
+                template: "#= ++record #",
+                width: "100px",
+                attributes: {
+                    class: "text-center"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+            },
+            {
+                field: "TenDayDu",
+                title: "Tên Nhân Viên",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "MaNhanVien",
+                title: "Mã Nhân viên",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "SoDienThoai",
+                title: "Số Điện Thoại",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "ID_GioiTinh",
+                title: "Giới Tính",
+                template: function (dataItem) {
+                    if (dataItem.ID_GioiTinh === 0) {
+                        return "<strong>nam</strong>";
+                    } else if (dataItem.ID_GioiTinh === 1) {
+                        return "<strong>nữ</strong>";
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "DiaChi",
+                title: "Địa Chỉ",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: right; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                    class: "table-header-cell"
+                }
+            },
+        ]
+    });
 
     $("#gridNhanVien").kendoGrid({
         height: function () {
@@ -982,6 +1339,29 @@
         ]
     });
 
+    $("#windowAddHoSo").kendoWindow({
+        width: "800",
+        height: "500",
+        title: "Danh sách hồ sơ",
+        visible: false,
+        modal: true,
+        resizable: false,
+        actions: [
+            "Close"
+        ]
+    });
+    $("#windowADCS").kendoWindow({
+        width: "100%",
+        height: "100%",
+        title: "Danh sách hồ sơ",
+        visible: false,
+        modal: true,
+        resizable: false,
+        actions: [
+            "Close"
+        ]
+    });
+
     $("#windowAddNhanVien").kendoWindow({
         width: "800",
         height: "500",
@@ -993,7 +1373,7 @@
             "Close"
         ]
     });
-    $("#windowADCS").kendoWindow({
+    $("#windowADChoNV").kendoWindow({
         width: "100%",
         height: "100%",
         title: "Danh sách nhân viên",
@@ -1097,6 +1477,7 @@ function ThemMoi() {
     Huy();
     isEdit = false;
     console.log(isEdit);
+    document.getElementById("gridHoSo").style.visibility = "hidden";
     document.getElementById("gridNhanVien").style.visibility = "hidden";
     if ($(window).width() > 800) {
         $("#window").data("kendoWindow").center().open();
@@ -1208,7 +1589,7 @@ function openAcceptWindow() {
     }
 
     // Hiển thị và thiết lập các giá trị cơ bản cho form
-    document.getElementById("gridNhanVien").style.visibility = "visible";
+    document.getElementById("gridHoSo").style.visibility = "visible";
     var selectedItem = $("#grid").data("kendoGrid").dataItem(arr);
     console.log(selectedItem);
 
@@ -1235,7 +1616,7 @@ function openAcceptWindow() {
         type: 'GET',
     }).done(function successCallback(response) {
         console.log(response);
-        kendo.ui.progress($("#griNhandVien"), true);
+        kendo.ui.progress($("#gridHoSo"), true);
 
         var dataSource = new kendo.data.DataSource({
             data: response,
@@ -1250,9 +1631,9 @@ function openAcceptWindow() {
             },
             pageSize: 20,
         });
-        $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
-        kendo.ui.progress($("#gridNhanVien"), false);
-         if ($(window).width() > 800) {
+        $("#gridHoSo").data("kendoGrid").setDataSource(dataSource);
+        kendo.ui.progress($("#gridHoSo"), false);
+        if ($(window).width() > 800) {
             $("#windowADCS").data("kendoWindow").center().open();
         } else {
             $("#windowADCS").data("kendoWindow").center().maximize().open();
@@ -1286,7 +1667,7 @@ function openAcceptWindow() {
     //});
 }
 
-function openAddNhanVienWindow() {
+function openAddHoSoWindow() {
     $.ajax({
         url: '/HoSoNhanSu/GetAll',
         type: 'GET',
@@ -1294,7 +1675,7 @@ function openAddNhanVienWindow() {
         pResponse = JSON.parse(response); // chuyển đổi respon thành JSON và gán tên biến pResponse
         kendo.ui.progress($("#gridAddNhanVien"), true);
         var bangDuLieuADCS = $("#gridNhanVien").data("kendoGrid").dataSource.data();  //tạo biến lưu data có trong #gridNhanVien
-        var ListID_HSDaCo = []; 
+        var ListID_HSDaCo = [];
         $.each(bangDuLieuADCS, function (index, item) {  //hàm $.(each) lặp qua tất cả các phần tử của bangDuLieuADCS thông qua index(chỉ số của phần tử) và item(đối tượng hiện tại từ bangDuLieuADCS)
             ListID_HSDaCo.push(item.ID_HoSoNhanSu); // lấy thuộc tính ID_HoSoNhanSu của từng item và thêm vào bangDuLieuADCS
         })
@@ -1324,7 +1705,7 @@ function openAddNhanVienWindow() {
 }
 
 
-function LuuAddNhanVien() {
+function LuuAddHoSo() {
     var gridAddNhanVien = $("#gridAddNhanVien").data("kendoGrid");
     var gridNhanVien = $("#gridNhanVien").data("kendoGrid");
     var dataSourceAddNV = gridAddNhanVien.dataSource._pristineData;
@@ -1332,6 +1713,7 @@ function LuuAddNhanVien() {
     var listSelectedID_HSNS = [];
     gridAddNhanVien.select().each(function (index, item) {
         dataItem = gridAddNhanVien.dataItem(item);
+       
         listSelectedID_HSNS.push(dataItem.ID);
         dataSourceNV.push({
             ID: 0,
@@ -1341,6 +1723,7 @@ function LuuAddNhanVien() {
             SoDienThoai: dataItem.SoDienThoai,
             TenDayDu: dataItem.TenDayDu,
         })
+
     });
     var result = dataSourceAddNV.filter((item) => !listSelectedID_HSNS.includes(item.ID));
     //console.log(listSelectedID_HSNS);
@@ -1369,7 +1752,7 @@ function LuuAddNhanVien() {
     gridNhanVien.setDataSource(newDataSourceNV);
     gridAddNhanVien.setDataSource(newDataSourceAddNV);
     $("#windowAddNhanVien").data("kendoWindow").close();
-    
+
     //var dataSource = new kendo.data.DataSource({
 
     //    data: bangDuLieuHS,
@@ -1512,12 +1895,35 @@ function ValidateForm1() {
     return valid;
 }
 
+function ValidateForm2() {
+    var validmucluong = SetValidate("MucLuongDongBaoHiemNVRead");
+    var validsdldbhxh = SetValidate("SDLDBaoHiemXaHoiNVRead");
+    var validsdldbhyt = SetValidate("SDLDBaoHiemYTeNVRead");
+    var validsdldbhtn = SetValidate("SDLDBaoHiemThatNghiepNVRead");
+    var validsdldtong = SetValidate("SDLDTongNVRead");
+    var validsdldthucte = SetValidate("SDLDThucTeNVRead");
+    var validnldbhxh = SetValidate("NLDBaoHiemXaHoiNVRead");
+    var validnldbhyt = SetValidate("NLDBaoHiemYTeNVRead");
+    var validnldbhtn = SetValidate("NLDBaoHiemThatNghiepNVRead");
+    var validnldtong = SetValidate("NLDTongNVRead");
+    var validnldthucte = SetValidate("NLDThucTeNVRead");
+    var validtong = SetValidate("TongTienNVRead");
+    var valid = validmucluong && validsdldbhxh && validsdldbhyt &&
+        validsdldbhtn && validsdldtong && validsdldthucte &&
+        validnldbhxh && validnldbhyt && validnldbhtn &&
+        validnldtong && validnldthucte && validtong;
+
+    console.log(valid);
+    return valid;
+}
+
+
 function LuuApDung() {
-    var dataSourceNhanVien = $("#gridNhanVien").data("kendoGrid").dataSource.data();
-    console.log(dataSourceNhanVien);
+    var dataSourceHoSo = $("#gridHoSo").data("kendoGrid").dataSource.data();
+    console.log(dataSourceHoSo);
     var listHS = [];
 
-    $.each(dataSourceNhanVien, function (index, item) {
+    $.each(dataSourceHoSo, function (index, item) {
         var fixitem = {
             ID_BaoHiemXaHoi: $("#ID").val(),
             ID_HoSoNhanSu: item.ID_HoSoNhanSu,
@@ -1570,7 +1976,6 @@ function LuuApDung() {
         }
     });
 }
-
 
 function HuyApDung() {
     $("#windowADCS").data("kendoWindow").close();
@@ -1630,9 +2035,131 @@ function enableInput() {
     }
 }
 
-function loadGridNVData(ID_BHXH) {
+function loadGridHSData(ID_BHXH) {
     $.ajax({
         url: '/HoSoNhanSu/GetByID_BaoHiemXaHoi?ID_BaoHiemXaHoi=' + ID_BHXH,
+        type: 'GET',
+    }).done(function successCallback(response) {
+        console.log(response);
+        kendo.ui.progress($("#gridHoSo"), true);
+        var dataSource = new kendo.data.DataSource({
+            data: response,
+            schema: {
+                model: {
+                    id: "ID",
+                }
+            },
+            pageSize: 20,
+        });
+        $("#gridHoSo").data("kendoGrid").setDataSource(dataSource);
+        kendo.ui.progress($("#gridHoSo"), false);
+    });
+}
+
+function DeleteMultiRowGridHS() {
+    var gridHS = $("#gridHoSo").data("kendoGrid");
+    var selectedRows = gridHS.select();  // Lấy các dòng được chọn
+    var PristineDatasource = gridHS.dataSource._pristineData
+    var listID_HS = []
+    selectedRows.each(function () {
+        var dataItem = gridHS.dataItem(this);
+        listID_HS.push(dataItem.ID_HoSoNhanSu)
+    });
+
+    var result = PristineDatasource.filter((item) => !listID_HS.includes(item.ID_HoSoNhanSu));
+    var newDataSourceHS = new kendo.data.DataSource({
+        data: result,
+        schema: {
+            model: {
+                ID: "ID",
+            }
+        },
+        pageSize: 20,
+    });
+    gridHS.setDataSource(newDataSourceHS);
+}
+
+function XuatExcel() {
+    var grid = $('#grid').data('kendoGrid'); // Đảm bảo dùng kendoGrid
+
+    grid.options.excel = {
+        fileName: "data.xlsx",
+        filterable: true,
+        allPages: true
+    };
+    grid.saveAsExcel();
+}
+
+
+function LuuApDungNV() {
+    var dataSourceNhanVien = $("#gridNhanVien").data("kendoGrid").dataSource.data();
+    console.log(dataSourceNhanVien);
+    var listNV = [];
+
+    $.each(dataSourceNhanVien, function (index, item) {
+        var fixitem = {
+            ID_BaoHiemXaHoi: $("#ID").val(),
+            ID_NhanVien: item.ID_NhanVien,
+            BatDauApDung: null, // Khởi tạo với null
+            KetThucApDung: null, // Khởi tạo với null
+        };
+        if (item.BatDauApDung != null) {
+            fixitem.BatDauApDung = kendo.toString(item.BatDauApDung, "yyyy/MM/dd");
+        }
+        if (item.KetThucApDung != null) {
+            fixitem.KetThucApDung = kendo.toString(item.KetThucApDung, "yyyy/MM/dd");
+        }
+
+        if (fixitem.BatDauApDung || fixitem.KetThucApDung) {
+            if (fixitem.BatDauApDung > fixitem.KetThucApDung) {
+                openDialog(dialogRoot, "<b style='line-height:40px;'>Thời gian bắt đầu phải nhỏ hơn thời gian kết thúc</b>");
+                return false;
+            }
+        }
+        listHS.push(fixitem);
+    });
+
+    //CheckTicke(dulieuchecknhanvien, dataSave.ThoiGianBatDauThucTe, dataSave.ThoiGianKetThucThucTe, function (isTicke) {
+    //    if (isTicke) {
+    //        notification.show({ kValue: "Có nhân viên đã có ticke" }, "error");
+
+    //    } else {
+    console.log(listHS);
+    $.ajax({
+        url: '/BaoHiem/InsertOrUpdateWithNhanVien',
+        type: 'POST',
+        data: {
+            list: listNV,
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    }).done(function successCallback(response) {
+        //response controller này trả về success và msg
+        console.log(response);
+        if (response.success) {
+            notification.show({ kValue: response.msg }, "success");
+            HuyApDungNV();
+            LoadGridData();
+        } else {
+            notification.show({ kValue: response.msg }, "error");
+        }
+    });
+}
+
+function HuyApDungNV() {
+    $("#windowADChoNV").data("kendoWindow").close();
+    var grid = $("#gridNhanVien").data("kendoGrid");
+    var DataSource = new kendo.data.DataSource();
+    grid.setDataSource(DataSource);
+}
+
+function loadGridNVData(ID_BHXH) {
+    $.ajax({
+        url: '/HoSoNhanSu/GetNVByID_BaoHiemXaHoi?ID_BaoHiemXaHoi=' + ID_BHXH,
         type: 'GET',
     }).done(function successCallback(response) {
         console.log(response);
@@ -1652,16 +2179,196 @@ function loadGridNVData(ID_BHXH) {
 }
 
 function DeleteMultiRowGridNV() {
-    var grid = $("#gridNhanVien").data("kendoGrid");
-    var selectedRows = grid.select();  // Lấy các dòng được chọn
-    var dataSource = grid.dataSource;  // Lấy dataSource của grid
-
+    var gridNV = $("#gridNhanVien").data("kendoGrid");
+    var selectedRows = gridNV.select();  // Lấy các dòng được chọn
+    var PristineDatasource = gridNV.dataSource._pristineData
+    var listID_NV = []
     selectedRows.each(function () {
-        var dataItem = grid.dataItem(this);  // Lấy đối tượng dữ liệu của mỗi dòng
-        dataSource.remove(dataItem);  // Xóa dòng khỏi dataSource
+        var dataItem = gridNV.dataItem(this);
+        listID_NV.push(dataItem.ID_NhanVien)
     });
 
-    // Cập nhật lại dataSource sau khi xóa
-    dataSource.sync();
+    var result = PristineDatasource.filter((item) => !listID_NV.includes(item.ID_NhanVien));
+    var newDataSourceNV = new kendo.data.DataSource({
+        data: result,
+        schema: {
+            model: {
+                ID: "ID",
+            }
+        },
+        pageSize: 20,
+    });
+    gridNV.setDataSource(newDataSourceNV);
 }
 
+function openAcceptNVWindow() {
+    var arr = $("#grid").data("kendoGrid").select();
+
+    // Kiểm tra số lượng bản ghi được chọn
+    if (arr.length != 1) {
+        openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sửa");
+        return;
+    }
+
+    // Hiển thị và thiết lập các giá trị cơ bản cho form
+    document.getElementById("gridNhanVien").style.visibility = "visible";
+    var selectedItem = $("#grid").data("kendoGrid").dataItem(arr);
+    console.log(selectedItem);
+
+    $("#ID").val(selectedItem.ID);
+    $("#MucLuongDongBaoHiemNVRead").val(selectedItem.MucLuongDongBaoHiem);
+    $("#SDLDBaoHiemXaHoiNVRead").val(selectedItem.SDLD_BHXH);
+    $("#SDLDBaoHiemYTeNVRead").val(selectedItem.SDLD_BHYT);
+    $("#SDLDBaoHiemThatNghiepNVRead").val(selectedItem.SDLD_BHTN);
+    $("#SDLDTongNVRead").val(selectedItem.SDLD_Tong);
+    $("#SDLDThucTeNVRead").val(selectedItem.SDLD_ThucTe);
+    $("#NLDBaoHiemXaHoiNVRead").val(selectedItem.NLD_BHXH);
+    $("#NLDBaoHiemYTeNVRead").val(selectedItem.NLD_BHYT);
+    $("#NLDBaoHiemThatNghiepNVRead").val(selectedItem.NLD_BHTN);
+    $("#NLDTongNVRead").val(selectedItem.NLD_Tong);
+    $("#NLDThucTeNVRead").val(selectedItem.NLD_ThucTe);
+    $("#TongTienNVRead").val(selectedItem.Tong);
+    $("#MoTaNVRead").val(selectedItem.MoTa);
+    $("#GhiChuNVRead").val(selectedItem.GhiChu);
+
+    isEdit = true;
+
+    $.ajax({
+        url: '/BaoHiem/GetNVByID_BaoHiemXaHoi?ID_BaoHiemXaHoi=' + selectedItem.ID,
+        type: 'GET',
+    }).done(function successCallback(response) {
+        console.log(response);
+        kendo.ui.progress($("#griNhandVien"), true);
+
+        var dataSource = new kendo.data.DataSource({
+            data: response,
+            schema: {
+                model: {
+                    id: "ID",
+                    fields: {
+                        BatDauApDung: { type: 'date', editable: true },
+                        KetThucApDung: { type: 'date', editable: true },
+                    }
+                }
+            },
+            pageSize: 20,
+        });
+        $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
+        kendo.ui.progress($("#gridNhanVien"), false);
+        if ($(window).width() > 800) {
+            $("#windowADChoNV").data("kendoWindow").center().open();
+        } else {
+            $("#windowADChoNV").data("kendoWindow").center().maximize().open();
+        }
+    });
+    
+}
+
+function openAddNhanVienWindow() {
+    $.ajax({
+        url: '/NhanVien/GetAllNhanVienWithTrangThai',
+        type: 'GET',
+    }).done(function successCallback(response) {
+        pResponse = JSON.parse(response); // chuyển đổi respon thành JSON và gán tên biến pResponse
+        kendo.ui.progress($("#gridAddNhanVien"), true);
+        var bangDuLieuADChoNV = $("#gridNhanVien").data("kendoGrid").dataSource.data();  //tạo biến lưu data có trong #gridNhanVien
+        var ListID_NVDaCo = [];
+        $.each(bangDuLieuADChoNV, function (index, item) {  //hàm $.(each) lặp qua tất cả các phần tử của bangDuLieuADCS thông qua index(chỉ số của phần tử) và item(đối tượng hiện tại từ bangDuLieuADCS)
+            ListID_NVDaCo.push(item.ID_NhanVien); // lấy thuộc tính ID_HoSoNhanSu của từng item và thêm vào bangDuLieuADCS
+        })
+        console.log(ListID_NVDaCo);
+        console.log(pResponse);
+        var result = pResponse.filter((item) => !ListID_NVDaCo.includes(item.ID)); // trả về true các item.ID không tồn tại trong ListID_HSDaCo, -> filter tạo ra mảng mới từ pResopnse dựa trên bộ lọc, lưu vào result
+        console.log(result);
+        var dataSource = new kendo.data.DataSource({ // khởi tạo đối tượng DataSource
+
+            data: result,
+            schema: {
+                model: {
+                    ID: "ID",
+                }
+            },
+            pageSize: 20,
+        });
+        console.log(dataSource);
+        $("#gridAddNhanVien").data("kendoGrid").setDataSource(dataSource);
+        kendo.ui.progress($("#gridAddNhanVien"), false);
+        if ($(window).width() > 800) {
+            $("#windowAddNhanVien").data("kendoWindow").center().open();
+        } else {
+            $("#windowAddNhanVien").data("kendoWindow").center().maximize().open();
+        }
+    });
+}
+
+
+function LuuAddNhanVien() {
+    var gridAddNhanVien = $("#gridAddNhanVien").data("kendoGrid");
+    var gridNhanVien = $("#gridNhanVien").data("kendoGrid");
+    var dataSourceAddNV = gridAddNhanVien.dataSource._pristineData;
+    var dataSourceNV = gridNhanVien.dataSource._pristineData;
+    var listSelectedID_NhanVien = [];
+    gridAddNhanVien.select().each(function (index, item) {
+        dataItem = gridAddNhanVien.dataItem(item);
+
+        listSelectedID_NhanVien.push(dataItem.ID);
+        dataSourceNV.push({
+            ID: 0,
+            ID_BaoHiemXaHoi: Number($("#ID").val()),
+            ID_NhanVien: dataItem.ID,
+            MaNhanVien: dataItem.MaNhanVien,
+            SoDienThoai: dataItem.SoDienThoai,
+            TenDayDu: dataItem.TenDayDu,
+        })
+
+    });
+    var result = dataSourceAddNV.filter((item) => !listSelectedID_NhanVien.includes(item.ID));
+    //console.log(listSelectedID_HSNS);
+    //console.log(dataSourceNV);
+    //console.log(result);
+
+    var newDataSourceAddNV = new kendo.data.DataSource({
+        data: result,
+        schema: {
+            model: {
+                ID: "ID",
+            }
+        },
+        pageSize: 20,
+    });
+
+    var newDataSourceNV = new kendo.data.DataSource({
+        data: dataSourceNV,
+        schema: {
+            model: {
+                ID: "ID",
+            }
+        },
+        pageSize: 20,
+    });
+    gridNhanVien.setDataSource(newDataSourceNV);
+    gridAddNhanVien.setDataSource(newDataSourceAddNV);
+    $("#windowAddNhanVien").data("kendoWindow").close();
+
+    //var dataSource = new kendo.data.DataSource({
+
+    //    data: bangDuLieuHS,
+    //    schema: {
+    //        model: {
+    //            ID: "ID",
+    //            field: {
+    //                STT: { type: 'number', editable: true },
+    //                TenDayDu: { type: 'string', editable: false },
+    //                MaNhanVien: { type: 'string', editable: false },
+    //                SoDienThoai: { type: 'string', editable: false },
+    //                ID_GioiTinh: { type: 'number', editable: false },
+    //                DiaChi: { type: 'string', editable: false }
+    //            }
+    //        }
+    //    },
+    //    pageSize: 20,
+    //});
+
+    //$("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
+
+}

@@ -305,5 +305,11 @@ namespace HRM_TrangAn.Controllers
         {
             return View();
         }
+
+        [SessionExpire]
+        public ActionResult NoiDungPhuCap()
+        {
+            return View();
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return null;
             }
         }
-        
+
 
         /* public HoSoNhanSu_BaoHiemXaHoiModel GetByID(int ID)
          {
@@ -155,25 +155,50 @@ namespace HRM_TrangAn.DataAccess.DAO
         {
             try
             {
-                List<TransactionModel> param = new List<TransactionModel>();
-                foreach (HoSoNhanSu_BaoHiemXaHoiModel model in list)
+                if (list != null)
                 {
-                    SqlParameter[] pars = new SqlParameter[] {
-                    new SqlParameter("@ID", model.ID),
-                    new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
-                    new SqlParameter("@ID_BaoHiemXaHoi", model.ID_BaoHiemXaHoi),
-                    new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
-                    new SqlParameter("@ThoiGianBatDau", ((model.BatDauApDung.Year == 1 || model.BatDauApDung == null) ? (object)DBNull.Value : model.BatDauApDung)),
-                    new SqlParameter("@ThoiGianKetThuc", ((model.KetThucApDung.Year == 1 || model.KetThucApDung == null) ? (object)DBNull.Value : model.KetThucApDung)),
-                };
-                    TransactionModel tranparam = new TransactionModel();
-                    tranparam.procName = "sp_HoSoNhanSu_BaoHiemXaHoi_InsertOrUpdate";
-                    tranparam.procParams = pars;
-                    param.Add(tranparam);
+                    List<int> ListID = new List<int>();
+                    foreach (HoSoNhanSu_BaoHiemXaHoiModel model in list)
+                    {
+                        ListID.Add(model.ID_HoSoNhanSu);
+                    }
+                    SqlParameter[] delPars = new SqlParameter[]
+                    {
+                    new SqlParameter("@ID_BaoHiemXaHoi", list.FirstOrDefault().ID_BaoHiemXaHoi),
+                    new SqlParameter("@StringID_HoSoNhanSu", string.Join(",",ListID)),
+                    };
+                    int rowaff = helper.ExecuteNonQuery("sp_HoSoNhanSu_BaoHiemXaHoi_DeleteMulti", delPars);
+                    List<TransactionModel> param = new List<TransactionModel>();
+                    foreach (HoSoNhanSu_BaoHiemXaHoiModel model in list)
+                    {
+                        SqlParameter[] pars = new SqlParameter[] {
+                        new SqlParameter("@ID", model.ID),
+                        new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
+                        new SqlParameter("@ID_BaoHiemXaHoi", model.ID_BaoHiemXaHoi),
+                        new SqlParameter("@ID_NguoiTao", model.ID_NguoiTao),
+                        new SqlParameter("@ThoiGianBatDau", ((model.BatDauApDung.Year == 1 || model.BatDauApDung == null) ? (object)DBNull.Value : model.BatDauApDung)),
+                        new SqlParameter("@ThoiGianKetThuc", ((model.KetThucApDung.Year == 1 || model.KetThucApDung == null) ? (object)DBNull.Value : model.KetThucApDung)),
+                    };
+                        TransactionModel tranparam = new TransactionModel();
+                        tranparam.procName = "sp_HoSoNhanSu_BaoHiemXaHoi_InsertOrUpdate";
+                        tranparam.procParams = pars;
+                        param.Add(tranparam);
+                    }
+
+                    bool success = helper.ExecuteTransaction(param);
+                    return success;
+                }
+                else
+                {
+                    SqlParameter[] delPars = new SqlParameter[]
+                    {
+                    new SqlParameter("@ID_BaoHiemXaHoi", list.FirstOrDefault().ID_BaoHiemXaHoi),
+                    new SqlParameter("@StringID_HoSoNhanSu", ""),
+                    };
+                    int rowaff = helper.ExecuteNonQuery("sp_HoSoNhanSu_BaoHiemXaHoi_DeleteMulti", delPars);
+                    return true;
                 }
 
-                bool success = helper.ExecuteTransaction(param);
-                return success;
             }
             catch (Exception ex)
             {
@@ -183,6 +208,8 @@ namespace HRM_TrangAn.DataAccess.DAO
             return false;
 
         }
+
+
 
         public bool Delete(int ID)
         {

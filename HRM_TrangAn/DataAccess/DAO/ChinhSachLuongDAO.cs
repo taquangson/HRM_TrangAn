@@ -158,7 +158,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 foreach (DataRow dr in dt.Rows)
                 {
                     ChinhSachLuong_NhanVien_TreeModel item = GetTreeCSNVObjFromDataRow(dr);
-                    item.chinhsachluong = GetNV_ByIDCSL(0, item.ID_HoSoNhanSu);
+                    item.chinhsachluong = GetNV_ByIDCSL(0, item.ID_HoSoNhanSu, null, null);
                     result.Add(item);
                 }
                 return result;
@@ -193,15 +193,43 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
-        public List<ChinhSachLuong_NhanVienModel> GetNV_ByIDCSL(int ID_ChinhSachLuong, int ID_HoSoNhanSu)
+        public List<ChinhSachLuong_NhanVienModel> GetNV_ByIDCSL(int ID_ChinhSachLuong, int ID_HoSoNhanSu, DateTime? From, DateTime? To)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[] {
-                new SqlParameter("@ID_ChinhSachLuong", ID_ChinhSachLuong),
-                new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu)
+                    new SqlParameter("@ID_ChinhSachLuong", ID_ChinhSachLuong),
+                    new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu),
+                    new SqlParameter("@NgayBatDau",From == null ? (object)DBNull.Value : From),
+                    new SqlParameter("@NgayKetThuc",To == null ? (object)DBNull.Value : To)
                 };
                 DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_NhanVien_GetByIDCSL", pars);
+                DataTable dt = ds.Tables[0];
+                List<ChinhSachLuong_NhanVienModel> result = new List<ChinhSachLuong_NhanVienModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    result.Add(GetNVObjFromDataRow(dr));
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_GetByIDCSL " + ex.Message);
+                return null;
+            }
+        }
+        
+        public List<ChinhSachLuong_NhanVienModel> GetNV_ByIDCSLThuViec(int ID_ChinhSachLuong, int ID_HoSoNhanSu, DateTime? From, DateTime? To)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID_ChinhSachLuong", ID_ChinhSachLuong),
+                    new SqlParameter("@ID_HoSoNhanSu", ID_HoSoNhanSu),
+                    new SqlParameter("@NgayBatDau",From == null ? (object)DBNull.Value : From),
+                    new SqlParameter("@NgayKetThuc",To == null ? (object)DBNull.Value : To)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_NhanVien_GetByIDCSL_ThuViec", pars);
                 DataTable dt = ds.Tables[0];
                 List<ChinhSachLuong_NhanVienModel> result = new List<ChinhSachLuong_NhanVienModel>();
                 foreach (DataRow dr in dt.Rows)
@@ -296,6 +324,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID", model.ID),
                     new SqlParameter("@Ten", model.Ten),
                     new SqlParameter("@Ma", model.Ma),
+                    new SqlParameter("@Loai", model.Loai),
                     new SqlParameter("@ID_LoaiHopDong", model.ID_LoaiHopDong),
                     new SqlParameter("@KyHanThanhToan", model.KyHanThanhToan),
                     new SqlParameter("@GhiChu", model.GhiChu),
@@ -398,6 +427,30 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public bool DeleteCSL_NV(int ID_ChinhSachLuong_NhanVien)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID", ID_ChinhSachLuong_NhanVien),
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_ChinhSachLuong_NhanVien_DeleteByID", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_DeleteByID" + ex.Message);
+                return false;
+            }
+        }
+
         public bool InsertCSL_CH(ChinhSachLuong_CauHinhModel model)
         {
             try
@@ -405,6 +458,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 SqlParameter[] pars = new SqlParameter[] {
                     new SqlParameter("@ID_ChinhSachLuong", model.ID_ChinhSachLuong),
                     new SqlParameter("@CongChuan", model.CongChuan),
+                    new SqlParameter("@CongChuanTheoThang", model.CongChuanTheoThang),
                     new SqlParameter("@DoanhSoToiThieu", model.DoanhSoToiThieu),
                     new SqlParameter("@LuyKe_DoanhSoToiThieu", model.LuyKe_DoanhSoToiThieu),
                     new SqlParameter("@LuongKhachToiThieu", model.LuongKhachToiThieu),

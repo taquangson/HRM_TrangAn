@@ -8,7 +8,7 @@
 <span class="sitemap">
     <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
     <i class="fa fa-chevron-right"></i>
-    <b><i class="fa fa-database"></i> Danh mục</b>
+    <b><i class="fa fa-briefcase"></i> Nghiệp vụ</b>
     <i class="fa fa-chevron-right"></i>
     <b><i class="fa fa-users"></i> Thông tin bảo hiểm xã hội của nhân viên</b>
 </span>
@@ -17,7 +17,8 @@
     <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
     <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
     <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
-    <button class="k-button bg-orange" onclick="openAcceptWindow()"> <i class="fa fa-wrench"> Áp dụng</i> </button>
+    <button class="k-button bg-orange" onclick="openAcceptWindow()"> <i class="fa fa-wrench"> Áp dụng cho hồ sơ nhân viên</i> </button>
+    <button class="k-button bg-orange" onclick="openAcceptNVWindow()"> <i class="fa fa-wrench"> Áp dụng cho nhân viên</i> </button>
 
 </div>
 <div class="row">
@@ -114,9 +115,9 @@
         </div>
     </form>
 </div>
-<div id="windowAddNhanVien">
+<div id="windowAddHoSo">
     <div class="toolBarMenu">
-        <button class="k-button bg-blue" onclick="LuuAddNhanVien()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-blue" onclick="LuuAddHoSo()"> <i class="fa fa-plus-square"> Lưu </i></button>
     </div>
 
     <div class="form-group">
@@ -124,7 +125,7 @@
     </div>
     <div class="form-group">
         <label>Danh sách nhân viên:</label>
-        <div id="gridAddNhanVien"></div>
+        <div id="gridAddHoSo"></div>
     </div>
 </div>
 <div style="visibility:hidden" id="windowADCS">
@@ -213,6 +214,114 @@
                 <div style="flex:1" class="form-group">
                     <label style="width:59%">Ghi chú:<span style="color:red"></span></label>
                     <textarea id="GhiChuRead" type="text" style="width:100%" class="k-textbox" readonly></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="gridHoSo"></div>
+        </div>
+    </form>
+</div>
+
+<div id="windowAddNhanVien">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddNhanVien()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách nhân viên:</label>
+        <div id="gridAddNhanVien"></div>
+    </div>
+</div>
+<div style="visibility:hidden" id="windowADChoNV">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuApDungNV()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyApDungNV()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <input type="hidden" id="ID" />
+        <div style="display: flex">
+            <div style="width: 100%; flex-direction:row; display: flex">
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Mức lương:<span style="color:red">*</span></label>
+                    <input id="MucLuongDongBaoHiemNVRead" type="number" style="width:100%" class="k-textbox" readonly />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div style="display: flex">
+            <div style="width: 50%; flex-direction:column; display: flex">
+                <div class="form-group">
+                    <label style="width:100%; font-size: 16px">Công ty đóng:</label>
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm xã hội:<span style="color:red">*</span></label>
+                    <input id="SDLDBaoHiemXaHoiNVRead" type="number" oninput="" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm y tế:<span style="color:red">*</span></label>
+                    <input id="SDLDBaoHiemYTeNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm thất nghiệp:<span style="color:red">*</span></label>
+                    <input id="SDLDBaoHiemThatNghiepNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Tổng công ty đóng:<span style="color:red">*</span></label>
+                    <input id="SDLDTongNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Tổng công đóng thực tế:<span style="color:red">*</span></label>
+                    <input id="SDLDThucTeNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+            </div>
+            <div style="width: 50%; flex-direction:column; display: flex">
+                <div class="form-group">
+                    <label style="width:100%; font-size: 16px">Người lao động đóng:</label>
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm xã hội:<span style="color:red">*</span></label>
+                    <input id="NLDBaoHiemXaHoiNVRead" type="number" oninput="" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm y tế:<span style="color:red">*</span></label>
+                    <input id="NLDBaoHiemYTeNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Bảo hiểm thất nghiệp:<span style="color:red">*</span></label>
+                    <input id="NLDBaoHiemThatNghiepNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Tổng người lao động đóng:<span style="color:red">*</span></label>
+                    <input id="NLDTongNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Tổng người lao động đóng thực tế:<span style="color:red">*</span></label>
+                    <input id="NLDThucTeNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div style="display: flex">
+            <div style="width: 100%; flex-direction:row; display: flex">
+                <div style="flex:1" class="form-group">
+                    <label style="width:100%">Tổng:<span style="color:red">*</span></label>
+                    <input id="TongTienNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+                <div style="flex:1" class="form-group">
+                    <label style="width:59%">Mô tả:<span style="color:red"></span></label>
+                    <input id="MoTaNVRead" type="text" style="width:100%" class="k-textbox" readonly />
+                </div>
+            </div>
+        </div>
+        <div style="display: flex">
+            <div style="width: 100%; flex-direction:row; display: flex">
+                <div style="flex:1" class="form-group">
+                    <label style="width:59%">Ghi chú:<span style="color:red"></span></label>
+                    <textarea id="GhiChuNVRead" type="text" style="width:100%" class="k-textbox" readonly></textarea>
                 </div>
             </div>
         </div>

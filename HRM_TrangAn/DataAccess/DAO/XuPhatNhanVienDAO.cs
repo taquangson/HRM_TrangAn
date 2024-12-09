@@ -48,6 +48,31 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             return obj;
         }
+        private BaoCaoXuPhatViewModel GetObjBCXPVFromDataRow(DataRow dr)
+        {
+            BaoCaoXuPhatViewModel obj = new BaoCaoXuPhatViewModel();
+            foreach (PropertyInfo propertyInfo in obj.GetType().GetProperties())
+            {
+                if (dr.Table.Columns.IndexOf(propertyInfo.Name) >= 0)
+                {
+
+                    if (!string.IsNullOrWhiteSpace(dr[propertyInfo.Name].ToString()))
+                    {
+                        var value = Convert.ChangeType(dr[propertyInfo.Name], propertyInfo.PropertyType);
+                        propertyInfo.SetValue(obj, value);
+                    }
+                    else
+                    {
+                        propertyInfo.SetValue(obj, null);
+                    }
+                }
+                else
+                {
+                    propertyInfo.SetValue(obj, null);
+                }
+            }
+            return obj;
+        }
 
         public List<XuPhatNhanVienModel> GetAll()
         {
@@ -68,6 +93,37 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_XuPhatNhanVien_GetAll " + ex.Message);
+                return null;
+            }
+        }
+
+        public List<XuPhatNhanVienModel> GetByDateRange(DateTime from, DateTime to)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+             new SqlParameter("@TuNgay", from),
+             new SqlParameter("@DenNgay", to)
+         };
+
+                DataSet ds = helper.ExecuteDataSet("sp_XuPhatNhanVien_GetByDateRange", pars);
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    DataTable dt = ds.Tables[0];
+                    List<XuPhatNhanVienModel> result = new List<XuPhatNhanVienModel>();
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        XuPhatNhanVienModel model = GetObjFromDataRow(dr);
+                        result.Add(model);
+                    }
+                    return result;
+                }
+                return new List<XuPhatNhanVienModel>();
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_XuPhatNhanVien_GetByDateRange " + ex.Message);
                 return null;
             }
         }
@@ -131,7 +187,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_TaiKhoan", model.ID_TaiKhoan),
                     new SqlParameter("@ID_DanhMucLoi", model.ID_DanhMucLoi),
                     new SqlParameter("@GhiChu", model.GhiChu),
-                    new SqlParameter("@NgayPhat", model.NgayPhat)
+                    new SqlParameter("@NgayPhat", model.NgayPhat),
+                    new SqlParameter("@FromDMVS", model.FromDMVS)
                 };
 
                 object id = helper.ExecuteScalar("sp_XuPhatNhanVien_InsertOrUpdate", pars);
@@ -160,7 +217,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_TaiKhoan", item.ID_NhanVien),
                     new SqlParameter("@ID_DanhMucLoi", model.ID_DanhMucLoi),
                     new SqlParameter("@GhiChu", model.GhiChu),
-                    new SqlParameter("@NgayPhat", model.NgayPhat)
+                    new SqlParameter("@NgayPhat", model.NgayPhat),
+                    new SqlParameter("@FromDMVS", model.FromDMVS)
 
                     };
                     TransactionModel tranparam = new TransactionModel();
@@ -182,6 +240,38 @@ namespace HRM_TrangAn.DataAccess.DAO
             return false;
         }
 
+        public List<BaoCaoXuPhatViewModel> GetBaoCao(DateTime from, DateTime to)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@from", from),
+                    new SqlParameter("@to", to),
+                };
+                List<BaoCaoXuPhatViewModel> result = new List<BaoCaoXuPhatViewModel>();
+                List<XuPhatNhanVienModel> list_XPNV = new List<XuPhatNhanVienModel>();
+                DataSet ds = helper.ExecuteDataSet("sp_XuPhatNhanVien_GetBaoCao", pars);
+                DataTable dtTongHopXPNV = ds.Tables[0];
+                DataTable dtXPNV = ds.Tables[1];
+                foreach (DataRow dr in dtXPNV.Rows)
+                {
+                    list_XPNV.Add(GetObjFromDataRow(dr));
+                }
+                foreach (DataRow dr in dtTongHopXPNV.Rows)
+                {
+                    BaoCaoXuPhatViewModel model = new BaoCaoXuPhatViewModel();
+                    model = GetObjBCXPVFromDataRow(dr);
+                    model.List_XPNV = list_XPNV.FindAll(item => item.ID_TaiKhoan == model.ID_TaiKhoan);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_XuPhatNhanVien_GetBaoCao " + ex.Message);
+                return new List<BaoCaoXuPhatViewModel>();
+            }
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HRM_TrangAn.App_Start;
 using HRM_TrangAn.DataAccess.DAO;
 using HRM_TrangAn.DataAccess.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,20 @@ namespace HRM_TrangAn.Controllers
         {
             XuPhatNhanVienDAO dao = new XuPhatNhanVienDAO();
             List<XuPhatNhanVienModel> data = dao.GetAll();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetXuPhatNhanVienByDateRange(string TuNgay, string DenNgay)
+        {
+
+            DateTime TuNgayDate = DateTime.ParseExact(TuNgay, "yyyy/MM/dd HH:mm:ss",
+                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime DenNgayDate = DateTime.ParseExact(DenNgay, "yyyy/MM/dd HH:mm:ss",
+                System.Globalization.CultureInfo.InvariantCulture);
+
+            XuPhatNhanVienDAO dao = new XuPhatNhanVienDAO();
+            List<XuPhatNhanVienModel> data = dao.GetByDateRange(TuNgayDate, DenNgayDate);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -130,6 +145,25 @@ namespace HRM_TrangAn.Controllers
                 return Json(new { success = false, msg = "Lưu dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
             }
         }
+        
+        
+        
+        [HttpPost]
+        public ActionResult InsertOrUpdate_XuPhatFromDiMuon(XuPhatNhanVienModel item)
+        {
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            XuPhatNhanVienDAO dao = new XuPhatNhanVienDAO();
+                           
+            if (dao.InsertOrUpdate(item) > 0)
+            {
+                
+                return Json(new { success = true, msg = "Lưu dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
         [HttpPost]
@@ -148,6 +182,20 @@ namespace HRM_TrangAn.Controllers
             }
 
 
+        }
+
+        [HttpGet]
+        public ActionResult GetBaoCao(string from, string to)
+        {
+
+            DateTime TuNgayDate = DateTime.ParseExact(from, "yyyy/MM/dd HH:mm:ss",
+                System.Globalization.CultureInfo.InvariantCulture);
+            DateTime DenNgayDate = DateTime.ParseExact(to, "yyyy/MM/dd HH:mm:ss",
+                System.Globalization.CultureInfo.InvariantCulture);
+
+            XuPhatNhanVienDAO dao = new XuPhatNhanVienDAO();
+            List<BaoCaoXuPhatViewModel> data = dao.GetBaoCao(TuNgayDate, DenNgayDate);
+            return Content(JsonConvert.SerializeObject(data));
         }
     }
 }

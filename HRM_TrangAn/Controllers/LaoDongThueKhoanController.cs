@@ -18,10 +18,10 @@ namespace HRM_TrangAn.Controllers
             return View();
         }
 
-        public ActionResult GetAllLaoDongThueKhoan()
+        public ActionResult GetAllLaoDongThueKhoan(DateTime from, DateTime to)
         {
             LaoDongThueKhoanDAO dao = new LaoDongThueKhoanDAO();
-            List<LaoDongThueKhoanModel> data = dao.GetAll();
+            List<LaoDongThueKhoanModel> data = dao.GetAll(from, to);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

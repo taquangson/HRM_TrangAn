@@ -74,10 +74,13 @@ namespace HRM_TrangAn.DataAccess.DAO
                 };
                 DataSet ds = helper.ExecuteDataSet("sp_CaLamViec_GetByID", pars);
                 DataTable dt = ds.Tables[0];
+                CaLamViec_PhanBoCongDAO pbdao = new CaLamViec_PhanBoCongDAO();
                 List<CaLamViecModel> result = new List<CaLamViecModel>();
                 foreach (DataRow dr in dt.Rows)
                 {
-                    result.Add(GetObjFromDataRow(dr));
+                    CaLamViecModel item = GetObjFromDataRow(dr);
+                    item.PhanBo = pbdao.GetByCaLamViec(item.ID);
+                    result.Add(item);
                 }
                 return result.FirstOrDefault();
             }

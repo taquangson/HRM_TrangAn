@@ -13,6 +13,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public string Ma { get; set; }
         public int KyHanThanhToan { get; set; }
         public int ID_LoaiHopDong { get; set; }
+        public int Loai { get; set; }
         public string GhiChu { get; set; }
     }
 }
