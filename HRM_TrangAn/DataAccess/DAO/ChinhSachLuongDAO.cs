@@ -27,6 +27,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 if (dr.Table.Columns.IndexOf(propertyInfo.Name) >= 0)
                 {
 
+
                     if (!string.IsNullOrWhiteSpace(dr[propertyInfo.Name].ToString()))
                     {
                         var value = Convert.ChangeType(dr[propertyInfo.Name], propertyInfo.PropertyType);
