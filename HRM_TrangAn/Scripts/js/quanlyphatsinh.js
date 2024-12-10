@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $("#grid").kendoGrid({
         height: function () {
-            var height = $(window).height() - 195;
+            var height = $(window).height() - 160;
             return height;
         },
         scrollable: true,
@@ -225,21 +225,6 @@ $(document).ready(function () {
         ]
     });
 
-    $("#TuNgay").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
-        dateInput: true,
-        change: function (e) {
-            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
-            $("#DenNgay").data("kendoDatePicker").value(d);
-        }
-    });
-    $("#DenNgay").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true,
-        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
-    });
-
     $("#NgayApDung").kendoDatePicker({
         format: "dd/MM/yyyy",
         dateInput: true
@@ -276,6 +261,7 @@ $(document).ready(function () {
         $("#grid").data("kendoGrid").select(row);
         openEditWindow();
     })
+    LoadGridData();
     $("#windowNhanVien").kendoWindow({
         width: "800",
         height: "400",
@@ -725,47 +711,6 @@ $(document).ready(function () {
     $(".main_container").show();
 })
 
-
-function TimKiem() {
-    console.log(kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00");
-    console.log(kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",);
-    kendo.ui.progress($("#grid"), true);
-    console.log("/PhatSinh/GetAllPhatSinhByDateRange"
-        + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-        + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59")
-    $.ajax({
-        url: "/PhatSinh/GetAllPhatSinhByDateRange"
-            + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-            + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
-        type: 'GET',
-        error: function (request, error) {
-            console.log(error);
-        },
-    }).done(function successCallback(response) {
-        var dataSource = new kendo.data.DataSource({
-            data: response,
-            schema: {
-                model: {
-                    id: "ID",
-                    fields: {
-                        NgayApDung: { type: 'date', editable: false },
-                    }
-                }
-            },
-            pageSize: 30,
-        });
-        if (dataSource === undefined || dataSource === null) {
-            console.log("void");
-        } else {
-            console.log(dataSource);
-            console.log($("#grid").data("kendoGrid"));
-            $("#grid").data("kendoGrid").setDataSource(dataSource);
-            kendo.ui.progress($("#grid"), false);
-        }
-        kendo.ui.progress($("#grid"), false);
-    });
-}
-
 function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
@@ -880,7 +825,7 @@ function Luu() {
                 if (response.success) {
                     notification.show({ kValue: response.msg }, "success");
                     Huy();
-                    TimKiem();
+                    LoadGridData();
                 } else {
                     notification.show({ kValue: response.msg }, "error");
                 }
@@ -911,7 +856,7 @@ function Luu() {
                     if (response.success) {
                         notification.show({ kValue: response.msg }, "success");
                         Huy();
-                        TimKiem();
+                        LoadGridData();
                     } else {
                         notification.show({ kValue: response.msg }, "error");
                     }
@@ -1000,7 +945,7 @@ function XoaDuLieu(bangDuLieu) {
     }).done(function (response) {
         if (response.success) {
             $("#grid").data("kendoGrid").clearSelection();
-            TimKiem();
+            LoadGridData();
             notification.show({ kValue: response.msg }, "success");
         } else {
             notification.show({ kValue: response.msg }, "error");

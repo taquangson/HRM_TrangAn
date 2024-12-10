@@ -71,34 +71,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
-
-        public List<PhatSinhModel> GetByDateRange(DateTime TuNgay, DateTime DenNgay)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@TuNgay",TuNgay ),
-                    new SqlParameter("@DenNgay",DenNgay )
-                };
-                NhanVienDAO nvdao = new NhanVienDAO();
-                DataSet ds = helper.ExecuteDataSet("sp_PhatSinh_GetByDateRange", pars);
-                DataTable dt = ds.Tables[0];
-                List<PhatSinhModel> result = new List<PhatSinhModel>();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    PhatSinhModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành PhatSinhModel
-                    result.Add(model);
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                log.Error("sp_PhatSinh_GetByDateRange " + ex.Message);
-                return null;
-            }
-        }
-
         public List<PhatSinhModel> GetByNhanVien_Ngay(int ID_NhanVien, DateTime Ngay)
         {
             try

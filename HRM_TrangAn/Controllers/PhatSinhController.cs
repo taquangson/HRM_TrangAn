@@ -25,18 +25,6 @@ namespace HRM_TrangAn.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        public ActionResult GetAllPhatSinhByDateRange(string TuNgay, string DenNgay)
-        {
-            DateTime TuNgayDate = DateTime.ParseExact(TuNgay, "yyyy/MM/dd HH:mm:ss",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-            DateTime DenNgayDate = DateTime.ParseExact(DenNgay, "yyyy/MM/dd HH:mm:ss",
-                                       System.Globalization.CultureInfo.InvariantCulture);
-            PhatSinhDAO dao = new PhatSinhDAO();
-            List<PhatSinhModel> data = dao.GetByDateRange(TuNgayDate, DenNgayDate);
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult GetByNhanVien_Ngay(int ID_NhanVien, DateTime Ngay)
         {
             PhatSinhDAO dao = new PhatSinhDAO();

@@ -139,6 +139,13 @@ namespace HRM_TrangAn.Controllers
             return Content(JsonConvert.SerializeObject(data));
         }
 
+        public ActionResult GetAllNhanVienWithTrangThai()
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            List<NhanVienModel> data = dao.GetAllWithTrangThai();
+            return Content(JsonConvert.SerializeObject(data));
+        }
+
         public ActionResult GetNhanVienById(int ID)
         {
             NhanVienDAO dao = new NhanVienDAO();
@@ -179,6 +186,14 @@ namespace HRM_TrangAn.Controllers
         {
             NhanVienDAO dao = new NhanVienDAO();
             List<NhanVienModel> data = dao.GetAllNhanVienTrongToNhom(ID_ToNhom);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetAllNhanVienTrongMultiToNhom(string ID_ToNhom)
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            List<NhanVienModel> data = dao.GetAllNhanVienTrongMultiToNhom(ID_ToNhom);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -669,6 +684,21 @@ namespace HRM_TrangAn.Controllers
             NhanVienDAO dao = new NhanVienDAO();
             List<ChinhSachLuong_NhanVienModel> data = dao.GetByNotID_ChinhSachLuong(ID_ChinhSachLuong);
             return Content(JsonConvert.SerializeObject(data));
+        }
+
+        [HttpPost]
+        public ActionResult XuatHoSoNhanSu(string StringID_NhanVien)
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            if (dao.XuatHoSoNhanSu(StringID_NhanVien))
+            {
+                return Json(new { status = true, msg = "Xuất hồ sơ thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { status = false, msg = "Xuất hồ sơ thất bại, vui lòng kiểm tra hồ sơ đã tồn tại hoặc thử lại sau ít phút!" }, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }

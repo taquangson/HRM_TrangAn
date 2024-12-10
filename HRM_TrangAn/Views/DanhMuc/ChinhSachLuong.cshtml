@@ -41,9 +41,15 @@
             <span class="fa fa-exclamation-triangle icon"></span>
 
         </div>
-        <div class="form-group valid" toggle-valid="SoTien">
-            <label style="width:100%">Số Tiền: <span style="color:red">*</span></label>
-            <input id="SoTien" type="number" class="k-textbox input" />
+        <div class="form-group valid" toggle-valid="ComboLoai">
+            <label style="width:100%">Loại: <span style="color:red">*</span></label>
+            <input id="ComboLoai" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+
+        </div>
+        <div class="form-group valid">
+            <label style="width:100%">Loại hợp đồng: <span style="color:red">*</span></label>
+            <input id="ComboHopDong" style="width:100%" class="input" />
             <span class="fa fa-exclamation-triangle icon"></span>
 
         </div>
@@ -85,4 +91,64 @@
         <label>Danh sách nhân viên:</label>
         <div id="gridAddNhanVien"></div>
     </div>
+</div>
+
+
+<div id="windowCH">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuCauHinh()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-red" onclick="HuyCauHinh()"> <i class="fa fa-trash-o"> Huỷ </i></button>
+    </div>
+    <form id="formCauHinh">
+        <br />
+        <div style="width:50%;float:left">
+            <div class="form-group">
+                <label style="width:100%">Áp dụng từ ngày</label>
+                <input style="width:100%" id="NgayBatDau" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Công chuẩn</label>
+                <input type="number" class="k-textbox" style="width:100%" id="CongChuan" />
+            </div>
+
+            <div class="form-group">
+                <label style="width:100%">Doanh số tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="DoanhSoToiThieu" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Lượng khách tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="LuongKhachToiThieu" />
+            </div>
+            <div class="form-group">
+                <label style="width:100%">Ngày công tối thiểu</label>
+                <input type="number" class="k-textbox" style="width:100%" id="NgayCongToiThieu" />
+            </div>
+        </div>
+        <div style="width:50%;float:left">
+            <div class="form-group">
+                <label style="width:100%">Áp dụng đến ngày</label>
+                <input type="checkbox" style="width:100%" id="NgayKetThuc" />
+            </div>
+            <div class="form-group" >
+                <label style="width:100%" for="CongChuanTheoThang">Công chuẩn theo tháng</label>
+                <input type="checkbox" onchange="UpdateCongChuanTheoThang()" id="CongChuanTheoThang" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%" for="LuyKe_DoanhSoToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_DoanhSoToiThieu" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%" for="LuyKe_LuongKhachToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_LuongKhachToiThieu" />
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label style="width:100%" for="LuyKe_NgayCongToiThieu">Luỹ kế</label>
+                <input type="checkbox" id="LuyKe_NgayCongToiThieu" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi chú</label>
+            <textarea class="k-textbox" style="width:100%" id="GhiChu"></textarea>
+        </div>
+    </form>
 </div>

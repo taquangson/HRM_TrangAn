@@ -70,32 +70,6 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
-        public List<DonSuaChuaThuyenModel> GetByDateRange(DateTime TuNgay, DateTime DenNgay)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("TuNgay", TuNgay),
-                    new SqlParameter("DenNgay", DenNgay),
-                };
-                DataSet ds = helper.ExecuteDataSet("sp_DonSuaChuaThuyen_GetByDateRange", pars);
-                DataTable dt = ds.Tables[0];
-                List<DonSuaChuaThuyenModel> result = new List<DonSuaChuaThuyenModel>();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    DonSuaChuaThuyenModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DonSuaChuaThuyenModel
-                    result.Add(model);
-                }
-                return result;
-            }
-            catch (Exception ex)
-            {
-                log.Error("sp_NghiPhep_GetByDateRange " + ex.Message);
-                return null;
-            }
-        }
-
         public int InsertOrUpdate(DonSuaChuaThuyenModel model)
         {
             try
