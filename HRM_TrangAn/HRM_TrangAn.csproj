@@ -1,0 +1,1678 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C7506B7-3323-47C4-B1A1-88DD7A52704A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HRM_TrangAn</RootNamespace>
+    <AssemblyName>HRM_TrangAn</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirebaseAdmin, Version=1.12.0.0, Culture=neutral, PublicKeyToken=97c8d00c348326ed, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseAdmin.1.12.0\lib\net45\FirebaseAdmin.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax, Version=2.7.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.2.7.0\lib\net45\Google.Api.Gax.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Api.Gax.Rest, Version=2.7.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Api.Gax.Rest.2.7.0\lib\net45\Google.Api.Gax.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.40.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.40.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.40.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.40.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.40.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.40.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.40.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.40.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.40.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.40.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.zkemkeeper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZKemkeeper.1.0.2\lib\Interop.zkemkeeper.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.5.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.5.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.5.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.4\lib\net45\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.4\lib\net45\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.4\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.4.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.4\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.3.0.0\lib\net452\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common, Version=1.5.3.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <HintPath>..\packages\SuperWebSocketNETServer.0.8\lib\net45\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Facility, Version=1.5.3.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <HintPath>..\packages\SuperWebSocketNETServer.0.8\lib\net45\SuperSocket.Facility.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase, Version=1.5.3.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <HintPath>..\packages\SuperWebSocketNETServer.0.8\lib\net45\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine, Version=1.5.3.0, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
+      <HintPath>..\packages\SuperWebSocketNETServer.0.8\lib\net45\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperWebSocket, Version=0.8.0.0, Culture=neutral, PublicKeyToken=7ba53b9a7cef5d1c, processorArchitecture=MSIL">
+      <HintPath>..\packages\SuperWebSocketNETServer.0.8\lib\net45\SuperWebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.5.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net45\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.9\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SessionAdmiRoleAttribute.cs" />
+    <Compile Include="App_Start\SessionExpireAttribute.cs" />
+    <Compile Include="App_Start\SessionModeratorRoleAttribute.cs" />
+    <Compile Include="App_Start\SocketChatServer.cs" />
+    <Compile Include="App_Start\TokenValidationHandler.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\BaiKiemTraController.cs" />
+    <Compile Include="Controllers\BangLuongController.cs" />
+    <Compile Include="Controllers\BaoCaoController.cs" />
+    <Compile Include="Controllers\BaoHiemController.cs" />
+    <Compile Include="Controllers\BaoHiemXaHoi_LichSuController.cs" />
+    <Compile Include="Controllers\BController.cs" />
+    <Compile Include="Controllers\CaLamViecNhanVienController.cs" />
+    <Compile Include="Controllers\ChamCongNhanVienController.cs" />
+    <Compile Include="Controllers\ChatMessageController.cs" />
+    <Compile Include="Controllers\ChinhSachLuongController.cs" />
+    <Compile Include="Controllers\ChucDanhController.cs" />
+    <Compile Include="Controllers\ChucNangController.cs" />
+    <Compile Include="Controllers\ChuyenCongController.cs" />
+    <Compile Include="Controllers\ChuyenDoController.cs" />
+    <Compile Include="Controllers\ChuyenToController.cs" />
+    <Compile Include="Controllers\CongViecController.cs" />
+    <Compile Include="Controllers\DangKyController.cs" />
+    <Compile Include="Controllers\DangKyLichNghiController.cs" />
+    <Compile Include="Controllers\DanhMucCongViecController.cs" />
+    <Compile Include="Controllers\DanhMucController.cs" />
+    <Compile Include="Controllers\DiemDanhController.cs" />
+    <Compile Include="Controllers\DiemQuetTheController.cs" />
+    <Compile Include="Controllers\DoanhSo_LuongKhachController.cs" />
+    <Compile Include="Controllers\DonSuaChuaThuyenController.cs" />
+    <Compile Include="Controllers\FBNotificationController.cs" />
+    <Compile Include="Controllers\FileManagerController.cs" />
+    <Compile Include="Controllers\HocSinhController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HoSoNhanSuController.cs" />
+    <Compile Include="Controllers\HoTroController.cs" />
+    <Compile Include="Controllers\KeHoachController.cs" />
+    <Compile Include="Controllers\LaoDongThueKhoanController.cs" />
+    <Compile Include="Controllers\LichHocController.cs" />
+    <Compile Include="Controllers\LiveClassController.cs" />
+    <Compile Include="Controllers\LopController.cs" />
+    <Compile Include="Controllers\MayChamCongController.cs" />
+    <Compile Include="Controllers\NghiepVuController.cs" />
+    <Compile Include="Controllers\NghiPhepController.cs" />
+    <Compile Include="Controllers\NghiPhepNamController.cs" />
+    <Compile Include="Controllers\NguoiGiamSatController.cs" />
+    <Compile Include="Controllers\NhanVienController.cs" />
+    <Compile Include="Controllers\NoCongController.cs" />
+    <Compile Include="Controllers\NoiDungPhuCapController.cs" />
+    <Compile Include="Controllers\PhatSinhController.cs" />
+    <Compile Include="Controllers\PhieuHocController.cs" />
+    <Compile Include="Controllers\PhieuThuController.cs" />
+    <Compile Include="Controllers\PhongBanController.cs" />
+    <Compile Include="Controllers\PhuCapController.cs" />
+    <Compile Include="Controllers\ThongBaoAppController.cs" />
+    <Compile Include="Controllers\ThongTinCongTyController.cs" />
+    <Compile Include="Controllers\ThuyenDoController.cs" />
+    <Compile Include="Controllers\TinNhanController.cs" />
+    <Compile Include="Controllers\ToNhomController.cs" />
+    <Compile Include="Controllers\TracNghiemController.cs" />
+    <Compile Include="Controllers\TuyenDoController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\XinNghiHocController.cs" />
+    <Compile Include="Controllers\XuPhatController.cs" />
+    <Compile Include="Controllers\XuPhatNhanVienController.cs" />
+    <Compile Include="DataAccess\DAO\AnhBaiKiemTraDAO.cs" />
+    <Compile Include="DataAccess\DAO\AnhDiemDanhDAO.cs" />
+    <Compile Include="DataAccess\DAO\BaiKiemTraDAO.cs" />
+    <Compile Include="DataAccess\DAO\BaiLamTracNghiemDAO.cs" />
+    <Compile Include="DataAccess\DAO\BangLuongDAO.cs" />
+    <Compile Include="DataAccess\DAO\BaoCaoDAO.cs" />
+    <Compile Include="DataAccess\DAO\BaoHiemXaHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\BaoHiemXaHoi_LichSuDAO.cs" />
+    <Compile Include="DataAccess\DAO\CaHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\CaLamViecDAO.cs" />
+    <Compile Include="DataAccess\DAO\CaLamViec_NhanVienDAO.cs" />
+    <Compile Include="DataAccess\DAO\CaLamViec_PhanBoCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\CauHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChamCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChamCongNhanVienDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChatBotDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChatSessionDAO.cs" />
+    <Compile Include="DataAccess\DAO\CheckInSuKienDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChinhSachLuongDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChucDanhDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChucNangDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChuyenCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChuyenDoDAO.cs" />
+    <Compile Include="DataAccess\DAO\ChuyenToDAO.cs" />
+    <Compile Include="DataAccess\DAO\CongLaoDongDAO.cs" />
+    <Compile Include="DataAccess\DAO\CongLaoDong_TransferDAO.cs" />
+    <Compile Include="DataAccess\DAO\DangKyEventDAO.cs" />
+    <Compile Include="DataAccess\DAO\DangKyHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\DangKyLichNghiDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhGiaDiemDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhGiaLaiDoDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucCauHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucCongViecDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucLoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucNgayLeDAO.cs" />
+    <Compile Include="DataAccess\DAO\DeThiDAO.cs" />
+    <Compile Include="DataAccess\DAO\DiemDanhDAO.cs" />
+    <Compile Include="DataAccess\DAO\DiemQuetTheDAO.cs" />
+    <Compile Include="DataAccess\DAO\DoanhSo_LuongKhachDAO.cs" />
+    <Compile Include="DataAccess\DAO\DonSuaChuaThuyenDAO.cs" />
+    <Compile Include="DataAccess\DAO\File_NhanVienDAO.cs" />
+    <Compile Include="DataAccess\DAO\GiaoAnDAO.cs" />
+    <Compile Include="DataAccess\DAO\HocSinhDAO.cs" />
+    <Compile Include="DataAccess\DAO\HoSoNhanSuDAO.cs" />
+    <Compile Include="DataAccess\DAO\HoSoNhanSu_BaoHiemXaHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\KeHoachDAO.cs" />
+    <Compile Include="DataAccess\DAO\KeHoach_FileDAO.cs" />
+    <Compile Include="DataAccess\DAO\LaoDongThueKhoanDAO.cs" />
+    <Compile Include="DataAccess\DAO\LichHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\LichSuKetNoiMCCDAO.cs" />
+    <Compile Include="DataAccess\DAO\LichSuThaoTacBangCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\LichSuThongBaoDAO.cs" />
+    <Compile Include="DataAccess\DAO\LopHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\Lop_HocSinhDAO.cs" />
+    <Compile Include="DataAccess\DAO\MauTinNhanDAO.cs" />
+    <Compile Include="DataAccess\DAO\MayChamCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\MayChamCong_DiemQuetTheDAO.cs" />
+    <Compile Include="DataAccess\DAO\NgayNghiPhepDAO.cs" />
+    <Compile Include="DataAccess\DAO\NghiPhepDAO.cs" />
+    <Compile Include="DataAccess\DAO\NguoiGiamSatDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVienDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_BaoHiemXaHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_ChucDanhDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_ChuyenToDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_KeHoachDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_ToNhomDAO.cs" />
+    <Compile Include="DataAccess\DAO\NhanVien_XuPhatDAO.cs" />
+    <Compile Include="DataAccess\DAO\NoCongDAO.cs" />
+    <Compile Include="DataAccess\DAO\NoiDungPhuCapDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhatSinhDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhieuHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhieuThuDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhongBanDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhuCapDAO.cs" />
+    <Compile Include="DataAccess\DAO\QuanSinh_LopHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\RatingLaiDoDAO.cs" />
+    <Compile Include="DataAccess\DAO\SoDuBuoiHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\TaiKhoanDAO.cs" />
+    <Compile Include="DataAccess\DAO\ThongBaoAppDAO.cs" />
+    <Compile Include="DataAccess\DAO\ThongTinCongTyDAO.cs" />
+    <Compile Include="DataAccess\DAO\ThuongDanhGiaDAO.cs" />
+    <Compile Include="DataAccess\DAO\ThuyenDoDAO.cs" />
+    <Compile Include="DataAccess\DAO\ThuyenDoLichSuDAO.cs" />
+    <Compile Include="DataAccess\DAO\TinNhanDAO.cs" />
+    <Compile Include="DataAccess\DAO\TinNhanPhanHoiDAO.cs" />
+    <Compile Include="DataAccess\DAO\ToNhomDAO.cs" />
+    <Compile Include="DataAccess\DAO\ToNhom_KeHoachDAO.cs" />
+    <Compile Include="DataAccess\DAO\TuyenDoDAO.cs" />
+    <Compile Include="DataAccess\DAO\TuyenDo_DiemDAO.cs" />
+    <Compile Include="DataAccess\DAO\XinNghiPhepDAO.cs" />
+    <Compile Include="DataAccess\DAO\XuPhatDAO.cs" />
+    <Compile Include="DataAccess\DAO\XuPhatNhanVienDAO.cs" />
+    <Compile Include="DataAccess\Helper\AuthorHelper.cs" />
+    <Compile Include="DataAccess\Helper\DataHelper.cs" />
+    <Compile Include="DataAccess\Helper\EmailHelper.cs" />
+    <Compile Include="DataAccess\Helper\RazorViewToString.cs" />
+    <Compile Include="DataAccess\Helper\StringHelper.cs" />
+    <Compile Include="DataAccess\Helper\TransactionModel.cs" />
+    <Compile Include="DataAccess\Models\AnhBaiKiemTraModel.cs" />
+    <Compile Include="DataAccess\Models\AnhDiemDanhModel.cs" />
+    <Compile Include="DataAccess\Models\BaiKiemTraModel.cs" />
+    <Compile Include="DataAccess\Models\BaiLamTracNghiemModel.cs" />
+    <Compile Include="DataAccess\Models\BaiLamTracNghiem_ChiTietModel.cs" />
+    <Compile Include="DataAccess\Models\BangLuongModel.cs" />
+    <Compile Include="DataAccess\Models\BaoCaoXuPhatViewModel.cs" />
+    <Compile Include="DataAccess\Models\BaoHiemXaHoiModel.cs" />
+    <Compile Include="DataAccess\Models\BaoHiemXaHoi_LichSuModel.cs" />
+    <Compile Include="DataAccess\Models\CaHocModel.cs" />
+    <Compile Include="DataAccess\Models\CaLamViecModel.cs" />
+    <Compile Include="DataAccess\Models\CaLamViecNhanVienViewModel.cs" />
+    <Compile Include="DataAccess\Models\CaLamViec_NhanVien.cs" />
+    <Compile Include="DataAccess\Models\CaLamViec_PhanBoCongModel.cs" />
+    <Compile Include="DataAccess\Models\CauHinhThuongDanhGiaModel.cs" />
+    <Compile Include="DataAccess\Models\CauHoiModel.cs" />
+    <Compile Include="DataAccess\Models\ChamCongModel.cs" />
+    <Compile Include="DataAccess\Models\ChamCongMonitorModel.cs" />
+    <Compile Include="DataAccess\Models\ChamCongNhanVienModel .cs" />
+    <Compile Include="DataAccess\Models\ChatBotModel.cs" />
+    <Compile Include="DataAccess\Models\ChatSessionModel.cs" />
+    <Compile Include="DataAccess\Models\CheckInSuKienModel.cs" />
+    <Compile Include="DataAccess\Models\ChiNhanhModels.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuongModel.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuong_CauHinhModel.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuong_NhanVienModel.cs" />
+    <Compile Include="DataAccess\Models\ChinhSachLuong_NhanVien_TreeModel.cs" />
+    <Compile Include="DataAccess\Models\ChiTietPhieuLuongModel.cs" />
+    <Compile Include="DataAccess\Models\ChucDanhModel.cs" />
+    <Compile Include="DataAccess\Models\ChucNangModel.cs" />
+    <Compile Include="DataAccess\Models\ChuyenDoModel.cs" />
+    <Compile Include="DataAccess\Models\ChuyenToModel.cs" />
+    <Compile Include="DataAccess\Models\CongLaoDongModel.cs" />
+    <Compile Include="DataAccess\Models\CongLaoDong_TransferModel.cs" />
+    <Compile Include="DataAccess\Models\ContentInitializer.cs" />
+    <Compile Include="DataAccess\Models\DangKyEventModel.cs" />
+    <Compile Include="DataAccess\Models\DangKyHocModel.cs" />
+    <Compile Include="DataAccess\Models\DangKyLichNghiModel.cs" />
+    <Compile Include="DataAccess\Models\DanhGiaDiemModel.cs" />
+    <Compile Include="DataAccess\Models\DanhGiaLaiDoModel.cs" />
+    <Compile Include="DataAccess\Models\DanhMucCauHoiModel.cs" />
+    <Compile Include="DataAccess\Models\DanhMucCongViecModel.cs" />
+    <Compile Include="DataAccess\Models\DanhMucLoiModel.cs" />
+    <Compile Include="DataAccess\Models\DanhMucNgayLeModel.cs" />
+    <Compile Include="DataAccess\Models\DapAnModel.cs" />
+    <Compile Include="DataAccess\Models\DeThiModel.cs" />
+    <Compile Include="DataAccess\Models\DeThi_CauHoiModel.cs" />
+    <Compile Include="DataAccess\Models\DeThi_ChiTietModel.cs" />
+    <Compile Include="DataAccess\Models\DiemDanhModel.cs" />
+    <Compile Include="DataAccess\Models\DiemQuetTheModel.cs" />
+    <Compile Include="DataAccess\Models\DirectoryProvider.cs" />
+    <Compile Include="DataAccess\Models\DoanhSo_LuongKhachModel.cs" />
+    <Compile Include="DataAccess\Models\DonSuaChuaThuyenModel.cs" />
+    <Compile Include="DataAccess\Models\DuLieuChuyenDoModel.cs" />
+    <Compile Include="DataAccess\Models\FileManagerEntry.cs" />
+    <Compile Include="DataAccess\Models\File_NhanVienModel.cs" />
+    <Compile Include="DataAccess\Models\GiaoAnModel.cs" />
+    <Compile Include="DataAccess\Models\HocSinhModel.cs" />
+    <Compile Include="DataAccess\Models\HoSoNhanSuModel.cs" />
+    <Compile Include="DataAccess\Models\HoSoNhanSu_BaoHiemXaHoiModel.cs" />
+    <Compile Include="DataAccess\Models\KeHoachModel.cs" />
+    <Compile Include="DataAccess\Models\KeHoach_FileModel.cs" />
+    <Compile Include="DataAccess\Models\KhoiModel.cs" />
+    <Compile Include="DataAccess\Models\LaoDongThueKhoanModel.cs" />
+    <Compile Include="DataAccess\Models\LichHocModel.cs" />
+    <Compile Include="DataAccess\Models\LichSuChuyenCongModel.cs" />
+    <Compile Include="DataAccess\Models\LichSuKetNoiMCCModel.cs" />
+    <Compile Include="DataAccess\Models\LichSuThaoTacBangCongModel.cs" />
+    <Compile Include="DataAccess\Models\LichSuThongBaoModel.cs" />
+    <Compile Include="DataAccess\Models\LichSuThuongDanhGiaModel.cs" />
+    <Compile Include="DataAccess\Models\LichSu_BaiLamTracNghiemModel.cs" />
+    <Compile Include="DataAccess\Models\LoginAppModel.cs" />
+    <Compile Include="DataAccess\Models\LoginModel.cs" />
+    <Compile Include="DataAccess\Models\LopHocModel.cs" />
+    <Compile Include="DataAccess\Models\Lop_HocSinhModel.cs" />
+    <Compile Include="DataAccess\Models\MauTinNhanModel.cs" />
+    <Compile Include="DataAccess\Models\MayChamCongModel.cs" />
+    <Compile Include="DataAccess\Models\MayChamCong_DiemQuetTheModel.cs" />
+    <Compile Include="DataAccess\Models\MonHocModel.cs" />
+    <Compile Include="DataAccess\Models\NgayNghiPhepModel.cs" />
+    <Compile Include="DataAccess\Models\NghiPhepModel.cs" />
+    <Compile Include="DataAccess\Models\NghiPhepNamViewModel.cs" />
+    <Compile Include="DataAccess\Models\NguoiGiamSatModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVienModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_BaoHiemXaHoiModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_ChucDanhModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_ChuyenToModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_KeHoachModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_ToNhomModel.cs" />
+    <Compile Include="DataAccess\Models\NhanVien_XuPhatModel.cs" />
+    <Compile Include="DataAccess\Models\NhomChucNangModel.cs" />
+    <Compile Include="DataAccess\Models\NoCongModel.cs" />
+    <Compile Include="DataAccess\Models\NoiDungPhuCapModel.cs" />
+    <Compile Include="DataAccess\Models\PhatSinhModel.cs" />
+    <Compile Include="DataAccess\Models\PhieuHocModel.cs" />
+    <Compile Include="DataAccess\Models\PhieuLuongModel.cs" />
+    <Compile Include="DataAccess\Models\PhieuThuModel.cs" />
+    <Compile Include="DataAccess\Models\PhongBanModel.cs" />
+    <Compile Include="DataAccess\Models\PhuCapModel.cs" />
+    <Compile Include="DataAccess\Models\PhuThuGiamTruModel.cs" />
+    <Compile Include="DataAccess\Models\QuanSinhLopHocModel.cs" />
+    <Compile Include="DataAccess\Models\RatingLaiDoModel.cs" />
+    <Compile Include="DataAccess\Models\SelectNhanVienForKeHoachModel.cs" />
+    <Compile Include="DataAccess\Models\SoDuBuoiHocModel.cs" />
+    <Compile Include="DataAccess\Models\SortByMarketcapModel.cs" />
+    <Compile Include="DataAccess\Models\TaiKhoanModel.cs" />
+    <Compile Include="DataAccess\Models\TaiLieuHoSoModel.cs" />
+    <Compile Include="DataAccess\Models\ThongBaoAppModel.cs" />
+    <Compile Include="DataAccess\Models\ThongTinCongTyModel.cs" />
+    <Compile Include="DataAccess\Models\ThuyenDoLichSuModel.cs" />
+    <Compile Include="DataAccess\Models\ThuyenDoModel.cs" />
+    <Compile Include="DataAccess\Models\TinhBangLuongModel.cs" />
+    <Compile Include="DataAccess\Models\TinhCongNhanVienModel.cs" />
+    <Compile Include="DataAccess\Models\TinNhanModel.cs" />
+    <Compile Include="DataAccess\Models\TinNhanPhanHoiModel.cs" />
+    <Compile Include="DataAccess\Models\ToNhomModel.cs" />
+    <Compile Include="DataAccess\Models\ToNhom_KeHoachModel.cs" />
+    <Compile Include="DataAccess\Models\TuyenDoModel.cs" />
+    <Compile Include="DataAccess\Models\TuyenDo_DiemModel.cs" />
+    <Compile Include="DataAccess\Models\ViewBangCongModel.cs" />
+    <Compile Include="DataAccess\Models\XinNghiPhepModel.cs" />
+    <Compile Include="DataAccess\Models\XuPhatModel.cs" />
+    <Compile Include="DataAccess\Models\XuPhatNhanVienModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\StringHelper.cs" />
+    <Compile Include="Hubs\DiemDanhHub.cs" />
+    <Compile Include="Hubs\TinNhanHub.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule\AttLogHelper.cs" />
+    <Compile Include="Schedule\GetDuLieuMCCJob.cs" />
+    <Compile Include="Schedule\JobScheduler.cs" />
+    <Compile Include="Schedule\ProcessAutoTinhChuyen.cs" />
+    <Compile Include="Schedule\ProcessMCC.cs" />
+    <Compile Include="Schedule\ReCalcChuyenDoJob.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Common.css" />
+    <Content Include="Assets\common.js" />
+    <Content Include="Assets\custom.css" />
+    <Content Include="Assets\custom.js" />
+    <Content Include="Assets\custom.min.css" />
+    <Content Include="Assets\custom.min.js" />
+    <Content Include="Assets\kendo\jszip.min.js" />
+    <Content Include="Assets\kendo\kendo-multi-calendar.js" />
+    <Content Include="Assets\kendo\kendo-multi-calendar.min.js" />
+    <Content Include="Assets\kendo\kendo-multi-date-select.js" />
+    <Content Include="Assets\kendo\kendo-multi-date-select.min.js" />
+    <Content Include="Assets\kendo\kendo.all.min.js" />
+    <Content Include="Assets\kendo\kendo.ext.css" />
+    <Content Include="Assets\kendo\kendo.web.ext.js" />
+    <Content Include="Assets\kendo\kendo2021.all.min.js" />
+    <Content Include="Assets\kendo\styles\Black\editor.png" />
+    <Content Include="Assets\kendo\styles\Black\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Black\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Black\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Black\loading.gif" />
+    <Content Include="Assets\kendo\styles\Black\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Black\markers.png" />
+    <Content Include="Assets\kendo\styles\Black\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Black\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Black\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Black\sprite.png" />
+    <Content Include="Assets\kendo\styles\Black\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Black\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Black\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\editor.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\loading.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\markers.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\BlueOpal\sprite.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\BlueOpal\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\editor.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\loading.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\markers.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Bootstrap\sprite.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Default\editor.png" />
+    <Content Include="Assets\kendo\styles\Default\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Default\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Default\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Default\loading.gif" />
+    <Content Include="Assets\kendo\styles\Default\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Default\markers.png" />
+    <Content Include="Assets\kendo\styles\Default\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Default\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Default\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Default\sprite.png" />
+    <Content Include="Assets\kendo\styles\Default\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Default\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Default\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Fiori\editor.png" />
+    <Content Include="Assets\kendo\styles\Fiori\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Fiori\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\loading.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\markers.png" />
+    <Content Include="Assets\kendo\styles\Fiori\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Fiori\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Fiori\sprite.png" />
+    <Content Include="Assets\kendo\styles\Fiori\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Fiori\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Fiori\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Flat\editor.png" />
+    <Content Include="Assets\kendo\styles\Flat\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Flat\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Flat\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Flat\loading.gif" />
+    <Content Include="Assets\kendo\styles\Flat\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Flat\markers.png" />
+    <Content Include="Assets\kendo\styles\Flat\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Flat\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Flat\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Flat\sprite.png" />
+    <Content Include="Assets\kendo\styles\Flat\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Flat\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Flat\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Assets\kendo\styles\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Assets\kendo\styles\HighContrast\editor.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\loading.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\markers.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\HighContrast\sprite.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\HighContrast\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\images\back.png" />
+    <Content Include="Assets\kendo\styles\images\kendoui.svg" />
+    <Content Include="Assets\kendo\styles\images\kendoui.ttf" />
+    <Content Include="Assets\kendo\styles\images\kendoui.woff" />
+    <Content Include="Assets\kendo\styles\images\wp8_icons.png" />
+    <Content Include="Assets\kendo\styles\images\wp8_inverseicons.png" />
+    <Content Include="Assets\kendo\styles\kendo.black.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.black.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.black.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.black.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.blueopal.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.blueopal.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.blueopal.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.blueopal.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap-v4.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap-v4.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.bootstrap.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-bootstrap.core.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-bootstrap.core.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-bootstrap.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-bootstrap.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-fiori.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-fiori.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-material.core.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-material.core.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-material.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-material.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-nova.core.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-nova.core.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-nova.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-nova.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common-office365.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common-office365.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common.core.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common.core.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.common.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.common.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.dataviz.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.dataviz.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.default-v2.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.default-v2.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.default.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.default.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.default.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.default.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.fiori.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.fiori.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.fiori.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.fiori.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.flat.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.flat.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.flat.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.flat.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.highcontrast.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.highcontrast.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.highcontrast.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.highcontrast.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.material.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.material.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.material.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.material.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.materialblack.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.materialblack.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.materialblack.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.materialblack.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.metro.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.metro.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.metro.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.metro.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.metroblack.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.metroblack.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.metroblack.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.metroblack.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.all.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.all.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.android.dark.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.android.dark.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.android.light.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.android.light.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.blackberry.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.blackberry.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.common.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.common.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.fiori.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.fiori.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.flat.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.flat.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.ios.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.ios.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.material.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.material.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.meego.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.meego.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.nova.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.nova.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.office365.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.office365.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.wp8.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.mobile.wp8.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.moonlight.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.moonlight.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.moonlight.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.moonlight.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.nova.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.nova.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.nova.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.nova.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.office365.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.office365.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.office365.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.office365.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.rtl.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.rtl.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.silver.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.silver.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.silver.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.silver.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.uniform.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.uniform.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo.uniform.mobile.min.css" />
+    <Content Include="Assets\kendo\styles\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Assets\kendo\styles\kendo2021.default-main.min.css" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\editor.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\loading.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\markers.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\sprite.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\MaterialBlack\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Material\editor.png" />
+    <Content Include="Assets\kendo\styles\Material\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Material\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Material\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Material\loading.gif" />
+    <Content Include="Assets\kendo\styles\Material\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Material\markers.png" />
+    <Content Include="Assets\kendo\styles\Material\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Material\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Material\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Material\sprite.png" />
+    <Content Include="Assets\kendo\styles\Material\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Material\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Material\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\editor.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\loading.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\markers.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\MetroBlack\sprite.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\MetroBlack\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Metro\editor.png" />
+    <Content Include="Assets\kendo\styles\Metro\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Metro\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Metro\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Metro\loading.gif" />
+    <Content Include="Assets\kendo\styles\Metro\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Metro\markers.png" />
+    <Content Include="Assets\kendo\styles\Metro\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Metro\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Metro\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Metro\sprite.png" />
+    <Content Include="Assets\kendo\styles\Metro\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Metro\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Metro\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\editor.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\loading.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\markers.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Moonlight\sprite.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Moonlight\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Nova\editor.png" />
+    <Content Include="Assets\kendo\styles\Nova\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Nova\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Nova\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Nova\loading.gif" />
+    <Content Include="Assets\kendo\styles\Nova\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Nova\markers.png" />
+    <Content Include="Assets\kendo\styles\Nova\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Nova\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Nova\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Nova\sprite.png" />
+    <Content Include="Assets\kendo\styles\Nova\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Nova\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Nova\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Office365\editor.png" />
+    <Content Include="Assets\kendo\styles\Office365\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Office365\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Office365\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Office365\loading.gif" />
+    <Content Include="Assets\kendo\styles\Office365\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Office365\markers.png" />
+    <Content Include="Assets\kendo\styles\Office365\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Office365\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Office365\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Office365\sprite.png" />
+    <Content Include="Assets\kendo\styles\Office365\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Office365\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Office365\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\Silver\editor.png" />
+    <Content Include="Assets\kendo\styles\Silver\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Silver\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Silver\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Silver\loading.gif" />
+    <Content Include="Assets\kendo\styles\Silver\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Silver\markers.png" />
+    <Content Include="Assets\kendo\styles\Silver\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Silver\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Silver\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Silver\sprite.png" />
+    <Content Include="Assets\kendo\styles\Silver\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Silver\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Silver\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\styles\textures\brushed-metal.png" />
+    <Content Include="Assets\kendo\styles\textures\dots1.png" />
+    <Content Include="Assets\kendo\styles\textures\dots10.png" />
+    <Content Include="Assets\kendo\styles\textures\dots11.png" />
+    <Content Include="Assets\kendo\styles\textures\dots12.png" />
+    <Content Include="Assets\kendo\styles\textures\dots13.png" />
+    <Content Include="Assets\kendo\styles\textures\dots2.png" />
+    <Content Include="Assets\kendo\styles\textures\dots3.png" />
+    <Content Include="Assets\kendo\styles\textures\dots4.png" />
+    <Content Include="Assets\kendo\styles\textures\dots5.png" />
+    <Content Include="Assets\kendo\styles\textures\dots6.png" />
+    <Content Include="Assets\kendo\styles\textures\dots7.png" />
+    <Content Include="Assets\kendo\styles\textures\dots8.png" />
+    <Content Include="Assets\kendo\styles\textures\dots9.png" />
+    <Content Include="Assets\kendo\styles\textures\glass-lighter.png" />
+    <Content Include="Assets\kendo\styles\textures\glass.png" />
+    <Content Include="Assets\kendo\styles\textures\highlight.png" />
+    <Content Include="Assets\kendo\styles\textures\hsv-gradient.png" />
+    <Content Include="Assets\kendo\styles\textures\hue.png" />
+    <Content Include="Assets\kendo\styles\textures\leather1.png" />
+    <Content Include="Assets\kendo\styles\textures\leather2.png" />
+    <Content Include="Assets\kendo\styles\textures\noise.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe1.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe2.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe3.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe4.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe5.png" />
+    <Content Include="Assets\kendo\styles\textures\stripe6.png" />
+    <Content Include="Assets\kendo\styles\textures\transparency.png" />
+    <Content Include="Assets\kendo\styles\textures\transtexture.png" />
+    <Content Include="Assets\kendo\styles\Uniform\editor.png" />
+    <Content Include="Assets\kendo\styles\Uniform\imagebrowser.png" />
+    <Content Include="Assets\kendo\styles\Uniform\indeterminate.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\loading-image.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\loading.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\loading_2x.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\markers.png" />
+    <Content Include="Assets\kendo\styles\Uniform\markers_2x.png" />
+    <Content Include="Assets\kendo\styles\Uniform\slider-h.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\slider-v.gif" />
+    <Content Include="Assets\kendo\styles\Uniform\sprite.png" />
+    <Content Include="Assets\kendo\styles\Uniform\sprite_2x.png" />
+    <Content Include="Assets\kendo\styles\Uniform\sprite_kpi.png" />
+    <Content Include="Assets\kendo\styles\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Assets\serviceAccount.json" />
+    <Content Include="Assets\stringeeConfig.js" />
+    <Content Include="Assets\tracuulichhoc.css" />
+    <Content Include="Assets\vendors\bootstrap\.bower.json" />
+    <Content Include="Assets\vendors\bootstrap\bower.json" />
+    <Content Include="Assets\vendors\bootstrap\CHANGELOG.md" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Assets\vendors\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\vendors\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\vendors\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Assets\vendors\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Assets\vendors\bootstrap\dist\js\npm.js" />
+    <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\vendors\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Assets\vendors\bootstrap\Gruntfile.js" />
+    <Content Include="Assets\vendors\bootstrap\grunt\.jshintrc" />
+    <Content Include="Assets\vendors\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Assets\vendors\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Assets\vendors\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Assets\vendors\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Assets\vendors\bootstrap\grunt\configBridge.json" />
+    <Content Include="Assets\vendors\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="Assets\vendors\bootstrap\js\.jscsrc" />
+    <Content Include="Assets\vendors\bootstrap\js\.jshintrc" />
+    <Content Include="Assets\vendors\bootstrap\js\affix.js" />
+    <Content Include="Assets\vendors\bootstrap\js\alert.js" />
+    <Content Include="Assets\vendors\bootstrap\js\button.js" />
+    <Content Include="Assets\vendors\bootstrap\js\carousel.js" />
+    <Content Include="Assets\vendors\bootstrap\js\collapse.js" />
+    <Content Include="Assets\vendors\bootstrap\js\dropdown.js" />
+    <Content Include="Assets\vendors\bootstrap\js\modal.js" />
+    <Content Include="Assets\vendors\bootstrap\js\popover.js" />
+    <Content Include="Assets\vendors\bootstrap\js\scrollspy.js" />
+    <Content Include="Assets\vendors\bootstrap\js\tab.js" />
+    <Content Include="Assets\vendors\bootstrap\js\tooltip.js" />
+    <Content Include="Assets\vendors\bootstrap\js\transition.js" />
+    <Content Include="Assets\vendors\bootstrap\less\.csscomb.json" />
+    <Content Include="Assets\vendors\bootstrap\less\.csslintrc" />
+    <Content Include="Assets\vendors\bootstrap\less\alerts.less" />
+    <Content Include="Assets\vendors\bootstrap\less\badges.less" />
+    <Content Include="Assets\vendors\bootstrap\less\bootstrap.less" />
+    <Content Include="Assets\vendors\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Assets\vendors\bootstrap\less\button-groups.less" />
+    <Content Include="Assets\vendors\bootstrap\less\buttons.less" />
+    <Content Include="Assets\vendors\bootstrap\less\carousel.less" />
+    <Content Include="Assets\vendors\bootstrap\less\close.less" />
+    <Content Include="Assets\vendors\bootstrap\less\code.less" />
+    <Content Include="Assets\vendors\bootstrap\less\component-animations.less" />
+    <Content Include="Assets\vendors\bootstrap\less\dropdowns.less" />
+    <Content Include="Assets\vendors\bootstrap\less\forms.less" />
+    <Content Include="Assets\vendors\bootstrap\less\glyphicons.less" />
+    <Content Include="Assets\vendors\bootstrap\less\grid.less" />
+    <Content Include="Assets\vendors\bootstrap\less\input-groups.less" />
+    <Content Include="Assets\vendors\bootstrap\less\jumbotron.less" />
+    <Content Include="Assets\vendors\bootstrap\less\labels.less" />
+    <Content Include="Assets\vendors\bootstrap\less\list-group.less" />
+    <Content Include="Assets\vendors\bootstrap\less\media.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\forms.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\grid.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\image.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\labels.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\panels.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\resize.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\size.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Assets\vendors\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Assets\vendors\bootstrap\less\modals.less" />
+    <Content Include="Assets\vendors\bootstrap\less\navbar.less" />
+    <Content Include="Assets\vendors\bootstrap\less\navs.less" />
+    <Content Include="Assets\vendors\bootstrap\less\normalize.less" />
+    <Content Include="Assets\vendors\bootstrap\less\pager.less" />
+    <Content Include="Assets\vendors\bootstrap\less\pagination.less" />
+    <Content Include="Assets\vendors\bootstrap\less\panels.less" />
+    <Content Include="Assets\vendors\bootstrap\less\popovers.less" />
+    <Content Include="Assets\vendors\bootstrap\less\print.less" />
+    <Content Include="Assets\vendors\bootstrap\less\progress-bars.less" />
+    <Content Include="Assets\vendors\bootstrap\less\responsive-embed.less" />
+    <Content Include="Assets\vendors\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Assets\vendors\bootstrap\less\scaffolding.less" />
+    <Content Include="Assets\vendors\bootstrap\less\tables.less" />
+    <Content Include="Assets\vendors\bootstrap\less\theme.less" />
+    <Content Include="Assets\vendors\bootstrap\less\thumbnails.less" />
+    <Content Include="Assets\vendors\bootstrap\less\tooltip.less" />
+    <Content Include="Assets\vendors\bootstrap\less\type.less" />
+    <Content Include="Assets\vendors\bootstrap\less\utilities.less" />
+    <Content Include="Assets\vendors\bootstrap\less\variables.less" />
+    <Content Include="Assets\vendors\bootstrap\less\wells.less" />
+    <Content Include="Assets\vendors\bootstrap\LICENSE" />
+    <Content Include="Assets\vendors\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Assets\vendors\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Assets\vendors\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Assets\vendors\bootstrap\package.js" />
+    <Content Include="Assets\vendors\bootstrap\package.json" />
+    <Content Include="Assets\vendors\bootstrap\README.md" />
+    <Content Include="Assets\vendors\font-awesome\.bower.json" />
+    <Content Include="Assets\vendors\font-awesome\.gitignore" />
+    <Content Include="Assets\vendors\font-awesome\.npmignore" />
+    <Content Include="Assets\vendors\font-awesome\bower.json" />
+    <Content Include="Assets\vendors\font-awesome\css\font-awesome.css" />
+    <Content Include="Assets\vendors\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Assets\vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Assets\vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\vendors\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Assets\vendors\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Assets\vendors\font-awesome\less\animated.less" />
+    <Content Include="Assets\vendors\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Assets\vendors\font-awesome\less\core.less" />
+    <Content Include="Assets\vendors\font-awesome\less\fixed-width.less" />
+    <Content Include="Assets\vendors\font-awesome\less\font-awesome.less" />
+    <Content Include="Assets\vendors\font-awesome\less\icons.less" />
+    <Content Include="Assets\vendors\font-awesome\less\larger.less" />
+    <Content Include="Assets\vendors\font-awesome\less\list.less" />
+    <Content Include="Assets\vendors\font-awesome\less\mixins.less" />
+    <Content Include="Assets\vendors\font-awesome\less\path.less" />
+    <Content Include="Assets\vendors\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Assets\vendors\font-awesome\less\screen-reader.less" />
+    <Content Include="Assets\vendors\font-awesome\less\stacked.less" />
+    <Content Include="Assets\vendors\font-awesome\less\variables.less" />
+    <Content Include="Assets\vendors\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_animated.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_core.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_icons.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_larger.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_list.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_mixins.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_path.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_stacked.scss" />
+    <Content Include="Assets\vendors\font-awesome\scss\_variables.scss" />
+    <Content Include="Assets\xlsx.js" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\FirebaseAdmin.dll" />
+    <Content Include="bin\FirebaseAdmin.xml" />
+    <Content Include="bin\Google.Api.Gax.dll" />
+    <Content Include="bin\Google.Api.Gax.pdb" />
+    <Content Include="bin\Google.Api.Gax.Rest.dll" />
+    <Content Include="bin\Google.Api.Gax.Rest.pdb" />
+    <Content Include="bin\Google.Api.Gax.Rest.xml" />
+    <Content Include="bin\Google.Api.Gax.xml" />
+    <Content Include="bin\Google.Apis.Auth.dll" />
+    <Content Include="bin\Google.Apis.Auth.pdb" />
+    <Content Include="bin\Google.Apis.Auth.PlatformServices.dll" />
+    <Content Include="bin\Google.Apis.Auth.xml" />
+    <Content Include="bin\Google.Apis.Core.dll" />
+    <Content Include="bin\Google.Apis.Core.pdb" />
+    <Content Include="bin\Google.Apis.Core.xml" />
+    <Content Include="bin\Google.Apis.dll" />
+    <Content Include="bin\Google.Apis.pdb" />
+    <Content Include="bin\Google.Apis.PlatformServices.dll" />
+    <Content Include="bin\Google.Apis.xml" />
+    <Content Include="bin\HRM_TrangAn.pdb" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.pdb" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.xml" />
+    <Content Include="bin\Interop.zkemkeeper.dll" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\log4net.xml" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.Core.pdb" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.Core.xml" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.pdb" />
+    <Content Include="bin\Microsoft.AspNet.SignalR.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.JsonWebTokens.xml" />
+    <Content Include="bin\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.Logging.xml" />
+    <Content Include="bin\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.Tokens.xml" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.xml" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.xml" />
+    <Content Include="bin\Microsoft.Owin.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\NPOI.dll" />
+    <Content Include="bin\NPOI.OOXML.dll" />
+    <Content Include="bin\NPOI.OOXML.xml" />
+    <Content Include="bin\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\NPOI.xml" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\Quartz.dll" />
+    <Content Include="bin\Quartz.pdb" />
+    <Content Include="bin\Quartz.xml" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\SuperSocket.Common.dll" />
+    <Content Include="bin\SuperSocket.Facility.dll" />
+    <Content Include="bin\SuperSocket.SocketBase.dll" />
+    <Content Include="bin\SuperSocket.SocketEngine.dll" />
+    <Content Include="bin\SuperWebSocket.dll" />
+    <Content Include="bin\System.Collections.Immutable.dll" />
+    <Content Include="bin\System.Collections.Immutable.xml" />
+    <Content Include="bin\System.IdentityModel.Tokens.Jwt.dll" />
+    <Content Include="bin\System.IdentityModel.Tokens.Jwt.xml" />
+    <Content Include="bin\System.Interactive.Async.dll" />
+    <Content Include="bin\System.Interactive.Async.xml" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Cors.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Http.Cors.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.xml" />
+    <Content Include="bin\System.Web.Http.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Icons\icon-128x128.png" />
+    <Content Include="Content\Icons\icon-144x144.png" />
+    <Content Include="Content\Icons\icon-152x152.png" />
+    <Content Include="Content\Icons\icon-16x16.png" />
+    <Content Include="Content\Icons\icon-180x180.png" />
+    <Content Include="Content\Icons\icon-192x192.png" />
+    <Content Include="Content\Icons\icon-256x256.png" />
+    <Content Include="Content\Icons\icon-48x48.png" />
+    <Content Include="Content\Icons\icon-512x512.png" />
+    <Content Include="Content\Icons\icon-64x64.png" />
+    <Content Include="Content\Icons\icon-72x72.png" />
+    <Content Include="Content\Icons\icon-96x96.png" />
+    <Content Include="Content\inthe.css" />
+    <Content Include="Content\intheA3.css" />
+    <Content Include="Content\intheA4.css" />
+    <Content Include="Content\intheA5.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\thitracnghiem.css" />
+    <Content Include="firebase-messaging-sw.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\13X21_1.png" />
+    <Content Include="Images\13X21_2.png" />
+    <Content Include="Images\13X21_3.png" />
+    <Content Include="Images\AnhCauHoi\0e692ac5aa0e5950001f.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523110834637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523113600637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523114215637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523114325637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523114523637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523114756637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523114912637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523115003637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210523115128637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210524124437637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210524124455sơn.png" />
+    <Content Include="Images\AnhCauHoi\20210530123623637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210530124248637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210530124319637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210530124417637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\20210530124724637477396625796505.jpg" />
+    <Content Include="Images\AnhCauHoi\23dd49622e6cdb32827d.jpg" />
+    <Content Include="Images\AnhCauHoi\2c9cecb6757d8623df6c.jpg" />
+    <Content Include="Images\AnhCauHoi\688f2023a0e853b60af9.jpg" />
+    <Content Include="Images\AnhDapAn\1262.png" />
+    <Content Include="Images\AnhDapAn\1273.png" />
+    <Content Include="Images\AnhDapAn\2132.png" />
+    <Content Include="Images\AnhDapAn\23dd49622e6cdb32827d.jpg" />
+    <Content Include="Images\AnhDapAn\2847.png" />
+    <Content Include="Images\anhthehs.jpg" />
+    <Content Include="Images\anhthehs2.jpg" />
+    <Content Include="Images\AnhThongBao\logo-removebg-preview.png" />
+    <Content Include="Images\app1.jpg" />
+    <Content Include="Images\app2.jpg" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\bbg.jpg" />
+    <Content Include="Images\computer-folder-icon.jpg" />
+    <Content Include="Images\docicon.png" />
+    <Content Include="Images\img.jpg" />
+    <Content Include="Images\img.png" />
+    <Content Include="Images\KhaoSatImage.jpg" />
+    <Content Include="Images\khung.png" />
+    <Content Include="Images\logodh.jpg" />
+    <Content Include="Images\logodh.png" />
+    <Content Include="Images\logodh2.png" />
+    <Content Include="Images\logo_trangan.jpg" />
+    <Content Include="Images\logo_trangan.png" />
+    <Content Include="Images\logo_trangan_white.jpg" />
+    <Content Include="Images\logo_trangan_white.png" />
+    <Content Include="Images\logo_trangan_white2.png" />
+    <Content Include="Images\matsau.png" />
+    <Content Include="Images\matsau11.png" />
+    <Content Include="Images\mattruoc.png" />
+    <Content Include="Images\mattruoc11.png" />
+    <Content Include="Images\new-folder-add.png" />
+    <Content Include="Images\pdficon.png" />
+    <Content Include="Images\sms.png" />
+    <Content Include="Images\Thelaido.png" />
+    <Content Include="Images\Thelaido_matsau.png" />
+    <Content Include="Images\Thenvvp.png" />
+    <Content Include="Images\user_image.png" />
+    <Content Include="Images\xlsicon.png" />
+    <Content Include="img_OX2_icon.ico" />
+    <Content Include="log4net.config" />
+    <Content Include="bin\HRM_TrangAn.dll.config" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Content\UserFiles\1\Files\Documents\baogiavanhanh.xlsx" />
+    <Content Include="manifest.json" />
+    <Content Include="Logs\logs.log" />
+    <Content Include="Logs\logs.log.2024-12-09" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\HRM_Tran.43F9473A.Up2Date" />
+    <Content Include="obj\Debug\HRM_TrangAn.csproj.AssemblyReference.cache" />
+    <Content Include="obj\Debug\HRM_TrangAn.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\HRM_TrangAn.csproj.ResolveComReference.cache" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="obj\Debug\HRM_TrangAn.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\HRM_TrangAn.dll" />
+    <Content Include="obj\Debug\HRM_TrangAn.pdb" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\js\bangcong.js" />
+    <Content Include="Scripts\js\bangcongnhanvien.js" />
+    <Content Include="Scripts\js\bangluongnhanvien.js" />
+    <Content Include="Scripts\js\baocao_js\baocaobiendongnhansu.js" />
+    <Content Include="Scripts\js\baocao_js\baocaochamcong.js" />
+    <Content Include="Scripts\js\baocao_js\baocaochitietchamcong.js" />
+    <Content Include="Scripts\js\baocao_js\baocaochotcong.js" />
+    <Content Include="Scripts\js\baocao_js\baocaochuyendonhaptay.js" />
+    <Content Include="Scripts\js\baocao_js\baocaocongtheodanhmuccongviec.js" />
+    <Content Include="Scripts\js\baocao_js\baocaodoanhthubanphieu.js" />
+    <Content Include="Scripts\js\baocao_js\baocaohocsinhnophieu.js" />
+    <Content Include="Scripts\js\baocao_js\baocaokehoachcongviec.js" />
+    <Content Include="Scripts\js\baocao_js\baocaolaodongcuatotrongthang.js" />
+    <Content Include="Scripts\js\baocao_js\baocaolichtrinh.js" />
+    <Content Include="Scripts\js\baocao_js\baocaoluongticketheoto.js" />
+    <Content Include="Scripts\js\baocao_js\baocaotickecuacactotrongthang.js" />
+    <Content Include="Scripts\js\baocao_js\baocaotickecuatotrongthang.js" />
+    <Content Include="Scripts\js\baocao_js\baocaotickenam.js" />
+    <Content Include="Scripts\js\baocao_js\baocaotuyendotheochuyen.js" />
+    <Content Include="Scripts\js\baocao_js\baocaoxuphattheodanhmucvipham.js" />
+    <Content Include="Scripts\js\baocao_js\bieudodiem.js" />
+    <Content Include="Scripts\js\baocao_js\bieudodiemtrungbinhtheolop.js" />
+    <Content Include="Scripts\js\baocao_js\thongkebuoihoctheogiaovien.js" />
+    <Content Include="Scripts\js\baocao_js\thongkebuoihocthohocsinh.js" />
+    <Content Include="Scripts\js\baocao_js\thongkephieuhoctheohocsinh.js" />
+    <Content Include="Scripts\js\calamviec.js" />
+    <Content Include="Scripts\js\calamviecnhanvien.js" />
+    <Content Include="Scripts\js\cauhinhthuongdanhgia.js" />
+    <Content Include="Scripts\js\chinhsachluongnhanvien.js" />
+    <Content Include="Scripts\js\dangkylichnghi.js" />
+    <Content Include="Scripts\js\danhmucchinhsachluong.js" />
+    <Content Include="Scripts\js\danhmuccongviec.js" />
+    <Content Include="Scripts\js\danhmuccongviecthuekhoan.js" />
+    <Content Include="Scripts\js\danhmucdiemquetthe.js" />
+    <Content Include="Scripts\js\danhmucloi.js" />
+    <Content Include="Scripts\js\danhmucngayle.js" />
+    <Content Include="Scripts\js\danhmucnguoigiamsat.js" />
+    <Content Include="Scripts\js\danhmucnguoilaodong.js" />
+    <Content Include="Scripts\js\danhmucthuyendo.js" />
+    <Content Include="Scripts\js\danhsachdethitheohocsinh.js" />
+    <Content Include="Scripts\js\danhsachhocsinhtheogiaovien.js" />
+    <Content Include="Scripts\js\danhsachlophoconline.js" />
+    <Content Include="Scripts\js\diemdanh.js" />
+    <Content Include="Scripts\js\doanhsoluongkhach.js" />
+    <Content Include="Scripts\js\home.js" />
+    <Content Include="Scripts\js\hosonhansu.js" />
+    <Content Include="Scripts\js\khocauhoi.js" />
+    <Content Include="Scripts\js\khodethi.js" />
+    <Content Include="Scripts\js\lichsubaohiemxahoi.js" />
+    <Content Include="Scripts\js\lichsukenoimcc.js" />
+    <Content Include="Scripts\js\lop.js" />
+    <Content Include="Scripts\js\maychamcong.js" />
+    <Content Include="Scripts\js\noidungphucap.js" />
+    <Content Include="Scripts\js\phancongcongviec.js" />
+    <Content Include="Scripts\js\phancongcongviectotruong.js" />
+    <Content Include="Scripts\js\phieugiaoviec.js" />
+    <Content Include="Scripts\js\phieuhoc.js" />
+    <Content Include="Scripts\js\phieuthu.js" />
+    <Content Include="Scripts\js\phongban.js" />
+    <Content Include="Scripts\js\quanlybangluong.js" />
+    <Content Include="Scripts\js\quanlychucdanh.js" />
+    <Content Include="Scripts\js\quanlychuyencong.js" />
+    <Content Include="Scripts\js\quanlychuyento.js" />
+    <Content Include="Scripts\js\quanlycong.js" />
+    <Content Include="Scripts\js\quanlycongtinhtien.js" />
+    <Content Include="Scripts\js\quanlydanhgiadiem.js" />
+    <Content Include="Scripts\js\quanlydanhgialaido.js" />
+    <Content Include="Scripts\js\quanlydimuonvesom.js" />
+    <Content Include="Scripts\js\quanlydonsuachuathuyen.js" />
+    <Content Include="Scripts\js\quanlydulieudiemdanh.js" />
+    <Content Include="Scripts\js\quanlyinthe.js" />
+    <Content Include="Scripts\js\quanlylichnghi.js" />
+    <Content Include="Scripts\js\quanlynghiphepnam.js" />
+    <Content Include="Scripts\js\quanlyphatsinh.js" />
+    <Content Include="Scripts\js\quanlyphucap.js" />
+    <Content Include="Scripts\js\quanlytailieu.js" />
+    <Content Include="Scripts\js\quanlythongbaoapp.js" />
+    <Content Include="Scripts\js\quanlyticket.js" />
+    <Content Include="Scripts\js\quanlyticket2.js" />
+    <Content Include="Scripts\js\quanlytonhom.js" />
+    <Content Include="Scripts\js\quanlytuyendo.js" />
+    <Content Include="Scripts\js\quanlyxuphat.js" />
+    <Content Include="Scripts\js\quanlyxuphatnhanvien.js" />
+    <Content Include="Scripts\js\room.js" />
+    <Content Include="Scripts\js\thongtinbaohiem.js" />
+    <Content Include="Scripts\js\thongtincongty.js" />
+    <Content Include="Scripts\js\thuongdanhgia.js" />
+    <Content Include="Scripts\js\tinnhan.js" />
+    <Content Include="Scripts\js\tinnhanphuhuynh.js" />
+    <Content Include="Scripts\js\xacnhanticket.js" />
+    <Content Include="Scripts\js\xinnghiphep.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\qrcode.js" />
+    <Content Include="Scripts\qrcode.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\BangLuong\BangLuongNhanVien.cshtml" />
+    <Content Include="Views\BangLuong\Index.cshtml" />
+    <Content Include="Views\BaoCao\BangChotCong.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoBienDongNhanSu.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoChamCong.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoChiTietChamCong.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoChuyenDoNhapTay.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoChuyenDoTheoTuyen.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoCongTheoDanhMucCongViec.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoDoanhThuBanPhieu.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoForLaiDo.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoHocSinhNoPhieu.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoKeHoachCongViec.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoLaoDongCuaToTrongThang.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoLichTrinhTuyen.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoLuongTickeTheoTo.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoPhieuHocTheoHocSinh.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoSoBuoiHocTheoGiaoVien.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoTickeCuaCacToTrongThang.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoTickeCuaToTrongThang.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoTickeNam.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoXuPhatTheoDanhMucViPham.cshtml" />
+    <Content Include="Views\BaoCao\BieuDoDiem.cshtml" />
+    <Content Include="Views\BaoCao\BieuDoDiemTrungBinh_TheoLop.cshtml" />
+    <Content Include="Views\BaoCao\ThongKeBuoiHocTheoHocSinh.cshtml" />
+    <Content Include="Views\BaoHiemXaHoi_LichSu\Index.cshtml" />
+    <Content Include="Views\BaoHiem\ThongTinBaoHiemXaHoi.cshtml" />
+    <Content Include="Views\CaLamViecNhanVien\Index.cshtml" />
+    <Content Include="Views\ChamCongNhanVien\BangCong.cshtml" />
+    <Content Include="Views\ChamCongNhanVien\BangCongNhanVien.cshtml" />
+    <Content Include="Views\ChamCongNhanVien\ThongBaoBangCong.cshtml" />
+    <Content Include="Views\ChatMessage\Index.cshtml" />
+    <Content Include="Views\ChatMessage\testchat.html" />
+    <Content Include="Views\ChinhSachLuong\Index.cshtml" />
+    <Content Include="Views\CongViec\PhanCongCongViec.cshtml" />
+    <Content Include="Views\CongViec\PhanCongCongViecToTruong.cshtml" />
+    <Content Include="Views\CongViec\PhieuGiaoViec.cshtml" />
+    <Content Include="Views\DangKyLichNghi\Index.cshtml" />
+    <Content Include="Views\DangKyLichNghi\ThongBaoNSDangKyLichNghi.cshtml" />
+    <Content Include="Views\DangKy\DangKyEvent.cshtml" />
+    <Content Include="Views\DangKy\DangKyHoc.cshtml" />
+    <Content Include="Views\DanhMuc\CaLamViec.cshtml" />
+    <Content Include="Views\DanhMuc\ChinhSachLuong.cshtml" />
+    <Content Include="Views\DanhMuc\CongViec.cshtml" />
+    <Content Include="Views\DanhMuc\CongViecThueKhoan.cshtml" />
+    <Content Include="Views\DanhMuc\DanhMucLoi.cshtml" />
+    <Content Include="Views\DanhMuc\DanhMucNgayLe.cshtml" />
+    <Content Include="Views\DanhMuc\DanhMucToNhom.cshtml" />
+    <Content Include="Views\DanhMuc\DanhMucTruongHoc.cshtml" />
+    <Content Include="Views\DanhMuc\DiemQuetThe.cshtml" />
+    <Content Include="Views\DanhMuc\DoanhSo_LuongKhach.cshtml" />
+    <Content Include="Views\DanhMuc\NguoiGiamSat.cshtml" />
+    <Content Include="Views\DanhMuc\NguoiLaoDong.cshtml" />
+    <Content Include="Views\DanhMuc\NoiDungPhuCap.cshtml" />
+    <Content Include="Views\DanhMuc\ThuyenDo.cshtml" />
+    <Content Include="Views\DiemDanh\Index.cshtml" />
+    <Content Include="Views\DiemDanh\QuanLyDuLieuDiemDanh.cshtml" />
+    <Content Include="Views\FileManager\Index.cshtml" />
+    <Content Include="Views\HocSinh\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexHS.cshtml" />
+    <Content Include="Views\HoSoNhanSu\Index.cshtml" />
+    <Content Include="Views\HoTro\DanhGiaThanhCong.cshtml" />
+    <Content Include="Views\HoTro\FormDanhGiaLaiDo.cshtml" />
+    <Content Include="Views\HoTro\GiaoVan.cshtml" />
+    <Content Include="Views\HoTro\HoTroDuongDe.cshtml" />
+    <Content Include="Views\HoTro\HoTroDuongDev2.cshtml" />
+    <Content Include="Views\HoTro\HoTroDuongDev3.cshtml" />
+    <Content Include="Views\HoTro\InTheA3.cshtml" />
+    <Content Include="Views\HoTro\InTheA4.cshtml" />
+    <Content Include="Views\HoTro\InTheA5.cshtml" />
+    <Content Include="Views\HoTro\QRCodeScanResult.cshtml" />
+    <Content Include="Views\HoTro\RatingLaiDo.cshtml" />
+    <Content Include="Views\LichHoc\TraCuuLichHoc.cshtml" />
+    <Content Include="Views\LiveClass\DanhSachLopHocOnline.cshtml" />
+    <Content Include="Views\LiveClass\Room.cshtml" />
+    <Content Include="Views\LiveClass\RoomGV.cshtml" />
+    <Content Include="Views\Lop\DanhSachLopTheoGiaoVien.cshtml" />
+    <Content Include="Views\Lop\Index.cshtml" />
+    <Content Include="Views\MayChamCong\Index.cshtml" />
+    <Content Include="Views\MayChamCong\Index2.cshtml" />
+    <Content Include="Views\MayChamCong\LichSuKetNoiMCC.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyChuyenCong.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyChuyenTo.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyCong.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyCongTinhTien.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyDiMuonVeSom.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyDonSuaChuaThuyen.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyLichNghi.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyPhatSinh.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyPhuCap.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyTicket.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyTicket2.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyTuyenDo.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyXuPhat.cshtml" />
+    <Content Include="Views\NghiepVu\QuanLyXuPhatNhanVien.cshtml" />
+    <Content Include="Views\NghiepVu\XacNhanTicket.cshtml" />
+    <Content Include="Views\NghiPhepNam\QuanLyNghiPhepNam.cshtml" />
+    <Content Include="Views\NhanVien\CauHinhThuongDanhGia.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDanhGia.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyDanhGiaDiem.cshtml" />
+    <Content Include="Views\NhanVien\QuanLyInThe.cshtml" />
+    <Content Include="Views\NhanVien\ThuongDanhGia.cshtml" />
+    <Content Include="Views\PhieuHoc\Index.cshtml" />
+    <Content Include="Views\PhieuThu\Index.cshtml" />
+    <Content Include="Views\PhieuThu\InPhieu.cshtml" />
+    <Content Include="Views\PhieuThu\InPhieuTamTinh.cshtml" />
+    <Content Include="Views\PhieuThu\ThongBaoHocPhi.cshtml" />
+    <Content Include="Views\PhongBan\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\ThongBaoApp\Index.cshtml" />
+    <Content Include="Views\ThongTinCongTy\Index.cshtml" />
+    <Content Include="Views\TinNhan\Index.cshtml" />
+    <Content Include="Views\TracNghiem\DanhSachDeThiTheoHocSinh.cshtml" />
+    <Content Include="Views\TracNghiem\KhoCauHoi.cshtml" />
+    <Content Include="Views\TracNghiem\KhoDeThi.cshtml" />
+    <Content Include="Views\TuyenDo\Index.cshtml" />
+    <Content Include="Views\User\ChangePass.cshtml" />
+    <Content Include="Views\User\ChucDanh.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\TaiKhoanApp.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\XinNghiHoc\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\_references.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\ExcelTemplate\" />
+    <Folder Include="Images\AnhDiemDanh\" />
+    <Folder Include="Images\AnhHocSinh\" />
+    <Folder Include="Images\AnhNhanVien_Temp\" />
+    <Folder Include="Images\BaiKiemTra\" />
+    <Folder Include="Images\HoTro\" />
+    <Folder Include="Images\SoDoLop\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\ChuyenDo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56811</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56812/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.4.2.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
