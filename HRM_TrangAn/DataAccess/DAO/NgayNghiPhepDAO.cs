@@ -106,7 +106,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
-        public bool UpdateListNgayNghiPhep(NghiPhepNamViewModel model, int ID_NguoiSua)
+        public bool UpdateListNgayNghiPhep(NghiPhepNamViewModel model, int ID_NguoiSua, int Nam)
         {
             try
             {
@@ -119,7 +119,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                 SqlParameter[] deletePars = new SqlParameter[] {
                     new SqlParameter("ID_HoSoNhanSu",model.ID_HoSoNhanSu),
                     new SqlParameter("ListID", StringID_NNP),
-                    new SqlParameter("ID_NguoiSua", ID_NguoiSua)
+                    new SqlParameter("ID_NguoiSua", ID_NguoiSua),
+                    new SqlParameter("Nam", Nam)
                 };
                 List<TransactionModel> transistions = new List<TransactionModel>();
                 TransactionModel deleteTransaction = new TransactionModel();
