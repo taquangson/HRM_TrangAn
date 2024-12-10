@@ -62,6 +62,10 @@ HRM_TrangAn/Content/danhsachloptheogiaovien.css
 HRM_TrangAn/Content/ExcelTemplate/
 HRM_TrangAn/bin
 <<<<<<< HEAD
+=======
+HRM_TrangAn/Content
+>>>>>>> cc4d26c (commit backend NgayNghiPhep)
+<<<<<<< HEAD
 .vs/HRM_TrangAn/FileContentIndex
 .vs/HRM_TrangAn/config/applicationhost.config
 .vs/HRM_TrangAn/FileContentIndex/afac0704-5f51-4037-b37c-1fcfb1bf8b1d.vsidx
@@ -75,12 +79,18 @@ HRM_TrangAn/bin
 .vs/HRM_TrangAn/FileContentIndex/028d241f-b767-4248-bacd-990a8fa82a44.vsidx
 .vs/HRM_TrangAn/FileContentIndex/b43236f9-8cda-4acf-a3d0-f596be352669.vsidx
 .vs/HRM_TrangAn/FileContentIndex/read.lock
+<<<<<<< HEAD
 packages/Microsoft.AspNet.Cors.5.2.9
 packages/Microsoft.Net.Compilers.4.2.0
 packages/Microsoft.AspNet.WebApi.Cors.5.2.9
 packages/Microsoft.AspNet.WebApi.Core.5.2.9
 packages/Microsoft.AspNet.WebApi.Client.5.2.9
+=======
+.vs/HRM_TrangAn/bin
+>>>>>>> cc4d26c (commit backend NgayNghiPhep)
 >>>>>>> b430f12cde309334bde96f4282355a931efad2e2
 /packages
 /.vs/HRM_TrangAn
 /HRM_TrangAn/.vs
+HRM_TrangAn/HRM_TrangAn.csproj
+HRM_TrangAn/Web.config
