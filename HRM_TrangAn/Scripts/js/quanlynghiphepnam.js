@@ -193,10 +193,10 @@ $(document).ready(function () {
             record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
         },
         dataSource: {
-            data: this.ListNgayNghiPhep,
+            data: [],
             schema: {
                 model: {
-                    id: "ID_HoSoNhanSu", // Định danh
+                    ID: "ID", // Định danh
                     fields: {
                         ID_HoSoNhanSu: { type: "number" }, // Kiểu dữ liệu
                         NgayNghi: { type: "date" }
@@ -322,21 +322,30 @@ function deleteSelectedRows() {
     var gridNgayNghi = $("#gridNgayNghi").data("kendoGrid");
     var grid = $("#grid").data("kendoGrid");
     var checkedBoxes = $("#gridNgayNghi").find("input:checked");
-
-    var itemsToRemove = [];
-    checkedBoxes.each(function () {
-        var row = $(this).closest("tr"); 
-        var dataItem = gridNgayNghi.dataItem(row);
-        itemsToRemove.push(dataItem);
-    });
-    
-    itemsToRemove.forEach(function (item) {
-        gridNgayNghi.dataSource.remove(item);
-    });
-    var rows = grid.select();
-    grid.clearSelection();
-    var row = $("#grid").data("kendoGrid").table.find("[data-uid=" + $(rows[0]).attr("data-uid") + "]");
-    grid.select(row);
+    if (gridNgayNghi.select().length > 0) {
+        var items = [];
+        gridNgayNghi.select().each(function (index, item) {
+            var dataItem = gridNgayNghi.dataItem(item);
+            items.push(dataItem);
+        });
+        $.each(items, function (index, item) {
+            $('#gridNgayNghi').data("kendoGrid").dataSource.remove(item);
+            console.log(item);
+            console.log(index);
+        })
+    }
+    //checkedBoxes.each(function () {
+    //    var row = $(this).closest("tr"); 
+    //    var dataItem = gridNgayNghi.dataItem(row);
+    //    itemsToRemove.push(dataItem);
+    //});
+    //itemsToRemove.forEach(function (item) {
+    //    gridNgayNghi.dataSource.remove(item);
+    //});
+    //var rows = grid.select();
+    //grid.clearSelection();
+    //var row = $("#grid").data("kendoGrid").table.find("[data-uid=" + $(rows[0]).attr("data-uid") + "]");
+    //grid.select(row);
 }
 
 
@@ -354,7 +363,8 @@ function openEditWindow() {
         $("#TenDayDu").val(selectedItem.TenDayDu);
         $("#MaNhanVien").val(selectedItem.MaNhanVien);
 
-        var listNgayNghiPhep = selectedItem.ListNgayNghiPhep || [];
+        var listNgayNghiPhep = selectedItem.ListNgayNghiPhep;
+        console.log(listNgayNghiPhep)
         var dataSource = new kendo.data.DataSource({
             data: listNgayNghiPhep,
             schema: {
@@ -392,7 +402,7 @@ function TimKiem() {
             data: response,
             schema: {
                 model: {
-                    id: "ID",
+                    id: "ID_HoSoNhanSu",
                     fields: {
                         SoNgayNghiPhepHienTai: { type: 'number', editable: false },
                         SoNgayNghiPhepQuyDinh: { type: 'number', editable: false },
@@ -410,62 +420,62 @@ function TimKiem() {
     });
 }
 
-function LoadGridData() {
-    kendo.ui.progress($("#grid"), true);
-    $.ajax({
-        url: '/KeHoach/GetAllKeHoach',
-        type: 'GET',
-    }).done(function successCallback(r) {
-        response = JSON.parse(r);
-        for (var i = 0; i < response.length; i++) {
-            var lst1 = []
-            var lst2 = []
-            response[i].TongCong = 0;
-            response[i].CongTT = 0;
-            if (response[i].lstNhanVien) {
-                for (var j = 0; j < response[i].lstNhanVien.length; j++) {
-                    if (response[i].lstNhanVien[j].TrangThai == 0) {
-                        lst1.push(response[i].lstNhanVien[j]);
-                        response[i].TongCong = response[i].TongCong + response[i].lstNhanVien[j].Cong;
-                    } else {
-                        lst2.push(response[i].lstNhanVien[j]);
-                        response[i].CongTT = response[i].CongTT + response[i].lstNhanVien[j].Cong;
-                    }
-                }
-            }
-            response[i].SlgDK = lst1.length > response[i].SoNguoiDuKien ? lst1.length : response[i].SoNguoiDuKien;
-            response[i].SlgTT = lst2.length;
-            response[i].SlgCL = response[i].SlgTT - response[i].SlgDK;
-            response[i].CongCL = response[i].TongCong - response[i].CongTT;
-            var strTo = "";
-            var strMa = "";
+//function LoadGridData() {
+//    kendo.ui.progress($("#grid"), true);
+//    $.ajax({
+//        url: '/KeHoach/GetAllKeHoach',
+//        type: 'GET',
+//    }).done(function successCallback(r) {
+//        response = JSON.parse(r);
+//        for (var i = 0; i < response.length; i++) {
+//            var lst1 = []
+//            var lst2 = []
+//            response[i].TongCong = 0;
+//            response[i].CongTT = 0;
+//            if (response[i].lstNhanVien) {
+//                for (var j = 0; j < response[i].lstNhanVien.length; j++) {
+//                    if (response[i].lstNhanVien[j].TrangThai == 0) {
+//                        lst1.push(response[i].lstNhanVien[j]);
+//                        response[i].TongCong = response[i].TongCong + response[i].lstNhanVien[j].Cong;
+//                    } else {
+//                        lst2.push(response[i].lstNhanVien[j]);
+//                        response[i].CongTT = response[i].CongTT + response[i].lstNhanVien[j].Cong;
+//                    }
+//                }
+//            }
+//            response[i].SlgDK = lst1.length > response[i].SoNguoiDuKien ? lst1.length : response[i].SoNguoiDuKien;
+//            response[i].SlgTT = lst2.length;
+//            response[i].SlgCL = response[i].SlgTT - response[i].SlgDK;
+//            response[i].CongCL = response[i].TongCong - response[i].CongTT;
+//            var strTo = "";
+//            var strMa = "";
 
 
-        }
+//        }
 
-        var dataSource = new kendo.data.DataSource({
-            data: response,
-            schema: {
-                model: {
-                    id: "ID",
-                    fields: {
-                        NgayLamViec: { type: 'date', editable: false },
-                        NgayTao: { type: 'date', editable: false },
-                        ThoiGianBatDauDuKien: { type: 'date', editable: false },
-                        ThoiGianKetThucDuKien: { type: 'date', editable: false },
-                        ThoiGianBatDauThucTe: { type: 'date', editable: false },
-                        ThoiGianKetThucThucTe: { type: 'date', editable: false },
-                    }
-                }
-            },
-            pageSize: 20,
-        });
-        $("#grid").data("kendoGrid").setDataSource(dataSource);
+//        var dataSource = new kendo.data.DataSource({
+//            data: response,
+//            schema: {
+//                model: {
+//                    id: "ID",
+//                    fields: {
+//                        NgayLamViec: { type: 'date', editable: false },
+//                        NgayTao: { type: 'date', editable: false },
+//                        ThoiGianBatDauDuKien: { type: 'date', editable: false },
+//                        ThoiGianKetThucDuKien: { type: 'date', editable: false },
+//                        ThoiGianBatDauThucTe: { type: 'date', editable: false },
+//                        ThoiGianKetThucThucTe: { type: 'date', editable: false },
+//                    }
+//                }
+//            },
+//            pageSize: 20,
+//        });
+//        $("#grid").data("kendoGrid").setDataSource(dataSource);
 
-        kendo.ui.progress($("#grid"), false);
+//        kendo.ui.progress($("#grid"), false);
 
-    });
-}
+//    });
+//}
 
 /*function ThemMoi() {
     Huy();
@@ -607,8 +617,21 @@ function XoaDuLieu(bangDuLieu) {
 
 function detailNghiPhepNamInit(e) {
     var detailRow = e.detailRow;
+    var listNgayNghiPhep = [];
+    $.each(e.data.ListNgayNghiPhep, function (index, item) {
+        listNgayNghiPhep.push({
+            ID: item.ID,
+            ID_HoSoNhanSu: item.ID_HoSoNhanSu,
+            ID_NguoiSua: item.ID_NguoiSua,
+            ID_NguoiTao: item.ID_NguoiTao,
+            NgayNghi: item.NgayNghi,
+            NgayTao: item.NgayTao,
+            TrangThai: item.TrangThai,
+            GhiChu: item.GhiChu
+        })
+    })
     var dataSource = new kendo.data.DataSource({
-        data: e.data.ListNgayNghiPhep,
+        data: listNgayNghiPhep,
         schema: {
             model: {
                 fields: {

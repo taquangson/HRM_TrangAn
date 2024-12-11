@@ -133,7 +133,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                         new SqlParameter("ID", item.ID),
                         new SqlParameter("NgayNghi", item.NgayNghi),
                         new SqlParameter("ID_HoSoNhanSu", item.ID_HoSoNhanSu),
-                        new SqlParameter("GhiChu", item.GhiChu),
+                        new SqlParameter("GhiChu", (item.GhiChu == null) ? (object)DBNull.Value : item.GhiChu),
                         new SqlParameter("ID_NguoiTao", ID_NguoiSua),
                         new SqlParameter("ID_NguoiSua", ID_NguoiSua),
                     };
