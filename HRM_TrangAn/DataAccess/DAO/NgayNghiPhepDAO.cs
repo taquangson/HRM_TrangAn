@@ -82,7 +82,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@Nam", Nam)
                 };
                 List<NghiPhepNamViewModel> result = new List<NghiPhepNamViewModel>();
-                DataSet ds = helper.ExecuteDataSet("sp_NgayNghiPhep_GetAll", pars);
+                DataSet ds = helper.ExecuteDataSet("sp_NgayNghiPhep_GetByNam", pars);
                 DataTable NPNVTable = ds.Tables[0];
                 DataTable NNPTable = ds.Tables[1];
                 List<NgayNghiPhepModel> listNgayNghiPhep = new List<NgayNghiPhepModel>();
@@ -101,7 +101,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             catch (Exception ex)
             {
-                log.Error("sp_NgayNghiPhep_GetAll " + ex.Message);
+                log.Error("sp_NgayNghiPhep_GetByNam " + ex.Message);
                 return new List<NghiPhepNamViewModel>();
             }
         }

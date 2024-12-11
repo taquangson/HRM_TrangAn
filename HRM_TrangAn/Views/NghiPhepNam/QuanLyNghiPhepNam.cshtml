@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="row toolBarMenu">
-    <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Tìm kiếm dữ liệu </i></button>
+    <button class="k-button bg-blue" onclick="TimKiem()"> <i class="fa fa-search"> Tìm kiếm </i></button>
     @*<button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>*@
     <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
     @*<button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy ticket</i> </button>*@
@@ -44,17 +44,17 @@
         </div>
         <div class="form-group valid" toggle-valid="TenDayDu">
             <label style="width:100%">Tên nhân viên: </label>
-            <input id="TenDayDu" type="text" class=" input" readonly />
+            <input id="TenDayDu" type="text" class="k-textbox input" readonly />
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
         <div class="form-group valid" toggle-valid="MaNhanVien">
             <label style="width:100%">Mã nhân viên: </label>
-            <input id="MaNhanVien" type="text" class=" input" readonly />
+            <input id="MaNhanVien" type="text" class="k-textbox input" readonly />
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
         <div class="form-group">
             <label>Danh sách nhân viên </label>
-            <div id="gridNghi"></div>
+            <div id="gridNgayNghi"></div>
         </div>
     </form>
 </div>
