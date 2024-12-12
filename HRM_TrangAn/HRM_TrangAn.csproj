@@ -287,6 +287,7 @@
     <Compile Include="Controllers\HoSoNhanSuController.cs" />
     <Compile Include="Controllers\HoTroController.cs" />
     <Compile Include="Controllers\NghiPhepController.cs" />
+    <Compile Include="Controllers\NghiPhepNamController.cs" />
     <Compile Include="Controllers\NguoiGiamSatController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\LichHocController.cs" />
@@ -357,6 +358,7 @@
     <Compile Include="DataAccess\DAO\DanhMucCongViecDAO.cs" />
     <Compile Include="DataAccess\DAO\MayChamCongDAO.cs" />
     <Compile Include="DataAccess\DAO\MayChamCong_DiemQuetTheDAO.cs" />
+    <Compile Include="DataAccess\DAO\NgayNghiPhepDAO.cs" />
     <Compile Include="DataAccess\DAO\NghiPhepDAO.cs" />
     <Compile Include="DataAccess\DAO\NguoiGiamSatDAO.cs" />
     <Compile Include="DataAccess\DAO\NhanVienDAO.cs" />
@@ -486,7 +488,9 @@
     <Compile Include="DataAccess\Models\MayChamCong_DiemQuetTheModel.cs" />
     <Compile Include="DataAccess\Models\MonHocModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucCongViecModel.cs" />
+    <Compile Include="DataAccess\Models\NgayNghiPhepModel.cs" />
     <Compile Include="DataAccess\Models\NghiPhepModel.cs" />
+    <Compile Include="DataAccess\Models\NghiPhepNamViewModel.cs" />
     <Compile Include="DataAccess\Models\NguoiGiamSatModel.cs" />
     <Compile Include="DataAccess\Models\NhanVienModel.cs" />
     <Compile Include="DataAccess\Models\NhanVien_BaoHiemXaHoiModel.cs" />
@@ -1282,6 +1286,7 @@
     <Content Include="Scripts\js\quanlydanhgiadiem.js" />
     <Content Include="Scripts\js\quanlydimuonvesom.js" />
     <Content Include="Scripts\js\quanlycongtinhtien.js" />
+    <Content Include="Scripts\js\quanlynghiphepnam.js" />
     <Content Include="Scripts\js\quanlyphucap.js" />
     <Content Include="Scripts\js\quanlyxuphatnhanvien.js" />
     <Content Include="Scripts\js\thongtinbaohiem.js" />
@@ -1469,6 +1474,7 @@
     <Content Include="Views\BaoCao\BaoCaoChamCong.cshtml" />
     <Content Include="Views\BaoCao\BaoCaoKeHoachCongViec.cshtml" />
     <Content Include="Views\BaoCao\BaoCaoXuPhatTheoDanhMucViPham.cshtml" />
+    <Content Include="Views\NghiPhepNam\QuanLyNghiPhepNam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
