@@ -1134,7 +1134,8 @@
                     style: "text-align: center;",
                     class: "table-header-cell"
                 }
-            }, {
+            },
+            {
                 field: "BatDauApDung",
                 title: "Thời gian bắt đầu",
                 format: "{0:dd/MM/yyyy}",
