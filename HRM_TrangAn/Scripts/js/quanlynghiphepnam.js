@@ -33,7 +33,7 @@ $(document).ready(function () {
         excelExport: function (e) {
             var columns = e.workbook.sheets[0].columns;
             var sheet = e.workbook.sheets[0];
-            sheet.title = "Danh sách ticket";
+            sheet.title = "Danh sách nghỉ phép năm";
             //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
             for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
                 var row = sheet.rows[rowIndex];
@@ -651,6 +651,35 @@ function detailNghiPhepNamInit(e) {
         filterable: {
             mode: "row",
         },
+        excel: {
+            filterable: true
+        },
+        excelExport: function (e) {
+            var columns = e.workbook.sheets[0].columns;
+            var sheet = e.workbook.sheets[0];
+            sheet.title = "Danh sách nghỉ phép năm chi tiết";
+            //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
+            for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
+                var row = sheet.rows[rowIndex];
+                var flag = false;
+                if (rowIndex == 0) {
+                    flag = true;
+                }
+                for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                    if (flag) {
+                        row.cells[cellIndex].textAlign = 'center';
+                        row.cells[cellIndex].bold = true;
+                    }
+                    row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                }
+            }
+        },
+        filterable: {
+            mode: "row",
+        },
         pageable: pageableShort,
         dataBinding: function () {
             record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
@@ -714,4 +743,15 @@ function detailNghiPhepNamInit(e) {
             },
         ]
     });
+}
+
+function XuatExcel() {
+    var grid = $('#grid').data('kendoGrid');
+
+    grid.options.excel = {
+        fileName: "NghiPhepNam.xlsx",
+        filterable: true,
+        allPages: true
+    }
+    grid.saveAsExcel();
 }
