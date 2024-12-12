@@ -127,7 +127,7 @@ $(document).ready(function () {
                 columns: [
                     {
                         field: "SoNgayNghiPhepHienTai",
-                        title: "Số ngày nghỉ quy định",
+                        title: "Số ngày nghỉ hiện tại",
                         width: "100px",
                         filterable: {
                             cell: {
@@ -148,7 +148,7 @@ $(document).ready(function () {
                     },
                     {
                         field: "SoNgayNghiPhepQuyDinh",
-                        title: "Số ngày nghỉ hiên tại",
+                        title: "Số ngày nghỉ quy định",
                         width: "100px",
                         filterable: {
                             cell: {
@@ -172,7 +172,7 @@ $(document).ready(function () {
         ]
     });
 
-    $("#gridNgayNghi").kendoGrid({
+    /*$("#gridNgayNghi").kendoGrid({
         height: function () {
             var height = $(window).height() - 435;
             return height;
@@ -281,7 +281,7 @@ $(document).ready(function () {
                 }
             },
         ]
-    });
+    });*/
 
     $("#grid").on("dblclick", "tr[role='row']", function () {
         $("#grid").data("kendoGrid").clearSelection();
@@ -307,7 +307,7 @@ $(document).ready(function () {
     $(".main_container").show();
 })
 
-function addNewRow() {
+/*function addNewRow() {
     var gridNgayNghi = $("#gridNgayNghi").data("kendoGrid");
     var grid = $("#grid").data("kendoGrid");
     
@@ -347,10 +347,10 @@ function deleteSelectedRows() {
     //var row = $("#grid").data("kendoGrid").table.find("[data-uid=" + $(rows[0]).attr("data-uid") + "]");
     //grid.select(row);
 }
+*/
 
 
-
-function openEditWindow() {
+/*function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
         openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sửa");
@@ -389,7 +389,7 @@ function openEditWindow() {
 
     }
 
-}
+}*/
 function TimKiem() {
     kendo.ui.progress($("#grid"), true);
     $.ajax({
@@ -517,7 +517,7 @@ function TimKiem() {
     return valid;
 }*/
 
-function Luu() {
+/*function Luu() {
     var gridNN = $("#gridNgayNghi").data("kendoGrid");
     var dataSourceNN = gridNN.dataSource.data();
     //var grid = $("#grid").data("kendoGrid");
@@ -613,7 +613,7 @@ function XoaDuLieu(bangDuLieu) {
             notification.show({ kValue: response.msg }, "error");
         }
     })
-}
+}*/
 
 function detailNghiPhepNamInit(e) {
     var detailRow = e.detailRow;
