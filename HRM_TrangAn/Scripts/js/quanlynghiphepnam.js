@@ -33,7 +33,7 @@ $(document).ready(function () {
         excelExport: function (e) {
             var columns = e.workbook.sheets[0].columns;
             var sheet = e.workbook.sheets[0];
-            sheet.title = "Danh sách ticket";
+            sheet.title = "Danh sách nghỉ phép năm";
             //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
             for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
                 var row = sheet.rows[rowIndex];
@@ -127,7 +127,7 @@ $(document).ready(function () {
                 columns: [
                     {
                         field: "SoNgayNghiPhepHienTai",
-                        title: "Số ngày nghỉ quy định",
+                        title: "Số ngày nghỉ hiện tại",
                         width: "100px",
                         filterable: {
                             cell: {
@@ -148,7 +148,7 @@ $(document).ready(function () {
                     },
                     {
                         field: "SoNgayNghiPhepQuyDinh",
-                        title: "Số ngày nghỉ hiên tại",
+                        title: "Số ngày nghỉ quy định",
                         width: "100px",
                         filterable: {
                             cell: {
@@ -172,7 +172,7 @@ $(document).ready(function () {
         ]
     });
 
-    $("#gridNgayNghi").kendoGrid({
+    /*$("#gridNgayNghi").kendoGrid({
         height: function () {
             var height = $(window).height() - 435;
             return height;
@@ -281,7 +281,7 @@ $(document).ready(function () {
                 }
             },
         ]
-    });
+    });*/
 
     $("#grid").on("dblclick", "tr[role='row']", function () {
         $("#grid").data("kendoGrid").clearSelection();
@@ -307,7 +307,7 @@ $(document).ready(function () {
     $(".main_container").show();
 })
 
-function addNewRow() {
+/*function addNewRow() {
     var gridNgayNghi = $("#gridNgayNghi").data("kendoGrid");
     var grid = $("#grid").data("kendoGrid");
     
@@ -347,10 +347,10 @@ function deleteSelectedRows() {
     //var row = $("#grid").data("kendoGrid").table.find("[data-uid=" + $(rows[0]).attr("data-uid") + "]");
     //grid.select(row);
 }
+*/
 
 
-
-function openEditWindow() {
+/*function openEditWindow() {
     var arr = $("#grid").data("kendoGrid").selectedKeyNames();
     if (arr.length != 1) {
         openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 bản ghi để sửa");
@@ -389,7 +389,7 @@ function openEditWindow() {
 
     }
 
-}
+}*/
 function TimKiem() {
     kendo.ui.progress($("#grid"), true);
     $.ajax({
@@ -517,7 +517,7 @@ function TimKiem() {
     return valid;
 }*/
 
-function Luu() {
+/*function Luu() {
     var gridNN = $("#gridNgayNghi").data("kendoGrid");
     var dataSourceNN = gridNN.dataSource.data();
     //var grid = $("#grid").data("kendoGrid");
@@ -613,7 +613,7 @@ function XoaDuLieu(bangDuLieu) {
             notification.show({ kValue: response.msg }, "error");
         }
     })
-}
+}*/
 
 function detailNghiPhepNamInit(e) {
     var detailRow = e.detailRow;
@@ -648,6 +648,35 @@ function detailNghiPhepNamInit(e) {
         autoFitColumn: true,
         resizable: true,
         sortable: true,
+        filterable: {
+            mode: "row",
+        },
+        excel: {
+            filterable: true
+        },
+        excelExport: function (e) {
+            var columns = e.workbook.sheets[0].columns;
+            var sheet = e.workbook.sheets[0];
+            sheet.title = "Danh sách nghỉ phép năm chi tiết";
+            //"từ" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "dd/MM/yyyy") + " đến " + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "dd/MM/yyyy");
+            for (var rowIndex = 0; rowIndex < sheet.rows.length; rowIndex++) {
+                var row = sheet.rows[rowIndex];
+                var flag = false;
+                if (rowIndex == 0) {
+                    flag = true;
+                }
+                for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex++) {
+                    if (flag) {
+                        row.cells[cellIndex].textAlign = 'center';
+                        row.cells[cellIndex].bold = true;
+                    }
+                    row.cells[cellIndex].borderBottom = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderTop = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderRight = { color: "#000", size: 1 };
+                    row.cells[cellIndex].borderleft = { color: "#000", size: 1 };
+                }
+            }
+        },
         filterable: {
             mode: "row",
         },
@@ -714,4 +743,15 @@ function detailNghiPhepNamInit(e) {
             },
         ]
     });
+}
+
+function XuatExcel() {
+    var grid = $('#grid').data('kendoGrid');
+
+    grid.options.excel = {
+        fileName: "NghiPhepNam.xlsx",
+        filterable: true,
+        allPages: true
+    }
+    grid.saveAsExcel();
 }
