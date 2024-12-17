@@ -1,6 +1,26 @@
 ﻿
 var aggreate = [];
 $(document).ready(function () {
+
+    $("#Thang").kendoDatePicker({
+        depth: "year",
+        start: "year",
+        format: "MM/yyyy",
+        value: new Date()
+    })
+    //TimKiem();
+})
+
+function TimKiem() {
+    var date = $("#Thang").data("kendoDatePicker").value();
+    var tuan = 0;
+    var thang = kendo.toString(date, "MM");
+    var quy = 0;
+    var nam = kendo.toString(date, "yyyy");
+
+    if ($("#grid").data("kendoGrid"))
+        $("#gridContainer").html('<div id="grid"></div>');
+
     var listColumn = [];
     listColumn.push({
         title: "STT",
@@ -124,54 +144,59 @@ $(document).ready(function () {
     });
 
 
+    var date = $("#Thang").data("kendoDatePicker").value();
+    var thang = kendo.toString(date, "MM");
+    var nam = kendo.toString(date, "yyyy");
 
     $.ajax({
-        url: '/ChinhSachLuong/GetAllChinhSachLuong',
+        url: '/ChinhSachLuong/GetAllChinhSachLuongByThangNam?Thang=' + thang + "&Nam=" + nam,
         type: 'GET',
     }).done(function successCallback(response) {
         var dynamicColumn = [];
         $.each(response, function (index, item) {
-            dynamicColumn.push({
-                field: item.Loai == 1 ? item.Ma + '_DM' : item.Ma,
-                title: item.Ten,
-                format: '{0:N0}',
-                aggregates: ["sum"],
-                groupHeaderColumnTemplate: function (e) {
-                    console.log(e);
-                    if (e[item.Ma]) {
-                        return '<b class="groupHeaderSum">' + (e[item.Ma].sum ? kendo.toString(e[item.Ma].sum, "N0") : '0') + '</b>';
-                    } else if (e.aggregates[item.Ma]) {
+            if (item.Loai == 1) {
+                dynamicColumn.push({
+                    field: item.Loai == 1 ? item.Ma + '_DM' : item.Ma,
+                    title: item.Ten,
+                    format: '{0:N0}',
+                    aggregates: ["sum"],
+                    groupHeaderColumnTemplate: function (e) {
+                        console.log(e);
+                        if (e[item.Ma]) {
+                            return '<b class="groupHeaderSum">' + (e[item.Ma].sum ? kendo.toString(e[item.Ma].sum, "N0") : '0') + '</b>';
+                        } else if (e.aggregates[item.Ma]) {
 
-                        return kendo.toString(e.aggregates[item.Ma].sum, "N0");
-                    } else {
-                        return "";
-                    }
-                },
-                footerTemplate: function (e) {
-                    if (e[item.Ma]) {
-                        return kendo.toString(e[item.Ma].sum ? e[item.Ma].sum : 0, "N0");
-                    }
-                },
-                footerAttributes: { style: "text-align: right; font-weight:700" },
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
+                            return kendo.toString(e.aggregates[item.Ma].sum, "N0");
+                        } else {
+                            return "";
                         }
+                    },
+                    footerTemplate: function (e) {
+                        if (e[item.Ma]) {
+                            return kendo.toString(e[item.Ma].sum ? e[item.Ma].sum : 0, "N0");
+                        }
+                    },
+                    footerAttributes: { style: "text-align: right; font-weight:700" },
+                    width: "150px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: right;"
                     }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold",
-                    class: "table-header-cell"
-                },
-                attributes: {
-                    style: "text-align: right;"
-                }
-            });
-            aggreate.push({ field: item.Ma, aggregate: "sum" })
+                });
+                aggreate.push({ field: item.Ma, aggregate: "sum" })
+            }
         })
 
         listColumn.push({
@@ -564,42 +589,27 @@ $(document).ready(function () {
             aggreate.push({ field: "LuongThucNhan", aggregate: "sum" });
             aggreate.push({ field: "TienPhat", aggregate: "sum" });
             aggreate.push({ field: "NLD_ThucTe", aggregate: "sum" });
+
+            $.ajax({
+                url: '/BangLuong/GetBangLuong?tuan=' + tuan + '&thang=' + thang + '&quy=' + quy + '&nam=' + nam,
+                type: 'GET',
+            }).done(function successCallback(BLresponse) {
+                var listBL = JSON.parse(BLresponse);
+                console.log(listBL);
+                var dataSource = new kendo.data.DataSource({
+                    data: listBL,
+                    group: {
+                        field: "TenPhongBan", aggregates: aggreate
+                    },
+
+                    aggregate: aggreate,
+                    pageSize: 500,
+                });
+                $("#grid").data("kendoGrid").setDataSource(dataSource);
+            })
         });
     });
 
 
 
-    $("#Thang").kendoDatePicker({
-        depth: "year",
-        start: "year",
-        format: "MM/yyyy",
-        value: new Date()
-    })
-    //TimKiem();
-})
-
-function TimKiem() {
-    var date = $("#Thang").data("kendoDatePicker").value();
-    var tuan = 0;
-    var thang = kendo.toString(date, "MM");
-    var quy = 0;
-    var nam = kendo.toString(date, "yyyy");
-
-    $.ajax({
-        url: '/BangLuong/GetBangLuong?tuan=' + tuan + '&thang=' + thang + '&quy=' + quy + '&nam=' + nam,
-        type: 'GET',
-    }).done(function successCallback(BLresponse) {
-        var listBL = JSON.parse(BLresponse);
-        console.log(listBL);
-        var dataSource = new kendo.data.DataSource({
-            data: listBL,
-            group: {
-                field: "TenPhongBan", aggregates: aggreate
-            },
-
-            aggregate: aggreate,
-            pageSize: 500,
-        });
-        $("#grid").data("kendoGrid").setDataSource(dataSource);
-    })
 }

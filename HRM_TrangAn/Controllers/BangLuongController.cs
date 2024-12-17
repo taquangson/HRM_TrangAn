@@ -285,7 +285,7 @@ namespace HRM_TrangAn.Controllers
             BangLuongDAO dao = new BangLuongDAO();
             ChinhSachLuongDAO csdao = new ChinhSachLuongDAO();
             NoiDungPhuCapDAO pcdao = new NoiDungPhuCapDAO();
-            List<ChinhSachLuongModel> lstcs = csdao.GetAll();
+            List<ChinhSachLuongModel> lstcs = csdao.GetAllByThangNam(thang, nam);
             List<NoiDungPhuCapModel> lstpc = pcdao.GetAll();
             DataTable dt = dao.GetDataBangLuong(thang, nam);
             dt.Columns.Add("TongTienLuong", typeof(decimal));

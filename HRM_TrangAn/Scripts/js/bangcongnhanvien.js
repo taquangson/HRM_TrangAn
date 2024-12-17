@@ -337,7 +337,7 @@ function ValidateForm(callback) {
 
 function ChotCong() {
     $.ajax({
-        url: '/ChamCongNhanVien/ChotBangCongNhanVien' + window.location.search,
+        url: '/ChamCongNhanVien/ChotBangCongNhanVien' + window.location.search + "&SoCongChot=" + $("#congtt").text(),
         type: 'GET',
 
     }).done(function successCallback(response) {

@@ -65,13 +65,14 @@ namespace HRM_TrangAn.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ChotBangCongNhanVien(int ID_TaiKhoan, int Thang, int Nam, string key)
+        public ActionResult ChotBangCongNhanVien(int ID_TaiKhoan, int Thang, int Nam, float SoCongChot, string key)
         {
             LichSuThaoTacBangCongDAO dao = new LichSuThaoTacBangCongDAO();
             LichSuThaoTacBangCongModel viewmodel = dao.GetLichSu(ID_TaiKhoan, Thang, Nam);
             if (viewmodel.KeyEvent == key)
             {
                 viewmodel.ThoiGianChotBangCong = DateTime.Now;
+                viewmodel.SoCongChot = SoCongChot;
                 dao.InsertOrUpdate(viewmodel);
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }

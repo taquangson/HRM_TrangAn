@@ -146,6 +146,30 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<ChinhSachLuongModel> GetAllByThangNam(int Thang, int Nam)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@Thang", Thang),
+                new SqlParameter("@Nam", Nam)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_GetAllByThangNam", pars);
+                DataTable dt = ds.Tables[0];
+                List<ChinhSachLuongModel> result = new List<ChinhSachLuongModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    result.Add(GetObjFromDataRow(dr));
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_GetAll " + ex.Message);
+                return null;
+            }
+        }
+
         public List<ChinhSachLuong_NhanVien_TreeModel> GetDataTreeChinhSachLuongNhanVien(int ID_PhongBan)
         {
             try

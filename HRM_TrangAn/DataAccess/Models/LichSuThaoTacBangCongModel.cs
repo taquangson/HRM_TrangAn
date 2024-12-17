@@ -15,6 +15,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime ThoiGianGuiMail { get; set; }
         public DateTime ThoiGianXemBangCong { get; set; }
         public DateTime ThoiGianChotBangCong { get; set; }
+        public float SoCongChot { get; set; }
         public string KeyEvent { get; set; }
         public string Link { get; set; }
     }

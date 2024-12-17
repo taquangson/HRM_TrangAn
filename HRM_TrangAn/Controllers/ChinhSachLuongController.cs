@@ -35,6 +35,13 @@ namespace HRM_TrangAn.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetAllChinhSachLuongByThangNam(int Thang, int Nam)
+        {
+            ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
+            List<ChinhSachLuongModel> data = dao.GetAllByThangNam(Thang, Nam);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetAllChinhSachLuongByID(int ID)
         {
             ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
