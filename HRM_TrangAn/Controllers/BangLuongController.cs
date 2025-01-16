@@ -119,7 +119,6 @@ namespace HRM_TrangAn.Controllers
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
                                 decimal TienLuong = cslnv.MucLuong * ((decimal)model.SoCong / CongChuan) * (decimal)dayCount;
-                                cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
                             }
@@ -149,7 +148,6 @@ namespace HRM_TrangAn.Controllers
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
                                 decimal TienLuong = cslnv.MucLuong * (decimal)model.SoCong / CongChuan * (decimal)weekCount;
-                                cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
                             }
@@ -159,7 +157,6 @@ namespace HRM_TrangAn.Controllers
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
                                 decimal TienLuong = cslnv.MucLuong * (decimal)cslnv.SoCong / CongChuan;
-                                cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
                             }
@@ -218,7 +215,6 @@ namespace HRM_TrangAn.Controllers
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
                                 decimal TienLuong = cslnv.MucLuong * (decimal)model.SoCong / CongChuan * proportionQuy;
-                                cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
                             }
@@ -238,7 +234,6 @@ namespace HRM_TrangAn.Controllers
                             {
                                 decimal CongChuan = (decimal)cslch.CongChuan;
                                 decimal TienLuong = cslnv.MucLuong * (decimal)model.SoCong / CongChuan * proportionYear;
-                                cslnv.TienLuong = TienLuong;
                                 model.TongTien += TienLuong;
                                 BLModel.TienLuong = TienLuong;
                             }
