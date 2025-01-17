@@ -867,7 +867,7 @@ function LuuInsert() {
             Tien: $("#TienInsert").val(),
             ID_NoiDungPhuCap: $("#NoiDungPhuCapInsert").data("kendoMultiColumnComboBox").value(),
             NoiDung: $("#NoiDungInsert").val(),
-            NgayHuongPhuCap: kendo.toString($("#NgayHuongPhuCapInsert").data("kendoDatePicker").value(), "yyyy/MM/đd"),
+            NgayHuongPhuCap: kendo.toString($("#NgayHuongPhuCapInsert").data("kendoDatePicker").value(), "yyyy/MM/dd"),
             ID_NguoiTao: 0,
         }
         $.ajax({

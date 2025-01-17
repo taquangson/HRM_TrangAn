@@ -43,7 +43,10 @@ namespace HRM_TrangAn.Controllers
             else if (thang > 0)
             {
                 from = new DateTime(nam, thang, 1);
-                to = new DateTime(nam, thang + 1, 1).AddDays(-1);
+                if (thang < 12)
+                    to = new DateTime(nam, thang + 1, 1).AddDays(-1);
+                else
+                    to = new DateTime(nam + 1, thang, 1).AddDays(-1);
             }
             else if (quy > 0)
             {

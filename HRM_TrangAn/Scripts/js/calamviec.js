@@ -420,9 +420,10 @@ function createGridPhanBo() {
                         }
                     },
                     editor: function (container, options) {
+                        console.log(options);
                         $('<input />').appendTo(container).kendoTimePicker({
                             dateInput: false,
-                            value: options.model.BatDau.Hours + ":" + options.model.BatDau.Minutes,
+                            value: options.model.BatDau != undefined ? (options.model.BatDau.Hours + ":" + options.model.BatDau.Minutes) : "00:00",
                             format: "H:mm",
                             componentType: "modern",
                             change: function (e) {
@@ -465,7 +466,7 @@ function createGridPhanBo() {
                         $('<input />').appendTo(container).kendoTimePicker({
                             dateInput: false,
                             format: "H:mm",
-                            value: options.model.KetThuc.Hours + ":" + options.model.KetThuc.Minutes,
+                            value: options.model.KetThuc != undefined ? (options.model.KetThuc.Hours + ":" + options.model.KetThuc.Minutes) : "00:00",
                             componentType: "modern",
                             change: function (e) {
                                 options.model.KetThuc = {

@@ -236,11 +236,11 @@ namespace HRM_TrangAn.Controllers
             }
             else
             {
-                if (tk_dao.GetByTenTaiKhoanOrEmail(model.TaiKhoan) != null)
+                if (tk_dao.GetByTenTaiKhoanOrEmail(model.TaiKhoan).ID > 0)
                 {
                     return Json(new { status = false, msg = "Tên tài khoản đã được sử dụng" }, JsonRequestBehavior.AllowGet);
                 }
-                if (tk_dao.GetByTenTaiKhoanOrEmail(model.Email) != null)
+                if (tk_dao.GetByTenTaiKhoanOrEmail(model.Email).ID > 0)
                 {
                     return Json(new { status = false, msg = "Email đã được sử dụng" }, JsonRequestBehavior.AllowGet);
                 }

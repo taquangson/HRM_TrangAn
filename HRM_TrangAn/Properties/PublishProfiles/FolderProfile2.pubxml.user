@@ -4,8 +4,2956 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <History>False|2024-12-17T17:24:02.2619511Z;False|2024-12-18T00:23:28.9141330+07:00;</History>
+    <History>True|2025-01-16T14:24:42.0151898Z;True|2024-12-18T10:03:18.3214253+07:00;True|2024-12-18T00:33:45.0703123+07:00;False|2024-12-18T00:29:44.0523051+07:00;False|2024-12-18T00:27:17.4632771+07:00;False|2024-12-18T00:24:02.2619511+07:00;False|2024-12-18T00:23:28.9141330+07:00;</History>
     <LastFailureDetails />
     <_PublishTargetUrl>D:\OneDrive\Documents\source\HRM_TrangAn_V2_Publish</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <File Include="Assets/Common.css">
+      <publishTime>11/08/2024 22:28:50</publishTime>
+    </File>
+    <File Include="Assets/common.js">
+      <publishTime>12/12/2024 10:09:43</publishTime>
+    </File>
+    <File Include="Assets/custom.css">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/custom.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/custom.min.css">
+      <publishTime>11/16/2024 09:43:42</publishTime>
+    </File>
+    <File Include="Assets/custom.min.js">
+      <publishTime>08/21/2024 09:48:49</publishTime>
+    </File>
+    <File Include="Assets/kendo/jszip.min.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo-multi-calendar.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo-multi-calendar.min.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo-multi-date-select.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo-multi-date-select.min.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo.all.min.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo.ext.css">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo.web.ext.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/kendo2021.all.min.js">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/editor.png">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/loading-image.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/loading.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/markers.png">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/markers_2x.png">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/slider-h.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/slider-v.gif">
+      <publishTime>08/21/2024 09:25:21</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Black/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/BlueOpal/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Bootstrap/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Default/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Fiori/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Flat/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSans-Bold.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSans-BoldOblique.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSans-ExtraLight.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSans.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSansMono-Bold.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSansMono-BoldOblique.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSansMono-Oblique.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSansMono.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSerif-Bold.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSerif-BoldItalic.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSerif-Italic.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/DejaVuSerif.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/DejaVu/LICENSE.txt">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/KendoUIGlyphs.eot">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/KendoUIGlyphs.svg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/KendoUIGlyphs.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/KendoUIGlyphs.woff">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/WebComponentsIcons.eot">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/WebComponentsIcons.svg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/WebComponentsIcons.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/fonts/glyphs/WebComponentsIcons.woff">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/HighContrast/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/back.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/kendoui.svg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/kendoui.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/kendoui.woff">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/wp8_icons.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/images/wp8_inverseicons.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.black.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.black.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.black.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.black.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.blueopal.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.blueopal.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.blueopal.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.blueopal.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap-v4.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap-v4.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.bootstrap.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-bootstrap.core.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-bootstrap.core.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-bootstrap.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-bootstrap.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-fiori.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-fiori.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-material.core.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-material.core.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-material.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-material.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-nova.core.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-nova.core.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-nova.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-nova.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-office365.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common-office365.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common.core.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common.core.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.common.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.dataviz.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.dataviz.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default-v2.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default-v2.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.default.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.fiori.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.fiori.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.fiori.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.fiori.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.flat.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.flat.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.flat.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.flat.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.highcontrast.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.highcontrast.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.highcontrast.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.highcontrast.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.material.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.material.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.material.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.material.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.materialblack.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.materialblack.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.materialblack.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.materialblack.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metro.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metro.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metro.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metro.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metroblack.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metroblack.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metroblack.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.metroblack.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.all.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.all.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.android.dark.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.android.dark.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.android.light.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.android.light.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.blackberry.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.blackberry.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.common.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.common.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.fiori.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.fiori.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.flat.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.flat.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.ios.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.ios.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.material.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.material.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.meego.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.meego.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.nova.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.nova.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.office365.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.office365.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.wp8.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.mobile.wp8.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.moonlight.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.moonlight.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.moonlight.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.moonlight.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.nova.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.nova.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.nova.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.nova.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.office365.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.office365.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.office365.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.office365.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.rtl.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.rtl.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.silver.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.silver.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.silver.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.silver.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.uniform.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.uniform.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.uniform.mobile.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo.uniform.mobile.min.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/kendo2021.default-main.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Material/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MaterialBlack/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Metro/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/MetroBlack/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Moonlight/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Nova/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Office365/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Silver/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/brushed-metal.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots1.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots10.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots11.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots12.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots13.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots2.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots3.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots4.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots5.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots6.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots7.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots8.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/dots9.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/glass-lighter.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/glass.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/highlight.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/hsv-gradient.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/hue.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/leather1.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/leather2.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/noise.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe1.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe2.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe3.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe4.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe5.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/stripe6.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/transparency.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/textures/transtexture.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/editor.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/imagebrowser.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/indeterminate.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/loading-image.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/loading.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/loading_2x.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/markers.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/markers_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/slider-h.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/slider-v.gif">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/sprite.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/sprite_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/sprite_kpi.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/kendo/styles/Uniform/sprite_kpi_2x.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/serviceAccount.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/stringeeConfig.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/tracuulichhoc.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/.bower.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/bower.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/CHANGELOG.md">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap-theme.css">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap-theme.css.map">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap-theme.min.css">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap-theme.min.css.map">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap.css">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/js/bootstrap.js">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/dist/js/npm.js">
+      <publishTime>10/20/2022 20:43:36</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/.jshintrc">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/bs-commonjs-generator.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/bs-glyphicons-data-generator.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/bs-lessdoc-parser.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/bs-raw-files-generator.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/configBridge.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/grunt/sauce_browsers.yml">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/Gruntfile.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/.jscsrc">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/.jshintrc">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/affix.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/alert.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/button.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/carousel.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/collapse.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/dropdown.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/modal.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/popover.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/scrollspy.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/tab.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/tooltip.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/js/transition.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/.csscomb.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/.csslintrc">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/alerts.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/badges.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/bootstrap.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/breadcrumbs.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/button-groups.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/buttons.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/carousel.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/close.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/code.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/component-animations.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/dropdowns.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/forms.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/glyphicons.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/grid.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/input-groups.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/jumbotron.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/labels.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/list-group.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/media.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/alerts.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/background-variant.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/border-radius.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/buttons.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/center-block.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/clearfix.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/forms.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/gradients.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/grid-framework.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/grid.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/hide-text.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/image.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/labels.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/list-group.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/nav-divider.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/nav-vertical-align.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/opacity.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/pagination.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/panels.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/progress-bar.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/reset-filter.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/reset-text.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/resize.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/responsive-visibility.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/size.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/tab-focus.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/table-row.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/text-emphasis.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/text-overflow.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/mixins/vendor-prefixes.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/modals.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/navbar.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/navs.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/normalize.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/pager.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/pagination.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/panels.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/popovers.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/print.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/progress-bars.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/responsive-embed.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/responsive-utilities.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/scaffolding.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/tables.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/theme.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/thumbnails.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/tooltip.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/type.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/utilities.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/variables.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/less/wells.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/LICENSE">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/nuget/bootstrap.less.nuspec">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/nuget/bootstrap.nuspec">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/nuget/MyGet.ps1">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/package.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/package.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/bootstrap/README.md">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/.bower.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/.gitignore">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/.npmignore">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/bower.json">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/css/font-awesome.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/css/font-awesome.css.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/css/font-awesome.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/fontawesome-webfont.eot">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/fontawesome-webfont.svg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/fontawesome-webfont.ttf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/fontawesome-webfont.woff">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/fontawesome-webfont.woff2">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/fonts/FontAwesome.otf">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/HELP-US-OUT.txt">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/animated.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/bordered-pulled.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/core.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/fixed-width.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/font-awesome.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/icons.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/larger.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/list.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/mixins.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/path.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/rotated-flipped.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/screen-reader.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/stacked.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/less/variables.less">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/font-awesome.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_animated.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_bordered-pulled.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_core.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_fixed-width.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_icons.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_larger.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_list.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_mixins.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_path.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_rotated-flipped.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_screen-reader.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_stacked.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/vendors/font-awesome/scss/_variables.scss">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Assets/xlsx.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>01/16/2025 21:24:31</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>01/16/2025 21:24:31</publishTime>
+    </File>
+    <File Include="bin/FirebaseAdmin.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Api.Gax.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Api.Gax.Rest.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.PlatformServices.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Core.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.PlatformServices.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/HRM_TrangAn.dll">
+      <publishTime>01/16/2025 21:24:02</publishTime>
+    </File>
+    <File Include="bin/HRM_TrangAn.pdb">
+      <publishTime>01/16/2025 21:24:02</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>08/21/2024 09:25:25</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.Core.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.SignalR.SystemWeb.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.JsonWebTokens.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/Quartz.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>05/13/2022 13:23:20</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>05/13/2022 13:23:20</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>05/13/2022 13:00:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>05/13/2022 13:23:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>05/13/2022 13:23:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>05/13/2022 13:00:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>05/13/2022 13:18:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>05/13/2022 13:22:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>05/13/2022 13:23:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>05/13/2022 13:17:50</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>05/13/2022 13:18:40</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>05/13/2022 13:19:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>05/13/2022 13:00:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>10/05/2021 07:47:54</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>10/05/2021 07:49:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.CurrentVersions.targets">
+      <publishTime>05/13/2022 13:17:58</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>05/13/2022 13:00:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>05/13/2022 13:00:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Buffers.dll">
+      <publishTime>02/19/2020 17:05:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>10/20/2020 01:37:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Memory.dll">
+      <publishTime>02/19/2020 17:05:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 20:29:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>10/20/2020 01:45:32</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>10/23/2021 06:40:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>10/23/2021 06:45:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>02/19/2020 17:05:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>05/13/2022 13:19:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>05/13/2022 13:19:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>05/13/2022 13:00:54</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>05/13/2022 13:25:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>05/13/2022 13:25:42</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.Common.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.Facility.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.SocketBase.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/SuperSocket.SocketEngine.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/SuperWebSocket.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/System.Collections.Immutable.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/System.Interactive.Async.dll">
+      <publishTime>08/21/2024 09:25:24</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/28/2022 06:41:34</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>05/28/2022 06:41:44</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Cors.dll">
+      <publishTime>05/28/2022 06:42:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/28/2022 06:41:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>08/21/2024 09:25:25</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-128x128.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-144x144.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-152x152.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-16x16.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-180x180.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-192x192.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-256x256.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-48x48.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-512x512.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-64x64.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-72x72.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/Icons/icon-96x96.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/inthe.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/intheA3.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/intheA4.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/intheA5.css">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Content/login.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/thitracnghiem.css">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="firebase-messaging-sw.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Images/13X21_1.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Images/13X21_2.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Images/13X21_3.png">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/0e692ac5aa0e5950001f.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523110834637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523113600637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523114215637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523114325637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523114523637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523114756637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523114912637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523115003637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210523115128637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210524124437637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210524124455sơn.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210530123623637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210530124248637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210530124319637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210530124417637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/20210530124724637477396625796505.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/23dd49622e6cdb32827d.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/2c9cecb6757d8623df6c.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhCauHoi/688f2023a0e853b60af9.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhDapAn/1262.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhDapAn/1273.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhDapAn/2132.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhDapAn/23dd49622e6cdb32827d.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhDapAn/2847.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/anhthehs.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/anhthehs2.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/AnhThongBao/logo-removebg-preview.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/app1.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/app2.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/background.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/bbg.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/computer-folder-icon.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/docicon.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/img.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/img.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/KhaoSatImage.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/khung.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logodh.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logodh.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logodh2.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logo_trangan.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logo_trangan.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logo_trangan_white.jpg">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logo_trangan_white.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/logo_trangan_white2.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/matsau.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/matsau11.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/mattruoc.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/mattruoc11.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/new-folder-add.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/pdficon.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/sms.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/Thelaido.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/Thelaido_matsau.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/Thenvvp.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/user_image.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Images/xlsicon.png">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="img_OX2_icon.ico">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="log4net.config">
+      <publishTime>12/12/2024 10:11:01</publishTime>
+    </File>
+    <File Include="manifest.json">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>01/16/2025 21:24:18</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.1.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.signalR-2.4.1.min.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/js/bangcong.js">
+      <publishTime>12/26/2024 16:14:44</publishTime>
+    </File>
+    <File Include="Scripts/js/bangcongnhanvien.js">
+      <publishTime>12/12/2024 10:56:34</publishTime>
+    </File>
+    <File Include="Scripts/js/bangluongnhanvien.js">
+      <publishTime>12/18/2024 08:12:57</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaobiendongnhansu.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaochamcong.js">
+      <publishTime>12/18/2024 09:46:31</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaochitietchamcong.js">
+      <publishTime>10/24/2024 16:25:34</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaochotcong.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaochuyendonhaptay.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaocongtheodanhmuccongviec.js">
+      <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaodoanhthubanphieu.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaohocsinhnophieu.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaokehoachcongviec.js">
+      <publishTime>11/20/2024 14:03:50</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaolaodongcuatotrongthang.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaolichtrinh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaoluongticketheoto.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaotickecuacactotrongthang.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaotickecuatotrongthang.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaotickenam.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaotuyendotheochuyen.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaoxuphattheodanhmucvipham.js">
+      <publishTime>11/22/2024 14:44:14</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/bieudodiem.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/bieudodiemtrungbinhtheolop.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/thongkebuoihoctheogiaovien.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/thongkebuoihocthohocsinh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/thongkephieuhoctheohocsinh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/calamviec.js">
+      <publishTime>12/26/2024 14:45:52</publishTime>
+    </File>
+    <File Include="Scripts/js/calamviecnhanvien.js">
+      <publishTime>11/14/2024 13:22:05</publishTime>
+    </File>
+    <File Include="Scripts/js/cauhinhthuongdanhgia.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/chinhsachluongnhanvien.js">
+      <publishTime>11/25/2024 10:13:22</publishTime>
+    </File>
+    <File Include="Scripts/js/dangkylichnghi.js">
+      <publishTime>12/07/2024 14:24:12</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucchinhsachluong.js">
+      <publishTime>11/23/2024 19:08:30</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmuccongviec.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmuccongviecthuekhoan.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucdiemquetthe.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucloi.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucngayle.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucnguoigiamsat.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucnguoilaodong.js">
+      <publishTime>11/14/2024 13:38:55</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmucthuyendo.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/danhsachdethitheohocsinh.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/danhsachhocsinhtheogiaovien.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/danhsachlophoconline.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/diemdanh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/doanhsoluongkhach.js">
+      <publishTime>11/04/2024 10:42:44</publishTime>
+    </File>
+    <File Include="Scripts/js/home.js">
+      <publishTime>11/01/2024 16:00:30</publishTime>
+    </File>
+    <File Include="Scripts/js/hosonhansu.js">
+      <publishTime>11/23/2024 14:41:54</publishTime>
+    </File>
+    <File Include="Scripts/js/khocauhoi.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/khodethi.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/lichsubaohiemxahoi.js">
+      <publishTime>11/23/2024 23:08:39</publishTime>
+    </File>
+    <File Include="Scripts/js/lichsukenoimcc.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/lop.js">
+      <publishTime>10/30/2024 15:19:17</publishTime>
+    </File>
+    <File Include="Scripts/js/maychamcong.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/noidungphucap.js">
+      <publishTime>11/08/2024 22:21:49</publishTime>
+    </File>
+    <File Include="Scripts/js/phancongcongviec.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/phancongcongviectotruong.js">
+      <publishTime>11/16/2024 09:37:28</publishTime>
+    </File>
+    <File Include="Scripts/js/phieugiaoviec.js">
+      <publishTime>11/09/2024 18:05:26</publishTime>
+    </File>
+    <File Include="Scripts/js/phieuhoc.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/phieuthu.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/phongban.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlybangluong.js">
+      <publishTime>12/17/2024 23:40:58</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlychucdanh.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlychuyencong.js">
+      <publishTime>11/09/2024 18:18:28</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlychuyento.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlycong.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlycongtinhtien.js">
+      <publishTime>11/16/2024 09:49:55</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlydanhgiadiem.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlydanhgialaido.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlydimuonvesom.js">
+      <publishTime>11/28/2024 14:06:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlydonsuachuathuyen.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlydulieudiemdanh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyinthe.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlylichnghi.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlynghiphepnam.js">
+      <publishTime>12/18/2024 00:26:06</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyphatsinh.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyphucap.js">
+      <publishTime>01/16/2025 14:11:12</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlytailieu.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlythongbaoapp.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyticket.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyticket2.js">
+      <publishTime>10/30/2024 15:20:40</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlytonhom.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlytrucdem.js">
+      <publishTime>01/16/2025 00:03:59</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlytuyendo.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyxuphat.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlyxuphatnhanvien.js">
+      <publishTime>11/28/2024 14:11:13</publishTime>
+    </File>
+    <File Include="Scripts/js/room.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/thongtinbaohiem.js">
+      <publishTime>12/12/2024 10:12:11</publishTime>
+    </File>
+    <File Include="Scripts/js/thongtincongty.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/thuongdanhgia.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/tinnhan.js">
+      <publishTime>10/30/2024 15:19:16</publishTime>
+    </File>
+    <File Include="Scripts/js/tinnhanphuhuynh.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/js/xacnhanticket.js">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Scripts/js/xinnghiphep.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/jszip.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/qrcode.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/qrcode.min.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BangLuong/BangLuongNhanVien.cshtml">
+      <publishTime>11/16/2024 09:05:03</publishTime>
+    </File>
+    <File Include="Views/BangLuong/Index.cshtml">
+      <publishTime>12/17/2024 23:43:36</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BangChotCong.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoBienDongNhanSu.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoChamCong.cshtml">
+      <publishTime>12/12/2024 10:09:43</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoChiTietChamCong.cshtml">
+      <publishTime>10/24/2024 16:21:12</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoChuyenDoNhapTay.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoChuyenDoTheoTuyen.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoCongTheoDanhMucCongViec.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoDoanhThuBanPhieu.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoForLaiDo.cshtml">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoHocSinhNoPhieu.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoKeHoachCongViec.cshtml">
+      <publishTime>11/20/2024 12:37:20</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoLaoDongCuaToTrongThang.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoLichTrinhTuyen.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoLuongTickeTheoTo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoPhieuHocTheoHocSinh.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoSoBuoiHocTheoGiaoVien.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoTickeCuaCacToTrongThang.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoTickeCuaToTrongThang.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoTickeNam.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoXuPhatTheoDanhMucViPham.cshtml">
+      <publishTime>11/22/2024 14:44:14</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BieuDoDiem.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BieuDoDiemTrungBinh_TheoLop.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoCao/ThongKeBuoiHocTheoHocSinh.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/BaoHiem/ThongTinBaoHiemXaHoi.cshtml">
+      <publishTime>11/25/2024 11:17:55</publishTime>
+    </File>
+    <File Include="Views/BaoHiemXaHoi_LichSu/Index.cshtml">
+      <publishTime>11/04/2024 10:42:44</publishTime>
+    </File>
+    <File Include="Views/CaLamViecNhanVien/Index.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/ChamCongNhanVien/BangCong.cshtml">
+      <publishTime>11/08/2024 10:52:35</publishTime>
+    </File>
+    <File Include="Views/ChamCongNhanVien/BangCongNhanVien.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/ChamCongNhanVien/ThongBaoBangCong.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/ChatMessage/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/ChatMessage/testchat.html">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/ChinhSachLuong/Index.cshtml">
+      <publishTime>11/23/2024 14:04:24</publishTime>
+    </File>
+    <File Include="Views/CongViec/PhanCongCongViec.cshtml">
+      <publishTime>10/22/2024 14:20:01</publishTime>
+    </File>
+    <File Include="Views/CongViec/PhanCongCongViecToTruong.cshtml">
+      <publishTime>10/19/2024 12:10:34</publishTime>
+    </File>
+    <File Include="Views/CongViec/PhieuGiaoViec.cshtml">
+      <publishTime>10/22/2024 11:18:26</publishTime>
+    </File>
+    <File Include="Views/DangKy/DangKyEvent.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DangKy/DangKyHoc.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DangKyLichNghi/Index.cshtml">
+      <publishTime>12/07/2024 13:56:23</publishTime>
+    </File>
+    <File Include="Views/DangKyLichNghi/ThongBaoNSDangKyLichNghi.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/CaLamViec.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/ChinhSachLuong.cshtml">
+      <publishTime>11/23/2024 19:05:56</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/CongViec.cshtml">
+      <publishTime>10/24/2024 11:00:21</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/CongViecThueKhoan.cshtml">
+      <publishTime>10/23/2024 14:24:48</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DanhMucLoi.cshtml">
+      <publishTime>08/22/2024 11:45:06</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DanhMucNgayLe.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DanhMucToNhom.cshtml">
+      <publishTime>11/11/2024 14:25:16</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DanhMucTruongHoc.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DiemQuetThe.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DoanhSo_LuongKhach.cshtml">
+      <publishTime>11/04/2024 10:42:44</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/NguoiGiamSat.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/NguoiLaoDong.cshtml">
+      <publishTime>10/23/2024 10:23:26</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/NoiDungPhuCap.cshtml">
+      <publishTime>11/08/2024 22:32:29</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/ThuyenDo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DiemDanh/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/DiemDanh/QuanLyDuLieuDiemDanh.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/FileManager/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HocSinh/Index.cshtml">
+      <publishTime>10/30/2024 15:20:41</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Home/IndexHS.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoSoNhanSu/Index.cshtml">
+      <publishTime>09/02/2024 11:28:13</publishTime>
+    </File>
+    <File Include="Views/HoTro/DanhGiaThanhCong.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/FormDanhGiaLaiDo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/GiaoVan.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/HoTroDuongDe.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/HoTroDuongDev2.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/HoTroDuongDev3.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/InTheA3.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/InTheA4.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/InTheA5.cshtml">
+      <publishTime>08/21/2024 09:31:16</publishTime>
+    </File>
+    <File Include="Views/HoTro/QRCodeScanResult.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/HoTro/RatingLaiDo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/LichHoc/TraCuuLichHoc.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/LiveClass/DanhSachLopHocOnline.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/LiveClass/Room.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/LiveClass/RoomGV.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Lop/DanhSachLopTheoGiaoVien.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Lop/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/MayChamCong/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/MayChamCong/Index2.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/MayChamCong/LichSuKetNoiMCC.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyChuyenCong.cshtml">
+      <publishTime>11/11/2024 10:46:09</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyChuyenTo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyCong.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyCongTinhTien.cshtml">
+      <publishTime>11/10/2024 14:57:44</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyDiMuonVeSom.cshtml">
+      <publishTime>10/23/2024 10:23:26</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyDonSuaChuaThuyen.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyLichNghi.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyPhatSinh.cshtml">
+      <publishTime>10/24/2024 15:40:25</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyPhuCap.cshtml">
+      <publishTime>11/22/2024 09:57:56</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyTicket.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyTicket2.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyTuyenDo.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyXuPhat.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/QuanLyXuPhatNhanVien.cshtml">
+      <publishTime>10/23/2024 10:23:26</publishTime>
+    </File>
+    <File Include="Views/NghiepVu/XacNhanTicket.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiPhepNam/QuanLyNghiPhepNam.cshtml">
+      <publishTime>12/18/2024 00:26:06</publishTime>
+    </File>
+    <File Include="Views/NhanVien/CauHinhThuongDanhGia.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NhanVien/QuanLyDanhGia.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NhanVien/QuanLyDanhGiaDiem.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NhanVien/QuanLyInThe.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NhanVien/ThuongDanhGia.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/PhongBan/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>11/16/2024 08:52:18</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout2.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/TrucDem/Index.cshtml">
+      <publishTime>01/15/2025 23:28:08</publishTime>
+    </File>
+    <File Include="Views/TuyenDo/Index.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/16/2025 21:24:06</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

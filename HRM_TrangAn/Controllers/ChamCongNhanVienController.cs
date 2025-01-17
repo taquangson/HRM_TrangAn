@@ -155,7 +155,8 @@ namespace HRM_TrangAn.Controllers
                     if (check != 0)
                     {
                         DangKyLichNghiModel lstnghi = lichnghinv.Where(x => x.BatDauNghi.Date.ToString("yyyyMMdd") == col.ColumnName || x.KetThucNghi.Date.ToString("yyyyMMdd") == col.ColumnName).FirstOrDefault();
-                        if (lstnghi != null)
+                        string cong = dt.Rows[i][col].ToString();
+                        if (lstnghi != null && cong == "0")
                         {
                             childRow.Add("data" + col.ColumnName, "<span style='display:block; background-color:" + lstnghi.KyHieuMau + "'>" + lstnghi.KyHieu + "</span>");
                         }
@@ -232,6 +233,7 @@ namespace HRM_TrangAn.Controllers
             CaLamViec_NhanVienDAO canvdao = new CaLamViec_NhanVienDAO();
             CaLamViecDAO cadao = new CaLamViecDAO();
             ChamCongNhanVienDAO ccnvdao = new ChamCongNhanVienDAO();
+            TrucDemDAO tddao = new TrucDemDAO();
             List<CaLamViec_NhanVienModel> listca = new List<CaLamViec_NhanVienModel>();
             if (ID_NhanVien > 0)
                 listca = canvdao.GetByNhanVienDate(ID_NhanVien, TuNgay, DenNgay);
@@ -287,10 +289,7 @@ namespace HRM_TrangAn.Controllers
                                 if (model.lstChamCong.First().WorkDate < batdau && model.lstChamCong.Last().WorkDate > ketthuc)
                                 {
                                     model.SoCong += phanbo.SoCong;
-                                    if (ngaynghi != null)
-                                    {
-                                        model.SoCong = model.SoCong * ngaynghi.TinhLuong;
-                                    }
+                                   
                                     if (phanbo.TangCa == 1)
                                     {
                                         model.SoCongTangCa += phanbo.SoCong;
@@ -302,6 +301,10 @@ namespace HRM_TrangAn.Controllers
                                 }
                             }
                         }
+                        if (ngaynghi != null)
+                        {
+                            model.SoCong = model.SoCong * ngaynghi.TinhLuong;
+                        }
                     }
                 }
                 if (model.lstChamCong.Count > 0)
@@ -309,9 +312,23 @@ namespace HRM_TrangAn.Controllers
                     if (ccnvdao.InsertCongNhanVien(model))
                         result.Add(model);
 
-                    if (model.lstChamCong.Count == 1 || model.lstChamCong.First().WorkDate > batdau || model.lstChamCong.Last().WorkDate < ketthuc)
+                    if (model.SoCong < model.CaLam.SoCong || model.lstChamCong.First().WorkDate > batdau || model.lstChamCong.Last().WorkDate < ketthuc)
                     {
                         ccnvdao.InsertLichSuDiMuonVeSom(model);
+                    }
+                    if (model.CaLam.IsCaDem == 0)
+                    {
+                        DateTime starttrucdem = model.Ngay.AddDays(1).AddHours(5);
+                        DateTime endtrucdem = model.Ngay.AddDays(1).AddHours(6);
+                        bool checktrucdem = ccnvdao.GetListChamCong_ByNgay_NhanVien(model.ID_TaiKhoan, starttrucdem, endtrucdem).Count > 0;
+                        if (checktrucdem)
+                        {
+                            TrucDemModel td = new TrucDemModel();
+                            td.ID_TaiKhoan = model.ID_TaiKhoan;
+                            td.Ngay = model.Ngay;
+                            td.TrangThai = 1;
+                            tddao.InsertOrUpdate(td);
+                        }
                     }
                 }
             }

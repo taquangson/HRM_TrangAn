@@ -265,6 +265,7 @@ function LoadGridData() {
             {
                 width: "40px",
                 selectable: true,
+                lock: true,
                 headerAttributes: {
                     style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
                     class: "table-header-cell"
@@ -272,6 +273,7 @@ function LoadGridData() {
             },
             {
                 title: "Phòng ban",
+                lock: true,
                 template: function (e) {
                     if (e.MaNhanVien != null) {
                         return "";
@@ -306,6 +308,7 @@ function LoadGridData() {
             {
                 field: "MaNhanVien",
                 title: "Mã nhân viên",
+                lock: true,
                 width: "100px",
                 filterable: {
                     cell: {
@@ -324,6 +327,7 @@ function LoadGridData() {
             {
                 field: "TenDayDu",
                 title: "Tên nhân viên",
+                lock:true,
                 template: function (e) {
                     if (e.MaNhanVien == null) {
                         return "";

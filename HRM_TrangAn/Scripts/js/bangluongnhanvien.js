@@ -19,6 +19,8 @@
 })
 
 function XacNhanMK() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
     var matkhau = $("#MatKhau").val();
     if (matkhau == '') {
         $("#errorMessage").html("Vui lòng nhập mật khẩu!");
@@ -28,9 +30,9 @@ function XacNhanMK() {
             url: '/BangLuong/GetDataBangLuongByHSNS',
             data: {
                 MatKhau: matkhau,
-                Thang: 10,
-                Nam: 2024,
-                ID_HoSoNhanSu: 2
+                Thang: urlParams.get('Thang'),
+                Nam: urlParams.get('Nam'),
+                ID_HoSoNhanSu: urlParams.get('ID_HoSoNhanSu')
             },
             type: 'POST',
         }).done(function successCallback(response) {
