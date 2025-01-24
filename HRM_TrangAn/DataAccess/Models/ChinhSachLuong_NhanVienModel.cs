@@ -101,6 +101,8 @@ namespace HRM_TrangAn.DataAccess.Models
 
         public int ID_ToNhom { get; set; }
 
+        public int ID_NguoiApDung { get; set; }
+
         public string MaToNhom { get; set; }
 
         public string TenToNhom { get; set; }

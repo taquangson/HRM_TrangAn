@@ -161,7 +161,7 @@ $(document).ready(function () {
     });
     $("#window").kendoWindow({
         width: "50%",
-        height: "50%",
+        height: "60%",
         title: "Chi tiết",
         visible: false,
         modal: true,

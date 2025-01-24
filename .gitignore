@@ -73,8 +73,9 @@ HRM_TrangAn/Content/ExcelTemplate/
 .vs/HRM_TrangAn/FileContentIndex/read.lock
 >>>>>>> b430f12cde309334bde96f4282355a931efad2e2
 /packages
-/.vs/HRM_TrangAn
-/HRM_TrangAn/.vs
+.vs/HRM_TrangAn
+HRM_TrangAn/.vs
+HRM_TrangAn/bin
 HRM_TrangAn/bin/HRM_TrangAn.pdb
 HRM_TrangAn/bin/HRM_TrangAn.dll
 HRM_TrangAn/bin/HRM_TrangAn.dll.config
