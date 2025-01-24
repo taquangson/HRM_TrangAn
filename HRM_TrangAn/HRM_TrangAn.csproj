@@ -288,6 +288,7 @@
     <Compile Include="Controllers\HoTroController.cs" />
     <Compile Include="Controllers\LaoDongThueKhoanController.cs" />
     <Compile Include="Controllers\NghiPhepController.cs" />
+    <Compile Include="Controllers\NghiPhepNamController.cs" />
     <Compile Include="Controllers\NguoiGiamSatController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\LichHocController.cs" />
@@ -309,6 +310,7 @@
     <Compile Include="Controllers\KeHoachController.cs" />
     <Compile Include="Controllers\ToNhomController.cs" />
     <Compile Include="Controllers\TracNghiemController.cs" />
+    <Compile Include="Controllers\TrucDemController.cs" />
     <Compile Include="Controllers\TuyenDoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XinNghiHocController.cs" />
@@ -358,6 +360,7 @@
     <Compile Include="DataAccess\DAO\DanhMucCongViecDAO.cs" />
     <Compile Include="DataAccess\DAO\MayChamCongDAO.cs" />
     <Compile Include="DataAccess\DAO\MayChamCong_DiemQuetTheDAO.cs" />
+    <Compile Include="DataAccess\DAO\NgayNghiPhepDAO.cs" />
     <Compile Include="DataAccess\DAO\NghiPhepDAO.cs" />
     <Compile Include="DataAccess\DAO\NguoiGiamSatDAO.cs" />
     <Compile Include="DataAccess\DAO\NhanVienDAO.cs" />
@@ -384,6 +387,7 @@
     <Compile Include="DataAccess\DAO\ThuongDanhGiaDAO.cs" />
     <Compile Include="DataAccess\DAO\ToNhomDAO.cs" />
     <Compile Include="DataAccess\DAO\ToNhom_KeHoachDAO.cs" />
+    <Compile Include="DataAccess\DAO\TrucDemDAO.cs" />
     <Compile Include="DataAccess\DAO\TuyenDoDAO.cs" />
     <Compile Include="DataAccess\DAO\TuyenDo_DiemDAO.cs" />
     <Compile Include="DataAccess\DAO\XinNghiPhepDAO.cs" />
@@ -487,7 +491,9 @@
     <Compile Include="DataAccess\Models\MayChamCong_DiemQuetTheModel.cs" />
     <Compile Include="DataAccess\Models\MonHocModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucCongViecModel.cs" />
+    <Compile Include="DataAccess\Models\NgayNghiPhepModel.cs" />
     <Compile Include="DataAccess\Models\NghiPhepModel.cs" />
+    <Compile Include="DataAccess\Models\NghiPhepNamViewModel.cs" />
     <Compile Include="DataAccess\Models\NguoiGiamSatModel.cs" />
     <Compile Include="DataAccess\Models\NhanVienModel.cs" />
     <Compile Include="DataAccess\Models\NhanVien_BaoHiemXaHoiModel.cs" />
@@ -526,6 +532,7 @@
     <Compile Include="DataAccess\Models\KeHoachModel.cs" />
     <Compile Include="DataAccess\Models\ToNhomModel.cs" />
     <Compile Include="DataAccess\Models\ToNhom_KeHoachModel.cs" />
+    <Compile Include="DataAccess\Models\TrucDemModel.cs" />
     <Compile Include="DataAccess\Models\TuyenDoModel.cs" />
     <Compile Include="DataAccess\Models\TuyenDo_DiemModel.cs" />
     <Compile Include="DataAccess\Models\ViewBangCongModel.cs" />
@@ -928,26 +935,14 @@
     <Content Include="Assets\vendors\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Assets\xlsx.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\FirebaseAdmin.dll" />
-    <Content Include="bin\FirebaseAdmin.xml" />
     <Content Include="bin\Google.Api.Gax.dll" />
-    <Content Include="bin\Google.Api.Gax.pdb" />
     <Content Include="bin\Google.Api.Gax.Rest.dll" />
-    <Content Include="bin\Google.Api.Gax.Rest.pdb" />
-    <Content Include="bin\Google.Api.Gax.Rest.xml" />
-    <Content Include="bin\Google.Api.Gax.xml" />
     <Content Include="bin\Google.Apis.Auth.dll" />
-    <Content Include="bin\Google.Apis.Auth.pdb" />
     <Content Include="bin\Google.Apis.Auth.PlatformServices.dll" />
-    <Content Include="bin\Google.Apis.Auth.xml" />
     <Content Include="bin\Google.Apis.Core.dll" />
-    <Content Include="bin\Google.Apis.Core.pdb" />
-    <Content Include="bin\Google.Apis.Core.xml" />
     <Content Include="bin\Google.Apis.dll" />
-    <Content Include="bin\Google.Apis.pdb" />
     <Content Include="bin\Google.Apis.PlatformServices.dll" />
-    <Content Include="bin\Google.Apis.xml" />
     <Content Include="bin\HRM_TrangAn.dll" />
     <Content Include="bin\HRM_TrangAn.pdb" />
     <Content Include="bin\roslyn\csc.exe" />
@@ -1334,7 +1329,9 @@
     <Content Include="Scripts\js\quanlycongtinhtien.js" />
     <Content Include="Scripts\js\quanlydanhgiadiem.js" />
     <Content Include="Scripts\js\quanlydimuonvesom.js" />
+    <Content Include="Scripts\js\quanlynghiphepnam.js" />
     <Content Include="Scripts\js\quanlyphucap.js" />
+    <Content Include="Scripts\js\quanlytrucdem.js" />
     <Content Include="Scripts\js\quanlyxuphatnhanvien.js" />
     <Content Include="Scripts\js\thongtinbaohiem.js" />
     <Content Include="Scripts\js\thuongdanhgia.js" />

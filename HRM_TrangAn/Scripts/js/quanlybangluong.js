@@ -11,7 +11,22 @@ $(document).ready(function () {
     //TimKiem();
 })
 
+function TinhBangLuong() {
+    kendo.ui.progress($("#grid"), true);
+    var date = $("#Thang").data("kendoDatePicker").value();
+    var thang = kendo.toString(date, "MM");
+    var nam = kendo.toString(date, "yyyy");
+    $.ajax({
+        url: '/BangLuong/GetDataTinhBangLuong?ngay=0&tuan=0&quy=0&thang=' + thang + "&nam=" + nam,
+        type: 'GET',
+    }).done(function successCallback(response) {
+        TimKiem()
+        kendo.ui.progress($("#grid"), false);
+    })
+}
+
 function TimKiem() {
+    kendo.ui.progress($("#grid"), true);
     var date = $("#Thang").data("kendoDatePicker").value();
     var tuan = 0;
     var thang = kendo.toString(date, "MM");
@@ -154,9 +169,11 @@ function TimKiem() {
     }).done(function successCallback(response) {
         var dynamicColumn = [];
         $.each(response, function (index, item) {
+            console.log(item);
             if (item.Loai == 1) {
                 dynamicColumn.push({
                     field: item.Loai == 1 ? item.Ma + '_DM' : item.Ma,
+                    //field: item.Ma,
                     title: item.Ten,
                     format: '{0:N0}',
                     aggregates: ["sum"],
@@ -606,6 +623,7 @@ function TimKiem() {
                     pageSize: 500,
                 });
                 $("#grid").data("kendoGrid").setDataSource(dataSource);
+                kendo.ui.progress($("#grid"), false);
             })
         });
     });

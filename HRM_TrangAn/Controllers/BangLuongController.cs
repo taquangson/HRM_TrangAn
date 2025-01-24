@@ -46,7 +46,7 @@ namespace HRM_TrangAn.Controllers
                 if (thang < 12)
                     to = new DateTime(nam, thang + 1, 1).AddDays(-1);
                 else
-                    to = new DateTime(nam + 1, thang, 1).AddDays(-1);
+                    to = new DateTime(nam + 1, 1, 1).AddDays(-1);
             }
             else if (quy > 0)
             {
@@ -85,8 +85,8 @@ namespace HRM_TrangAn.Controllers
                 {
                     BangLuongModel BLModel = new BangLuongModel();
                     BLModel.ID_ChinhSachLuong_NhanSu = cslnv.ID;
-                    BLModel.NgayBatDau = cslnv.NgayBatDau;
-                    BLModel.NgayKetThuc = cslnv.NgayKetThuc;
+                    BLModel.NgayBatDau = cslnv.NgayBatDau.Year > 1 ? cslnv.NgayBatDau : from;
+                    BLModel.NgayKetThuc = cslnv.NgayKetThuc.Year < 2100 ? cslnv.NgayKetThuc : to;
                     BLModel.ID_ChinhSachLuong = cslnv.ID_ChinhSachLuong;
                     BLModel.ID_NhanSu = cslnv.ID_HoSoNhanSu;
                     BLModel.Ngay = ngay;

@@ -128,6 +128,7 @@ namespace HRM_TrangAn.DataAccess.Models
 
         public int IsToPho { get; set; }
         public decimal MucLuong { get; set; }
+        public string TenChinhSach { get; set; }
         public float SoCong { get; set; }
 
         public List<File_NhanVienModel> lstFile { get; set; }
@@ -146,5 +147,6 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime NgayBatDau { get; set; }
 
         public DateTime NgayKetThuc { get; set; }
+        public int ID_NguoiApDung { get; set; }
     }
 }
