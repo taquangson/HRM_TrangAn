@@ -280,8 +280,16 @@ function LoadGridData() {
                                 }
                                 html += "<span data-mucluong='<b>" + kendo.toString(item.MucLuong,'N0') + " VNĐ</b>' "
                                     + "data-info='" + (info != '' ? info : 'Không xác định') + "' "
-                                    + "' class='itemchinhsach'><b>" + item.TenChinhSach
-                                    + "</b><i onclick='XoaChinhSach(\"" + item.TenChinhSach + "\"," + item.ID + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-times'></i></span>"
+                                    + "' class='itemchinhsach'><b>" + item.TenChinhSach + "</b>"
+                                    + "<i onclick='SuaChinhSach(\"" + e.TenNhanVien + "\","
+                                    + item.ID_HoSoNhanSu + ","
+                                    + item.ID_ChinhSachLuong + ","
+                                    + "\"" + item.NgayBatDau + "\"" + ","
+                                    + "\"" + item.NgayKetThuc + "\"" + ","
+                                    + item.GhiChu + ","
+                                    + item.MucLuong + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-gear'></i>"
+                                    + "<i onclick='XoaChinhSach(\"" + item.TenChinhSach + "\"," + item.ID + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-times'></i></span > "
+
                             })
                             return html;
                         }
@@ -348,11 +356,14 @@ function LoadGridData() {
 function ThemMoi() {
     $("#ID_HoSoNhanSu").val(0);
     $("#ID_PhongBan").val(0);
-
+    var combobox = $("#ComboChinhSachLuong").data("kendoComboBox");
+    combobox.readonly(false);
+    $("#btnLuu").removeAttr("hidden")
+    $("#btnLuuChinhSach").attr("hidden", "true")
     var treeList = $("#grid").data("kendoTreeList");
     var row = treeList.select();
     if (row.length != 1) {
-        openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 nhân viên hoặc 1 phòng ban cần phân ca làm việc");
+        openDialog($("#dialogRoot").data("kendoDialog"), "Vui lòng chọn 1 nhân viên hoặc 1 phòng ban cần phân chính sách lương");
     } else {
         var selectedItem = treeList.dataItem(row);
         console.log(selectedItem);
@@ -385,6 +396,30 @@ function ValidateForm(callback) {
     } else {
         callback(valid);
     }
+}
+
+function LuuChinhSach() {
+    $.ajax({
+        url: '/ChinhSachLuong/UpdateCSL_NVFromChinhSachLuong',
+        type: 'POST',
+        data: {
+            ID_ChinhSachLuong: $("#ComboChinhSachLuong").data("kendoComboBox").value(),
+            MucLuong: $("#MucLuong").val(),
+            ID_HoSoNhanSu: $("#ID_HoSoNhanSu").val(),
+            GhiChu: $("#GhiChu").val(),
+            NgayBatDau: kendo.toString($("#BatDau").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
+            NgayKetThuc: kendo.toString($("#KetThuc").data("kendoDatePicker").value(), 'yyyy-MM-dd'),
+        }
+    }).done(function successCallback(response) {
+        //response controller này trả về success và msg
+        if (response.success) {
+            notification.show({ kValue: response.msg }, "success");
+            Huy();
+            LoadGridData();
+        } else {
+            notification.show({ kValue: response.msg }, "error");
+        }
+    });
 }
 
 
@@ -488,6 +523,25 @@ function Xoa() {
         }
     }
 
+}
+
+function SuaChinhSach(TenNhanVien, ID_HoSoNhanSu, ID_ChinhSachLuong, NgayBatDau, NgayKetThuc, GhiChu, MucLuong) {
+    $("#Ten").val(TenNhanVien);
+    $("#ID_HoSoNhanSu").val(ID_HoSoNhanSu);
+    $("#ComboChinhSachLuong").data("kendoComboBox").value(ID_ChinhSachLuong);
+    $("#MucLuong").val(MucLuong);
+    $("#BatDau").data("kendoDatePicker").value(new Date(parseInt(NgayBatDau.substr(6))));
+    $("#KetThuc").data("kendoDatePicker").value(new Date(parseInt(NgayKetThuc.substr(6))));
+    $("#GhiChu").val(GhiChu);
+    var combobox = $("#ComboChinhSachLuong").data("kendoComboBox");
+    combobox.readonly(true);
+    $("#btnLuu").attr("hidden", "true")
+    $("#btnLuuChinhSach").removeAttr("hidden")
+    if ($(window).width() > 800) {
+        $("#window").data("kendoWindow").center().open();
+    } else {
+        $("#window").data("kendoWindow").center().maximize().open();
+    }
 }
 
 function XoaChinhSach(TenChinhSach, ID_ChinhSach_NhanSu) {

@@ -115,6 +115,22 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpPost]
+        public ActionResult UpdateCSL_NVFromChinhSachLuong(ChinhSachLuong_NhanVienModel model)
+        {
+            ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            model.ID_NguoiApDung = userinfor.ID;
+            if (dao.UpdateCSL_NV(model))
+            {
+                return Json(new { success = true, msg = "Lưu phân bố chính sách thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu phân bố chính sách thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
         public ActionResult DeleteCSL_NVFromChinhSachLuong(int ID_ChinhSachLuong_NhanVien)
         {
             ChinhSachLuongDAO dao = new ChinhSachLuongDAO();

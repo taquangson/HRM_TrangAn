@@ -427,6 +427,36 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public bool UpdateCSL_NV(ChinhSachLuong_NhanVienModel model)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@ID_ChinhSachLuong", model.ID_ChinhSachLuong),
+                    new SqlParameter("@ID_HoSoNhanSu", model.ID_HoSoNhanSu),
+                    new SqlParameter("@MucLuong", model.MucLuong),
+                    new SqlParameter("@ID_NguoiApDung", model.ID_NguoiApDung),
+                    new SqlParameter("@GhiChu", model.GhiChu),
+                    new SqlParameter("@NgayBatDau",((model.NgayBatDau.Year == 1 || model.NgayBatDau == null) ? (object)DBNull.Value : model.NgayBatDau)),
+                    new SqlParameter("@NgayKetThuc",((model.NgayKetThuc.Year == 1 || model.NgayKetThuc == null) ? (object)DBNull.Value : model.NgayKetThuc)),
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_ChinhSachLuong_NhanVien_Update", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_NhanVien_Update " + ex.Message);
+                return false;
+            }
+        }
+
         public bool DeleteCSL_NV(int ID_ChinhSachLuong, int ID_HoSoNhanSu)
         {
             try

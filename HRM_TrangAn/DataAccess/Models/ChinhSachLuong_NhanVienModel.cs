@@ -149,6 +149,5 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime NgayBatDau { get; set; }
 
         public DateTime NgayKetThuc { get; set; }
-        public int ID_NguoiApDung { get; set; }
     }
 }
