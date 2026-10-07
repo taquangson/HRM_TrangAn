@@ -200,6 +200,30 @@ namespace HRM_TrangAn.DataAccess.DAO
             };
 
         }
+        
+        
+        public DataTable GetDataChinhSachLuong(int Thang, int Nam)
+        {
+            try
+            {
+                List<BangLuongModel> result = new List<BangLuongModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@Thang", Thang),
+                new SqlParameter("@Nam", Nam)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChinhSachLuong_GetDataTinhLuong", pars);
+                DataTable dt = ds.Tables[0];
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChinhSachLuong_GetDataTinhLuong " + ex.Message);
+                return null;
+            };
+
+        }
 
         public PhieuLuongModel GetDataBangLuongByHSNS(int ID_HoSoNhanSu, int Thang, int Nam)
         {
@@ -269,6 +293,43 @@ namespace HRM_TrangAn.DataAccess.DAO
                     //else
                     //{
                     model.listChinhSachLuong = dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu, from, to);
+                    //}
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_BangLuong_GetDataTinhBangLuong " + ex.Message);
+                return new List<TinhBangLuongModel>();
+            }
+        }
+        
+        public List<TinhBangLuongModel> GetDataTinhBangLuong_ByNhanVien(DateTime from, DateTime to, int ID_HoSoNhanSu)
+        {
+            try
+            {
+                List<TinhBangLuongModel> result = new List<TinhBangLuongModel>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("from", from),
+                new SqlParameter("to", to),
+                new SqlParameter("ID_HoSoNhanSu", ID_HoSoNhanSu)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_BangLuong_GetDataTinhBangLuong_ByNhanVien", pars);
+                DataTable dt = ds.Tables[0];
+                ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    TinhBangLuongModel model = GetObjTBLFromDataRow(dr);
+                    //if (model.NgayBatDauHoppDong >= from && model.NgayBatDauHoppDong <= to)
+                    //{
+                    //    model.listChinhSachLuong = dao.GetNV_ByIDCSL_ThuViec(0, model.ID_HoSoNhanSu, from, model.NgayBatDauHoppDong);
+                    //    model.listChinhSachLuong.AddRange(dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu, model.NgayBatDauHoppDong, to));
+                    //}
+                    //else
+                    //{
+                    //model.listChinhSachLuong = dao.GetNV_ByIDCSL(0, model.ID_HoSoNhanSu, from, to);
                     //}
                     result.Add(model);
                 }

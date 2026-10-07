@@ -17,6 +17,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public string TenCongViecThucTe { get; set; }
         public float CongThucTe { get; set; }
         public string DiaDiem { get; set; }
+        public int ID_CongTrinh { get; set; }
         public float ThoiGianDuKien { get; set; }
         public float ThoiGianThucTe { get; set; }
         public string GhiChu { get; set; }

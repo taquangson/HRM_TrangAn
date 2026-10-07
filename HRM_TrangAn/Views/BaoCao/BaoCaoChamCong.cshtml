@@ -54,25 +54,53 @@
         <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
     </div>
     <form id="formChiTiet">
-        <input type="hidden" id="ID_NhanVien" />
-        <input type="hidden" id="ID_NhomNhanVien" />
+        <input type="hidden" id="ID_HoSoNhanSu" />
+        <input type="hidden" id="ID_TaiKhoan" />
+        <input type="hidden" id="Ngay" />
         <div class="form-group valid" toggle-valid="Ten">
-            <label id="TenDoiTuong" style="width:100%"></label>
-            <input id="Ten" readonly type="text" class="k-textbox input" />
+            <label style="width:100%">Tên nhân viên</label>
+            <input id="TenNhanVien" readonly type="text" class="k-textbox input" />
             <span class="fa fa-exclamation-triangle icon"></span>
         </div>
         <div class="form-group valid" toggle-valid="ComboCa">
-            <label style="width:100%">Ca làm việc:</label>
+            <label style="width:100%">Ca làm việc:<span style="color:red">*</span></label>
             <div class="input" id="ComboCa"></div>
+            <span class="fa fa-exclamation-triangle icon"></span>
         </div>
-        <div class="form-group valid" toggle-valid="BatDau">
-            <label style="width:100%">Từ ngày:</label>
-            <input id="BatDau" class="input" />
+        <div class="form-group valid" toggle-valid="CheckIn">
+            <label style="width:100%">Check in:<span style="color:red">*</span></label>
+            <input id="CheckIn" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
         </div>
-        <div class="form-group valid" toggle-valid="KetThuc">
-            <label style="width:100%">Đến ngày:</label>
-            <input id="KetThuc" class="input" />
+        <div class="form-group valid" toggle-valid="CheckOut">
+            <label style="width:100%">Check out:<span style="color:red">*</span></label>
+            <input id="CheckOut" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
         </div>
-
+        <div class="form-group valid" toggle-valid="SoCong">
+            <label style="width:100%">Số công: <span style="color:red">*</span></label>
+            <input id="SoCong" step="0.25" type="number" min="0" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="SoCongTangCa">
+            <label style="width:100%">Số công tăng ca: <span style="color:red">*</span></label>
+            <input id="SoCongTangCa" step="0.25" type="number" min="0" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="TrucDem">
+            <label style="width:100%">Trực đêm: <span style="color:red">*</span></label>
+            <input id="TrucDem" step="0.25" type="number" min="0" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="TrucDemDenTran">
+            <label style="width:100%">Trực đêm Đền Trần: <span style="color:red">*</span></label>
+            <input id="TrucDemDenTran" step="0.25" type="number" min="0" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="XuatAn">
+            <label style="width:100%">Số xuất ăn: <span style="color:red">*</span></label>
+            <input id="XuatAn" step="0.25" type="number" min="0" class="k-textbox input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
     </form>
 </div>

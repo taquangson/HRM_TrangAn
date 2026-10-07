@@ -39,6 +39,13 @@ namespace HRM_TrangAn.Controllers
             return Content(JsonConvert.SerializeObject(data));
         }
 
+        public ActionResult GetAllByKhoangNgay(DateTime TuNgay, DateTime DenNgay)
+        {
+            KeHoachDAO dao = new KeHoachDAO();
+            List<KeHoachModel> data = dao.GetAllByKhoangNgay(TuNgay, DenNgay);
+            return Content(JsonConvert.SerializeObject(data));
+        }
+
         public ActionResult GetBaoCaoKeHoach(DateTime from, DateTime to)
         {
             KeHoachDAO dao = new KeHoachDAO();

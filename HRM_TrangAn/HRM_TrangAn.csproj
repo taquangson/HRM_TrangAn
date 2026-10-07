@@ -273,6 +273,7 @@
     <Compile Include="Controllers\ChuyenToController.cs" />
     <Compile Include="Controllers\CongViecController.cs" />
     <Compile Include="Controllers\DangKyController.cs" />
+    <Compile Include="Controllers\DangKyLichNghiLaiDoController.cs" />
     <Compile Include="Controllers\DangKyLichNghiController.cs" />
     <Compile Include="Controllers\DanhMucCongViecController.cs" />
     <Compile Include="Controllers\DanhMucController.cs" />
@@ -344,12 +345,14 @@
     <Compile Include="DataAccess\DAO\CongLaoDong_TransferDAO.cs" />
     <Compile Include="DataAccess\DAO\DangKyEventDAO.cs" />
     <Compile Include="DataAccess\DAO\DangKyHocDAO.cs" />
+    <Compile Include="DataAccess\DAO\DangKyLichNghiLaiDoDAO.cs" />
     <Compile Include="DataAccess\DAO\DangKyLichNghiDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhGiaDiemDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhGiaLaiDoDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhMucCauHoiDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhMucCongViecDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhMucDAO.cs" />
+    <Compile Include="DataAccess\DAO\DanhMucCongTrinhDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhMucLoiDAO.cs" />
     <Compile Include="DataAccess\DAO\DanhMucNgayLeDAO.cs" />
     <Compile Include="DataAccess\DAO\DeThiDAO.cs" />
@@ -390,6 +393,7 @@
     <Compile Include="DataAccess\DAO\PhieuHocDAO.cs" />
     <Compile Include="DataAccess\DAO\PhieuThuDAO.cs" />
     <Compile Include="DataAccess\DAO\PhongBanDAO.cs" />
+    <Compile Include="DataAccess\DAO\PhongBan_CongChuanDAO.cs" />
     <Compile Include="DataAccess\DAO\PhuCapDAO.cs" />
     <Compile Include="DataAccess\DAO\QuanSinh_LopHocDAO.cs" />
     <Compile Include="DataAccess\DAO\RatingLaiDoDAO.cs" />
@@ -458,6 +462,7 @@
     <Compile Include="DataAccess\Models\DanhGiaLaiDoModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucCauHoiModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucCongViecModel.cs" />
+    <Compile Include="DataAccess\Models\DanhMucCongTrinhModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucLoiModel.cs" />
     <Compile Include="DataAccess\Models\DanhMucNgayLeModel.cs" />
     <Compile Include="DataAccess\Models\DapAnModel.cs" />
@@ -514,6 +519,7 @@
     <Compile Include="DataAccess\Models\PhieuLuongModel.cs" />
     <Compile Include="DataAccess\Models\PhieuThuModel.cs" />
     <Compile Include="DataAccess\Models\PhongBanModel.cs" />
+    <Compile Include="DataAccess\Models\PhongBan_CongChuanModel.cs" />
     <Compile Include="DataAccess\Models\PhuCapModel.cs" />
     <Compile Include="DataAccess\Models\PhuThuGiamTruModel.cs" />
     <Compile Include="DataAccess\Models\QuanSinhLopHocModel.cs" />
@@ -1272,6 +1278,8 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include=".vs\HRM_TrangAn.csproj.dtbcache.json" />
+    <Content Include="Content\BangLuong\2025-1-0-0.json" />
+    <Content Include="Content\ChinhSachLuong\2025-1.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Assets\tracuulichhoc.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1290,6 +1298,7 @@
     <Content Include="Scripts\js\bangcongnhanvien.js" />
     <Content Include="Scripts\js\bangluongnhanvien.js" />
     <Content Include="Scripts\js\baocao_js\baocaobiendongnhansu.js" />
+    <Content Include="Scripts\js\baocao_js\baocaochamcongfornhanvien.js" />
     <Content Include="Scripts\js\baocao_js\baocaochamcong.js" />
     <Content Include="Scripts\js\baocao_js\baocaochitietchamcong.js" />
     <Content Include="Scripts\js\baocao_js\baocaochotcong.js" />
@@ -1315,11 +1324,13 @@
     <Content Include="Scripts\js\calamviecnhanvien.js" />
     <Content Include="Scripts\js\cauhinhthuongdanhgia.js" />
     <Content Include="Scripts\js\chinhsachluongnhanvien.js" />
+    <Content Include="Scripts\js\dangkylichnghilaido.js" />
     <Content Include="Scripts\js\dangkylichnghi.js" />
     <Content Include="Scripts\js\danhmucchinhsachluong.js" />
     <Content Include="Scripts\js\danhmuccongviec.js" />
     <Content Include="Scripts\js\danhmuccongviecthuekhoan.js" />
     <Content Include="Scripts\js\danhmucdiemquetthe.js" />
+    <Content Include="Scripts\js\danhmuccongtrinh.js" />
     <Content Include="Scripts\js\danhmucloi.js" />
     <Content Include="Scripts\js\danhmucngayle.js" />
     <Content Include="Scripts\js\danhmucnguoigiamsat.js" />
@@ -1344,6 +1355,7 @@
     <Content Include="Scripts\js\phieugiaoviec.js" />
     <Content Include="Scripts\js\phieuhoc.js" />
     <Content Include="Scripts\js\phieuthu.js" />
+    <Content Include="Scripts\js\cauhinhcongchuan.js" />
     <Content Include="Scripts\js\phongban.js" />
     <Content Include="Scripts\js\quanlybangluong.js" />
     <Content Include="Scripts\js\quanlychucdanh.js" />
@@ -1495,7 +1507,6 @@
     <Content Include="Views\PhongBan\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\ThongBaoApp\Index.cshtml" />
     <Content Include="Views\ThongTinCongTy\Index.cshtml" />
     <Content Include="Views\TinNhan\Index.cshtml" />
@@ -1523,6 +1534,11 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Views\PhongBan\CauHinhCongChuan.cshtml" />
+    <Content Include="Views\BaoCao\BaoCaoChamCongForNhanVien.cshtml" />
+    <Content Include="Views\DangKyLichNghiLaiDo\Index.cshtml" />
+    <Content Include="Views\DangKyLichNghiLaiDo\ThongBaoNSDangKyLichNghi.cshtml" />
+    <Content Include="Views\DanhMuc\DanhMucCongTrinh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

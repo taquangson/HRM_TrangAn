@@ -23,6 +23,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public string[] Tag_NhanVien { get; set; }
         public string Tags_NhanVien { get; set; }
         public DateTime NgayPheDuyet { get; set; }
+        public float SoNgay { get; set; }
 
     }
 }

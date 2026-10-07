@@ -416,7 +416,7 @@ function TimKiem() {
     }).done(function successCallback(response) {
 		$.each(response,function(index,item){
 			
-			item.SoTien = 200000;
+			item.SoTien = 250000;
 			item.TongLuong = item.SoTien * item.SoTicke;
 			item.ThucLinh = item.TongLuong - item.Phat - item.SuaThuyen;
 		});

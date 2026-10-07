@@ -287,7 +287,7 @@ function LoadGridData() {
                                     + "\"" + item.NgayBatDau + "\"" + ","
                                     + "\"" + item.NgayKetThuc + "\"" + ","
                                     + item.GhiChu + ","
-                                    + item.MucLuong + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-gear'></i>"
+                                    + item.MucLuong + ")' style='margin-left:15px;color:blue; cursor:pointer' class='fa fa-gear'></i>"
                                     + "<i onclick='XoaChinhSach(\"" + item.TenChinhSach + "\"," + item.ID + ")' style='margin-left:15px;color:red; cursor:pointer' class='fa fa-times'></i></span > "
 
                             })

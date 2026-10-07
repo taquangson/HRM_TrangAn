@@ -95,10 +95,14 @@ namespace HRM_TrangAn.Controllers
             TaiKhoanDAO tk_dao = new TaiKhoanDAO();
             if (tk_dao.CheckLogin(model.UserName, model.Password))
             {
-                Session["UserInfor"] = tk_dao.GetByTenTaiKhoanOrEmail(model.UserName);
+                TaiKhoanModel tk = tk_dao.GetByTenTaiKhoanOrEmail(model.UserName);
+                Session["UserInfor"] = tk;
                 if (string.IsNullOrWhiteSpace(model.PreviewousUrl))
                 {
-                    return RedirectToAction("Index", "Home");
+                    if (tk.Role == 1)
+                        return RedirectToAction("Index", "Home");
+                    else
+                        return RedirectToAction("BaoCaoChamCongForNhanVien", "BaoCao");
                 }
                 else
                 {
@@ -344,7 +348,7 @@ namespace HRM_TrangAn.Controllers
                 return Json(new { status = true, msg = "Xóa dữ liệu thất bại, vui lòng liên hệ quản trị" }, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         [HttpPost]
         public ActionResult UpdateToken(string token)
         {

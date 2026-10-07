@@ -5,19 +5,32 @@ var selectdNhanVien = [];
 var listGridSelected = [];
 var SERVERIMAGE = "http://localhost:56812/";
 $(document).ready(function () {
-    $("#Ngay").kendoDatePicker({
+    //$("#Ngay").kendoDatePicker({
+    //    format: "dd/MM/yyyy",
+    //    value: new Date(),
+    //    dateInput: true,
+    //    messages: {
+    //        "year": "yyyy",
+    //        "month": "mm",
+    //        "day": "dd",
+    //        "hour": "hh",
+    //        "minute": "mm",
+    //        "second": "ss",
+    //        "dayperiod": "am/pm",
+    //    }
+    //});
+    $("#TuNgay").kendoDatePicker({
         format: "dd/MM/yyyy",
-        value: new Date(),
-        dateInput: true,
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
+        value: new Date(new Date().getFullYear() + "/" + (new Date().getMonth() + 1) + "/01"),
+        change: function (e) {
+            var d = new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0);
+            $("#DenNgay").data("kendoDatePicker").value(d);
+            CheckDaChotCongLaoDong();
         }
+    })
+    $("#DenNgay").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
     })
     $("#grid").kendoGrid({
         height: function () {
@@ -1636,6 +1649,25 @@ $(document).ready(function () {
         })
     });
 
+    $.ajax({
+        url: '/DanhMuc/GetAll_DanhMucCongTrinh',
+        type: 'GET',
+    }).done(function successCallback(response) {
+        var dataSource = new kendo.data.DataSource({
+            data: response,
+        });
+
+        $("#ComboCongTrinh").kendoComboBox({
+            dataTextField: "TenCongTrinh",
+            dataValueField: "ID",
+            filter: "contains",
+            suggest: true,
+            delay: 1000,
+            dataSource: dataSource,
+        })
+        
+    });
+
     $("#previewimage").kendoTooltip({
         filter: "img",
         position: "top",
@@ -2118,6 +2150,7 @@ function openEditWindow() {
             console.log(selectedItem);
             $("#ID").val(selectedItem.ID);
             $("#ComboCongViec").data("kendoMultiColumnComboBox").value(selectedItem.ID_CongViec);
+            $("#ComboCongTrinh").data("kendoComboBox").value(selectedItem.ID_CongTrinh);
             $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").value(selectedItem.ID_NguoiGiamSat);
             $("#TenCongViec").val(selectedItem.TenCongViec);
             $("#Cong").val(selectedItem.Cong);
@@ -2174,6 +2207,7 @@ function openCopyWindow() {
         console.log(selectedItem);
         //$("#ID").val(selectedItem.ID);
         $("#ComboCongViec").data("kendoMultiColumnComboBox").value(selectedItem.ID_CongViec);
+        $("#ComboCongTrinh").data("kendoComboBox").value(selectedItem.ID_CongTrinh);
         $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").value(selectedItem.ID_NguoiGiamSat);
         $("#TenCongViec").val(selectedItem.TenCongViec);
         $("#Cong").val(selectedItem.Cong);
@@ -2349,7 +2383,10 @@ function openUpdateWindow() {
 function TimKiem() {
     kendo.ui.progress($("#grid"), true);
     $.ajax({
-        url: '/KeHoach/GetAllKeHoachByNgay' + "?Ngay=" + kendo.toString($("#Ngay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00",
+        url: '/KeHoach/GetAllByKhoangNgay'
+            + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
+            + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
+            //+ "?Ngay=" + kendo.toString($("#Ngay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00",
         type: 'GET',
     }).done(function successCallback(r) {
         response = JSON.parse(r);
@@ -2565,6 +2602,7 @@ function Luu() {
                 TrangThai: 1,
                 DiaDiem: $('#DiaDiem').val(),
                 ID_CongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").value(),
+                ID_CongTrinh: $("#ComboCongTrinh").data("kendoComboBox").value(),
                 TenCongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").dataItem().TenCongViec,
                 Cong: $('#Cong').val(),
                 SoNguoiDuKien: $('#SoNguoiDuKien').val() == 0 ? bangDuLieuNhanVienKeHoach.length : $('#SoNguoiDuKien').val(),
@@ -3068,7 +3106,7 @@ function LuuAddNhanVienToNhom() {
             DiaChi: item.DiaChi,
             TrangThai: item.TrangThai,
             MaNhanVien: item.MaNhanVien,
-            Cong: parseFloat($('#CongThucTe').val())
+            Cong: parseFloat($('#Cong').val())
         });
         arr_idnhanvien.push(item.ID);
     })
@@ -3083,7 +3121,7 @@ function LuuAddNhanVienToNhom() {
             DiaChi: item.DiaChi,
             TrangThai: item.TrangThai,
             MaNhanVien: item.MaNhanVien,
-            Cong: parseFloat($('#CongThucTe').val())
+            Cong: parseFloat($('#Cong').val())
         });
         arr_idnhanvien.push(item.ID);
     });
@@ -3093,13 +3131,14 @@ function LuuAddNhanVienToNhom() {
         type: 'POST',
         data: {
             lst_id: arr_idnhanvien.join(','),
-            from: kendo.toString($("#ThoiGianBatDauThucTe").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-            to: kendo.toString($("#ThoiGianKetThucThucTe").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss')
+            from: kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
+            to: kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss')
         }
     }).done(function successCallback(r) {
         var response = JSON.parse(r);
         $.each(response, function (index, item) {
-            item.Cong = parseFloat($('#CongThucTe').val())
+            //item.Cong = parseFloat($('#CongThucTe').val())
+            item.Cong = parseFloat($('#Cong').val())
         })
         if (response) {
             var dataSource = new kendo.data.DataSource({
@@ -3166,4 +3205,15 @@ function UpdateTimeDK(cong) {
 function UpdateTimeTT(cong) {
     $("#ThoiGianThucTe").val(cong * ($("#ComboCongViecThucTe").data("kendoMultiColumnComboBox").dataItem().ThoiGian / $("#ComboCongViecThucTe").data("kendoMultiColumnComboBox").dataItem().Cong));
 
+}
+
+function XuatExcel() {
+    var grid = $('#grid').data('kendoGrid');
+
+    grid.options.excel = {
+        fileName: "phancongcongviec.xlsx",
+        filterable: true,
+        allPages: true
+    }
+    grid.saveAsExcel();
 }

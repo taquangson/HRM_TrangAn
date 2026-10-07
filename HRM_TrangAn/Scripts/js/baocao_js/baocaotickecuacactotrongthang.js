@@ -12,6 +12,7 @@
     });
     $("#rootContainer").show();
 
+
     $("#gridData").kendoGrid({
 
         height: function () {
@@ -104,13 +105,43 @@
         format: "dd/MM/yyyy",
         value: new Date($("#TuNgay").data("kendoDatePicker").value().getFullYear(), $("#TuNgay").data("kendoDatePicker").value().getMonth() + 1, 0)
     })
+
+    LoadCombo();
 })
 
+function LoadCombo() {
+    $.ajax({
+        url: '/ToNhom/GetAllDanhMucToNhom',
+        type: 'GET',
+    }).done(function successCallback(response) {
+        var data = [{
+            TenToNhom: "Tất cả",
+            ID: 0
+        }]
+        $.each(response, function (index, item) {
+            data.push({
+                TenToNhom: item.TenToNhom,
+                ID: item.ID
+            })
+        })
+        var dataSource = new kendo.data.DataSource({
+            data: data
+        });
+        $("#comboToNhom").kendoComboBox({
+            dataTextField: 'TenToNhom',
+            dataValueField: 'ID',
+            dataSource: dataSource,
+            filter: "contains"
+        });
+        $("#comboToNhom").data("kendoComboBox").value(0);
+    });
+}
 function TimKiem() {
     $.ajax({
         url: "/BaoCao/GetData_BaoCaoTickeCuaCacToTrongThang"
             + "?TuNgay=" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00"
-            + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59",
+            + "&DenNgay=" + kendo.toString($("#DenNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 23:59:59"
+            + "&ID_ToNhom=" + ($("#comboToNhom").data("kendoComboBox").value() ? $("#comboToNhom").data("kendoComboBox").value() : 0),
         type: 'POST',
     }).done(function successCallback(response) {
         console.log(response);

@@ -130,6 +130,12 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
+        public ActionResult BaoCaoChamCongForNhanVien()
+        {
+            return View();
+        }
+
+        [SessionExpire]
         public ActionResult BaoCaoKeHoachCongViec()
         {
             return View();
@@ -162,6 +168,30 @@ namespace HRM_TrangAn.Controllers
         }
 
         [SessionExpire]
+        [HttpGet]
+        public ActionResult GetBangChamCongForNhanVien(DateTime from, DateTime to)
+        {
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            HoSoNhanSuModel hs = new HoSoNhanSuDAO().GetByID_TaiKhoan(userinfor.ID);
+            ChamCongNhanVienDAO dao = new ChamCongNhanVienDAO();
+            DataTable data = dao.GetBangChamCongForNhanVien(hs.ID, from, to);
+            List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
+            Dictionary<string, object> childRow;
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                DataRow dr = data.Rows[i];
+                childRow = new Dictionary<string, object>();
+                foreach (DataColumn col in data.Columns)
+                {
+                    childRow.Add(col.ColumnName, dr[col]);
+                }
+                parentRow.Add(childRow);
+            }
+            return Json(parentRow, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [SessionExpire]
         public ActionResult GetData_BaoCaoChuyenDoNhapTay(DateTime from, DateTime to, int ID_ToNhom)
         {
             ChuyenDoDAO cdao = new ChuyenDoDAO();
@@ -174,10 +204,10 @@ namespace HRM_TrangAn.Controllers
             ChuyenDoDAO dao = new ChuyenDoDAO();
             ChamCongDAO cdao = new ChamCongDAO();
             NhanVienDAO nvdao = new NhanVienDAO();
-            NhanVienModel nv = nvdao.GetByMa(MaNhanVien);
+            NhanVienModel nv = nvdao.GetByID(int.Parse(MaNhanVien));
             int day = DateTime.Now.Day;
             DateTime fromd = DateTime.Now.AddDays((day - 1) * (-1));
-            List<ChuyenDoModel> data1 = dao.GetChuyenDo_GetByNhanVien(fromd.Date, DateTime.Now, nv.ID);
+            List<ChuyenDoModel> data1 = dao.GetChuyenDoForBaoCao_GetByNhanVien(fromd.Date, DateTime.Now, nv.ID);
 
             DataTable data2 = cdao.GetDataChotCongByNhanVien(fromd.Date, DateTime.Now, nv.ID);
             Dictionary<string, object> childRow = new Dictionary<string, object>();
@@ -191,10 +221,11 @@ namespace HRM_TrangAn.Controllers
             }
             List<ChamCongModel> data3 = cdao.GetListChamCong_ByNgay_NhanVien(nv.ID, from, to);
             DanhGiaLaiDoDAO rdao = new DanhGiaLaiDoDAO();
-            List<DanhGiaLaiDoModel> rating = rdao.GetAll(0, MaNhanVien, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Now).Where(x => x.TrangThai == 1).ToList();
-            List<DanhGiaLaiDoModel> ratingmonth = rdao.GetAll(0, MaNhanVien, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now).Where(x => x.TrangThai == 1).ToList();
-            childRow.Add("LuotDanhGia", rating.Count());
-            return Json(new { nv = nv, data1 = data1, data2 = childRow, data3 = data3, data4 = rating, data5 = ratingmonth }, JsonRequestBehavior.AllowGet);
+            //List<DanhGiaLaiDoModel> rating = rdao.GetAll(0, MaNhanVien, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Now).Where(x => x.TrangThai == 1).ToList();
+            //List<DanhGiaLaiDoModel> ratingmonth = rdao.GetAll(0, MaNhanVien, new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1), DateTime.Now).Where(x => x.TrangThai == 1).ToList();
+            //childRow.Add("LuotDanhGia", rating.Count());
+            childRow.Add("LuotDanhGia", 0);
+            return Json(new { nv = nv, data1 = data1, data2 = childRow, data3 = data3, data4 = 0, data5 = 0 }, JsonRequestBehavior.AllowGet);
         }
 
         [SessionExpire]
@@ -277,7 +308,7 @@ namespace HRM_TrangAn.Controllers
                     dr["data" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     dr["data2" + date.ToString("yyyyMMdd")] = float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
                     dr["data3" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString()) - float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
-                    TongCong += float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString()) + float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
+                    TongCong += float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString()) - float.Parse(giamtru.Rows[i][date.ToString("yyyyMMdd")].ToString());
                 }
                 dr["ID"] = ticket.Rows[i]["ID"].ToString();
                 dr["TenDayDu"] = ticket.Rows[i]["TenDayDu"].ToString();
@@ -450,7 +481,7 @@ namespace HRM_TrangAn.Controllers
 
         [SessionExpire]
         [HttpPost]
-        public ActionResult GetData_BaoCaoTickeCuaCacToTrongThang(DateTime TuNgay, DateTime DenNgay)
+        public ActionResult GetData_BaoCaoTickeCuaCacToTrongThang(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
             ChamCongDAO tk_dao = new ChamCongDAO();
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
@@ -463,7 +494,7 @@ namespace HRM_TrangAn.Controllers
             {
                 dt.Columns.Add("data" + date.ToString("yyyyMMdd"), typeof(float));
             }
-            DataTable ticket = tk_dao.GetDataCongChuyenDoTheoCacTo(TuNgay, DenNgay);
+            DataTable ticket = tk_dao.GetDataCongChuyenDoTheoCacTo(TuNgay, DenNgay, ID_ToNhom);
             for (int i = 0; i < ticket.Rows.Count; i++)
             {
                 DataRow dr = dt.NewRow();
@@ -538,7 +569,7 @@ namespace HRM_TrangAn.Controllers
         [HttpPost]
         public ContentResult GetData_BaoCaoChiTietChamCong(DateTime TuNgay, DateTime DenNgay, int ID_ToNhom)
         {
-            ChamCongDAO tk_dao = new ChamCongDAO();            
+            ChamCongDAO tk_dao = new ChamCongDAO();
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
@@ -550,6 +581,7 @@ namespace HRM_TrangAn.Controllers
             dt.Columns.Add("TongCongLDTrongThang", typeof(float));
             dt.Columns.Add("Ticket", typeof(float));
             dt.Columns.Add("ChuyenTo", typeof(float));
+            dt.Columns.Add("ChuyenCong", typeof(float));
             dt.Columns.Add("Plus", typeof(float));
             dt.Columns.Add("CongPhatSinh", typeof(float));
             dt.Columns.Add("NoCongTonDau", typeof(float));
@@ -579,8 +611,9 @@ namespace HRM_TrangAn.Controllers
                 dr["Plus"] = chotcong.Rows[i]["Plus"].ToString();
                 dr["NoCongTonDau"] = chotcong.Rows[i]["NoCongTonDau"].ToString();
                 dr["CongPhatSinh"] = chotcong.Rows[i]["CongPhatSinh"].ToString();
+                dr["ChuyenCong"] = chotcong.Rows[i]["ChuyenCong"].ToString();
                 dr["NoCong"] = float.Parse(chotcong.Rows[i]["NoCongTonDau"].ToString()) + float.Parse(chotcong.Rows[i]["TongCongLDTrongThang"].ToString()) + float.Parse(chotcong.Rows[i]["ChuyenTo"].ToString()) +
-                    float.Parse(chotcong.Rows[i]["CongPhatSinh"].ToString()) - float.Parse(chotcong.Rows[i]["Ticket"].ToString()) - float.Parse(chotcong.Rows[i]["Plus"].ToString());
+                    float.Parse(chotcong.Rows[i]["CongPhatSinh"].ToString()) + float.Parse(chotcong.Rows[i]["ChuyenCong"].ToString()) - float.Parse(chotcong.Rows[i]["Ticket"].ToString()) - float.Parse(chotcong.Rows[i]["Plus"].ToString());
                 for (var date = TuNgay; date <= DenNgay; date = date.AddDays(1))
                 {
                     dr["data" + date.ToString("yyyyMMdd")] = float.Parse(ticket.Rows[i][date.ToString("yyyyMMdd")].ToString());

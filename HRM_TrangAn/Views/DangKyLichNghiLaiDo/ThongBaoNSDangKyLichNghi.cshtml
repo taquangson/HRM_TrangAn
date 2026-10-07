@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HRM TRANG AN</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <span style="font-size:13px;vertical-align:top">
+        Thông báo đăng ký lịch nghỉ từ nhân sự: <b>@Model.TenDayDu</b> !
+        <br />
+        <span>
+            Thời gian nghỉ: từ <b>@Model.BatDauNghi.ToString("dd-MM-yyyy HH:mm")</b> đến <b>@Model.KetThucNghi.ToString("dd-MM-yyyy HH:mm")</b>
+        </span>
+        <br />
+
+        <span>
+            Hình thức nghỉ: @Model.TenLoai
+        </span>
+        <br />
+
+        <span>
+            Ghi chú: @Model.GhiChu
+        </span>
+        <br />
+    </span>
+
+</body>
+</html>

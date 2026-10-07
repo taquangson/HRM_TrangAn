@@ -107,7 +107,7 @@ function SetValidate(input) {
             inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("invalid").addClass("valid");
         }
     })
-    if (inputtag.val() == "" || inputtag.val().trim() == "") {
+    if (inputtag.val() == "" || inputtag.val() == "") {
         valid = false;
         inputtag.parents().find("div[toggle-valid='" + input + "']").removeClass("valid").addClass("invalid");
     } else {

@@ -287,6 +287,7 @@ function TimKiem() {
 
             {
                 field: "NoCongTonDau",
+                format: "{0:n2}",
                 title: "Tồn đầu",
                 footerTemplate: function (e) {
                     return e.NoCongTonDau ? kendo.toString(e.NoCongTonDau.sum, 'n0') : 0
@@ -312,6 +313,7 @@ function TimKiem() {
             },
             {
                 field: "CongPhatSinh",
+                format: "{0:n2}",
                 title: "Công trách nhiệm",
                 footerTemplate: function (e) {
                     return e.CongPhatSinh ? kendo.toString(e.CongPhatSinh.sum, 'n0') : 0
@@ -338,8 +340,9 @@ function TimKiem() {
             {
                 field: "TongCongLDTrongThang",
                 title: "Tổng công LĐ trong tháng",
+                format: "{0:n2}",
                 footerTemplate: function (e) {
-                    return e.TongCongLDTrongThang ? kendo.toString(e.TongCongLDTrongThang.sum, 'n0') : 0
+                    return e.TongCongLDTrongThang ? kendo.toString(e.TongCongLDTrongThang.sum, 'n2') : 0
                 },
                 aggregates: ["sum"],
                 width: "170px",
@@ -363,8 +366,9 @@ function TimKiem() {
             {
                 field: "Ticket",
                 title: "Tổng tích kê",
+                format: "{0:n2}",
                 footerTemplate: function (e) {
-                    return e.Ticket ? kendo.toString(e.Ticket.sum, 'n0') : 0
+                    return e.Ticket ? kendo.toString(e.Ticket.sum, 'n2') : 0
                 },
                 aggregates: ["sum"],
                 width: "170px",
@@ -388,9 +392,10 @@ function TimKiem() {
             {
                 field: "ChuyenTo",
                 title: "Chuyến tổ",
+                format: "{0:n2}",
                 aggregates: ["sum"],
                 footerTemplate: function (e) {
-                    return e.ChuyenTo ? kendo.toString(e.ChuyenTo.sum, 'n0') : 0
+                    return e.ChuyenTo ? kendo.toString(e.ChuyenTo.sum, 'n2') : 0
                 },
                 width: "170px",
                 filterable: {

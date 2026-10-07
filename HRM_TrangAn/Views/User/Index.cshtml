@@ -243,6 +243,7 @@
             $("#ComboHoSo").kendoComboBox({
                 dataTextField: "TenDayDu",
                 dataValueField: "ID",
+                template: '#:data.MaNhanVien# - #:data.TenDayDu#',
                 filter: "contains",
                 suggest: true,
                 delay: 1000,

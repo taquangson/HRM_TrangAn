@@ -14,5 +14,6 @@ namespace HRM_TrangAn.DataAccess.Models
         public DateTime NgayTao { get; set; }
         public int TrangThai { get; set; }
         public int SoNguoi { get; set; }
+        public int DaChon { get; set; }
     }
 }

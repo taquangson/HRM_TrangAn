@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace HRM_TrangAn.Controllers
 {
-    public class PhuCapController: Controller
+    public class PhuCapController : Controller
     {
         [SessionExpire]
         public ActionResult Index()
@@ -75,19 +75,35 @@ namespace HRM_TrangAn.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertMulti(PhuCapModel model, string StringID)
+        public ActionResult InsertMulti(List<PhuCapModel> data)
         {
             PhuCapDAO dao = new PhuCapDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
-            model.ID_NguoiTao = userinfor.ID;
-            if (dao.InsertMulti(model, StringID))
+            foreach (PhuCapModel model in data)
             {
-                return Json(new { success = true, msg = "Thêm hoặc sửa dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+                model.ID_NguoiTao = userinfor.ID;
+                dao.InsertOrUpdate(model);
             }
-            else
+            return Json(new { success = true, msg = "Thêm hoặc sửa dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ImportFromExcel(List<PhuCapModel> data)
+        {
+            PhuCapDAO dao = new PhuCapDAO();
+            HoSoNhanSuDAO hsdao = new HoSoNhanSuDAO();
+            NoiDungPhuCapDAO ndpcdao = new NoiDungPhuCapDAO();
+            List<NoiDungPhuCapModel> dspc = ndpcdao.GetAll();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            foreach (PhuCapModel model in data)
             {
-                return Json(new { success = false, msg = "Thêm hoặc sửa dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+                model.ID_NguoiTao = userinfor.ID;
+                model.ID_HoSoNhanSu = hsdao.GetByMa(model.MaNhanVien).ID;
+                model.ID_NoiDungPhuCap = dspc.Where(x => x.Ma == model.MaPhuCap).FirstOrDefault().ID;
+                model.NgayHuongPhuCap = model.NgayHuongPhuCap;
+                dao.InsertOrUpdate(model);
             }
+            return Json(new { success = true, msg = "Import dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

@@ -16,14 +16,13 @@ $(document).ready(function () {
             schema: {
                 model: {
                     fields: {
-                        TongTien: { type: "number" },
-                        TongTienHang: { type: "number" }
+                        NgayDi: { type: "date" },
+                        SoLuotChamCong: { type: "number" }
                     }
                 }
             },
             aggregate: [
-                { field: "TongTien", aggregate: "sum" },
-                { field: "TongTienHang", aggregate: "sum" }
+                { field: "SoLuotChamCong", aggregate: "sum" }
             ]
         }),
         scrollable: true,
@@ -237,6 +236,30 @@ $(document).ready(function () {
                     style: "text-align: center; font-size: 12px; font-weight:bold",
                     class: "table-header-cell"
                 }
+            },
+            {
+                field: "SoLuotChamCong",
+                title: "Số khách",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                footerTemplate: function (e) {
+                    if (e.SoLuotChamCong) {
+                        return kendo.toString(e.SoLuotChamCong.sum ? e.SoLuotChamCong.sum : 0, "N0");
+                    }
+                },
+                footerAttributes: { style: "text-align: right; font-weight:700" },
             },
             {
                 field: "TrangThai",
@@ -566,17 +589,18 @@ function LoadGridData() {
         kendo.ui.progress($("#grid"), true);
         var dataSource = new kendo.data.DataSource({
             data: response,
+            pageSize: 50,
             schema: {
                 model: {
-                    id: "ID_ChuyenDo",
                     fields: {
-                        NgayDi: {
-                            type: 'date'
-                        },
+                        NgayDi: { type: "date" },
+                        SoLuotChamCong: { type: "number" }
                     }
                 }
             },
-            pageSize: 20,
+            aggregate: [
+                { field: "SoLuotChamCong", aggregate: "sum" }
+            ]
         });
         $("#grid").data("kendoGrid").setDataSource(dataSource);
         kendo.ui.progress($("#grid"), false);

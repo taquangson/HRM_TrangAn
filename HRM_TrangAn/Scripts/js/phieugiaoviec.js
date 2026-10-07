@@ -1022,7 +1022,7 @@ function openAddNhanVienWindow(uid) {
 
         kendo.ui.progress($("#gridAddNhanVien"), false);
         if ($(window).width() > 800) {
-            $("#windowNhanVien").data("kendoWindow").center().open();
+            $("#windowNhanVien").data("kendoWindow").center().maximize().open();
         } else {
             $("#windowNhanVien").data("kendoWindow").center().maximize().open();
         }
@@ -1574,13 +1574,14 @@ function refreshCheckBox(uids) {
 }
 
 function LuuAddNhanVien() {
-    $("#windowNhanVien").data("kendoWindow").close();
     var grid = $("#grid").data("kendoGrid");
     var selectedItem = grid.dataItem(grid.select());
     var arr_idnhanvien = [];
     var bangDuLieuAddNhanVien = $("#gridAddNhanVien").data("kendoGrid");
+    $.each(selectedItem.lstToNhomKeHoach, function (index, item) { item.DaChon = 0; });
     bangDuLieuAddNhanVien.select().each(function () {
         var dataItem = bangDuLieuAddNhanVien.dataItem(this);
+
         //console.log(dataItem);
         //bangDuLieuNhanVien.push({
         //    ID: dataItem.ID,
@@ -1594,8 +1595,17 @@ function LuuAddNhanVien() {
         //    MaNhanVien: dataItem.MaNhanVien
         //});
         arr_idnhanvien.push(dataItem.ID);
+        selectedItem.lstToNhomKeHoach.filter(x => x.ID_ToNhom == dataItem.ID_ToNhom)[0].DaChon++;
     });
 
+    console.log(selectedItem.lstToNhomKeHoach);
+    let valid = true;
+    $.each(selectedItem.lstToNhomKeHoach, function (index, item) {
+        valid = item.DaChon == item.SoNguoi;
+        if (item.DaChon != item.SoNguoi) {
+            notification.show({ kValue: "Số lượng người ở :" + item.TenToNhom + " chưa đúng vơi phân công! Vui lòng kiểm tra lại!" }, "error");
+        }
+    });
 
     $.ajax({
         url: '/KeHoach/UpdateDanhSachNhanVien',
@@ -1609,6 +1619,7 @@ function LuuAddNhanVien() {
             notification.show({ kValue: response.msg }, "success");
             Huy();
             TimKiem();
+            $("#windowNhanVien").data("kendoWindow").close();
         } else {
             notification.show({ kValue: response.msg }, "error");
         }

@@ -512,8 +512,8 @@ namespace HRM_TrangAn.DataAccess.DAO
             {
                 SqlParameter[] pars = new SqlParameter[] {
                     new SqlParameter("@ID_ChinhSachLuong", model.ID_ChinhSachLuong),
-                    new SqlParameter("@CongChuan", model.CongChuan),
-                    new SqlParameter("@CongChuanTheoThang", model.CongChuanTheoThang),
+                    //new SqlParameter("@CongChuan", model.CongChuan),
+                    //new SqlParameter("@CongChuanTheoThang", model.CongChuanTheoThang),
                     new SqlParameter("@DoanhSoToiThieu", model.DoanhSoToiThieu),
                     new SqlParameter("@LuyKe_DoanhSoToiThieu", model.LuyKe_DoanhSoToiThieu),
                     new SqlParameter("@LuongKhachToiThieu", model.LuongKhachToiThieu),

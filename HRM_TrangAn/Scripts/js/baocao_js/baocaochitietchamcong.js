@@ -688,6 +688,188 @@ function loadChiTietTinhTien(idnv, ngay) {
     });
 }
 
+function loadChiTietTinhTien(idnv, ngay) {
+    $.ajax({
+        url: '/LaoDongThueKhoan/GetByNhanVien_Ngay?ID_NhanVien=' + idnv + '&Ngay=' + ngay,
+        type: 'GET',
+    }).done(function successCallback(response) {
+        var dataSource = new kendo.data.DataSource({
+            data: response,
+            schema: {
+                model: {
+                    id: "ID",
+                    fields: {
+                        NgayApDung: { type: 'date', editable: false },
+                        ThanhTien: { type: 'number', editable: false },
+                    }
+                }
+            }
+        });
+        var container = document.createElement('div');
+        $(container).kendoGrid({
+            height: 235,
+            dataSource: dataSource,
+            scrollable: true,
+            persistSelection: true,
+            autoFitColumn: true,
+            resizable: true,
+            sortable: true,
+            filterable: {
+                mode: "row",
+            },
+            pageable: false,
+            dataBinding: function () {
+                record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+            },
+            columns: [
+                {
+                    field: "NgayApDung",
+                    title: "Ngày áp dụng",
+                    format: "{0:dd/MM/yyyy}",
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                {
+                    field: "ThanhTien",
+                    title: "Thành tiền",
+                    format: "{0:N0}",
+                    width: "120px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                {
+                    field: "TenDayDu",
+                    title: "Tên nhân viên",
+                    width: "150px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: left;",
+                    }
+                },
+
+                {
+                    field: "MaThuyen",
+                    title: "Mã số đò",
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    },
+                    attributes: {
+                        style: "text-align: center;",
+                    }
+                },
+                {
+                    field: "TenToNhom",
+                    title: "Tên tổ",
+                    width: "80px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "TenCongViec",
+                    title: "Danh mục công việc",
+                    width: "200px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "GhiChu",
+                    width: "120px",
+                    title: "Ghi chú",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold",
+                        class: "table-header-cell"
+                    }
+                }
+            ]
+
+        });
+        $('#contentgrid').html(container);
+    });
+}
+
 function LoadCombo() {
     $.ajax({
         url: '/ToNhom/GetAllDanhMucToNhom',
@@ -1015,6 +1197,32 @@ function TimKiem() {
                 title: "PS",
                 template: function (e) {
                     return "<div class='congPS' data-type='congps' data-idnhanvien='" + e.ID + "' data-ngay='" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), 'yyyy/MM/dd') + "'/>" + e.CongPhatSinh + "</div>";
+                },
+                footerTemplate: "#=kendo.toString(sum,'n2')#",
+                aggregates: ["sum"],
+                width: "170px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    class: 'text-center congPS'
+                }
+            },
+            {
+                field: "ChuyenCong",
+                title: "Công chuyển",
+                template: function (e) {
+                    return "<div class='congChuyen' data-type='congchuyen' data-idnhanvien='" + e.ID + "' data-ngay='" + kendo.toString($("#TuNgay").data("kendoDatePicker").value(), 'yyyy/MM/dd') + "'/>" + e.ChuyenCong + "</div>";
                 },
                 footerTemplate: "#=kendo.toString(sum,'n2')#",
                 aggregates: ["sum"],

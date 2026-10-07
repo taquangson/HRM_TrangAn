@@ -118,22 +118,35 @@ namespace HRM_TrangAn.Controllers
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             DataTable dt = dao.CongNhanSu_GetDataTree(from, to, ID_PhongBan);
             List<DangKyLichNghiModel> lichnghi = new DangKyLichNghiDAO().GetByDate(from, to);
+            List<TrucDemModel> trucdem = new TrucDemDAO().GetByNgay(ID_PhongBan, "", from, to);
+            List<DanhMucNgayLeModel> ngaynghile = new DanhMucNgayLeDAO().GetByDate(from, to);
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 float TongCong = 0;
+                float LeTetThucTe = 0;
                 int ID_TaiKhoan = int.Parse(dt.Rows[i]["ID"].ToString());
+                float XuatAn = dao.CongNhanSu_CountXuatAn(from, to, ID_TaiKhoan);
                 List<DangKyLichNghiModel> lichnghinv = lichnghi.Where(x => x.TrangThai == 2 && x.ID_TaiKhoan == ID_TaiKhoan).ToList();
                 LichSuThaoTacBangCongModel lsuchotcong = daobc.GetLichSu(ID_TaiKhoan, from.Month, from.Year);
+
                 for (var date = from; date <= to; date = date.AddDays(1))
                 {
-                    TongCong += float.Parse(dt.Rows[i][date.ToString("yyyyMMdd")].ToString());
+                    float cong = float.Parse(dt.Rows[i][date.ToString("yyyyMMdd")].ToString());
+                    TongCong += cong;
+                    if (ngaynghile.Any(x => x.NgayBatDauNghi <= date && date <= x.NgayKetThucNghi))
+                        LeTetThucTe += cong;
                 }
-                TongCong += lichnghinv.Where(x => x.KyHieu == "DO" || x.KyHieu == "PH").Count();
-
                 childRow = new Dictionary<string, object>();
                 childRow.Add("TongCong", TongCong);
+                childRow.Add("NgayNghiPH", lichnghinv.Where(x => x.KyHieu == "PH").Sum(x => x.SoNgay));
+                childRow.Add("LeTetThucTe", LeTetThucTe);
+                childRow.Add("TrucDem", trucdem.Count(x => x.ID_TaiKhoan == ID_TaiKhoan && x.Loai == 0));
+                childRow.Add("TrucDemDenTran", trucdem.Count(x => x.ID_TaiKhoan == ID_TaiKhoan && x.Loai == 1));
+                childRow.Add("CongTinhLuong", TongCong + lichnghinv.Where(x => x.KyHieu == "PH").Sum(x => x.SoNgay));
+                childRow.Add("XuatAn", XuatAn);
+
 
                 if (lsuchotcong != null)
                 {
@@ -289,7 +302,7 @@ namespace HRM_TrangAn.Controllers
                                 if (model.lstChamCong.First().WorkDate < batdau && model.lstChamCong.Last().WorkDate > ketthuc)
                                 {
                                     model.SoCong += phanbo.SoCong;
-                                   
+
                                     if (phanbo.TangCa == 1)
                                     {
                                         model.SoCongTangCa += phanbo.SoCong;
@@ -392,6 +405,53 @@ namespace HRM_TrangAn.Controllers
             }
             //return Json(result, JsonRequestBehavior.AllowGet);
             return Content(JsonConvert.SerializeObject(result));
+        }
+
+        public ActionResult DieuChinhCong(int ID_HoSoNhanSu, int ID_TaiKhoan, DateTime Ngay, int ID_Ca, DateTime Checkin, DateTime Checkout, float SoCong, float SoCongTangCa, float TrucDem, float TrucDemDenTran, float XuatAn)
+        {
+            ChamCongNhanVienDAO ccnvdao = new ChamCongNhanVienDAO();
+            TinhCongNhanVienModel model = new TinhCongNhanVienModel();
+            model.ID_TaiKhoan = ID_TaiKhoan;
+            model.SoCong = SoCong;
+            model.SoCongTangCa = SoCongTangCa;
+            model.XuatAn = XuatAn;
+            model.Ngay = Ngay;
+            model.ID_CaLamViec = ID_Ca;
+            if (ccnvdao.InsertCongNhanVien(model))
+            {
+                TrucDemDAO tddao = new TrucDemDAO();
+                if (TrucDem > 0)
+                {
+                    TrucDemModel td = new TrucDemModel();
+                    td.ID_TaiKhoan = model.ID_TaiKhoan;
+                    td.Ngay = model.Ngay;
+                    td.TrangThai = 1;
+                    td.Loai = 0;
+                    tddao.InsertOrUpdate(td);
+                }
+                else
+                {
+                    tddao.DeleteByTaiKhoan_Ngay(model.ID_TaiKhoan, model.Ngay, 0);
+                }
+                if (TrucDemDenTran > 0)
+                {
+                    TrucDemModel td = new TrucDemModel();
+                    td.ID_TaiKhoan = model.ID_TaiKhoan;
+                    td.Ngay = model.Ngay;
+                    td.TrangThai = 1;
+                    td.Loai = 1;
+                    tddao.InsertOrUpdate(td);
+                }
+                else
+                {
+                    tddao.DeleteByTaiKhoan_Ngay(model.ID_TaiKhoan, model.Ngay, 1);
+                }
+                return Json(new { success = true, msg = "Lưu dữ liệu thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu dữ liệu thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
         }
 
 

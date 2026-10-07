@@ -57,6 +57,13 @@ namespace HRM_TrangAn.Controllers
             return View();
         }
 
+        [SessionExpire]
+        [SessionAdminRole]
+        public ActionResult DanhMucCongTrinh()
+        {
+            return View();
+        }
+
         [SessionAdminRole]
         public ActionResult DanhMucTruongHoc()
         {
@@ -103,6 +110,21 @@ namespace HRM_TrangAn.Controllers
         {
             DanhMucNgayLeDAO dm_dao = new DanhMucNgayLeDAO();
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            if (dm_dao.InsertOrUpdate(model) > 0)
+            {
+                return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Lưu danh mục thất bại, vui lòng liên hệ quản trị viên" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [SessionExpire]
+        [HttpPost]
+        public ActionResult InsertOrUpdate_DanhMucCongTrinh(DanhMucCongTrinhModel model)
+        {
+            DanhMucCongTrinhDAO dm_dao = new DanhMucCongTrinhDAO();
             if (dm_dao.InsertOrUpdate(model) > 0)
             {
                 return Json(new { success = true, msg = "Lưu danh mục thành công" }, JsonRequestBehavior.AllowGet);
@@ -169,6 +191,15 @@ namespace HRM_TrangAn.Controllers
         {
             DanhMucLoiDAO dm_dao = new DanhMucLoiDAO();
             List<DanhMucLoiModel> dt = dm_dao.GetAll();
+            return Json(dt, JsonRequestBehavior.AllowGet);
+        }
+
+        [SessionExpire]
+        [HttpGet]
+        public ActionResult GetAll_DanhMucCongTrinh()
+        {
+            DanhMucCongTrinhDAO dm_dao = new DanhMucCongTrinhDAO();
+            List<DanhMucCongTrinhModel> dt = dm_dao.GetAll();
             return Json(dt, JsonRequestBehavior.AllowGet);
         }
 

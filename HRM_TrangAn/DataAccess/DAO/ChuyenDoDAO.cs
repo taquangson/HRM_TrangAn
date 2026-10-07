@@ -176,6 +176,32 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<ChuyenDoModel> GetChuyenDoForBaoCao_GetByNhanVien(DateTime from, DateTime to, int ID_NhanVien)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to),
+                new SqlParameter("@ID_NhanVien", ID_NhanVien)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChuyenDo_GetByNhanVien", pars);
+                DataTable dt = ds.Tables[0];
+                List<ChuyenDoModel> result = new List<ChuyenDoModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ChuyenDoModel model = GetChuyenDoFromDataRow(dr);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChuyenDo_GetByNgay_NhanVien " + ex.Message);
+                return null;
+            }
+        }
+
         public List<ChuyenDoModel> GetChuyenDoNhapTay(DateTime from, DateTime to, int ID_ToNhom)
         {
             try
@@ -454,6 +480,32 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_ChuyenDo_DeleteChuyenDoThemByNgay " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool UpdateSoLuongKhach(int ID_ChuyenDo, int SoLuong)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_ChuyenDo",ID_ChuyenDo ),
+                    new SqlParameter("@SoLuong",SoLuong ),
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_ChuyenDo_UpdateSoLuongKhach", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChuyenDo_UpdateSoLuongKhach " + ex.Message);
                 return false;
             }
         }

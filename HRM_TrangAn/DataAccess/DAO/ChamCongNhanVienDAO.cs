@@ -195,6 +195,8 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@ID_TaiKhoan", model.ID_TaiKhoan),
                     new SqlParameter("@NgayTinhCong", model.Ngay),
                     new SqlParameter("@SoCong", model.SoCong),
+                    new SqlParameter("@SoCongTangCa", model.SoCongTangCa),
+                    new SqlParameter("@XuatAn", model.XuatAn),
                     new SqlParameter("@Loai", 1),
                     new SqlParameter("@ID_CaLamViec", model.ID_CaLamViec)
 
@@ -310,6 +312,70 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public DataTable CongNhanSu_GetDataTree_XuatAn(DateTime from, DateTime to, int ID_PhongBan)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@fromdate", from),
+                    new SqlParameter("@todate", to),
+                    new SqlParameter("@ID_PhongBan", ID_PhongBan)
+                };
+
+                DataSet ds = helper.ExecuteDataSet("sp_CongNhanSu_GetDataTree_XuatAn", pars);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongNhanSu_GetDataTree_XuatAn " + ex.Message);
+                return null;
+            }
+        }
+
+        public float CongNhanSu_CountXuatAn(DateTime from, DateTime to, int ID_TaiKhoan)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@from", from),
+                    new SqlParameter("@to", to),
+                    new SqlParameter("@ID_TaiKhoan", ID_TaiKhoan)
+                };
+
+                object d = helper.ExecuteScalar("sp_CongNhanSu_CountXuatAn", pars);
+                return float.Parse(d.ToString());
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongNhanSu_CountXuatAn " + ex.Message);
+                return 0;
+            }
+        }
+
+
+
+        public DataTable CongNhanSu_GetDataTree_TangCa(DateTime from, DateTime to, int ID_PhongBan)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                    new SqlParameter("@fromdate", from),
+                    new SqlParameter("@todate", to),
+                    new SqlParameter("@ID_PhongBan", ID_PhongBan)
+                };
+
+                DataSet ds = helper.ExecuteDataSet("sp_CongNhanSu_GetDataTree_TangCa", pars);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_CongNhanSu_GetDataTree_TangCa " + ex.Message);
+                return null;
+            }
+        }
+
         public DataTable CongNhanSu_GetDataByNhanVien(DateTime from, DateTime to, int ID_TaiKhoan)
         {
             try
@@ -371,6 +437,27 @@ namespace HRM_TrangAn.DataAccess.DAO
                     new SqlParameter("@to",to),
                 };
                 DataSet ds = helper.ExecuteDataSet("sp_ChamCongNhanVien_GetBangChamCong", pars);
+                DataTable dt = ds.Tables[0];
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_ChamCongNhanVien_GetBangChamCong " + ex.Message);
+                return null;
+            }
+        }
+
+        public DataTable GetBangChamCongForNhanVien(int ID_HSNS, DateTime from, DateTime to)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_HSNS",ID_HSNS),
+                    new SqlParameter("@from",from),
+                    new SqlParameter("@to",to),
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_ChamCongNhanVien_GetBangChamCongForNhanVien", pars);
                 DataTable dt = ds.Tables[0];
                 return dt;
             }

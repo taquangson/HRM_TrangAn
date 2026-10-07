@@ -20,9 +20,13 @@
                     id: "ID",
                     fields: {
                         Ngay: { type: 'date', editable: false },
+                        SoNguoiThucTe: { type: 'number', editable: false },
                     }
                 }
             },
+            aggregate: [
+                { field: "SoNguoiThucTe", aggregate: "sum" },
+            ],
             pageSize: 20,
             //aggregate: [{ field: 'SoCong', aggregate: "sum" }]
         }),
@@ -180,6 +184,7 @@
                 field: "SoNguoiThucTe",
                 title: "Tổng số người",
                 width: "150px",
+                footerTemplate: "#=kendo.toString(sum,'n1')#",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -257,10 +262,13 @@ function TimKiem() {
                     id: "ID",
                     fields: {
                         NgayLamViec: { type: 'date', editable: false },
-
+                        SoNguoiThucTe: { type: 'number', editable: false },
                     }
                 }
             },
+            aggregate: [
+                { field: "SoNguoiThucTe", aggregate: "sum" },
+            ],
             pageSize: 30,
         });
         if (dataSource === undefined || dataSource === null) {

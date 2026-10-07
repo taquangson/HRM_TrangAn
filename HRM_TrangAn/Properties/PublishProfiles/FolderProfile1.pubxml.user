@@ -5,15 +5,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\OneDrive\Documents\source\HRM_TrangAn_V2_Publish</_PublishTargetUrl>
-    <History>False|2024-12-17T17:21:47.7580366Z;False|2024-12-18T00:16:34.8475793+07:00;False|2024-12-18T00:14:34.5841893+07:00;False|2024-12-18T00:13:14.8025849+07:00;False|2024-12-18T00:11:58.7865770+07:00;False|2024-12-18T00:11:24.1190748+07:00;False|2024-12-18T00:10:31.2217168+07:00;False|2024-12-18T00:10:08.3838027+07:00;False|2024-12-18T00:09:11.7127935+07:00;True|2024-12-10T22:57:40.7039509+07:00;True|2024-12-08T22:37:20.4695748+07:00;True|2024-11-23T22:57:24.0757234+07:00;True|2024-11-23T11:40:57.7517540+07:00;True|2024-11-20T09:08:56.5853622+07:00;True|2024-11-18T20:13:53.2550974+07:00;True|2024-11-14T12:41:08.8109629+07:00;True|2024-11-11T09:24:21.8550844+07:00;True|2024-11-10T15:30:29.4193705+07:00;True|2024-11-02T22:22:27.3638561+07:00;True|2024-10-21T16:53:34.3568164+07:00;True|2024-09-13T19:37:13.8843672+07:00;True|2024-09-13T19:06:41.8193604+07:00;True|2024-09-02T11:43:17.5615220+07:00;True|2024-08-23T15:31:30.3055662+07:00;</History>
+    <History>True|2026-04-04T08:54:49.8985805Z;True|2026-02-24T11:22:51.6207044+07:00;True|2026-01-19T20:25:29.9894354+07:00;True|2026-01-16T16:34:03.0482198+07:00;True|2026-01-16T16:06:24.1113612+07:00;True|2025-10-31T23:07:46.4300575+07:00;True|2025-10-01T10:13:08.8758761+07:00;True|2025-09-01T22:42:20.6709882+07:00;True|2025-06-11T15:04:09.7847708+07:00;False|2025-06-11T15:03:30.9746945+07:00;True|2025-06-11T14:57:08.8738453+07:00;True|2025-06-08T08:58:26.5377658+07:00;True|2025-02-08T15:58:09.7109973+07:00;False|2024-12-18T00:21:47.7580366+07:00;False|2024-12-18T00:16:34.8475793+07:00;False|2024-12-18T00:14:34.5841893+07:00;False|2024-12-18T00:13:14.8025849+07:00;False|2024-12-18T00:11:58.7865770+07:00;False|2024-12-18T00:11:24.1190748+07:00;False|2024-12-18T00:10:31.2217168+07:00;False|2024-12-18T00:10:08.3838027+07:00;False|2024-12-18T00:09:11.7127935+07:00;True|2024-12-10T22:57:40.7039509+07:00;True|2024-12-08T22:37:20.4695748+07:00;True|2024-11-23T22:57:24.0757234+07:00;True|2024-11-23T11:40:57.7517540+07:00;True|2024-11-20T09:08:56.5853622+07:00;True|2024-11-18T20:13:53.2550974+07:00;True|2024-11-14T12:41:08.8109629+07:00;True|2024-11-11T09:24:21.8550844+07:00;True|2024-11-10T15:30:29.4193705+07:00;True|2024-11-02T22:22:27.3638561+07:00;True|2024-10-21T16:53:34.3568164+07:00;True|2024-09-13T19:37:13.8843672+07:00;True|2024-09-13T19:06:41.8193604+07:00;True|2024-09-02T11:43:17.5615220+07:00;True|2024-08-23T15:31:30.3055662+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
+    <File Include=".vs/HRM_TrangAn.csproj.dtbcache.json">
+      <publishTime>01/19/2026 14:14:55</publishTime>
+    </File>
     <File Include="Assets/Common.css">
       <publishTime>11/08/2024 22:28:50</publishTime>
     </File>
     <File Include="Assets/common.js">
-      <publishTime>12/10/2024 21:49:41</publishTime>
+      <publishTime>02/19/2025 09:56:43</publishTime>
     </File>
     <File Include="Assets/custom.css">
       <publishTime>08/21/2024 09:25:21</publishTime>
@@ -1779,6 +1782,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>04/04/2026 15:54:15</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>04/04/2026 15:54:15</publishTime>
+    </File>
     <File Include="bin/FirebaseAdmin.dll">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
@@ -1819,10 +1828,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="bin/HRM_TrangAn.dll">
-      <publishTime>12/10/2024 22:57:27</publishTime>
+      <publishTime>04/04/2026 15:53:58</publishTime>
     </File>
     <File Include="bin/HRM_TrangAn.pdb">
-      <publishTime>12/10/2024 22:57:27</publishTime>
+      <publishTime>04/04/2026 15:53:58</publishTime>
     </File>
     <File Include="bin/ICSharpCode.SharpZipLib.dll">
       <publishTime>08/21/2024 09:25:24</publishTime>
@@ -2049,11 +2058,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/WebGrease.dll">
       <publishTime>08/21/2024 09:25:25</publishTime>
     </File>
+    <File Include="Content/BangLuong/2025-1-0-0.json">
+      <publishTime>03/07/2025 10:22:28</publishTime>
+    </File>
     <File Include="Content/bootstrap.css">
       <publishTime>08/21/2024 09:25:22</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>08/21/2024 09:25:22</publishTime>
+    </File>
+    <File Include="Content/ChinhSachLuong/2025-1.json">
+      <publishTime>03/07/2025 11:58:14</publishTime>
     </File>
     <File Include="Content/Icons/icon-128x128.png">
       <publishTime>08/21/2024 09:31:16</publishTime>
@@ -2095,7 +2110,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:22</publishTime>
     </File>
     <File Include="Content/intheA3.css">
-      <publishTime>08/21/2024 09:25:22</publishTime>
+      <publishTime>06/13/2025 22:51:14</publishTime>
     </File>
     <File Include="Content/intheA4.css">
       <publishTime>08/21/2024 09:25:22</publishTime>
@@ -2305,13 +2320,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="log4net.config">
-      <publishTime>12/09/2024 10:54:07</publishTime>
+      <publishTime>12/12/2024 10:11:01</publishTime>
+    </File>
+    <File Include="Logs/logs.log">
+      <publishTime>02/24/2026 10:44:50</publishTime>
+    </File>
+    <File Include="Logs/logs.log.2024-10-03">
+      <publishTime>10/03/2024 22:37:15</publishTime>
     </File>
     <File Include="manifest.json">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>04/04/2026 15:54:01</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>08/21/2024 09:25:22</publishTime>
@@ -2347,22 +2371,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:22</publishTime>
     </File>
     <File Include="Scripts/js/bangcong.js">
-      <publishTime>11/08/2024 11:16:37</publishTime>
+      <publishTime>02/25/2025 21:12:49</publishTime>
     </File>
     <File Include="Scripts/js/bangcongnhanvien.js">
-      <publishTime>08/21/2024 09:31:16</publishTime>
+      <publishTime>12/12/2024 10:56:34</publishTime>
     </File>
     <File Include="Scripts/js/bangluongnhanvien.js">
-      <publishTime>11/16/2024 09:23:49</publishTime>
+      <publishTime>12/18/2024 08:12:57</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaobiendongnhansu.js">
       <publishTime>08/21/2024 09:25:22</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaochamcong.js">
-      <publishTime>12/10/2024 22:56:48</publishTime>
+      <publishTime>02/20/2025 15:39:35</publishTime>
+    </File>
+    <File Include="Scripts/js/baocao_js/baocaochamcongfornhanvien.js">
+      <publishTime>05/11/2025 17:08:34</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaochitietchamcong.js">
-      <publishTime>10/24/2024 16:25:34</publishTime>
+      <publishTime>05/07/2025 14:24:29</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaochotcong.js">
       <publishTime>08/21/2024 09:25:22</publishTime>
@@ -2380,7 +2407,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaokehoachcongviec.js">
-      <publishTime>11/20/2024 14:03:50</publishTime>
+      <publishTime>04/15/2025 11:06:45</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaolaodongcuatotrongthang.js">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2389,13 +2416,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaoluongticketheoto.js">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>04/15/2025 10:19:02</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaotickecuacactotrongthang.js">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>05/07/2025 09:54:41</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaotickecuatotrongthang.js">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>05/07/2025 09:46:13</publishTime>
     </File>
     <File Include="Scripts/js/baocao_js/baocaotickenam.js">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2422,22 +2449,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/calamviec.js">
-      <publishTime>12/03/2024 12:50:01</publishTime>
+      <publishTime>12/26/2024 14:45:52</publishTime>
     </File>
     <File Include="Scripts/js/calamviecnhanvien.js">
       <publishTime>11/14/2024 13:22:05</publishTime>
+    </File>
+    <File Include="Scripts/js/cauhinhcongchuan.js">
+      <publishTime>02/08/2025 14:20:32</publishTime>
     </File>
     <File Include="Scripts/js/cauhinhthuongdanhgia.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
     </File>
     <File Include="Scripts/js/chinhsachluongnhanvien.js">
-      <publishTime>11/25/2024 10:13:22</publishTime>
+      <publishTime>01/25/2025 01:23:05</publishTime>
     </File>
     <File Include="Scripts/js/dangkylichnghi.js">
-      <publishTime>12/07/2024 14:24:12</publishTime>
+      <publishTime>10/31/2025 22:40:02</publishTime>
+    </File>
+    <File Include="Scripts/js/dangkylichnghilaido.js">
+      <publishTime>10/31/2025 22:43:59</publishTime>
     </File>
     <File Include="Scripts/js/danhmucchinhsachluong.js">
       <publishTime>11/23/2024 19:08:30</publishTime>
+    </File>
+    <File Include="Scripts/js/danhmuccongtrinh.js">
+      <publishTime>01/19/2026 14:14:51</publishTime>
     </File>
     <File Include="Scripts/js/danhmuccongviec.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2452,7 +2488,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:20:41</publishTime>
     </File>
     <File Include="Scripts/js/danhmucngayle.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>01/25/2025 01:18:26</publishTime>
     </File>
     <File Include="Scripts/js/danhmucnguoigiamsat.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2506,13 +2542,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/08/2024 22:21:49</publishTime>
     </File>
     <File Include="Scripts/js/phancongcongviec.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>01/19/2026 20:15:40</publishTime>
     </File>
     <File Include="Scripts/js/phancongcongviectotruong.js">
-      <publishTime>11/16/2024 09:37:28</publishTime>
+      <publishTime>05/07/2025 13:26:53</publishTime>
     </File>
     <File Include="Scripts/js/phieugiaoviec.js">
-      <publishTime>11/09/2024 18:05:26</publishTime>
+      <publishTime>05/07/2025 13:52:39</publishTime>
     </File>
     <File Include="Scripts/js/phieuhoc.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2524,7 +2560,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/quanlybangluong.js">
-      <publishTime>11/23/2024 19:12:33</publishTime>
+      <publishTime>03/07/2025 14:58:44</publishTime>
     </File>
     <File Include="Scripts/js/quanlychucdanh.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2539,7 +2575,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:20:41</publishTime>
     </File>
     <File Include="Scripts/js/quanlycongtinhtien.js">
-      <publishTime>11/16/2024 09:49:55</publishTime>
+      <publishTime>05/07/2025 14:42:24</publishTime>
     </File>
     <File Include="Scripts/js/quanlydanhgiadiem.js">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2560,13 +2596,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:20:41</publishTime>
     </File>
     <File Include="Scripts/js/quanlylichnghi.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>03/05/2025 13:17:57</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlynghiphepnam.js">
+      <publishTime>12/18/2024 00:26:06</publishTime>
     </File>
     <File Include="Scripts/js/quanlyphatsinh.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>04/08/2025 11:10:57</publishTime>
     </File>
     <File Include="Scripts/js/quanlyphucap.js">
-      <publishTime>11/19/2024 21:58:52</publishTime>
+      <publishTime>04/14/2025 23:12:21</publishTime>
     </File>
     <File Include="Scripts/js/quanlytailieu.js">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2581,7 +2620,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:20:40</publishTime>
     </File>
     <File Include="Scripts/js/quanlytonhom.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>05/07/2025 10:20:02</publishTime>
+    </File>
+    <File Include="Scripts/js/quanlytrucdem.js">
+      <publishTime>01/16/2025 21:30:48</publishTime>
     </File>
     <File Include="Scripts/js/quanlytuyendo.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2596,7 +2638,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/thongtinbaohiem.js">
-      <publishTime>11/25/2024 11:17:55</publishTime>
+      <publishTime>12/12/2024 10:12:11</publishTime>
     </File>
     <File Include="Scripts/js/thongtincongty.js">
       <publishTime>10/30/2024 15:20:41</publishTime>
@@ -2611,7 +2653,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Scripts/js/xacnhanticket.js">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>09/16/2025 10:23:35</publishTime>
     </File>
     <File Include="Scripts/js/xinnghiphep.js">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2641,7 +2683,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/16/2024 09:05:03</publishTime>
     </File>
     <File Include="Views/BangLuong/Index.cshtml">
-      <publishTime>11/18/2024 20:54:54</publishTime>
+      <publishTime>02/28/2025 14:27:06</publishTime>
     </File>
     <File Include="Views/BaoCao/BangChotCong.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2650,10 +2692,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoChamCong.cshtml">
-      <publishTime>12/10/2024 21:39:00</publishTime>
+      <publishTime>02/19/2025 10:25:24</publishTime>
+    </File>
+    <File Include="Views/BaoCao/BaoCaoChamCongForNhanVien.cshtml">
+      <publishTime>05/06/2025 20:54:28</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoChiTietChamCong.cshtml">
-      <publishTime>10/24/2024 16:21:12</publishTime>
+      <publishTime>05/07/2025 14:25:44</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoChuyenDoNhapTay.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2668,7 +2713,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoForLaiDo.cshtml">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>02/24/2026 11:12:43</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoHocSinhNoPhieu.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2692,7 +2737,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoTickeCuaCacToTrongThang.cshtml">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>05/07/2025 09:52:38</publishTime>
     </File>
     <File Include="Views/BaoCao/BaoCaoTickeCuaToTrongThang.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2737,13 +2782,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/ChinhSachLuong/Index.cshtml">
-      <publishTime>11/23/2024 14:04:24</publishTime>
+      <publishTime>01/25/2025 01:18:26</publishTime>
     </File>
     <File Include="Views/CongViec/PhanCongCongViec.cshtml">
-      <publishTime>10/22/2024 14:20:01</publishTime>
+      <publishTime>01/19/2026 20:11:38</publishTime>
     </File>
     <File Include="Views/CongViec/PhanCongCongViecToTruong.cshtml">
-      <publishTime>10/19/2024 12:10:34</publishTime>
+      <publishTime>05/07/2025 10:35:51</publishTime>
     </File>
     <File Include="Views/CongViec/PhieuGiaoViec.cshtml">
       <publishTime>10/22/2024 11:18:26</publishTime>
@@ -2760,17 +2805,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/DangKyLichNghi/ThongBaoNSDangKyLichNghi.cshtml">
       <publishTime>08/21/2024 09:31:16</publishTime>
     </File>
+    <File Include="Views/DangKyLichNghiLaiDo/Index.cshtml">
+      <publishTime>10/31/2025 22:32:08</publishTime>
+    </File>
+    <File Include="Views/DangKyLichNghiLaiDo/ThongBaoNSDangKyLichNghi.cshtml">
+      <publishTime>10/31/2025 22:30:52</publishTime>
+    </File>
     <File Include="Views/DanhMuc/CaLamViec.cshtml">
       <publishTime>08/21/2024 09:31:16</publishTime>
     </File>
     <File Include="Views/DanhMuc/ChinhSachLuong.cshtml">
-      <publishTime>11/23/2024 19:05:56</publishTime>
+      <publishTime>02/08/2025 10:51:59</publishTime>
     </File>
     <File Include="Views/DanhMuc/CongViec.cshtml">
       <publishTime>10/24/2024 11:00:21</publishTime>
     </File>
     <File Include="Views/DanhMuc/CongViecThueKhoan.cshtml">
       <publishTime>10/23/2024 14:24:48</publishTime>
+    </File>
+    <File Include="Views/DanhMuc/DanhMucCongTrinh.cshtml">
+      <publishTime>01/19/2026 20:23:37</publishTime>
     </File>
     <File Include="Views/DanhMuc/DanhMucLoi.cshtml">
       <publishTime>08/22/2024 11:45:06</publishTime>
@@ -2818,7 +2872,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/Home/IndexHS.cshtml">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>05/06/2025 20:38:15</publishTime>
     </File>
     <File Include="Views/HoSoNhanSu/Index.cshtml">
       <publishTime>09/02/2024 11:28:13</publishTime>
@@ -2845,7 +2899,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/HoTro/InTheA4.cshtml">
-      <publishTime>08/21/2024 09:25:23</publishTime>
+      <publishTime>01/09/2026 14:49:31</publishTime>
     </File>
     <File Include="Views/HoTro/InTheA5.cshtml">
       <publishTime>08/21/2024 09:31:16</publishTime>
@@ -2908,7 +2962,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/24/2024 15:40:25</publishTime>
     </File>
     <File Include="Views/NghiepVu/QuanLyPhuCap.cshtml">
-      <publishTime>11/22/2024 09:57:56</publishTime>
+      <publishTime>04/14/2025 23:10:50</publishTime>
     </File>
     <File Include="Views/NghiepVu/QuanLyTicket.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2927,6 +2981,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Views/NghiepVu/XacNhanTicket.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
+    </File>
+    <File Include="Views/NghiPhepNam/QuanLyNghiPhepNam.cshtml">
+      <publishTime>12/18/2024 00:26:06</publishTime>
     </File>
     <File Include="Views/NhanVien/CauHinhThuongDanhGia.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2958,6 +3015,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/PhieuThu/ThongBaoHocPhi.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
+    <File Include="Views/PhongBan/CauHinhCongChuan.cshtml">
+      <publishTime>02/08/2025 14:06:05</publishTime>
+    </File>
     <File Include="Views/PhongBan/Index.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
@@ -2965,7 +3025,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/16/2024 08:52:18</publishTime>
+      <publishTime>02/24/2025 21:36:06</publishTime>
     </File>
     <File Include="Views/Shared/_Layout2.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
@@ -2988,6 +3048,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/TracNghiem/KhoDeThi.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
+    <File Include="Views/TrucDem/Index.cshtml">
+      <publishTime>01/15/2025 23:28:08</publishTime>
+    </File>
     <File Include="Views/TuyenDo/Index.cshtml">
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
@@ -2998,7 +3061,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>10/30/2024 15:20:41</publishTime>
+      <publishTime>03/05/2025 13:14:29</publishTime>
     </File>
     <File Include="Views/User/Login.cshtml">
       <publishTime>11/06/2024 08:32:19</publishTime>
@@ -3016,7 +3079,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/21/2024 09:25:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/10/2024 22:57:28</publishTime>
+      <publishTime>02/24/2026 11:22:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

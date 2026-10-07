@@ -96,6 +96,34 @@ namespace HRM_TrangAn.DataAccess.DAO
                 return null;
             }
         }
+        
+        
+        public List<DangKyLichNghiModel> GetDataLichNghiDaDuyet(DateTime from, DateTime to)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+              {
+                    new SqlParameter("@from",from ),
+                    new SqlParameter("@to",to )
+              };
+                DataSet ds = helper.ExecuteDataSet("sp_DangKyLichNghi_GetDataLichNghiDaDuyet", pars);
+                DataTable dt = ds.Tables[0];
+                List<DangKyLichNghiModel> result = new List<DangKyLichNghiModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DangKyLichNghiModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành DangKyLichNghiModel
+                    model.Tag_NhanVien = model.Tags_NhanVien.Trim().Split(',');
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_DangKyLichNghi_GetByDate " + ex.Message);
+                return null;
+            }
+        }
 
         public List<DangKyLichNghiModel> GetByID_NhanVien(int ID_TaiKhoan, DateTime from, DateTime to)
         {

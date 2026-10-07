@@ -14,6 +14,7 @@ namespace HRM_TrangAn.DataAccess.Models
         public decimal PhuCap { get; set; }
         public string TenDayDu { get; set; }
         public string MaNhanVien { get; set; }
+        public int Loai { get; set; }
         public List<ChamCongNhanVienModel> lstChamCong { get; set;}
     }
 

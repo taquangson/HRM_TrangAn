@@ -321,8 +321,8 @@ $(document).ready(function () {
     })
     LoadGridData();
     $("#windowNhanVien").kendoWindow({
-        width: "800",
-        height: "400",
+        width: "1000",
+        height: "800",
         title: "Danh sách nhân viên",
         visible: false,
         modal: true,
@@ -333,7 +333,7 @@ $(document).ready(function () {
     });
     $("#gridNhanVien").kendoGrid({
         height: function () {
-            var height = 300;
+            var height = $(window).height() - 300;
             return height;
         },
         scrollable: true,
@@ -570,7 +570,7 @@ $(document).ready(function () {
 
     $("#gridAddNhanVien").kendoGrid({
         height: function () {
-            var height = 300;
+            var height = 650;
             return height;
         },
         scrollable: true,
@@ -730,22 +730,29 @@ function openEditWindow() {
         $("#MaToNhom").val(selectedItem.MaToNhom);
         $("#GhiChu").val(selectedItem.GhiChu);
         $("#DanhSachNhanVien").val(selectedItem.lstNhanVien);
-        var dataSource = new kendo.data.DataSource({
-            data: selectedItem.lstNhanVien,
-            schema: {
-                model: {
-                    ID: "ID",
-                    fields: {
-                        NgaySinh: { type: 'date', editable: false },
-                        TenDayDu: { type: "text", editable: false },
-                        MaThuyen: { type: "text", editable: false },
-                        SoDienThoai: { type: "text", editable: false },
+        
+        $.ajax({
+            url: '/NhanVien/GetAllNhanVienTrongMultiToNhom?ID_ToNhom=' + selectedItem.ID,
+            type: 'GET',
+        }).done(function successCallback(responsee) {
+            var dataSource = new kendo.data.DataSource({
+                //data: selectedItem.lstNhanVien,
+                data: responsee,
+                schema: {
+                    model: {
+                        ID: "ID",
+                        fields: {
+                            NgaySinh: { type: 'date', editable: false },
+                            TenDayDu: { type: "text", editable: false },
+                            MaThuyen: { type: "text", editable: false },
+                            SoDienThoai: { type: "text", editable: false },
+                        }
                     }
-                }
-            },
-            pageSize: 20,
-        });
-        $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
+                },
+                pageSize: 20,
+            });
+            $("#gridNhanVien").data("kendoGrid").setDataSource(dataSource);
+        })
         if ($(window).width() > 800) {
             $("#window").data("kendoWindow").center().open();
         } else {
@@ -767,16 +774,16 @@ function LoadGridData() {
             response[i].SDTToTruong = ""
             response[i].TenToPho = ""
             response[i].SDTToPho = ""
-            for (var j = 0; j < response[i].lstNhanVien.length; j++) {
-                if (response[i].lstNhanVien[j].IsToTruong == 1) {
-                    response[i].TenToTruong = response[i].lstNhanVien[j].TenDayDu
-                    response[i].SDTToTruong = response[i].lstNhanVien[j].SoDienThoai
-                }
-                if (response[i].lstNhanVien[j].IsToPho == 1) {
-                    response[i].TenToPho = response[i].lstNhanVien[j].TenDayDu
-                    response[i].SDTToPho = response[i].lstNhanVien[j].SoDienThoai
-                }
-            }
+            //for (var j = 0; j < response[i].lstNhanVien.length; j++) {
+            //    if (response[i].lstNhanVien[j].IsToTruong == 1) {
+            //        response[i].TenToTruong = response[i].lstNhanVien[j].TenDayDu
+            //        response[i].SDTToTruong = response[i].lstNhanVien[j].SoDienThoai
+            //    }
+            //    if (response[i].lstNhanVien[j].IsToPho == 1) {
+            //        response[i].TenToPho = response[i].lstNhanVien[j].TenDayDu
+            //        response[i].SDTToPho = response[i].lstNhanVien[j].SoDienThoai
+            //    }
+            //}
         }
         var dataSource = new kendo.data.DataSource({
             data: response,

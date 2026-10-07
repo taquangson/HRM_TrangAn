@@ -384,10 +384,29 @@ $(document).ready(function () {
                 },
             },
             {
+                field: "NgayApDung",
+                title: "Ngày làm việc",
+                width: "120px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
                 field: "MaNhanVien",
                 title: "Mã Nhân viên/Mã Số Ticket",
                 width: "120px",
                 filterable: {
+
                     cell: {
                         operator: "contains",
                         showOperators: false,

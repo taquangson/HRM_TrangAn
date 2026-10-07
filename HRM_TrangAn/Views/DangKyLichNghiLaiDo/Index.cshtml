@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Quản lý đăng ký lịch nghỉ lái đò";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .k-cell {
+        display: inline-grid;
+        padding-block: 10px;
+    }
+
+    .redbg {
+        text-align: center;
+        background-color: red
+    }
+
+    .yellowbg {
+        text-align: center;
+        background-color: yellow
+    }
+</style>
+@using HRM_TrangAn.DataAccess.Models
+@{
+    TaiKhoanModel userinfor = (TaiKhoanModel)Session["UserInfor"];
+}
+<script>
+    var Role = @userinfor.Role;
+    var ID_TaiKhoan = @userinfor.ID;
+</script>
+<script src="~/Scripts/js/dangkylichnghilaido.js"></script>
+
+
+<div id="dialogRoot"></div>
+<span class="sitemap">
+    <a href="/Home/Index"><b><i class="fa fa-home"></i> Home</b></a>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-briefcase"></i> Nghiệp vụ</b>
+    <i class="fa fa-chevron-right"></i>
+    <b><i class="fa fa-calendar"></i> Quản lý đăng ký lịch nghỉ lái đò</b>
+</span>
+<div class="row" style="margin-top:10px;">
+    <div class="col-sm-2">
+        <label style="width:100%">Từ ngày</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày</label>
+        <input style="width:100%" id="DenNgay" />
+    </div>
+
+</div>
+<div class="row toolBarMenu">
+    <button class="k-button bg-blue" onclick="LoadGridData()"> <i class="fa fa-search"> Tải dữ liệu </i></button>
+    <button class="k-button bg-blue" onclick="ThemMoi()"> <i class="fa fa-plus-square"> Thêm </i></button>
+    <button class="k-button bg-blue" onclick="ThemNhieu()"> <i class="fa fa-plus-square"> Thêm nhiều </i></button>
+    <button class="k-button bg-green" onclick="GuiYeuCau()"> <i class="fa fa-send"> Gửi yêu cầu phê duyệt </i></button>
+    <button class="k-button bg-green" onclick="DuyetYeuCau()"> <i class="fa fa-send"> Duyệt đơn nghỉ </i></button>
+    <button class="k-button bg-orange" onclick="openEditWindow()"> <i class="fa fa-wrench"> Sửa</i> </button>
+    <button class="k-button bg-red" onclick="Xoa()"> <i class="fa fa-close"> Xóa</i> </button>
+    <button class="k-button bg-green" onclick="XuatExcel()"> <i class="fa fa-file-excel-o"> Xuất excel</i> </button>
+</div>
+<div class="row">
+    <div id="grid"></div>
+</div>
+<div style="visibility:hidden" id="window">
+
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="Luu()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-green" onclick="LuuVaGui()"> <i class="fa fa-send-o"> Lưu và gửi yêu cầu phê duyệt</i></button>
+        <button class="k-button bg-red" onclick="Huy()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+
+        <div class="form-group valid" toggle-valid="ComboNhanVien">
+            <label style="width:100%">Lái đò:<span style="color:red">*</span></label>
+            <input id="ComboNhanVien" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="BatDauNghi">
+            <label style="width:100%">Ngày bắt đầu nghỉ:<span style="color:red">*</span></label>
+            <input id="BatDauNghi" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="KetThucNghi">
+            <label style="width:100%">Ngày kết thúc nghỉ:<span style="color:red">*</span></label>
+            <input id="KetThucNghi" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group valid" toggle-valid="ComboLoai">
+            <label style="width:100%">Loại nghỉ:<span style="color:red">*</span></label>
+            <input id="ComboLoai" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <label style="width:100%">Ghi Chú:</label>
+            <textarea id="GhiChu" type="text" style="width:100%" class="k-textbox"></textarea>
+        </div>
+        <div class="form-group valid" toggle-valid="Tag_NhanVien">
+            <label style="width:100%">Người phụ trách:<span style="color:red">*</span></label>
+            <input id="Tag_NhanVien" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+    </form>
+</div>
+
+<div style="visibility:hidden" id="windowAddMulti">
+
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuMulti()"> <i class="fa fa-plus-square"> Lưu </i></button>
+        <button class="k-button bg-green" onclick="LuuMultiVaGui()"> <i class="fa fa-send-o"> Lưu và gửi yêu cầu phê duyệt</i></button>
+        <button class="k-button bg-red" onclick="HuyAddHS()"> <i class="fa fa-close"> Hủy</i> </button>
+    </div>
+    <form id="formChiTiet1">
+        <div class="form-group">
+            <input id="ID" type="hidden" />
+        </div>
+        <div class="form-group valid" toggle-valid="Tag_NhanVien">
+            <label style="width:100%">Người phụ trách:<span style="color:red">*</span></label>
+            <input id="Tag_NhanVien1" type="text" class="input" />
+            <span class="fa fa-exclamation-triangle icon"></span>
+        </div>
+        <div class="form-group">
+            <div id="gridHoSo"></div>
+        </div>
+    </form>
+</div>
+
+<div id="windowAddHoSo">
+    <div class="toolBarMenu">
+        <button class="k-button bg-blue" onclick="LuuAddHoSo()"> <i class="fa fa-plus-square"> Lưu </i></button>
+    </div>
+
+    <div class="form-group">
+        <input id="ID_TaiKhoan" type="hidden" />
+    </div>
+    <div class="form-group">
+        <label>Danh sách nhân viên:</label>
+        <div id="gridAddHoSo"></div>
+    </div>
+</div>

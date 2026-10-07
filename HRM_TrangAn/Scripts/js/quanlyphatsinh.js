@@ -962,9 +962,10 @@ function openAddNhanVienWindow() {
     $.ajax({
         url: '/NhanVien/GetAllNhanVien',
         type: 'GET',
-    }).done(function successCallback(response) {
+    }).done(function successCallback(data) {
         kendo.ui.progress($("#gridAddNhanVien"), true);
         var lstNhanVienNgoaiPhatSinh = [];
+        let response = JSON.parse(data);
         for (var i = 0; i < response.length; i++) {
             if (!CheckNhanVienTrongPhatSinh(response[i].ID)) {
                 lstNhanVienNgoaiPhatSinh.push(response[i])

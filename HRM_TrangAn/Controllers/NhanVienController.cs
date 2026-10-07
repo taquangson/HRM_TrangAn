@@ -232,6 +232,7 @@ namespace HRM_TrangAn.Controllers
             //model.ID_ChiNhanh = userinfor.ID_ChiNhanh;
             File_NhanVienDAO filedao = new File_NhanVienDAO();
             int ID_New = dm_dao.InsertOrUpdate(model);
+            model.ID = ID_New;
             int countXoaErr = 0;
             int countThemErr = 0;
             int countXoaFileErr = 0;

@@ -138,6 +138,41 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<KeHoachModel> GetAllByKhoangNgay(DateTime TuNgay, DateTime DenNgay)
+        {
+            try
+            {
+                NhanVien_KeHoachDAO nvdao = new NhanVien_KeHoachDAO();
+                KeHoach_FileDAO fdao = new KeHoach_FileDAO();
+                ToNhom_KeHoachDAO tndao = new ToNhom_KeHoachDAO();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@TuNgay",TuNgay ),
+                    new SqlParameter("@DenNgay",DenNgay )
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_KeHoach_GetAllByKhoangNgay", pars);
+                DataTable dt = ds.Tables[0];
+                List<KeHoachModel> result = new List<KeHoachModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành KeHoachModel
+                    model.lstNhanVien = nvdao.GetAllNhanVienTrongKeHoach(model.ID);
+                    model.lstToNhomKeHoach = tndao.GetAllByKeHoach(model.ID);
+                    model.lstFile = fdao.GetAllByKeHoach(model.ID);
+                    model.To_SoNguoiDuKien = GetTo_SoNguoi(model.ID, 0);
+                    model.To_SoNguoiDuKien_Text = model.To_SoNguoiDuKien.Replace("</br>", ", ");
+                    model.To_SoNguoiThucTe = GetTo_SoNguoi(model.ID, 1);
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_KeHoach_GetAllByNgay " + ex.Message);
+                return null;
+            }
+        }
+
         public List<KeHoachModel> GetByChamCongNhanVien(int ID_NhanVien, DateTime Ngay)
         {
             try
@@ -181,7 +216,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 foreach (DataRow dr in dt.Rows)
                 {
                     KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành KeHoachModel
-                    model.lstNhanVien = nvdao.GetAllNhanVienTrongKeHoach(model.ID);
+                    model.lstNhanVien = nvdao.GetAllNhanVienDaXacNhanTrongKeHoach(model.ID);
                     model.To_SoNguoiThucTe = GetTo_SoNguoi(model.ID, 1);
                     result.Add(model);
                 }
@@ -277,6 +312,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 SqlParameter[] pars = new SqlParameter[] {
                     new SqlParameter("@ID", model.ID),
                     new SqlParameter("@ID_CongViec", model.ID_CongViec),
+                    new SqlParameter("@ID_CongTrinh", model.ID_CongTrinh),
                     new SqlParameter("@Cong", model.Cong),
                     new SqlParameter("@TenCongViec", model.TenCongViec),
                     new SqlParameter("@MaPhieuPhanCong", model.MaPhieuPhanCong),

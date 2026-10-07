@@ -51,6 +51,14 @@ namespace HRM_TrangAn.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetDataLichNghiDaDuyet(DateTime from, DateTime to)
+        {
+            DangKyLichNghiDAO dao = new DangKyLichNghiDAO();
+            TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
+            List<DangKyLichNghiModel> data = dao.GetDataLichNghiDaDuyet(from, to);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpPost]
         public ActionResult UpdateTrangThai_DangKyLichNghi(DangKyLichNghiModel model)
@@ -121,7 +129,7 @@ namespace HRM_TrangAn.Controllers
             TaiKhoanModel userinfor = (TaiKhoanModel)System.Web.HttpContext.Current.Session["UserInfor"];
             if (dao.MultiInsert(list))
             {
-                if(model.TrangThai == 1)
+                if (model.TrangThai == 1)
                 {
                     EmailHelper helper = new EmailHelper();
                     HoSoNhanSuDAO hsdao = new HoSoNhanSuDAO();
@@ -134,7 +142,6 @@ namespace HRM_TrangAn.Controllers
                             var html = RazorViewToString.RenderRazorViewToString(this, "ThongBaoNSDangKyLichNghi", item);
                             helper.SendEmail(html.ToString(), tk.Email, "Thông báo nhân sự đăng ký lịch nghỉ!");
                         }
-
                     }
                 }
                 return Json(new { success = true, msg = "Lưu thông tin thành công" }, JsonRequestBehavior.AllowGet);

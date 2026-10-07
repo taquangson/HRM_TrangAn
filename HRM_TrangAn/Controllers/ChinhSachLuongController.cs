@@ -39,6 +39,12 @@ namespace HRM_TrangAn.Controllers
         {
             ChinhSachLuongDAO dao = new ChinhSachLuongDAO();
             List<ChinhSachLuongModel> data = dao.GetAllByThangNam(Thang, Nam);
+            string p = "/Content/ChinhSachLuong/";
+            string path = System.IO.Path.Combine(Server.MapPath(p), Nam + "-" + Thang + ".json");
+            using (var streamWriter = System.IO.File.CreateText(path))
+            {
+                streamWriter.Write(JsonConvert.SerializeObject(data));
+            }
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

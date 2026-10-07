@@ -16,6 +16,8 @@ $(document).ready(function () {
                         CheckIn: { type: 'date', editable: false },
                         CheckOut: { type: 'date', editable: false },
                         SoCong: { type: 'float', editable: false },
+                        TrucDem: { type: 'float', editable: false },
+                        TrucDemDenTran: { type: 'float', editable: false },
                         SoCongTangCa: { type: 'float', editable: false },
                         XuatAn: { type: 'float', editable: false },
                     }
@@ -24,7 +26,9 @@ $(document).ready(function () {
             pageSize: 40,
             aggregate: [{ field: 'SoCong', aggregate: "sum" },
             { field: 'SoCongTangCa', aggregate: "sum" },
-            { field: 'XuatAn', aggregate: "sum" }]
+            { field: 'XuatAn', aggregate: "sum" },
+            { field: 'TrucDem', aggregate: "sum" },
+            { field: 'TrucDemDenTran', aggregate: "sum" }]
         }),
         height: function () {
             var height = $(window).height() - 280;
@@ -271,6 +275,60 @@ $(document).ready(function () {
                 footerAttributes: { style: "text-align: right; font-weight:700" },
             },
             {
+                field: "TrucDem",
+                title: "Trực đêm",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                },
+                footerTemplate: function (e) {
+                    if (e.TrucDem) {
+                        return kendo.toString(e.TrucDem.sum ? e.TrucDem.sum : 0, "N1");
+                    }
+                },
+                footerAttributes: { style: "text-align: right; font-weight:700" },
+            },
+            {
+                field: "TrucDemDenTran",
+                title: "Trực đêm Đền Trần",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                },
+                footerTemplate: function (e) {
+                    if (e.TrucDemDenTran) {
+                        return kendo.toString(e.TrucDemDenTran.sum ? e.TrucDemDenTran.sum : 0, "N1");
+                    }
+                },
+                footerAttributes: { style: "text-align: right; font-weight:700" },
+            },
+            {
                 field: "XuatAn",
                 title: "Số xuất ăn",
                 width: "100px",
@@ -348,7 +406,7 @@ $(document).ready(function () {
                     if (item.ID == e.sender.value()) {
                         ci.setHours(item.BatDauTinhCa.Hours, item.BatDauTinhCa.Minutes, 0, 0);
                         co.setHours(item.KetThucTinhCa.Hours, item.KetThucTinhCa.Minutes, 0, 0);
-                        $("#CheckIn").data("kendoDateTimePicker").setOptions({ min: ci});
+                        $("#CheckIn").data("kendoDateTimePicker").setOptions({ min: ci });
                         $("#CheckOut").data("kendoDateTimePicker").setOptions({ min: ci });
                     }
 
@@ -496,6 +554,8 @@ function TimKiem() {
                         CheckIn: { type: 'date', editable: false },
                         CheckOut: { type: 'date', editable: false },
                         SoCong: { type: 'float', editable: false },
+                        TrucDem: { type: 'float', editable: false },
+                        TrucDemDenTran: { type: 'float', editable: false },
                         SoCongTangCa: { type: 'float', editable: false },
                         XuatAn: { type: 'float', editable: false },
                     }
@@ -504,7 +564,9 @@ function TimKiem() {
             pageSize: 40,
             aggregate: [{ field: 'SoCong', aggregate: "sum" },
             { field: 'SoCongTangCa', aggregate: "sum" },
-            { field: 'XuatAn', aggregate: "sum" }]
+            { field: 'XuatAn', aggregate: "sum" },
+            { field: 'TrucDem', aggregate: "sum" },
+            { field: 'TrucDemDenTran', aggregate: "sum" }]
         });
         if (dataSource === undefined || dataSource === null) {
             console.log("void");
@@ -531,12 +593,15 @@ function openEditWindow() {
         //    type: 'GET',
         //}).done(function successCallback(response) {
         $("#ID_HoSoNhanSu").val(selectedItem.ID_HoSoNhanSu);
+        $("#ID_TaiKhoan").val(selectedItem.ID_TaiKhoan);
         $("#Ngay").val(kendo.toString(selectedItem.Ngay, 'yyyy-MM-dd'));
         $("#TenCa").val(selectedItem.TenCa);
         $("#TenNhanVien").val(selectedItem.TenDayDu);
         $("#XuatAn").val(selectedItem.XuatAn);
         $("#SoCong").val(selectedItem.SoCong);
         $("#SoCongTangCa").val(selectedItem.SoCongTangCa);
+        $("#TrucDem").val(selectedItem.TrucDem);
+        $("#TrucDemDenTran").val(selectedItem.TrucDemDenTran);
         $("#ComboCa").data("kendoComboBox").value(selectedItem.ID_Ca);
         let ci = new Date(selectedItem.Ngay);
         let co = new Date(selectedItem.Ngay);
@@ -570,8 +635,10 @@ function ValidateForm(callback) {
     var validca = SetValidate("ComboCa");
     var validcong = SetValidate("SoCong");
     var validcongtangca = SetValidate("SoCongTangCa");
+    var validtrucdem = SetValidate("TrucDem");
+    var validtrucdemdentran = SetValidate("TrucDemDenTran");
     var validxuatan = SetValidate("XuatAn");
-    var valid = validbatdau && validketthuc && validca && validcong && validcongtangca && validxuatan
+    var valid = validbatdau && validketthuc && validca && validcong && validcongtangca && validxuatan && validtrucdem && validtrucdemdentran
     if (valid) {
         callback(valid);
     } else {
@@ -585,12 +652,15 @@ function Luu() {
         if (valid) {
             $.ajax({
                 url: '/ChamCongNhanVien/DieuChinhCong?ID_HoSoNhanSu=' + $("#ID_HoSoNhanSu").val()
+                    + '&ID_TaiKhoan=' + $("#ID_TaiKhoan").val()
                     + '&Ngay=' + $("#Ngay").val()
                     + '&ID_Ca=' + $("#ComboCa").data("kendoComboBox").value()
                     + '&Checkin=' + kendo.toString($("#CheckIn").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm')
                     + '&Checkout=' + kendo.toString($("#CheckOut").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm')
                     + '&SoCong=' + $("#SoCong").val()
                     + '&SoCongTangCa=' + $("#SoCongTangCa").val()
+                    + '&TrucDem=' + $("#TrucDem").val()
+                    + '&TrucDemDenTran=' + $("#TrucDemDenTran").val()
                     + '&XuatAn=' + $("#XuatAn").val(),
                 type: 'GET',
             }).done(function successCallback(response) {
@@ -611,6 +681,7 @@ function Luu() {
 function Huy() {
     document.getElementById("formChiTiet").reset();
     $("#ID_HoSoNhanSu").val('');
+    $("#ID_TaiKhoan").val('');
     $("#Ngay").val('');
     $("#window").data("kendoWindow").close();
     $("#grid").data("kendoGrid").clearSelection();

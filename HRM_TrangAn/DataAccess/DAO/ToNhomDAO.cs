@@ -78,7 +78,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             try
             {
                 NhanVienDAO nvdao = new NhanVienDAO();
-                DataSet ds = helper.ExecuteDataSet("sp_ToNhom_GetAll");
+                DataSet ds = helper.ExecuteDataSet("sp_ToNhom_GetAllSimple");
                 DataTable dt = ds.Tables[0];
                 List<ToNhomModel> result = new List<ToNhomModel>();
                 foreach (DataRow dr in dt.Rows)
@@ -90,7 +90,7 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
             catch (Exception ex)
             {
-                log.Error("sp_ToNhom_GetAll " + ex.Message);
+                log.Error("sp_ToNhom_GetAllSimple " + ex.Message);
                 return null;
             }
         }

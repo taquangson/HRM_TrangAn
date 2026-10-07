@@ -9,6 +9,7 @@ $(document).ready(function () {
         });
         $("#ComboNhanVien").kendoComboBox({
             dataTextField: "TenDayDu",
+            //template: '#:data.MaNhanVien# - #:data.TenDayDu#',
             dataValueField: "ID",
             //columns: [
             //    {
@@ -384,7 +385,7 @@ $(document).ready(function () {
                         operator: "contains",
                         showOperators: false,
                         template: function (e) {
-                            e.element.parent().html("<a class='k-button' title='Thêm nhân viên vào chính sách lương' style='width:50%; height:25px;float: left; position: relative;' onclick='openAddHoSoWindow()'><i class='fa fa-plus'></i></a><a class='k-button' title='Xóa nhân viên đã chọn' style='width:50%; height:25px;float: left; position: relative;' onclick='DeleteMultiRowGridHS()'><i class='fa fa-minus'></i></a>")
+                            e.element.parent().html("<a class='k-button' title='Thêm nhân viên vào danh sách nghỉ' style='width:50%; height:25px;float: left; position: relative;' onclick='openAddHoSoWindow()'><i class='fa fa-plus'></i></a><a class='k-button' title='Xóa nhân viên đã chọn' style='width:50%; height:25px;float: left; position: relative;' onclick='DeleteMultiRowGridHS()'><i class='fa fa-minus'></i></a>")
 
                         }
                     }

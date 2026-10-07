@@ -19,9 +19,17 @@
     <b><i class="fa fa-user"></i> Quản lý phân công việc</b>
 </span>
 <div class="row" style="margin-top:10px;">
-    <div class="col-sm-2">
+    @*<div class="col-sm-2">
         <label style="width:100%">Ngày</label>
         <input style="width:100%" id="Ngay" />
+    </div>*@
+    <div class="col-sm-2">
+        <label style="width:100%">Từ ngày</label>
+        <input style="width:100%" id="TuNgay" />
+    </div>
+    <div class="col-sm-2">
+        <label style="width:100%">Đến ngày</label>
+        <input style="width:100%" id="DenNgay" />
     </div>
     <div class="col-sm-3">
         <label style="width:100%;height:15px;"> </label>
@@ -76,6 +84,11 @@
                     <textarea id="DiaDiem" type="text" rows="2" style="width:100%;padding:2px;" class="k-textbox"></textarea>
 
                     <span class="fa fa-exclamation-triangle icon"></span>
+
+                </div>
+                <div class="form-group valid" toggle-valid="DiaDiem">
+                    <label style="width:100%">Công trình:</label>
+                    <input id="ComboCongTrinh" type="text" class="input" />
 
                 </div>
 
@@ -283,6 +296,7 @@
         <div id="gridAddNhanVien"></div>
     </div>
 </div>
+
 <div id="windowNhanVienToNhom">
     <div class="toolBarMenu">
         <button class="k-button bg-blue" onclick="LuuAddNhanVienToNhom()"> <i class="fa fa-plus-square"> Lưu </i></button>
@@ -292,6 +306,7 @@
         <div id="gridAddNhanVienToNhom"></div>
     </div>
 </div>
+
 <script type="text/x-kendo-template" id="template">
     <div class="orders"></div>
 </script>

@@ -125,7 +125,7 @@
         }
 
         .hocsinh .qrcode2 {
-            display: block;
+            display: none;
             margin-left: 580px;
             margin-top: -85px;
             position: absolute;
@@ -331,7 +331,7 @@ html {
     }
 
     .hocsinh .qrcode2 {
-        display: block;
+        display: none;
         margin-left: 560px;
         margin-top: -100px;
         position: absolute;

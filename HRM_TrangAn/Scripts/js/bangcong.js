@@ -149,7 +149,8 @@ $(document).ready(function () {
     //        dataValueField: 'ID',
     //        filter: "startswith"
     //    })
-    //});   
+    //});
+
 
     //LoadGridData();
     $("#dialogRoot").kendoDialog().data("kendoDialog").close();
@@ -251,170 +252,212 @@ function LoadGridData() {
     console.log(from);
     console.log(to);
     $.ajax({
-        url: '/ChamCongNhanVien/CongNhanSu_GetDataTree'
+        url: '/DangKyLichNghi/GetDataLichNghiDaDuyet'
             + "?from=" + kendo.toString(from, "yyyy/MM/dd") + " 00:00:00"
-            + "&to=" + kendo.toString(to, "yyyy/MM/dd") + " 23:59:59"
-            + "&ID_PhongBan=" + ($("#treePhongBan").data("kendoDropDownTree").value() ? $("#treePhongBan").data("kendoDropDownTree").value() : 0),
+            + "&to=" + kendo.toString(to, "yyyy/MM/dd") + " 23:59:59",
         type: 'GET',
     }).done(function successCallback(response) {
-        kendo.ui.progress($("#grid"), true);
+        dataLichNghi = response;
 
-        var columns = [];
-        var f = [];
-        columns.push(
-            {
-                width: "40px",
-                selectable: true,
-                lock: true,
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                title: "Phòng ban",
-                lock: true,
-                template: function (e) {
-                    if (e.MaNhanVien != null) {
-                        return "";
-                    } else {
-                        return e.TenDayDu;
-                    }
-                },
-                width: "150px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                attributes: function (e) {
-                    console.log(e.MaNhanVien);
-                    //if (e.MaNhanVien != null) {
-                    //    return { style: "font-size: 12px; font-weight:bold; vertical-align: middle;" };
-                    //} else {
-                    //    return { style: "font-size: 12px; font-weight:bold; vertical-align: middle; background-color:#232323" };
-                    //}
+        $.ajax({
+            url: '/ChamCongNhanVien/CongNhanSu_GetDataTree'
+                + "?from=" + kendo.toString(from, "yyyy/MM/dd") + " 00:00:00"
+                + "&to=" + kendo.toString(to, "yyyy/MM/dd") + " 23:59:59"
+                + "&ID_PhongBan=" + ($("#treePhongBan").data("kendoDropDownTree").value() ? $("#treePhongBan").data("kendoDropDownTree").value() : 0),
+            type: 'GET',
+        }).done(function successCallback(response) {
+            kendo.ui.progress($("#grid"), true);
 
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "MaNhanVien",
-                title: "Mã nhân viên",
-                lock: true,
-                width: "100px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
+            var columns = [];
+            var f = [];
+            columns.push(
+                {
+                    width: "40px",
+                    selectable: true,
+                    locked: true,
+                    lockable: false,
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
                     }
                 },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
+                {
+                    title: "Phòng ban",
+                    locked: true,
+                    lockable: false,
+                    template: function (e) {
+                        if (e.MaNhanVien != null) {
+                            return "";
+                        } else {
+                            return e.TenDayDu;
+                        }
+                    },
+                    width: "150px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    attributes: function (e) {
+                        console.log(e.MaNhanVien);
+                        //if (e.MaNhanVien != null) {
+                        //    return { style: "font-size: 12px; font-weight:bold; vertical-align: middle;" };
+                        //} else {
+                        //    return { style: "font-size: 12px; font-weight:bold; vertical-align: middle; background-color:#232323" };
+                        //}
+
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "MaNhanVien",
+                    title: "Mã nhân viên",
+                    locked: true,
+                    lockable: false,
+                    width: "100px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "TenDayDu",
+                    title: "Tên nhân viên",
+                    locked: true,
+                    lockable: false,
+                    template: function (e) {
+                        if (e.MaNhanVien == null) {
+                            return "";
+                        } else {
+                            return e.TenDayDu;
+                        }
+                    },
+                    width: "180px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "ThoiGianGuiMail",
+                    title: "Th/gian gửi email",
+                    format: "{0:dd/MM/yyyy HH:mm}",
+                    width: "120px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "ThoiGianXemBangCong",
+                    title: "Th/gian xem bảng công",
+                    format: "{0:dd/MM/yyyy HH:mm}",
+                    width: "120px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                },
+                {
+                    field: "ThoiGianChotCong",
+                    title: "Th/gian chốt công",
+                    format: "{0:dd/MM/yyyy HH:mm}",
+                    width: "120px",
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
                 }
-            },
-            {
-                field: "TenDayDu",
-                title: "Tên nhân viên",
-                lock:true,
+            )
+            var dates = getDates(from, to);
+            $.each(dates, function (index, item) {
+                columns.push({
+                    title: kendo.toString(item, 'dd/MM'),
+                    field: 'data2' + kendo.toString(item, 'yyyyMMdd'),
+                    template: function (e) {
+                        return e['data2' + kendo.toString(item, 'yyyyMMdd')];
+                    },
+                    filterable: {
+                        cell: {
+                            operator: "contains",
+                            showOperators: false,
+                            template: function (e) {
+                                e.element.addClass("k-textbox").css("width", "100%")
+                            }
+                        }
+                    },
+                    width: "55px",
+                    attributes: {
+                        style: "text-align: center; font-size: 12px;padding:0;"
+                    },
+                    headerAttributes: {
+                        style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                        class: "table-header-cell"
+                    }
+                });
+                f['data' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: true };
+            });
+            columns.push({
+                title: 'Tổng công',
+                field: 'TongCong',
                 template: function (e) {
                     if (e.MaNhanVien == null) {
                         return "";
                     } else {
-                        return e.TenDayDu;
+                        return e.TongCong;
                     }
-                },
-                width: "120px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "ThoiGianGuiMail",
-                title: "Th/gian gửi email",
-                format: "{0:dd/MM/yyyy HH:mm}",
-                width: "120px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "ThoiGianXemBangCong",
-                title: "Th/gian xem bảng công",
-                format: "{0:dd/MM/yyyy HH:mm}",
-                width: "120px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            },
-            {
-                field: "ThoiGianChotCong",
-                title: "Th/gian chốt công",
-                format: "{0:dd/MM/yyyy HH:mm}",
-                width: "120px",
-                filterable: {
-                    cell: {
-                        operator: "contains",
-                        showOperators: false,
-                        template: function (e) {
-                            e.element.addClass("k-textbox").css("width", "100%")
-                        }
-                    }
-                },
-                headerAttributes: {
-                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                    class: "table-header-cell"
-                }
-            }
-        )
-        var dates = getDates(from, to);
-        $.each(dates, function (index, item) {
-            columns.push({
-                title: kendo.toString(item, 'dd/MM'),
-                field: 'data2' + kendo.toString(item, 'yyyyMMdd'),
-                template: function (e) {
-                    return e['data2' + kendo.toString(item, 'yyyyMMdd')];
                 },
                 filterable: {
                     cell: {
@@ -425,6 +468,7 @@ function LoadGridData() {
                         }
                     }
                 },
+                format: '{0:N0}',
                 width: "80px",
                 attributes: {
                     style: "text-align: center; font-size: 12px;padding:0;"
@@ -434,96 +478,238 @@ function LoadGridData() {
                     class: "table-header-cell"
                 }
             });
-            f['data' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: true };
-        });
-        columns.push({
-            title: 'Tổng công',
-            field: 'TongCong',
-            template: function (e) {
-                if (e.MaNhanVien == null) {
-                    return "";
-                } else {
-                    return e.TongCong;
-                }
-            },
-            filterable: {
-                cell: {
-                    operator: "contains",
-                    showOperators: false,
-                    template: function (e) {
-                        e.element.addClass("k-textbox").css("width", "100%")
-                    }
-                }
-            },
-            format: '{0:N0}',
-            width: "80px",
-            attributes: {
-                style: "text-align: center; font-size: 12px;padding:0;"
-            },
-            headerAttributes: {
-                style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
-                class: "table-header-cell"
-            }
-        });
-        //var ds = new kendo.data.DataSource({
-        var ds = new kendo.data.TreeListDataSource({
-            data: JSON.parse(response),
-            schema: {
-                model: {
-                    id: "ID",
-                    parentId: "ID_Parent",
-                    expanded: true,
-                    fields: {
-                        ID: { type: "number", editable: false, nullable: false },
-                        ID_Parent: { type: "number", nullable: true },
-                        TongCong: { type: "number", nullable: true, editable: true },
-                        ThoiGianChotCong: { type: "date", nullable: true, editable: false },
-                        ThoiGianGuiMail: { type: "date", nullable: true, editable: false },
-                        ThoiGianXemBangCong: { type: "date", nullable: true, editable: false },
+            columns.push({
+                title: 'Ngày nghỉ PH',
+                field: 'NgayNghiPH',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.NgayNghiPH;
                     }
                 },
-                parse: function (res) {
-                    for (var i = 0; i < res.length; i++) {
-                        if (res[i].ID == 10000 + parseInt($("#treePhongBan").data("kendoDropDownTree").value())) {
-                            res[i].ID_Parent = null;
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
                         }
-                        $.each(dates, function (index, item) {
-                            if (res[i]['MaNhanVien'] != null) {
-                                res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = res[i]['data' + kendo.toString(item, 'yyyyMMdd')]
-
-
-                                //let lichnghi = dataLichNghi.filter(x => x.ID_TaiKhoan.toString() == res[i]['ID'].toString()
-                                //    && dateFromJson(x.BatDauNghi).getDate() == item.getDate()
-                                //    && dateFromJson(x.KetThucNghi).getDate() == item.getDate());
-                                //console.log(lichnghi);
-                                //if (lichnghi.length > 0) {
-                                //    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "<span style='display:block; background-color:" + lichnghi[0].KyHieuMau + "'>" + lichnghi[0].KyHieu + "</span>";
-                                //}
-
-
-                                //try {
-                                //    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = dataCa.filter(x => x.ID == res[i]['data' + kendo.toString(item, 'yyyyMMdd')])[0].TenCa;
-                                //} catch {
-                                //    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "";
-                                //}
-                            } else {
-                                res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "";
-                            }
-                        })
                     }
-                    console.log(res);
-                    return res;
+                },
+                format: '{0:N0}',
+                width: "80px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
                 }
-            },
-        });
+            });
+            columns.push({
+                title: 'Lễ tết thực tế',
+                field: 'LeTetThucTe',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.LeTetThucTe;
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                format: '{0:N0}',
+                width: "80px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            });
+            columns.push({
+                title: 'Công đêm BV',
+                field: 'TrucDem',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.TrucDem;
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                format: '{0:N0}',
+                width: "80px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            });
+            columns.push({
+                title: 'Công đêm Đền Trần',
+                field: 'TrucDemDenTran',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.TrucDemDenTran;
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                format: '{0:N0}',
+                width: "150px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            });
+            columns.push({
+                title: 'Tổng tính lương',
+                field: 'CongTinhLuong',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.CongTinhLuong;
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                format: '{0:N0}',
+                width: "80px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            });
+            columns.push({
+                title: 'Suất ăn',
+                field: 'XuatAn',
+                template: function (e) {
+                    if (e.MaNhanVien == null) {
+                        return "";
+                    } else {
+                        return e.XuatAn;
+                    }
+                },
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                format: '{0:N0}',
+                width: "80px",
+                attributes: {
+                    style: "text-align: center; font-size: 12px;padding:0;"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                    class: "table-header-cell"
+                }
+            });
+            //var ds = new kendo.data.DataSource({
+            var ds = new kendo.data.TreeListDataSource({
+                data: JSON.parse(response),
+                schema: {
+                    model: {
+                        id: "ID",
+                        parentId: "ID_Parent",
+                        expanded: true,
+                        fields: {
+                            ID: { type: "number", editable: false, nullable: false },
+                            ID_Parent: { type: "number", nullable: true },
+                            TongCong: { type: "number", nullable: true, editable: true },
+                            ThoiGianChotCong: { type: "date", nullable: true, editable: false },
+                            ThoiGianGuiMail: { type: "date", nullable: true, editable: false },
+                            ThoiGianXemBangCong: { type: "date", nullable: true, editable: false },
+                        }
+                    },
+                    parse: function (res) {
+                        for (var i = 0; i < res.length; i++) {
+                            if (res[i].ID == 10000 + parseInt($("#treePhongBan").data("kendoDropDownTree").value())) {
+                                res[i].ID_Parent = null;
+                            }
+                            $.each(dates, function (index, item) {
+                                if (res[i]['MaNhanVien'] != null) {
+                                    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = res[i]['data' + kendo.toString(item, 'yyyyMMdd')]
 
-        $("#grid").data("kendoTreeList").setOptions({
-            //$("#grid").data("kendoGrid").setOptions({
-            dataSource: ds,
-            columns: columns,
-            editable: "incell"
+
+                                    let lichnghi = dataLichNghi.filter(x => x.ID_TaiKhoan.toString() == res[i]['ID'].toString()
+                                        && (dateFromJson(x.BatDauNghi).getDate() === item.getDate() || dateFromJson(x.KetThucNghi).getDate() === item.getDate()));
+                                    if (lichnghi.length > 0) {
+                                        res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "<span style='display:block;line-height:30px; background-color:" + lichnghi[0].KyHieuMau + "'>" + lichnghi[0].KyHieu + "</span>";
+                                    }
+
+
+                                    //try {
+                                    //    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = dataCa.filter(x => x.ID == res[i]['data' + kendo.toString(item, 'yyyyMMdd')])[0].TenCa;
+                                    //} catch {
+                                    //    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "";
+                                    //}
+                                } else {
+                                    res[i]['data2' + kendo.toString(item, 'yyyyMMdd')] = "";
+                                }
+                            })
+                        }
+                        console.log(res);
+                        return res;
+                    }
+                },
+            });
+
+            $("#grid").data("kendoTreeList").setOptions({
+                //$("#grid").data("kendoGrid").setOptions({
+                dataSource: ds,
+                columns: columns,
+                editable: "incell"
+            });
+            kendo.ui.progress($("#grid"), false);
         });
-        kendo.ui.progress($("#grid"), false);
     });
 }
 

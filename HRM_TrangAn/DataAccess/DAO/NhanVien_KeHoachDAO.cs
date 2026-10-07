@@ -121,6 +121,30 @@ namespace HRM_TrangAn.DataAccess.DAO
             }
         }
 
+        public List<NhanVien_KeHoachModel> GetAllNhanVienDaXacNhanTrongKeHoach(int ID_KeHoach)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@ID_KeHoach", ID_KeHoach)
+                };
+                DataSet ds = helper.ExecuteDataSet("sp_NhanVien_KeHoach_GetAllNhanVienDaXacNhan_TrongKeHoach", pars);
+                DataTable dt = ds.Tables[0];
+                List<NhanVien_KeHoachModel> result = new List<NhanVien_KeHoachModel>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    NhanVien_KeHoachModel model = GetObjFromDataRow(dr);// Tự động chuyển datarow thành NhanVienModel
+                    result.Add(model);
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_NhanVien_KeHoach_GetAllNhanVienDaXacNhan_TrongKeHoach " + ex.Message);
+                return null;
+            }
+        }
+
         public int Insert(int ID_NhanVien, int ID_KeHoach,float Cong, int TrangThai)
         {
             try

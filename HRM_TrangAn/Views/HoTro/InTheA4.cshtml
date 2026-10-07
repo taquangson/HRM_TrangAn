@@ -25,7 +25,7 @@
                 correctLevel: QRCode.CorrectLevel.H,
             });
             ////QR_CODE@(i).makeCode("@Model[i].MaNhanVien");
-            QR_CODE@(i).makeCode("http://dstabt.ddns.net:198/B/B?I=" +@Model[i].MaNhanVien);
+            QR_CODE@(i).makeCode("http://dstabt.ddns.net:198/B/B?I=" +@Model[i].ID);
 
             var QR_CODEX@(i) = new QRCode("qrcodex@(i)", {
                 width: 75,

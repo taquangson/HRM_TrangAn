@@ -530,11 +530,14 @@ $(document).ready(function () {
 
 
 
-    $("#NgayLamViec").kendoDatePicker({
-        format: "dd/MM/yyyy",
-        dateInput: true,
+    $("#NgayLamViec").kendoCalendar({
+        //format: "dd/MM/yyyy",
+        //dateInput: true,
+        selectable: "multiple",
         change: function () {
-            var ngay = $("#NgayLamViec").data("kendoDatePicker").value();
+            var selectDates = $("#NgayLamViec").data("kendoCalendar").selectDates();
+            var ngay = selectDates[0];
+            console.log(ngay);
             let ngay1 = new Date(ngay.getFullYear(), ngay.getMonth(), ngay.getDate(), 7, 0, 0);
             $("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(ngay1);
 
@@ -543,17 +546,17 @@ $(document).ready(function () {
             $("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(ngay2);
         }
     })
-    $("#NgayLamViec").data("kendoDatePicker")._dateInput.setOptions({
-        messages: {
-            "year": "yyyy",
-            "month": "mm",
-            "day": "dd",
-            "hour": "hh",
-            "minute": "mm",
-            "second": "ss",
-            "dayperiod": "am/pm",
-        }
-    });
+    //$("#NgayLamViec").data("kendoDatePicker")._dateInput.setOptions({
+    //    messages: {
+    //        "year": "yyyy",
+    //        "month": "mm",
+    //        "day": "dd",
+    //        "hour": "hh",
+    //        "minute": "mm",
+    //        "second": "ss",
+    //        "dayperiod": "am/pm",
+    //    }
+    //});
     $("#ThoiGianBatDauDuKien").kendoDateTimePicker({
         format: "dd/MM/yyyy HH:mm",
         timeFormat: "HH:mm",
@@ -983,11 +986,11 @@ function ValidateForm() {
     var validgs = SetValidate("ComboNguoiGiamSat");
     var validma = SetValidate("Cong");
     var validdiachi = SetValidate("DiaDiem");
-    var validngay = SetValidate("NgayLamViec");
+    //var validngay = SetValidate("NgayLamViec");
     var validthoigian = SetValidate("ThoiGianDuKien");
     var validthoigianbatdau = SetValidate("ThoiGianBatDauDuKien");
     var validthoigianketthuc = SetValidate("ThoiGianKetThucDuKien");
-    var valid = validma && validten && validdiachi && validngay && validthoigian && validgs && validthoigianbatdau && validthoigianketthuc;
+    var valid = validma && validten && validdiachi && validthoigian && validgs && validthoigianbatdau && validthoigianketthuc;
     return valid;
 }
 function Luu() {
@@ -1010,49 +1013,50 @@ function Luu() {
         if (hours < 0) {
             notification.show({ kValue: "Thời gian không hợp lệ" }, "error");
         } else {
-            var dataSave = {
-                ID: $("#ID").val(),
-                GhiChu: $("#GhiChu").val(),
-                NgayLamViec: kendo.toString($("#NgayLamViec").data("kendoDatePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-                TrangThai: 1,
-                DiaDiem: $('#DiaDiem').val(),
-                ID_CongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").value(),
-                TenCongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").dataItem().TenCongViec,
-                Cong: $('#Cong').val(),
-                SoNguoiDuKien: $('#SoNguoiDuKien').val() == 0 ? songuoi : $('#SoNguoiDuKien').val(),
-                ThoiGianDuKien: hours / 3600000,
-                ThoiGianBatDauDuKien: kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-                ThoiGianKetThucDuKien: kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-                ID_NguoiGiamSat: $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").value(),
-                NguoiGiamSat: $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").dataItem().TenDayDu,
-                ID_CongViecThucTe: 0,
-                TenCongViecThucTe: "",
-                CongThucTe: 0,
-                ThoiGianThucTe: "",
-                SoNguoiThucTe: 0,
-                ID_NguoiGiamSatThucTe: 0,
-                NguoiGiamSatThucTe: "",
-                ThoiGianBatDauThucTe: kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-                ThoiGianKetThucThucTe: kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'yyyy-MM-dd HH:mm:ss'),
-                lstToNhomKeHoach: bangDuLieuToNhomVienKeHoach
+            var selectDates = $("#NgayLamViec").data("kendoCalendar").selectDates();
+            $.each(selectDates, function (index, item){
+                var dataSave = {
+                    ID: $("#ID").val(),
+                    GhiChu: $("#GhiChu").val(),
+                    NgayLamViec: kendo.toString(item, 'yyyy-MM-dd HH:mm:ss'),
+                    TrangThai: 1,
+                    DiaDiem: $('#DiaDiem').val(),
+                    ID_CongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").value(),
+                    TenCongViec: $("#ComboCongViec").data("kendoMultiColumnComboBox").dataItem().TenCongViec,
+                    Cong: $('#Cong').val(),
+                    SoNguoiDuKien: $('#SoNguoiDuKien').val() == 0 ? songuoi : $('#SoNguoiDuKien').val(),
+                    ThoiGianDuKien: hours / 3600000,
+                    ThoiGianBatDauDuKien: kendo.toString(item, 'yyyy-MM-dd') + ' ' + kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'HH:mm:ss'),
+                    ThoiGianKetThucDuKien: kendo.toString(item, 'yyyy-MM-dd') + ' ' + kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'HH:mm:ss'),
+                    ID_NguoiGiamSat: $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").value(),
+                    NguoiGiamSat: $("#ComboNguoiGiamSat").data("kendoMultiColumnComboBox").dataItem().TenDayDu,
+                    ID_CongViecThucTe: 0,
+                    TenCongViecThucTe: "",
+                    CongThucTe: 0,
+                    ThoiGianThucTe: "",
+                    SoNguoiThucTe: 0,
+                    ID_NguoiGiamSatThucTe: 0,
+                    NguoiGiamSatThucTe: "",
+                    ThoiGianBatDauThucTe: kendo.toString(item, 'yyyy-MM-dd') + ' ' + kendo.toString($("#ThoiGianBatDauDuKien").data("kendoDateTimePicker").value(), 'HH:mm:ss'),
+                    ThoiGianKetThucThucTe: kendo.toString(item, 'yyyy-MM-dd') + ' ' + kendo.toString($("#ThoiGianKetThucDuKien").data("kendoDateTimePicker").value(), 'HH:mm:ss'),
+                    lstToNhomKeHoach: bangDuLieuToNhomVienKeHoach
 
-            }
-            console.log(dataSave);
-            $.ajax({
-                url: '/KeHoach/InsertOrUpdate_KeHoachV3',
-                type: 'POST',
-                data: dataSave
-            }).done(function successCallback(response) {
-                if (response.success) {
-                    notification.show({ kValue: response.msg }, "success");
-                    Huy();
-                    TimKiem()
-                } else {
-                    notification.show({ kValue: response.msg }, "error");
                 }
-            });
-
-
+                console.log(dataSave);
+                $.ajax({
+                    url: '/KeHoach/InsertOrUpdate_KeHoachV3',
+                    type: 'POST',
+                    data: dataSave
+                }).done(function successCallback(response) {
+                    if (response.success) {
+                        notification.show({ kValue: response.msg }, "success");
+                        Huy();
+                        TimKiem()
+                    } else {
+                        notification.show({ kValue: response.msg }, "error");
+                    }
+                });
+            })
         }
 
     }

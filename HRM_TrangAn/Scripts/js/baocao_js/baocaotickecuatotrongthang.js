@@ -321,13 +321,39 @@ function TimKiem() {
                             style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
                             class: "table-header-cell"
                         }
+                    },
+                    {
+                        title: "Tổng",
+                        field: 'data3' + kendo.toString(item, 'yyyyMMdd'),
+                        format: "{0:n1}",
+                        footerTemplate: "#=kendo.toString(sum,'n1')#",
+                        aggregates: ["sum"],
+                        filterable: {
+                            cell: {
+                                operator: "contains",
+                                showOperators: false,
+                                template: function (e) {
+                                    e.element.addClass("k-textbox").css("width", "100%")
+                                }
+                            }
+                        },
+                        width: "80px",
+                        attributes: {
+                            style: "text-align: center; font-size: 12px;padding:0;"
+                        },
+                        headerAttributes: {
+                            style: "text-align: center; font-size: 12px; font-weight:bold; vertical-align: middle;",
+                            class: "table-header-cell"
+                        }
                     }
                 ]
             });
             f['data' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: false };
             f['data2' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: true };
+            f['data3' + kendo.toString(item, 'yyyyMMdd')] = { type: 'number', editable: false };
             aggregates.push({ field: 'data' + kendo.toString(item, 'yyyyMMdd'), aggregate: "sum" });
             aggregates.push({ field: 'data2' + kendo.toString(item, 'yyyyMMdd'), aggregate: "sum" });
+            aggregates.push({ field: 'data3' + kendo.toString(item, 'yyyyMMdd'), aggregate: "sum" });
         });
 
         f['TongCongLDTrongThang'] = { type: 'number' };
@@ -379,13 +405,9 @@ function TimKiem() {
             schema: {
                 model: {
                     fields: f
-                    //TongCongLDTrongThang: { type: 'number' }
                 }
             },
             aggregate: aggregates,
-            //aggregate: [
-            //    { field: "TongCongLDTrongThang", aggregate: "sum" }
-            //],
             pageSize: 50
         });
         //$("#gridData").data("kendoGrid").setDataSource(dataSource);

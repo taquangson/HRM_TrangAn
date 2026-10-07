@@ -262,6 +262,152 @@
 
     });
 
+    $("#gridImport").kendoGrid({
+        height: function () {
+            var height = $(window).height() - 150;
+            return height;
+        },
+        scrollable: true,
+        persistSelection: true,
+        autoFitColumn: true,
+        resizable: true,
+        sortable: true,
+        editable: { mode: "incell" },
+        save: function (e) {
+            console.log(e);
+        },
+        filterable: {
+            mode: "row",
+        },
+        pageable: pageableShort,
+
+        dataBinding: function () {
+            record = (this.dataSource.page() - 1) * this.dataSource.pageSize();
+        },
+
+        columns: [
+
+            {
+                field: "STT",
+                title: "STT",
+                filterable: {
+                    cell: { template: betweenFilter },
+                },
+                width: "50px",
+                attributes: {
+                    class: "text-center"
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                }
+            },
+            {
+                field: "NgayHuongPhuCap",
+                title: "Ngày Hưởng Phụ Cấp",
+                format: "{0:dd/MM/yyyy}",
+                width: "200px",
+                filterable: {
+                    cell: { template: betweenFilter },
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                }
+            },
+            {
+                field: "TenNhanVien",
+                title: "Tên Nhân Viên",
+                width: "200px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: center;",
+                }
+            },
+            {
+                field: "MaNhanVien",
+                title: "Mã nhân viên",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
+            {
+                field: "MaPhuCap",
+                title: "Mã phụ cấp",
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: left;",
+                }
+            },
+            {
+                field: "Tien",
+                title: "Số Tiền",
+                format: "{0:n0}",
+                aggregates: ["sum"],
+                width: "100px",
+                filterable: {
+                    cell: {
+                        operator: "contains",
+                        showOperators: false,
+                        template: function (e) {
+                            e.element.addClass("k-textbox").css("width", "100%")
+                        }
+                    }
+                },
+                headerAttributes: {
+                    style: "text-align: center; font-size: 12px; font-weight:bold",
+                    class: "table-header-cell"
+                },
+                attributes: {
+                    style: "text-align: right;",
+                }
+            },
+        ]
+
+    });
+
     $("#gridNhanVien").kendoGrid({
         height: function () {
             var height = $(window).height() - 500;
@@ -405,11 +551,10 @@
                 }
             },
             {
-                field: "DiaChi",
-                title: "Địa Chỉ",
-                editable: function () {
-                    return false;
-                },
+                field: "Tien",
+                title: "Phụ cấp",
+                format: "{0:N0}",
+                width: "150px",
                 filterable: {
                     cell: {
                         operator: "contains",
@@ -546,7 +691,7 @@
                     style: "text-align: center; font-size: 12px; font-weight:bold",
                     class: "table-header-cell"
                 }
-            },            
+            },
             {
                 field: "DiaChi",
                 title: "Địa Chỉ",
@@ -601,6 +746,18 @@
         width: "800",
         height: "800",
         title: "Danh sách nhân viên",
+        visible: false,
+        modal: true,
+        resizable: false,
+        actions: [
+            "Close"
+        ]
+    });
+
+    $("#windowImport").kendoWindow({
+        width: "100%",
+        height: "100%",
+        title: "Nhập liệu từ file excel",
         visible: false,
         modal: true,
         resizable: false,
@@ -715,8 +872,77 @@
         $("#NhanVien").data("kendoMultiColumnComboBox").setDataSource(dataSource);
     });
 
-    
+    $("#file").kendoUpload({
+        multiple: false,
+        localization: {
+            select: 'Tải file dữ liệu đầu vào',
+            remove: '',
+            cancel: ''
+        },
+        allowedExtensions: [".xls", ".xlsx"],
+        select: function (e) {
+            PushFormDataFile(e.files[0]);
+        }
+    });
+
+
 })
+
+function PushFormDataFile(file) {
+    kendo.ui.progress($("#gridImport"), true);
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        var data = e.target.result;
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
+
+        var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]], { range: 0 });
+        var json_object = JSON.stringify(XL_row_object);
+
+        jsondata = JSON.parse(json_object);
+        console.log("jsondata: ", jsondata);
+
+        $.each(jsondata, function (index, item) {
+            item.STT = index + 1;
+            item.NgayHuongPhuCap = item["Ngày Hưởng Phụ Cấp"];
+            item.TenNhanVien = item["Tên Nhân Viên"];
+            item.MaNhanVien = item["Mã nhân viên"];
+            item.Tien = item["Số Tiền"];
+            item.MaPhuCap = item["Loại"];
+            //item.NoiDung = item["Tên Nhân Viên"];
+        })
+
+        var dsgrid = new kendo.data.DataSource({
+            data: jsondata,
+            schema: {
+                model: {
+                    ID: "ID",
+                    fields: {
+                        Tien: {
+                            type: 'number', editable: true
+                        },
+                    }
+                }
+            },
+
+        });
+        $("#gridImport").data("kendoGrid").setDataSource(dsgrid);
+        notification.show({ kValue: "Tải dữ liệu thành công" }, "success");
+        kendo.ui.progress($("#gridImport"), false);
+    }
+    reader.onerror = function (ex) {
+        console.log(ex);
+    };
+
+    reader.readAsBinaryString(file.rawFile);
+}
+
+function NhapExcel() {
+    $("#windowImport").data("kendoWindow").center().maximize().open();
+}
 
 function TimKiem() {
     var tuNgay = kendo.toString($("#TuNgay").data("kendoDatePicker").value(), "yyyy/MM/dd") + " 00:00:00";
@@ -815,14 +1041,14 @@ function ValidateForm() {
 }
 
 function ValidateInsertForm() {
-    var validtien = SetValidate("TienInsert");
+    //var validtien = SetValidate("TienInsert");
     var validnoidung = SetValidate("NoiDungPhuCapInsert");
     var dataSource = $("#gridNhanVien").data("kendoGrid").dataSource._pristineData;
     if (dataSource.length <= 0) {
         notification.show({ kValue: "Cần thêm nhân viên để lưu" }, "error");
         return false;
     }
-    return validtien && validnoidung;
+    return validnoidung;
 }
 
 function Luu() {
@@ -857,25 +1083,24 @@ function Luu() {
 function LuuInsert() {
     if (ValidateInsertForm()) {
         var ListID_HSNS = [];
-        var dataSource = $("#gridNhanVien").data("kendoGrid").dataSource._pristineData;
+        var dataSource = $("#gridNhanVien").data("kendoGrid").dataSource.data();
         console.log(dataSource);
         $.each(dataSource, function (index, item) {
-            ListID_HSNS.push(item.ID);
+            ListID_HSNS.push({
+                ID: 0,
+                ID_HoSoNhanSu: item.ID,
+                Tien: item.Tien,
+                ID_NoiDungPhuCap: $("#NoiDungPhuCapInsert").data("kendoMultiColumnComboBox").value(),
+                NoiDung: $("#NoiDungInsert").val(),
+                NgayHuongPhuCap: kendo.toString($("#NgayHuongPhuCapInsert").data("kendoDatePicker").value(), "yyyy/MM/dd"),
+                ID_NguoiTao: 0,
+            });
         });
-        var dataItem = {
-            ID: 0,
-            Tien: $("#TienInsert").val(),
-            ID_NoiDungPhuCap: $("#NoiDungPhuCapInsert").data("kendoMultiColumnComboBox").value(),
-            NoiDung: $("#NoiDungInsert").val(),
-            NgayHuongPhuCap: kendo.toString($("#NgayHuongPhuCapInsert").data("kendoDatePicker").value(), "yyyy/MM/dd"),
-            ID_NguoiTao: 0,
-        }
+        console.log(ListID_HSNS);
         $.ajax({
-            url: '/PhuCap/InsertMulti?StringID=' + ListID_HSNS.join(","),
+            url: '/PhuCap/InsertMulti',
             type: 'POST',
-            data: {
-                model: dataItem
-            }
+            data: { data: ListID_HSNS }
         }).done(function successCallback(response) {
             if (response.success) {
                 $("#grid").data("kendoGrid").clearSelection();
@@ -887,6 +1112,39 @@ function LuuInsert() {
             }
         });
     }
+}
+
+function LuuImport() {
+    var ListID_HSNS = [];
+    var dataSource = $("#gridImport").data("kendoGrid").dataSource.data();
+    console.log(dataSource);
+    $.each(dataSource, function (index, item) {
+        ListID_HSNS.push({
+            ID: 0,
+            ID_HoSoNhanSu: 0,
+            MaNhanVien: item.MaNhanVien,
+            Tien: item.Tien,
+            ID_NoiDungPhuCap: 0,
+            MaPhuCap: item.MaPhuCap,
+            NgayHuongPhuCap: item.NgayHuongPhuCap,
+            ID_NguoiTao: 0,
+        });
+    });
+    console.log(ListID_HSNS);
+    $.ajax({
+        url: '/PhuCap/ImportFromExcel',
+        type: 'POST',
+        data: { data: ListID_HSNS }
+    }).done(function successCallback(response) {
+        if (response.success) {
+            $("#grid").data("kendoGrid").clearSelection();
+            HuyInsert();
+            TimKiem();
+            notification.show({ kValue: response.msg }, "success");
+        } else {
+            notification.show({ kValue: response.msg }, "error");
+        }
+    });
 }
 
 function openAddNhanVienWindow() {
@@ -908,6 +1166,11 @@ function openAddNhanVienWindow() {
             schema: {
                 model: {
                     ID: "ID",
+                    fields: {
+                        Tien: {
+                            type: 'number', editable: true
+                        },
+                    }
                 }
             },
             pageSize: 20,
@@ -936,7 +1199,8 @@ function LuuAddNhanVien() {
             MaNhanVien: dataItem.MaNhanVien,
             SoDienThoai: dataItem.SoDienThoai,
             TenDayDu: dataItem.TenDayDu,
-            DiaChi: dataItem.DiaChi
+            DiaChi: dataItem.DiaChi,
+            Tien: 0
         })
     });
     var result = dataSourceAddNV.filter((item) => !listSelectedID_HSNS.includes(item.ID));
@@ -956,6 +1220,11 @@ function LuuAddNhanVien() {
         schema: {
             model: {
                 ID: "ID",
+                fields: {
+                    Tien: {
+                        type: 'number', editable: true
+                    },
+                }
             }
         },
         pageSize: 20,
@@ -978,7 +1247,7 @@ function Huy() {
 
 function HuyInsert() {
     $("#ID").val('');
-    $("#TienInsert").val(0);
+    //$("#TienInsert").val(0);
     $("#NgayHuongPhuCapInsert").data("kendoDatePicker").value(new Date());
     $("#windowInsert").data("kendoWindow").close();
     $("#grid").data("kendoGrid").clearSelection();
@@ -1037,6 +1306,15 @@ function DeleteMultiRowGridNV() {
         },
     });
     gridNV.setDataSource(newDataSourceNV);
+}
+
+function DownloadTemp() {
+    window.open('../Content/ExcelTemplate/Temp_PhuCap.xlsx', '_blank')
+}
+function HuyImport() {
+    document.getElementById("formImport").reset();
+    $("#windowImport").data("kendoWindow").close();
+    $("#gridImport").data("kendoGrid").clearSelection();
 }
 
 function betweenFilter(args) {

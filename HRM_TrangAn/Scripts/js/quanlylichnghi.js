@@ -13,6 +13,11 @@ $(document).ready(function () {
             dataValueField: "ID",
             columns: [
                 {
+                    field: "MaNhanVien",
+                    title: "Họ tên",
+                    width: "200px",
+                },
+                {
                     field: "TenDayDu",
                     title: "Họ tên",
                     width: "200px",
@@ -35,7 +40,7 @@ $(document).ready(function () {
             ],
             footerTemplate: 'Tổng #: instance.dataSource.total() # nhân viên',
             filter: "contains",
-            filterFields: ["TenDayDu", "MaNhanVien", "MaThuyen", "MaToNhom"],
+            filterFields: ["MaNhanVien","TenDayDu", "MaNhanVien", "MaThuyen", "MaToNhom"],
             suggest: true,
             delay: 1000,
             dataSource: dataSource,

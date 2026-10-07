@@ -159,6 +159,7 @@ namespace HRM_TrangAn.DataAccess.DAO
                 new SqlParameter("@ID_TaiKhoan", model.ID_TaiKhoan),
                 new SqlParameter("@Ngay", model.Ngay),
                 new SqlParameter("@TrangThai", model.TrangThai),
+                new SqlParameter("@Loai", model.Loai),
                 new SqlParameter("@PhuCap", model.PhuCap)
                 };
 
@@ -197,6 +198,33 @@ namespace HRM_TrangAn.DataAccess.DAO
             catch (Exception ex)
             {
                 log.Error("sp_BaiKiemTra_Delete " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool DeleteByTaiKhoan_Ngay(int ID_TaiKhoan, DateTime Ngay, int Loai)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ID_TaiKhoan",ID_TaiKhoan ),
+                    new SqlParameter("@Ngay",Ngay ),
+                    new SqlParameter("@Loai",Loai )
+                };
+                int rowaff = helper.ExecuteNonQuery("sp_TrucDem_DeleteByTaiKhoan_Ngay", pars);
+                if (rowaff > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("sp_TrucDem_DeleteByTaiKhoan_Ngay " + ex.Message);
                 return false;
             }
         }
